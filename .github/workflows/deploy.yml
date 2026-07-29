@@ -2,7 +2,9 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [main]
+    # Dal adına bağlı kalmamak için hepsini dinleyip aşağıda varsayılan
+    # dala filtreliyoruz; depo main'e geçse de çalışmaya devam eder.
+    branches: ['**']
   workflow_dispatch:
 
 permissions:
@@ -18,6 +20,7 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    if: github.ref_name == github.event.repository.default_branch
     steps:
       - uses: actions/checkout@v4
 
@@ -26,6 +29,13 @@ jobs:
           node-version: 20
           cache: npm
 
+      # enablement, Pages kaynağını "GitHub Actions"a çevirir. Depo "Deploy
+      # from a branch" modundaysa bu adım onu düzeltir; aksi halde derlenmemiş
+      # kaynak yayınlanır ve site boş açılır.
+      - uses: actions/configure-pages@v5
+        with:
+          enablement: true
+
       - run: npm ci
 
       - name: Build
@@ -33,8 +43,6 @@ jobs:
         env:
           BASE_PATH: /${{ github.event.repository.name }}/
         run: npm run build
-
-      - uses: actions/configure-pages@v5
 
       - uses: actions/upload-pages-artifact@v3
         with:

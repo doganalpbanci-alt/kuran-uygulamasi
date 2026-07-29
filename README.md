@@ -62,9 +62,15 @@ eklentisi de bu tam yanıttan Range dilimlerini servis eder.
 
 ## GitHub Pages
 
-`.github/workflows/deploy.yml`, `main` dalına her push'ta siteyi yayınlar.
-Depo ayarlarından **Settings → Pages → Source: GitHub Actions** seçilmesi
-yeterlidir.
+`.github/workflows/deploy.yml`, varsayılan dala her push'ta siteyi
+yayınlar. Depo ayarlarında **Settings → Pages → Source** mutlaka
+**GitHub Actions** olmalıdır.
+
+"Deploy from a branch" seçilirse GitHub depo kökünü olduğu gibi sunar;
+bu bir Vite projesi olduğu için derlenmemiş `index.html` yayınlanır,
+`/src/main.jsx` bulunamaz ve site boş açılır. Workflow bunu kendi
+düzeltmeyi dener (`configure-pages` `enablement: true`), ama ayar elle
+de değiştirilebilir.
 
 Pages projeyi `/<depo-adı>/` altında sunduğu için build `BASE_PATH` ile
 yapılır; workflow bunu depo adından otomatik verir. Yerelde kök dizin
