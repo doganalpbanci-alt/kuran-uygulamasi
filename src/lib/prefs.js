@@ -6,6 +6,8 @@ const DEFAULT_PREFS = {
   lastSurahId: null,
   playbackRate: 1,
   wordCursor: true,
+  // "arabic" (tilavet) veya "meal" (Türkçe meal sesi)
+  audioMode: "arabic",
   reminderEnabled: false,
   reminderTime: "20:00",
   lastNotifiedDate: null,

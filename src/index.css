@@ -3,6 +3,10 @@
 @theme {
   --font-sans: "Segoe UI", system-ui, Roboto, sans-serif;
   --font-reading: Georgia, "Times New Roman", serif;
+  /* Arapça için sistemdeki hazır hatlar; harici font yüklenmiyor ki
+     uygulama offline'da da aynı görünsün. */
+  --font-arabic: "Scheherazade New", "Amiri", "Traditional Arabic",
+    "Geeza Pro", "Noto Naskh Arabic", serif;
 
   --color-cream-50: #faf7ef;
   --color-cream-100: #f3ede0;

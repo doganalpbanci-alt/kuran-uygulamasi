@@ -1,105 +1,20 @@
-import { useCallback, useEffect, useMemo, useRef } from "react";
-import { useAudioPlayer } from "../hooks/useAudioPlayer";
-import {
-  computeEffectiveStartTimes,
-  findActiveVerseIndex,
-  getVerseProgress,
-  getVersesWithOverrides,
-} from "../lib/verses";
+import { useMemo, useState } from "react";
+import { getVersesWithOverrides } from "../lib/verses";
+import { getPrefs, updatePrefs } from "../lib/prefs";
 import { markSurahCompleted } from "../lib/streak";
-import { clearProgress, getProgress, saveProgress } from "../lib/progress";
-import { getPrefs } from "../lib/prefs";
-import AudioPlayer from "./AudioPlayer";
-import OfflineToggle from "./OfflineToggle";
-import TrackedTranscription from "./TrackedTranscription";
+import ArabicReader from "./ArabicReader";
+import MealReader from "./MealReader";
 
 export default function ReadingScreen({ surah, onBack, onOpenSync }) {
   const verses = useMemo(() => getVersesWithOverrides(surah), [surah]);
-  const verseRefs = useRef([]);
+  const [mode, setMode] = useState(() => getPrefs().audioMode);
 
-  const handleEnded = useCallback(() => {
-    markSurahCompleted(surah.id);
-    // Sure bitti; bir dahaki açılışta baştan başlasın.
-    clearProgress(surah.id);
-  }, [surah.id]);
+  const hasArabic = verses.some((v) => v.arabic?.url);
+  const effectiveMode = hasArabic ? mode : "meal";
 
-  const {
-    audioRef,
-    isPlaying,
-    currentTime,
-    duration,
-    playbackRate,
-    togglePlay,
-    seekBy,
-    seekTo,
-    cycleRate,
-  } = useAudioPlayer({ onEnded: handleEnded });
-
-  const effectiveStartTimes = useMemo(
-    () => computeEffectiveStartTimes(verses, duration || surah.audio.duration),
-    [verses, duration, surah.audio.duration],
-  );
-
-  const activeIndex = findActiveVerseIndex(effectiveStartTimes, currentTime);
-
-  const wordCursor = getPrefs().wordCursor;
-  const verseProgress = getVerseProgress(
-    effectiveStartTimes,
-    activeIndex,
-    currentTime,
-    duration || surah.audio.duration,
-  );
-
-  // Kaldığı yerden devam: metadata yüklenince kayıtlı konuma atla.
-  const restoredRef = useRef(false);
-  useEffect(() => {
-    restoredRef.current = false;
-  }, [surah.id]);
-
-  useEffect(() => {
-    const audio = audioRef.current;
-    if (!audio || restoredRef.current) return;
-
-    const restore = () => {
-      if (restoredRef.current) return;
-      const saved = getProgress(surah.id);
-      // Sonuna çok yakınsa baştan başlamak daha mantıklı.
-      if (saved?.time > 0 && saved.time < audio.duration - 5) {
-        audio.currentTime = saved.time;
-      }
-      restoredRef.current = true;
-    };
-
-    if (audio.readyState >= 1) restore();
-    else audio.addEventListener("loadedmetadata", restore, { once: true });
-
-    return () => audio.removeEventListener("loadedmetadata", restore);
-  }, [surah.id, audioRef]);
-
-  // İlerlemeyi kaydet (her timeupdate'te değil, ayet değiştikçe).
-  useEffect(() => {
-    if (!restoredRef.current || currentTime <= 0) return;
-    saveProgress(surah.id, {
-      time: currentTime,
-      verseNumber: verses[activeIndex]?.verse_number ?? 0,
-    });
-    // currentTime kasıtlı olarak bağımlılık dışı: kayıt aktif ayet
-    // değiştiğinde yapılır, saniyede birkaç kez değil.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [activeIndex, surah.id, verses]);
-
-  // Otomatik scroll yalnızca ses çalarken; duraklatılmışken kullanıcı
-  // serbestçe okuyup gezinebilsin.
-  useEffect(() => {
-    if (!isPlaying) return;
-    const el = verseRefs.current[activeIndex];
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth", block: "center" });
-    }
-  }, [activeIndex, isPlaying]);
-
-  const handleMarkAsRead = () => {
-    markSurahCompleted(surah.id);
+  const changeMode = (next) => {
+    setMode(next);
+    updatePrefs({ audioMode: next });
   };
 
   return (
@@ -125,69 +40,47 @@ export default function ReadingScreen({ surah, onBack, onOpenSync }) {
         </button>
       </div>
 
-      <AudioPlayer
-        isPlaying={isPlaying}
-        currentTime={currentTime}
-        duration={duration || surah.audio.duration}
-        playbackRate={playbackRate}
-        onTogglePlay={togglePlay}
-        onSeekBy={seekBy}
-        onSeekTo={seekTo}
-        onCycleRate={cycleRate}
-      />
-      <audio ref={audioRef} src={surah.audio.url} preload="metadata" />
-
-      <OfflineToggle url={surah.audio.url} />
-
-      <div className="flex-1 space-y-6 px-5 py-6">
-        {verses.map((verse, i) => (
-          <div
-            key={verse.verse_number}
-            ref={(el) => {
-              verseRefs.current[i] = el;
-            }}
-            className={`rounded-xl px-3 py-3 transition-colors ${
-              i === activeIndex
-                ? "bg-gold-500/15 ring-1 ring-gold-500/40"
-                : ""
-            }`}
-          >
-            <p className="flex items-start gap-2 font-[var(--font-reading)] text-xl leading-relaxed text-ink-900 dark:text-cream-100">
-              <button
-                type="button"
-                // MP3 çerçeve sınırına yuvarlama seek'i birkaç ms geriye
-                // düşürebiliyor; bu da bir önceki ayeti aktif gösteriyordu.
-                // Küçük bir pay ile ayetin içine indiğimizden emin oluyoruz.
-                onClick={() => seekTo(effectiveStartTimes[i] + 0.25)}
-                aria-label={`${verse.verse_number}. ayetten oynat`}
-                className="mt-1 shrink-0 rounded px-1 text-xs font-medium text-teal-700/70 hover:bg-teal-600/10 dark:text-gold-500/70"
-              >
-                {verse.verse_number}
-              </button>
-              <span>
-                <TrackedTranscription
-                  text={verse.transcription}
-                  progress={i === activeIndex ? verseProgress : 0}
-                  // Kelime imleci yalnızca aktif ayette ve ses çalarken;
-                  // durunca metin normal okunabilirliğine döner.
-                  enabled={wordCursor && i === activeIndex && isPlaying}
-                />
-              </span>
-            </p>
-            <p className="mt-1.5 pl-6 text-sm leading-relaxed text-ink-700/70 dark:text-cream-200/60">
-              {verse.translation}
-            </p>
-          </div>
-        ))}
-
-        <button
-          type="button"
-          onClick={handleMarkAsRead}
-          className="mx-auto block rounded-full border border-teal-600/30 px-5 py-2 text-sm text-teal-700 dark:border-cream-200/30 dark:text-cream-100"
+      {hasArabic && (
+        <div
+          role="group"
+          aria-label="Ses kaynağı"
+          className="mx-4 mt-3 flex rounded-full bg-teal-600/10 p-0.5 text-xs dark:bg-white/5"
         >
-          ✓ Okudum olarak işaretle
-        </button>
-      </div>
+          {[
+            { id: "arabic", label: "Arapça tilavet" },
+            { id: "meal", label: "Türkçe meal" },
+          ].map((opt) => (
+            <button
+              key={opt.id}
+              type="button"
+              onClick={() => changeMode(opt.id)}
+              aria-pressed={effectiveMode === opt.id}
+              className={`flex-1 rounded-full px-3 py-1.5 font-medium transition ${
+                effectiveMode === opt.id
+                  ? "bg-teal-600 text-cream-50 shadow-sm"
+                  : "text-teal-700 dark:text-cream-100"
+              }`}
+            >
+              {opt.label}
+            </button>
+          ))}
+        </div>
+      )}
+
+      {/* Mod değişince oynatıcı sıfırdan kurulsun diye key veriyoruz. */}
+      {effectiveMode === "arabic" ? (
+        <ArabicReader key="arabic" surah={surah} verses={verses} />
+      ) : (
+        <MealReader key="meal" surah={surah} verses={verses} />
+      )}
+
+      <button
+        type="button"
+        onClick={() => markSurahCompleted(surah.id)}
+        className="mx-auto mb-6 block rounded-full border border-teal-600/30 px-5 py-2 text-sm text-teal-700 dark:border-cream-200/30 dark:text-cream-100"
+      >
+        ✓ Okudum olarak işaretle
+      </button>
     </div>
   );
 }

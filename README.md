@@ -3,8 +3,20 @@
 Kıraat dinlerken Türkçe okunuşu ve meali eş zamanlı takip edebileceğin, offline
 çalışan bir PWA. Günlük okuma alışkanlığı için basit bir streak takibi içerir.
 
-MVP kapsamı: Yasin, Mülk, Vakıa, Kehf sureleri (Diyanet İşleri meali,
-[Açık Kuran API](https://acikkuran.com/api) üzerinden build-time çekilir).
+MVP kapsamı: Yasin, Mülk, Vakıa, Kehf sureleri.
+
+İki ses kaynağı var, okuma ekranından geçiş yapılır:
+
+- **Arapça tilavet** — Mishari Rashid al-Afasy, ayet başına ayrı kayıt
+  ([Quran.com API](https://api-docs.quran.foundation/)). Ayet senkronu
+  kendiliğinden kesin; kelime zaman damgaları da geldiği için imleç
+  okunan kelimeyi birebir takip eder.
+- **Türkçe meal sesi** — Diyanet İşleri meali, sure başına tek mp3
+  ([Açık Kuran API](https://acikkuran.com/api)).
+
+Okunuş ve meal metinleri Açık Kuran'dan, Arapça kelime metinleri
+Quran.com'dan gelir; hepsi build-time çekilip `src/data/surahs.json`
+içine yazılır.
 
 ## Geliştirme
 
@@ -24,11 +36,24 @@ node scripts/fetch-surahs.mjs
 
 ## Kelime imleci
 
-Ses çalarken aktif ayetin okunuşunda o an okunan kelime vurgulanır;
-öncesi koyu, sonrası soluk gösterilir. Kelime bazlı zaman damgası
-olmadığı için konum, ayet içindeki ilerlemeden kelime uzunluklarına göre
-tahmin edilir — bu yüzden yaklaşıktır ve aşağıdaki senkron adımı
-yapıldıkça isabeti artar. Ayarlar'dan kapatılabilir.
+Ses çalarken o an okunan kelime vurgulanır; öncesi koyu, sonrası soluk
+gösterilir. İki modda kaynağı farklıdır:
+
+- **Tilavet modunda kesin.** Quran.com kelime bazlı zaman damgası
+  (segments) verdiği için vurgulanan kelime sesin tam olarak okuduğu
+  kelimedir. Ek bir ayar veya senkron gerekmez.
+- **Meal modunda tahmini.** Kelime zaman damgası olmadığından konum,
+  ayet içindeki ilerlemeden kelime uzunluklarına göre kestirilir;
+  aşağıdaki senkron adımı yapıldıkça isabeti artar. Ayarlar'dan
+  kapatılabilir.
+
+### Arapça hat desteği
+
+Arapça metin Uthmani imlasıyla gelir ve vakf işaretleri (ۖ ۢ ۭ) içerir.
+Uygulama harici font yüklemez — offline'da da aynı görünsün diye
+sistemdeki Arapça hatlar kullanılır. Cihazınızda bu işaretler kutu (▯)
+görünüyorsa ya sadeleştirilmiş metne geçmek ya da bir Kur'an fontunu
+uygulamayla birlikte paketlemek gerekir.
 
 ## Ayet-ses senkronu
 
@@ -44,9 +69,13 @@ uygulama sure süresine oranlayarak kaba bir tahmin kullanır.
 Uygulama kabuğu (arayüz, ayet metinleri, mealler) service worker ile
 precache edilir; ilk açılıştan sonra internet olmadan da çalışır.
 
-Ses dosyaları büyük olduğu için (Mülk 13 MB, Yasin 28 MB, Vakıa 15 MB,
-Kehf 59 MB) otomatik indirilmez. Okuma ekranındaki **"Offline'a indir"**
-ile sure sure indirilir; indirilen sesler "Kaldır" ile silinebilir.
+Ses dosyaları büyük olduğu için otomatik indirilmez. Okuma ekranındaki
+**"Offline'a indir"** ile o an seçili ses kaynağı sure sure indirilir;
+indirilenler "Kaldır" ile silinebilir.
+
+Tilavet ayet başına ayrı dosya olduğundan indirme dosya dosya ilerler
+(örn. Kehf için 111 parça). Türkçe meal ise sure başına tek büyük
+dosyadır (Mülk 13 MB, Yasin 28 MB, Vakıa 15 MB, Kehf 59 MB).
 
 Bu adım şart: `<audio>` elementi ses dosyalarını her zaman Range
 (206 Partial Content) isteğiyle çeker ve kısmi yanıtlar cache'lenmez —
@@ -54,11 +83,11 @@ yani sadece dinlemek dosyayı offline'a almaz. İndirme, tam dosyayı
 service worker'ın okuduğu cache'e yazar; workbox'ın `rangeRequests`
 eklentisi de bu tam yanıttan Range dilimlerini servis eder.
 
-> **Bilinen kısıt:** `audio.acikkuran.com` yanıtlarında
-> `Access-Control-Allow-Origin` başlığı yok. Dinleme etkilenmez
-> (`<audio>` CORS istemez), ancak indirme `fetch()` kullandığı için
-> tarayıcı bunu engeller. Sesin de offline çalışması için mp3'leri
-> repoya alıp aynı origin'den sunmak gerekir.
+> **Kısıt yalnızca Türkçe meal sesinde:** `audio.acikkuran.com`
+> yanıtlarında `Access-Control-Allow-Origin` başlığı yok, bu yüzden
+> indirme tarayıcı tarafından engellenir (dinleme etkilenmez, `<audio>`
+> CORS istemez). Quran.com tarafı `Access-Control-Allow-Origin: *`
+> gönderdiği için **tilavet offline'a sorunsuz indirilebilir**.
 
 ## GitHub Pages
 

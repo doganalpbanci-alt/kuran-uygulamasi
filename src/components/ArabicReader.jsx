@@ -1,0 +1,89 @@
+import { useCallback, useEffect, useMemo, useRef } from "react";
+import { usePlaylistPlayer } from "../hooks/usePlaylistPlayer";
+import { markSurahCompleted } from "../lib/streak";
+import { clearProgress, getProgress, saveProgress } from "../lib/progress";
+import PlaylistPlayer from "./PlaylistPlayer";
+import VerseList from "./VerseList";
+import OfflineToggle from "./OfflineToggle";
+
+/** Arapça tilavet: ayet başına ayrı mp3, kesin ayet ve kelime senkronu. */
+export default function ArabicReader({ surah, verses }) {
+  const verseRefs = useRef([]);
+
+  // Tilaveti olmayan ayet olursa listeden düşmesin diye index eşleşmesini
+  // koruyoruz; url'i olmayanı playlist atlar.
+  const items = useMemo(
+    () => verses.map((v) => ({ url: v.arabic?.url })).filter((x) => x.url),
+    [verses],
+  );
+
+  const handleFinished = useCallback(() => {
+    markSurahCompleted(surah.id);
+    clearProgress(surah.id);
+  }, [surah.id]);
+
+  const player = usePlaylistPlayer({ items, onFinished: handleFinished });
+  const { index, isPlaying, currentTime } = player;
+
+  // Kaldığı ayetten devam
+  const restoredRef = useRef(false);
+  useEffect(() => {
+    restoredRef.current = false;
+  }, [surah.id]);
+
+  useEffect(() => {
+    if (restoredRef.current) return;
+    restoredRef.current = true;
+    const saved = getProgress(surah.id);
+    if (saved?.verseIndex > 0 && saved.verseIndex < items.length) {
+      player.goTo(saved.verseIndex);
+    }
+    // Yalnızca sure değiştiğinde bir kez çalışmalı.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [surah.id, items.length]);
+
+  useEffect(() => {
+    if (!restoredRef.current) return;
+    saveProgress(surah.id, {
+      verseIndex: index,
+      verseNumber: verses[index]?.verse_number ?? 0,
+    });
+  }, [index, surah.id, verses]);
+
+  // Otomatik scroll yalnızca çalarken
+  useEffect(() => {
+    if (!isPlaying) return;
+    verseRefs.current[index]?.scrollIntoView({
+      behavior: "smooth",
+      block: "center",
+    });
+  }, [index, isPlaying]);
+
+  return (
+    <>
+      <PlaylistPlayer
+        {...player}
+        total={items.length}
+        verseNumber={verses[index]?.verse_number}
+      />
+      <audio ref={player.audioRef} preload="auto" />
+
+      <OfflineToggle
+        urls={items.map((i) => i.url)}
+        label="Tilaveti offline'a indir"
+      />
+
+      <VerseList
+        verses={verses}
+        activeIndex={index}
+        showArabic
+        arabicTimeMs={currentTime * 1000}
+        transcriptionProgress={0}
+        wordCursorEnabled={false}
+        isPlaying={isPlaying}
+        onSelectVerse={(i) => player.goTo(i, { autoplay: true })}
+        verseRefs={verseRefs}
+      />
+    </>
+  );
+}
