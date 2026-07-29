@@ -1,0 +1,2316 @@
+{
+  "author_id": 11,
+  "author_name": "Diyanet İşleri",
+  "fetched_at": "2026-07-29T10:31:14.429Z",
+  "surahs": [
+    {
+      "id": 36,
+      "name": "Yasin",
+      "name_translation_tr": "YaSin",
+      "verse_count": 83,
+      "audio": {
+        "url": "https://audio.acikkuran.com/tr/36.mp3",
+        "duration": 717
+      },
+      "verses": [
+        {
+          "verse_number": 0,
+          "verse": "بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّح۪يمِ",
+          "transcription": "Bismillahir rahmanir rahim.",
+          "translation": "Bismillahirrahmanirrahim.",
+          "start_time": null
+        },
+        {
+          "verse_number": 1,
+          "verse": "يٰسٓۜ",
+          "transcription": "Ya sin.",
+          "translation": "Ya Sin.",
+          "start_time": null
+        },
+        {
+          "verse_number": 2,
+          "verse": "وَالْقُرْاٰنِ الْحَك۪يمِۙ",
+          "transcription": "Vel kur'anil hakim.",
+          "translation": "(2-4) (Ey Muhammed!) Hikmet dolu Kur'an'a andolsun ki, sen elbette dosdoğru bir yol üzere (peygamber) gönderilenlerdensin.",
+          "start_time": null
+        },
+        {
+          "verse_number": 3,
+          "verse": "اِنَّكَ لَمِنَ الْمُرْسَل۪ينَۙ",
+          "transcription": "İnneke leminel murselin.",
+          "translation": "(2-4) (Ey Muhammed!) Hikmet dolu Kur'an'a andolsun ki, sen elbette dosdoğru bir yol üzere (peygamber) gönderilenlerdensin.",
+          "start_time": null
+        },
+        {
+          "verse_number": 4,
+          "verse": "عَلٰى صِرَاطٍ مُسْتَق۪يمٍۜ",
+          "transcription": "Ala sıratın mustekim.",
+          "translation": "(2-4) (Ey Muhammed!) Hikmet dolu Kur'an'a andolsun ki, sen elbette dosdoğru bir yol üzere (peygamber) gönderilenlerdensin.",
+          "start_time": null
+        },
+        {
+          "verse_number": 5,
+          "verse": "تَنْز۪يلَ الْعَز۪يزِ الرَّح۪يمِۙ",
+          "transcription": "Tenzilel azizir rahim.",
+          "translation": "(5-6) Kur'an, ataları uyarılmamış, bu yüzden de gaflet içinde olan bir kavmi uyarman için mutlak güç sahibi, çok merhametli Allah tarafından indirilmiştir.",
+          "start_time": null
+        },
+        {
+          "verse_number": 6,
+          "verse": "لِتُنْذِرَ قَوْماً مَٓا اُنْذِرَ اٰبَٓاؤُ۬هُمْ فَهُمْ غَافِلُونَ",
+          "transcription": "Li tunzire kavmen ma unzire abauhum fe hum gafilun.",
+          "translation": "(5-6) Kur'an, ataları uyarılmamış, bu yüzden de gaflet içinde olan bir kavmi uyarman için mutlak güç sahibi, çok merhametli Allah tarafından indirilmiştir.",
+          "start_time": null
+        },
+        {
+          "verse_number": 7,
+          "verse": "لَقَدْ حَقَّ الْقَوْلُ عَلٰٓى اَكْثَرِهِمْ فَهُمْ لَا يُؤْمِنُونَ",
+          "transcription": "Lekad hakkal kavlu ala ekserihim fe hum la yu'minun.",
+          "translation": "Andolsun, onların çoğu üzerine o söz (azap) hak olmuştur. Artık onlar iman etmezler.",
+          "start_time": null
+        },
+        {
+          "verse_number": 8,
+          "verse": "اِنَّا جَعَلْنَا ف۪ٓي اَعْنَاقِهِمْ اَغْلَالاً فَهِيَ اِلَى الْاَذْقَانِ فَهُمْ مُقْمَحُونَ",
+          "transcription": "İnna cealna fi a'nakıhim aglalen fe hiye ilel ezkani fe hum mukmehun.",
+          "translation": "Onların boyunlarına demir halkalar geçirdik, o halkalar çenelerine dayanmıştır. Bu sebeple kafaları yukarıya kalkık durumdadır.",
+          "start_time": null
+        },
+        {
+          "verse_number": 9,
+          "verse": "وَجَعَلْنَا مِنْ بَيْنِ اَيْد۪يهِمْ سَداًّ وَمِنْ خَلْفِهِمْ سَداًّ فَاَغْشَيْنَاهُمْ فَهُمْ لَا يُبْصِرُونَ",
+          "transcription": "Ve cealna min beyni eydihim sedden ve min halfihim sedden fe agşeynahum fe hum la yubsırun.",
+          "translation": "Biz, onların önlerine bir set, arkalarına da bir set çekip gözlerini perdeledik. Artık görmezler.",
+          "start_time": null
+        },
+        {
+          "verse_number": 10,
+          "verse": "وَسَوَٓاءٌ عَلَيْهِمْ ءَاَنْذَرْتَهُمْ اَمْ لَمْ تُنْذِرْهُمْ لَا يُؤْمِنُونَ",
+          "transcription": "Ve sevaun aleyhim e enzertehum em lem tunzirhum la yu'minun.",
+          "translation": "Onları uyarsan da, uyarmasan da onlar için birdir, inanmazlar.",
+          "start_time": null
+        },
+        {
+          "verse_number": 11,
+          "verse": "اِنَّمَا تُنْذِرُ مَنِ اتَّبَعَ الذِّكْرَ وَخَشِيَ الرَّحْمٰنَ بِالْغَيْبِۚ فَبَشِّرْهُ بِمَغْفِرَةٍ وَاَجْرٍ كَر۪يمٍ",
+          "transcription": "İnnema tunziru menittebeaz zikre ve haşiyer rahmane bil gayb, fe beşşirhu bi magfiretin ve ecrin kerim.",
+          "translation": "Sen ancak Zikr'e (Kur'an'a) uyanı ve görmediği halde Rahman'dan korkan kimseyi uyarırsın. İşte onu bir bağışlanma ve güzel bir mükafatla müjdele.",
+          "start_time": null
+        },
+        {
+          "verse_number": 12,
+          "verse": "اِنَّا نَحْنُ نُحْـيِ الْمَوْتٰى وَنَكْتُبُ مَا قَدَّمُوا وَاٰثَارَهُمْۜ وَكُلَّ شَيْءٍ اَحْصَيْنَاهُ ف۪ٓي اِمَامٍ مُب۪ينٍ۟",
+          "transcription": "İnna nahnu nuhyil mevta ve nektubu ma kaddemu ve asarehum ve kulle şey'in ahsaynahu fi imamin mubin.",
+          "translation": "Şüphesiz biz, ölüleri mutlaka diriltiriz. Onların yaptıklarını ve bıraktıkları eserlerini yazarız. Biz, her şeyi apaçık bir kitapta (Levh-i Mahfuz'da) bir bir kaydetmişizdir.",
+          "start_time": null
+        },
+        {
+          "verse_number": 13,
+          "verse": "وَاضْرِبْ لَهُمْ مَثَلاً اَصْحَابَ الْقَرْيَةِۢ اِذْ جَٓاءَهَا الْمُرْسَلُونَۚ",
+          "transcription": "Vadrıb lehum meselen ashabel karyeh, iz cae hel murselun.",
+          "translation": "(Ey Muhammed!) Onlara, o memleket halkını örnek ver. Hani oraya elçiler gelmişti.",
+          "start_time": null
+        },
+        {
+          "verse_number": 14,
+          "verse": "اِذْ اَرْسَلْـنَٓا اِلَيْهِمُ اثْنَيْنِ فَكَذَّبُوهُمَا فَعَزَّزْنَا بِثَالِثٍ فَقَالُٓوا اِنَّٓا اِلَيْكُمْ مُرْسَلُونَ",
+          "transcription": "İz erselna ileyhimusneyni fe kezzebuhuma fe azzezna bi salisin fe kalu inna ileykum murselun.",
+          "translation": "Hani biz onlara iki elçi göndermiştik de onları yalancı saymışlardı. Biz de onlara üçüncü bir elçi ile destek vermiştik. Onlar, \"Şüphesiz biz size gönderilmiş elçileriz\" dediler.",
+          "start_time": null
+        },
+        {
+          "verse_number": 15,
+          "verse": "قَالُوا مَٓا اَنْتُمْ اِلَّا بَشَرٌ مِثْلُنَاۙ وَمَٓا اَنْزَلَ الرَّحْمٰنُ مِنْ شَيْءٍۙ اِنْ اَنْتُمْ اِلَّا تَكْذِبُونَ",
+          "transcription": "Kalu ma entum illa beşerun misluna ve ma enzeler rahmanu min şey'in in entum illa tekzibun.",
+          "translation": "Onlar şöyle dediler: \"Siz de ancak bizim gibi insansınız. Rahman, hiçbir şey indirmemiştir. Siz sadece yalan söylüyorsunuz.\"",
+          "start_time": null
+        },
+        {
+          "verse_number": 16,
+          "verse": "قَالُوا رَبُّنَا يَعْلَمُ اِنَّٓا اِلَيْكُمْ لَمُرْسَلُونَ",
+          "transcription": "Kalu rabbuna ya'lemu inna ileykum le murselun.",
+          "translation": "(Elçiler ise) şöyle dediler: \"Bizim gerçekten size gönderilmiş elçiler olduğumuzu Rabbimiz biliyor.\"",
+          "start_time": null
+        },
+        {
+          "verse_number": 17,
+          "verse": "وَمَا عَلَيْنَٓا اِلَّا الْبَلَاغُ الْمُب۪ينُ",
+          "transcription": "Ve ma aleyna illel belagul mubin.",
+          "translation": "\"Bize düşen ancak apaçık bir tebliğdir.\"",
+          "start_time": null
+        },
+        {
+          "verse_number": 18,
+          "verse": "قَالُٓوا اِنَّا تَطَيَّرْنَا بِكُمْۚ لَئِنْ لَمْ تَنْتَهُوا لَنَرْجُمَنَّكُمْ وَلَيَمَسَّنَّكُمْ مِنَّا عَذَابٌ اَل۪يمٌ",
+          "transcription": "Kalu inna tetayyerna bi kum, le in lem tentehu le nercumennekum ve le yemessennekum minna azabun elim.",
+          "translation": "Dediler ki: \"Şüphesiz biz sizin yüzünüzden uğursuzluğa uğradık. Eğer vazgeçmezseniz, sizi mutlaka taşlarız ve bizim tarafımızdan size elem dolu bir azap dokunur.\"",
+          "start_time": null
+        },
+        {
+          "verse_number": 19,
+          "verse": "قَالُوا طَٓائِرُكُمْ مَعَكُمْۜ اَئِنْ ذُكِّرْتُمْۜ بَلْ اَنْتُمْ قَوْمٌ مُسْرِفُونَ",
+          "transcription": "Kalu tairikum meakum, e in zukkirtum, bel entum kavmun musrifun.",
+          "translation": "Elçiler de, \"Uğursuzluğunuz kendinizdendir. Size öğüt verildiği için mi (uğursuzluğa uğruyorsunuz?). Hayır, siz aşırı giden bir kavimsiniz\" dediler.",
+          "start_time": null
+        },
+        {
+          "verse_number": 20,
+          "verse": "وَجَٓاءَ مِنْ اَقْصَا الْمَد۪ينَةِ رَجُلٌ يَسْعٰى قَالَ يَا قَوْمِ اتَّبِعُوا الْمُرْسَل۪ينَۙ",
+          "transcription": "Ve cae min aksal medineti raculun yes'a kale ya kavmittebiul murselin.",
+          "translation": "Şehrin öbür ucundan bir adam koşarak geldi ve şöyle dedi: \"Ey kavmim! Bu elçilere uyun.\"",
+          "start_time": null
+        },
+        {
+          "verse_number": 21,
+          "verse": "اِتَّبِعُوا مَنْ لَا يَسْـَٔلُكُمْ اَجْراً وَهُمْ مُهْتَدُونَ",
+          "transcription": "İttebiu men la yes'elukum ecren ve hum muhtedun.",
+          "translation": "\"Sizden hiçbir ücret istemeyen kimselere uyun, onlar hidayete erdirilmiş kimselerdir.\"",
+          "start_time": null
+        },
+        {
+          "verse_number": 22,
+          "verse": "وَمَا لِيَ لَٓا اَعْبُدُ الَّذ۪ي فَطَرَن۪ي وَاِلَيْهِ تُرْجَعُونَ",
+          "transcription": "Ve ma liye la a'budullezi fatarani ve ileyhi turceun.",
+          "translation": "\"Hem ben, ne diye beni yaratana kulluk etmeyeyim. Oysa siz de yalnızca O'na döndürüleceksiniz.\"",
+          "start_time": null
+        },
+        {
+          "verse_number": 23,
+          "verse": "ءَاَتَّخِذُ مِنْ دُونِه۪ٓ اٰلِهَةً اِنْ يُرِدْنِ الرَّحْمٰنُ بِضُرٍّ لَا تُغْنِ عَنّ۪ي شَفَاعَتُهُمْ شَيْـٔاً وَلَا يُنْقِذُونِۚ",
+          "transcription": "E ettehızu min dunihi aliheten in yuridnir rahmanu bi durrin la tugni anni şefaatuhum şey'en ve la yunkızun.",
+          "translation": "\"O'nu bırakıp da başka ilahlar mı edineyim? Eğer Rahman bana bir zarar vermek istese, onların şefaati bana hiçbir fayda sağlamaz ve beni kurtaramazlar.\"",
+          "start_time": null
+        },
+        {
+          "verse_number": 24,
+          "verse": "اِنّ۪ٓي اِذاً لَف۪ي ضَلَالٍ مُب۪ينٍ",
+          "transcription": "İnni izen le fi dalalin mubin.",
+          "translation": "\"O taktirde ben mutlaka açık bir sapıklık içinde olurum.\"",
+          "start_time": null
+        },
+        {
+          "verse_number": 25,
+          "verse": "اِنّ۪ٓي اٰمَنْتُ بِرَبِّكُمْ فَاسْمَعُونِۜ",
+          "transcription": "İnni amentu bi rabbikum fesmeun.",
+          "translation": "\"Şüphesiz ben sizin Rabbinize inandım. Gelin, beni dinleyin!\"",
+          "start_time": null
+        },
+        {
+          "verse_number": 26,
+          "verse": "ق۪يلَ ادْخُلِ الْجَنَّةَۜ قَالَ يَا لَيْتَ قَوْم۪ي يَعْلَمُونَۙ",
+          "transcription": "Kiled hulil cenneh, kale ya leyte kavmi ya'lemun.",
+          "translation": "(26-27) (Kavmi onu öldürdüğünde kendisine): \"Cennete gir!\" denildi. O da, \"Keşke kavmim, Rabbimin beni bağışladığını ve beni ikram edilenlerden kıldığını bilseydi!\" dedi.",
+          "start_time": null
+        },
+        {
+          "verse_number": 27,
+          "verse": "بِمَا غَفَرَ ل۪ي رَبّ۪ي وَجَعَلَن۪ي مِنَ الْمُكْرَم۪ينَ",
+          "transcription": "Bima gafere li rabbi ve cealeni minel mukremin.",
+          "translation": "(26-27) (Kavmi onu öldürdüğünde kendisine): \"Cennete gir!\" denildi. O da, \"Keşke kavmim, Rabbimin beni bağışladığını ve beni ikram edilenlerden kıldığını bilseydi!\" dedi.",
+          "start_time": null
+        },
+        {
+          "verse_number": 28,
+          "verse": "وَمَٓا اَنْزَلْنَا عَلٰى قَوْمِه۪ مِنْ بَعْدِه۪ مِنْ جُنْدٍ مِنَ السَّمَٓاءِ وَمَا كُنَّا مُنْزِل۪ينَ",
+          "transcription": "Ve ma enzelna ala kavmihi min ba'dihi min cundin mines semai ve ma kunna munzilin.",
+          "translation": "Kendisinden sonra kavmi üzerine (onları cezalandırmak için) gökten hiçbir ordu indirmedik. İndirecek de değildik.",
+          "start_time": null
+        },
+        {
+          "verse_number": 29,
+          "verse": "اِنْ كَانَتْ اِلَّا صَيْحَةً وَاحِدَةً فَاِذَا هُمْ خَامِدُونَ",
+          "transcription": "İn kanet illa sayhaten vahıdetenfe iza hum hamidun.",
+          "translation": "Sadece korkunç bir ses oldu. Bir anda sönüp gittiler.",
+          "start_time": null
+        },
+        {
+          "verse_number": 30,
+          "verse": "يَا حَسْرَةً عَلَى الْعِبَادِۚ مَا يَأْت۪يهِمْ مِنْ رَسُولٍ اِلَّا كَانُوا بِه۪ يَسْتَهْزِؤُ۫نَ",
+          "transcription": "Ya hasreten alel ıbad, ma ye'tihim min resulin illa kanu bihi yestehziun.",
+          "translation": "Yazık o kullara! Kendilerine bir peygamber gelmezdi ki, onunla alay ediyor olmasınlar.",
+          "start_time": null
+        },
+        {
+          "verse_number": 31,
+          "verse": "اَلَمْ يَرَوْا كَمْ اَهْلَكْنَا قَبْلَهُمْ مِنَ الْقُرُونِ اَنَّهُمْ اِلَيْهِمْ لَا يَرْجِعُونَ",
+          "transcription": "E lem yerev kem ehlekna kablehum minel kuruni ennehum ileyhim la yerciun.",
+          "translation": "Kendilerinden önce nice nesilleri helak ettiğimizi; onların artık kendilerine dönmeyeceklerini görmediler mi?",
+          "start_time": null
+        },
+        {
+          "verse_number": 32,
+          "verse": "وَاِنْ كُلٌّ لَمَّا جَم۪يعٌ لَدَيْنَا مُحْضَرُونَ۟",
+          "transcription": "Ve in kullun lemma cemiun ledeyna muhdarun.",
+          "translation": "Onların hepsi de mutlaka toplanıp (hesap için) huzurumuza çıkarılacaklardır.",
+          "start_time": null
+        },
+        {
+          "verse_number": 33,
+          "verse": "وَاٰيَةٌ لَهُمُ الْاَرْضُ الْمَيْتَةُۚ اَحْيَيْنَاهَا وَاَخْرَجْنَا مِنْهَا حَباًّ فَمِنْهُ يَأْكُلُونَ",
+          "transcription": "Ve ayetun lehumul ardul meyteh, ahyeynaha ve ahrecna minha habben fe minhu ye'kulun.",
+          "translation": "Ölü toprak onlar için bir delildir. Biz, onu diriltir ve ondan taneler çıkarırız da onlardan yerler.",
+          "start_time": null
+        },
+        {
+          "verse_number": 34,
+          "verse": "وَجَعَلْنَا ف۪يهَا جَنَّاتٍ مِنْ نَخ۪يلٍ وَاَعْنَابٍ وَفَجَّرْنَا ف۪يهَا مِنَ الْعُيُونِۙ",
+          "transcription": "Ve cealna fiha cennatin min nahilin ve a'nabin ve feccerna fiha minel uyun.",
+          "translation": "(34-35) Meyvelerinden yesinler diye biz orada hurmalıklar, üzüm bağları var ettik ve içlerinde pınarlar fışkırttık. Bunları onların elleri yapmış değildir. Hala şükretmeyecekler mi?",
+          "start_time": null
+        },
+        {
+          "verse_number": 35,
+          "verse": "لِيَأْكُلُوا مِنْ ثَمَرِه۪ۙ وَمَا عَمِلَتْهُ اَيْد۪يهِمْۜ اَفَلَا يَشْكُرُونَ",
+          "transcription": "Li ye'kulu min semerihi ve ma amilethu eydihim, e fe la yeşkurun.",
+          "translation": "(34-35) Meyvelerinden yesinler diye biz orada hurmalıklar, üzüm bağları var ettik ve içlerinde pınarlar fışkırttık. Bunları onların elleri yapmış değildir. Hala şükretmeyecekler mi?",
+          "start_time": null
+        },
+        {
+          "verse_number": 36,
+          "verse": "سُبْحَانَ الَّذ۪ي خَلَقَ الْاَزْوَاجَ كُلَّهَا مِمَّا تُنْبِتُ الْاَرْضُ وَمِنْ اَنْفُسِهِمْ وَمِمَّا لَا يَعْلَمُونَ",
+          "transcription": "Subhanellezi halakal ezvace kulleha mimma tunbitulardu ve min enfusihim ve mimma la ya'lemun.",
+          "translation": "Yerin bitirdiği şeylerden, insanların kendilerinden ve (daha) bilemedikleri (nice) şeylerden, bütün çiftleri yaratanın şanı yücedir.",
+          "start_time": null
+        },
+        {
+          "verse_number": 37,
+          "verse": "وَاٰيَةٌ لَهُمُ الَّيْلُۚ نَسْلَخُ مِنْهُ النَّهَارَ فَاِذَا هُمْ مُظْلِمُونَۙ",
+          "transcription": "Ve ayetun lehumul leyl, neslehu minhun nehare fe iza hum muzlimun.",
+          "translation": "Gece de onlar için bir delildir. Gündüzü ondan çıkarırız, bir de bakarsın karanlık içinde kalmışlardır.",
+          "start_time": null
+        },
+        {
+          "verse_number": 38,
+          "verse": "وَالشَّمْسُ تَجْر۪ي لِمُسْتَقَرٍّ لَهَاۜ ذٰلِكَ تَقْد۪يرُ الْعَز۪يزِ الْعَل۪يمِۜ",
+          "transcription": "Veş şemsu tecri li mustekarrin leha, zalike takdirul azizil alim.",
+          "translation": "Güneş de kendi yörüngesinde akıp gitmektedir. Bu, mutlak güç sahibi, hakkıyla bilen Allah'ın takdiri (düzenlemesi)dir.",
+          "start_time": null
+        },
+        {
+          "verse_number": 39,
+          "verse": "وَالْقَمَرَ قَدَّرْنَاهُ مَنَازِلَ حَتّٰى عَادَ كَالْعُرْجُونِ الْقَد۪يمِ",
+          "transcription": "Vel kamere kaddernahu menazile hatta adekel urcunil kadim.",
+          "translation": "Ayın dolaşımı için de konak yerleri (evreler) belirledik. Nihayet o, eğrilmiş kuru hurma dalı gibi olur.",
+          "start_time": null
+        },
+        {
+          "verse_number": 40,
+          "verse": "لَا الشَّمْسُ يَنْبَغ۪ي لَـهَٓا اَنْ تُدْرِكَ الْقَمَرَ وَلَا الَّيْلُ سَابِقُ النَّهَارِۜ وَكُلٌّ ف۪ي فَلَكٍ يَسْبَحُونَ",
+          "transcription": "Leş şemsu yenbegi leha en tudrikel kamere ve lel leylu sabikun nehar, ve kullun fi felekin yesbehun.",
+          "translation": "Ne güneş aya yetişebilir, ne de gece gündüzü geçebilir. Her biri bir yörüngede yüzmektedir.",
+          "start_time": null
+        },
+        {
+          "verse_number": 41,
+          "verse": "وَاٰيَةٌ لَهُمْ اَنَّا حَمَلْنَا ذُرِّيَّتَهُمْ فِي الْفُلْكِ الْمَشْحُونِۙ",
+          "transcription": "Ve ayetun lehum enna hamelna zurriyyetehum fil fulkil meşhun.",
+          "translation": "Onların soylarını dolu gemide taşımamız da onlar için bir delildir.",
+          "start_time": null
+        },
+        {
+          "verse_number": 42,
+          "verse": "وَخَلَقْنَا لَهُمْ مِنْ مِثْلِه۪ مَا يَرْكَبُونَ",
+          "transcription": "Ve halakna lehum min mislihi ma yerkebun.",
+          "translation": "Biz, onlar için o gemi gibi binecekleri nice şeyler yarattık.",
+          "start_time": null
+        },
+        {
+          "verse_number": 43,
+          "verse": "وَاِنْ نَشَأْ نُغْرِقْهُمْ فَلَا صَر۪يخَ لَهُمْ وَلَا هُمْ يُنْقَذُونَۙ",
+          "transcription": "Ve in neşe' nugrıkhum fe la sariha lehum ve la hum yunkazun.",
+          "translation": "Biz istesek onları suda boğarız da kendileri için ne imdat çağrısı yapan olur, ne de kurtarılırlar.",
+          "start_time": null
+        },
+        {
+          "verse_number": 44,
+          "verse": "اِلَّا رَحْمَةً مِنَّا وَمَتَاعاً اِلٰى ح۪ينٍ",
+          "transcription": "İlla rahmeten minna ve metaan ila hin.",
+          "translation": "Ancak tarafımızdan bir rahmet olarak ve bir süreye kadar daha yaşasınlar diye kurtarılırlar.",
+          "start_time": null
+        },
+        {
+          "verse_number": 45,
+          "verse": "وَاِذَا ق۪يلَ لَهُمُ اتَّقُوا مَا بَيْنَ اَيْد۪يكُمْ وَمَا خَلْفَكُمْ لَعَلَّكُمْ تُرْحَمُونَ",
+          "transcription": "Ve iza kile lehumutteku ma beyne eydikum ve ma halfekum leallekum turhamun.",
+          "translation": "Onlara, \"Önünüzde ve arkanızda olan şeylerden (dünya ve ahirette göreceğiniz azaplardan) sakının ki size merhamet edilsin\" denildiğinde yüz çevirirler.",
+          "start_time": null
+        },
+        {
+          "verse_number": 46,
+          "verse": "وَمَا تَأْت۪يهِمْ مِنْ اٰيَةٍ مِنْ اٰيَاتِ رَبِّهِمْ اِلَّا كَانُوا عَنْهَا مُعْرِض۪ينَ",
+          "transcription": "Ve ma te'tihim min ayetin min ayati rabbihim illa kanu anha mu'ridin.",
+          "translation": "Onlara Rablerinin ayetlerinden bir ayet gelmez ki ondan yüz çeviriyor olmasınlar.",
+          "start_time": null
+        },
+        {
+          "verse_number": 47,
+          "verse": "وَاِذَا ق۪يلَ لَهُمْ اَنْفِقُوا مِمَّا رَزَقَكُمُ اللّٰهُۙ قَالَ الَّذ۪ينَ كَفَرُوا لِلَّذ۪ينَ اٰمَنُٓوا اَنُطْعِمُ مَنْ لَوْ يَشَٓاءُ اللّٰهُ اَطْعَمَهُۗ اِنْ اَنْتُمْ اِلَّا ف۪ي ضَلَالٍ مُب۪ينٍ",
+          "transcription": "Ve iza kile lehum enfiku mimma rezakakumullahu kalellezine keferu lillezine amenu e nut'imu men lev yeşaullahu at'ameh, in entum illa fi dalalin mubin.",
+          "translation": "Onlara, \"Allah'ın sizi rızıklandırdığı şeylerden Allah yolunda harcayın\" denildiği zaman, inkar edenler iman edenlere, \"Allah'ın, dilemiş olsa kendilerini doyurabileceği kimselere mi yedireceğiz? Siz ancak apaçık bir sapıklık içindesiniz\" derler.",
+          "start_time": null
+        },
+        {
+          "verse_number": 48,
+          "verse": "وَيَقُولُونَ مَتٰى هٰذَا الْوَعْدُ اِنْ كُنْتُمْ صَادِق۪ينَ",
+          "transcription": "Ve yekulune meta hazel va'du in kuntum sadikin.",
+          "translation": "\"Eğer doğru söyleyenlerseniz, bu tehdit ne zaman gelecek?\" diyorlar.",
+          "start_time": null
+        },
+        {
+          "verse_number": 49,
+          "verse": "مَا يَنْظُرُونَ اِلَّا صَيْحَةً وَاحِدَةً تَأْخُذُهُمْ وَهُمْ يَخِصِّمُونَ",
+          "transcription": "Ma yenzurune illa sayhaten vahıdeten te'huzuhum ve hum yahıssımun.",
+          "translation": "Onlar ancak, çekişip dururlarken kendilerini yakalayacak korkunç bir ses bekliyorlar.",
+          "start_time": null
+        },
+        {
+          "verse_number": 50,
+          "verse": "فَلَا يَسْتَط۪يعُونَ تَوْصِيَةً وَلَٓا اِلٰٓى اَهْلِهِمْ يَرْجِعُونَ۟",
+          "transcription": "Fe la yestetiune tavsiyeten ve la ila ehlihim yerciun.",
+          "translation": "Artık ne birbirlerine tavsiyede bulunabilirler, ne de ailelerine dönebilirler.",
+          "start_time": null
+        },
+        {
+          "verse_number": 51,
+          "verse": "وَنُفِـخَ فِي الصُّورِ فَاِذَا هُمْ مِنَ الْاَجْدَاثِ اِلٰى رَبِّهِمْ يَنْسِلُونَ",
+          "transcription": "Ve nufiha fis suri fe iza hum minel ecdasi ila rabbihim yensilun.",
+          "translation": "Sura üfürülür. Bir de bakarsın, kabirlerden çıkmış, Rablerine doğru akın akın gitmektedirler.",
+          "start_time": null
+        },
+        {
+          "verse_number": 52,
+          "verse": "قَالُوا يَا وَيْلَنَا مَنْ بَعَثَنَا مِنْ مَرْقَدِنَ۔اۢ هٰذَا مَا وَعَدَ الرَّحْمٰنُ وَصَدَقَ الْمُرْسَلُونَ",
+          "transcription": "Kalu ya veylena men beasena min merkadina, haza ma vaader rahmanuve sadakal murselun.",
+          "translation": "Şöyle derler: \"Vay başımıza gelene! Kim bizi diriltip mezarımızdan çıkardı? Bu, Rahman'ın vaad ettiği şeydir. Peygamberler doğru söylemişler.\"",
+          "start_time": null
+        },
+        {
+          "verse_number": 53,
+          "verse": "اِنْ كَانَتْ اِلَّا صَيْحَةً وَاحِدَةً فَاِذَا هُمْ جَم۪يعٌ لَدَيْنَا مُحْضَرُونَ",
+          "transcription": "İn kanet illa sayhaten vahıdeten fe iza hum cemiun ledeyna muhdarun.",
+          "translation": "Sadece korkunç bir ses olur. Bir de bakarsın, hepsi birden toplanıp huzurumuza çıkarılmışlardır.",
+          "start_time": null
+        },
+        {
+          "verse_number": 54,
+          "verse": "فَالْيَوْمَ لَا تُظْلَمُ نَفْسٌ شَيْـٔاً وَلَا تُجْزَوْنَ اِلَّا مَا كُنْتُمْ تَعْمَلُونَ",
+          "transcription": "Fel yevme la tuzlemu nefsun şey'en ve la tuczevne illa ma kuntum ta'melun.",
+          "translation": "O gün kimseye, hiç mi hiç zulmedilmez. Size ancak işlemekte olduğunuz şeylerin karşılığı verilir.",
+          "start_time": null
+        },
+        {
+          "verse_number": 55,
+          "verse": "اِنَّ اَصْحَابَ الْجَنَّةِ الْيَوْمَ ف۪ي شُغُلٍ فَاكِهُونَۚ",
+          "transcription": "İnne ashabel cennetil yevme fi şugulin fakihun.",
+          "translation": "Şüphesiz cennetlikler o gün nimetlerle meşguldürler, zevk sürerler.",
+          "start_time": null
+        },
+        {
+          "verse_number": 56,
+          "verse": "هُمْ وَاَزْوَاجُهُمْ ف۪ي ظِلَالٍ عَلَى الْاَرَٓائِكِ مُتَّكِؤُ۫نَ",
+          "transcription": "Hum ve ezvacuhum fi zılalin alel eraiki muttekiun.",
+          "translation": "Onlar ve eşleri gölgelerde koltuklara yaslanmaktadırlar.",
+          "start_time": null
+        },
+        {
+          "verse_number": 57,
+          "verse": "لَهُمْ ف۪يهَا فَاكِهَةٌ وَلَهُمْ مَا يَدَّعُونَۚ",
+          "transcription": "Lehum fiha fakihetun ve lehum ma yeddeun.",
+          "translation": "Onlar için orada meyveler vardır. Onlar için diledikleri her şey vardır.",
+          "start_time": null
+        },
+        {
+          "verse_number": 58,
+          "verse": "سَلَامٌ قَوْلاً مِنْ رَبٍّ رَح۪يمٍ",
+          "transcription": "Selamun kavlen min rabbin rahim.",
+          "translation": "Çok merhametli olan Rab'den bir söz olarak (kendilerine) \"Selam\" (vardır).",
+          "start_time": null
+        },
+        {
+          "verse_number": 59,
+          "verse": "وَامْتَازُوا الْيَوْمَ اَيُّهَا الْمُجْرِمُونَ",
+          "transcription": "Vemtazul yevme eyyuhel mucrimun.",
+          "translation": "(Allah, şöyle der:) \"Ey suçlular! Ayrılın bu gün!\"",
+          "start_time": null
+        },
+        {
+          "verse_number": 60,
+          "verse": "اَلَمْ اَعْهَدْ اِلَيْكُمْ يَا بَن۪ٓي اٰدَمَ اَنْ لَا تَعْبُدُوا الشَّيْطَانَۚ اِنَّهُ لَكُمْ عَدُوٌّ مُب۪ينٌۙ",
+          "transcription": "E lem a'had ileykum ya beni ademe en la ta'buduş şeytan, innehu lekum aduvvun mubin.",
+          "translation": "(60-61) \"Ey Ademoğulları! Ben, size, şeytana kulluk etmeyin. Çünkü o, sizin için apaçık bir düşmandır. Bana kulluk edin. İşte bu dosdoğru yoldur, diye emretmedim mi?\"",
+          "start_time": null
+        },
+        {
+          "verse_number": 61,
+          "verse": "وَاَنِ اعْبُدُون۪يۜ هٰذَا صِرَاطٌ مُسْتَق۪يمٌ",
+          "transcription": "Ve eni'buduni, haza sıratun mustekim.",
+          "translation": "(60-61) \"Ey Ademoğulları! Ben, size, şeytana kulluk etmeyin. Çünkü o, sizin için apaçık bir düşmandır. Bana kulluk edin. İşte bu dosdoğru yoldur, diye emretmedim mi?\"",
+          "start_time": null
+        },
+        {
+          "verse_number": 62,
+          "verse": "وَلَقَدْ اَضَلَّ مِنْكُمْ جِبِلاًّ كَث۪يراًۜ اَفَلَمْ تَكُونُوا تَعْقِلُونَ",
+          "transcription": "Ve lekad edalle minkum cibillen kesira, e fe lem tekunu ta'kılun.",
+          "translation": "\"Andolsun, o sizden pek çok nesli saptırmıştı. Hiç düşünmüyor muydunuz?\"",
+          "start_time": null
+        },
+        {
+          "verse_number": 63,
+          "verse": "هٰذِه۪ جَهَنَّمُ الَّت۪ي كُنْتُمْ تُوعَدُونَ",
+          "transcription": "Hazihi cehennemulleti kuntum tuadun.",
+          "translation": "\"İşte bu, tehdit edildiğiniz cehennemdir.\"",
+          "start_time": null
+        },
+        {
+          "verse_number": 64,
+          "verse": "اِصْلَوْهَا الْيَوْمَ بِمَا كُنْتُمْ تَكْفُرُونَ",
+          "transcription": "Islevhel yevme bima kuntum tekfurun.",
+          "translation": "\"İnkar ettiğinizden dolayı bugün girin oraya!\"",
+          "start_time": null
+        },
+        {
+          "verse_number": 65,
+          "verse": "اَلْيَوْمَ نَخْتِمُ عَلٰٓى اَفْوَاهِهِمْ وَتُكَلِّمُنَٓا اَيْد۪يهِمْ وَتَشْهَدُ اَرْجُلُهُمْ بِمَا كَانُوا يَكْسِبُونَ",
+          "transcription": "El yevme nahtimu ala efvahihim ve tukellimuna eydihim ve teşhedu erculuhum bima kanu yeksibun.",
+          "translation": "O gün biz onların ağızlarını mühürleriz. Elleri bize konuşur, ayakları da kazandıklarına şahitlik eder.",
+          "start_time": null
+        },
+        {
+          "verse_number": 66,
+          "verse": "وَلَوْ نَشَٓاءُ لَطَمَسْنَا عَلٰٓى اَعْيُنِهِمْ فَاسْتَبَقُوا الصِّرَاطَ فَاَنّٰى يُبْصِرُونَ",
+          "transcription": "Ve lev neşau le tamesna ala a'yunihim festebekus sırata fe enna yubsırun.",
+          "translation": "Eğer dileseydik, onların gözlerini büsbütün kör ederdik de (bu halde) yola koyulmak için didişirlerdi. Fakat nasıl görecekler ki?!",
+          "start_time": null
+        },
+        {
+          "verse_number": 67,
+          "verse": "وَلَوْ نَشَٓاءُ لَمَسَخْنَاهُمْ عَلٰى مَكَانَتِهِمْ فَمَا اسْتَطَاعُوا مُضِياًّ وَلَا يَرْجِعُونَ۟",
+          "transcription": "Ve lev neşau le mesahnahum ala mekanetihim fe mastetau mudiyyen ve la yerciun.",
+          "translation": "Yine eğer dileseydik, oldukları yerde başka yaratıklara dönüştürürdük de ne ileri gidebilirler, ne geri dönebilirlerdi.",
+          "start_time": null
+        },
+        {
+          "verse_number": 68,
+          "verse": "وَمَنْ نُعَمِّرْهُ نُنَكِّسْهُ فِي الْخَلْقِۜ اَفَلَا يَعْقِلُونَ",
+          "transcription": "Ve men nuammirhu nunekkishu fil halk, e fe la ya'kılun.",
+          "translation": "Kime uzun ömür verirsek, onu yaratılış itibariyle tersine çeviririz (gücünü azaltırız). Hala düşünmeyecekler mi?",
+          "start_time": null
+        },
+        {
+          "verse_number": 69,
+          "verse": "وَمَا عَلَّمْنَاهُ الشِّعْرَ وَمَا يَنْبَغ۪ي لَهُۜ اِنْ هُوَ اِلَّا ذِكْرٌ وَقُرْاٰنٌ مُب۪ينٌۙ",
+          "transcription": "Ve ma allemnahuş şi're ve ma yenbagi leh, in huve illa zikrun ve kur'anun mubin.",
+          "translation": "Biz, o Peygamber'e şiir öğretmedik. Bu, ona yaraşmaz da. O(na verdiğimiz) ancak bir öğüt ve apaçık bir Kur'an'dır.",
+          "start_time": null
+        },
+        {
+          "verse_number": 70,
+          "verse": "لِيُنْذِرَ مَنْ كَانَ حَياًّ وَيَحِقَّ الْقَوْلُ عَلَى الْكَافِر۪ينَ",
+          "transcription": "Li yunzire men kane hayyen ve yehıkkal kavlu alel kafirin.",
+          "translation": "(Aklen ve fikren) diri olanları uyarması ve kafirler hakkındaki o sözün (azabın) gerçekleşmesi için Kur'an'ı indirdik.",
+          "start_time": null
+        },
+        {
+          "verse_number": 71,
+          "verse": "اَوَلَمْ يَرَوْا اَنَّا خَلَقْنَا لَهُمْ مِمَّا عَمِلَتْ اَيْد۪ينَٓا اَنْعَاماً فَهُمْ لَهَا مَالِكُونَ",
+          "transcription": "E ve lem yerev enna halakna lehum mimma amilet eydina en'amen fe hum leha malikun.",
+          "translation": "Görmediler mi ki, biz onlar için, ellerimizin (kudretimizin) eseri olan hayvanlar yarattık da onlar bu hayvanlara sahip oluyorlar.",
+          "start_time": null
+        },
+        {
+          "verse_number": 72,
+          "verse": "وَذَلَّلْنَاهَا لَهُمْ فَمِنْهَا رَكُوبُهُمْ وَمِنْهَا يَأْكُلُونَ",
+          "transcription": "Ve zellelnaha lehum fe minha rakubuhum ve minha ye'kulun.",
+          "translation": "Biz, o hayvanları kendilerine boyun eğdirdik. Onlardan bir kısmı binekleridir, bir kısmını da yerler.",
+          "start_time": null
+        },
+        {
+          "verse_number": 73,
+          "verse": "وَلَهُمْ ف۪يهَا مَنَافِـعُ وَمَشَارِبُۜ اَفَلَا يَشْكُرُونَ",
+          "transcription": "Ve lehum fiha menafiu ve meşarib, e fe la yeşkurun.",
+          "translation": "Onlar için bu hayvanlarda (daha pek çok) yararlar ve içecekler vardır. Hala şükretmeyecekler mi?",
+          "start_time": null
+        },
+        {
+          "verse_number": 74,
+          "verse": "وَاتَّخَذُوا مِنْ دُونِ اللّٰهِ اٰلِهَةً لَعَلَّهُمْ يُنْصَرُونَۜ",
+          "transcription": "Vettehazu min dunillahi aliheten leallehum yunsarun.",
+          "translation": "Belki kendilerine yardım edilir diye Allah'ı bırakıp da ilahlar edindiler.",
+          "start_time": null
+        },
+        {
+          "verse_number": 75,
+          "verse": "لَا يَسْتَط۪يعُونَ نَصْرَهُمْۙ وَهُمْ لَهُمْ جُنْدٌ مُحْضَرُونَ",
+          "transcription": "La yestetiune nasrahum ve hum lehum cundun muhdarun.",
+          "translation": "Onlar, ilahlar için (hizmete) hazır asker oldukları halde, ilahlar onlara yardım edemezler.",
+          "start_time": null
+        },
+        {
+          "verse_number": 76,
+          "verse": "فَلَا يَحْزُنْكَ قَوْلُهُمْۢ اِنَّا نَعْلَمُ مَا يُسِرُّونَ وَمَا يُعْلِنُونَ",
+          "transcription": "Fe la yahzunke kavluhum, inna na'lemu ma yusirrune ve ma yu'linun.",
+          "translation": "(Ey Muhammed!) Artık onların sözü seni üzmesin. Çünkü biz, onların gizlediklerini de açığa vurduklarını da biliyoruz.",
+          "start_time": null
+        },
+        {
+          "verse_number": 77,
+          "verse": "اَوَلَمْ يَرَ الْاِنْسَانُ اَنَّا خَلَقْنَاهُ مِنْ نُطْفَةٍ فَاِذَا هُوَ خَص۪يمٌ مُب۪ينٌ",
+          "transcription": "E ve lem yerel insanu enna halaknahu min nutfetin fe iza huve hasimun mubin.",
+          "translation": "İnsan, bizim, kendisini az bir sudan (meniden) yarattığımızı görmedi mi ki, kalkmış apaçık bir düşman kesilmiştir.",
+          "start_time": null
+        },
+        {
+          "verse_number": 78,
+          "verse": "وَضَرَبَ لَنَا مَثَلاً وَنَسِيَ خَلْقَهُۜ قَالَ مَنْ يُحْـيِ الْعِظَامَ وَهِيَ رَم۪يمٌ",
+          "transcription": "Ve darebe lena meselen ve nesiye halkah, kale men yuhyil izame ve hiye remim.",
+          "translation": "Bir de kendi yaratılışını unutarak bize bir örnek getirdi. Dedi ki: \"Çürümüşlerken kemikleri kim diriltecek?\"",
+          "start_time": null
+        },
+        {
+          "verse_number": 79,
+          "verse": "قُلْ يُحْي۪يهَا الَّـذ۪ٓي اَنْشَاَهَٓا اَوَّلَ مَرَّةٍۜ وَهُوَ بِكُلِّ خَلْقٍ عَل۪يمٌۙ",
+          "transcription": "Kul yuhyihellezi enşeeha evvele merreh, ve huve bi kulli halkın alim.",
+          "translation": "De ki: \"Onları ilk defa var eden diriltecektir. O, her yaratılmışı hakkıyla bilendir.\"",
+          "start_time": null
+        },
+        {
+          "verse_number": 80,
+          "verse": "اَلَّذ۪ي جَعَلَ لَكُمْ مِنَ الشَّجَرِ الْاَخْضَرِ نَاراً فَاِذَٓا اَنْتُمْ مِنْهُ تُوقِدُونَ",
+          "transcription": "Ellezi ceale lekum mineş şeceril ahdarinaren fe iza entum minhu tukıdun.",
+          "translation": "O, sizin için yeşil ağaçtan ateş yaratandır. Şimdi siz ondan yakıp duruyorsunuz.",
+          "start_time": null
+        },
+        {
+          "verse_number": 81,
+          "verse": "اَوَلَيْسَ الَّذ۪ي خَلَقَ السَّمٰوَاتِ وَالْاَرْضَ بِقَادِرٍ عَلٰٓى اَنْ يَخْلُقَ مِثْلَهُمْۜ بَلٰى وَهُوَ الْخَلَّاقُ الْعَل۪يمُ",
+          "transcription": "E ve leysellezi halakas semavati vel arda bi kadirin ala en yahluka mislehum, bela ve huvel hallakul alim.",
+          "translation": "Gökleri ve yeri yaratan Allah'ın, onların benzerini yaratmaya gücü yetmez mi? Evet yeter. O, hakkıyla yaratandır, hakkıyla bilendir.",
+          "start_time": null
+        },
+        {
+          "verse_number": 82,
+          "verse": "اِنَّـمَٓا اَمْرُهُٓ اِذَٓا اَرَادَ شَيْـٔاً اَنْ يَقُولَ لَهُ كُنْ فَيَكُونُ",
+          "transcription": "İnnema emruhu iza erade şey'en en yekule lehu kun fe yekun.",
+          "translation": "Bir şeyi dilediği zaman, O'nun emri o şeye ancak \"Ol!\" demektir. O da hemen oluverir.",
+          "start_time": null
+        },
+        {
+          "verse_number": 83,
+          "verse": "فَسُبْحَانَ الَّذ۪ي بِيَدِه۪ مَلَكُوتُ كُلِّ شَيْءٍ وَاِلَيْهِ تُرْجَعُونَ",
+          "transcription": "Fe subhanellezi bi yedihi melekutu kulli şey'in ve ileyhi turceun.",
+          "translation": "Her şeyin hükümranlığı elinde olan Allah'ın şanı yücedir! Siz yalnız O'na döndürüleceksiniz.",
+          "start_time": null
+        }
+      ]
+    },
+    {
+      "id": 67,
+      "name": "Mülk",
+      "name_translation_tr": "Yönetim",
+      "verse_count": 30,
+      "audio": {
+        "url": "https://audio.acikkuran.com/tr/67.mp3",
+        "duration": 331
+      },
+      "verses": [
+        {
+          "verse_number": 0,
+          "verse": "بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّح۪يمِ",
+          "transcription": "Bismillahir rahmanir rahim.",
+          "translation": "Bismillahirrahmanirrahim.",
+          "start_time": null
+        },
+        {
+          "verse_number": 1,
+          "verse": "تَبَارَكَ الَّذ۪ي بِيَدِهِ الْمُلْكُۘ وَهُوَ عَلٰى كُلِّ شَيْءٍ قَد۪يرٌۙ",
+          "transcription": "Tebarekellezi bi yedihil mulku ve huve ala kulli şey'in kadir.",
+          "translation": "Hükümranlık elinde olan Allah, yücedir. O, her şeye hakkıyla gücü yetendir.",
+          "start_time": null
+        },
+        {
+          "verse_number": 2,
+          "verse": "اَلَّذ۪ي خَلَقَ الْمَوْتَ وَالْحَيٰوةَ لِيَبْلُوَكُمْ اَيُّكُمْ اَحْسَنُ عَمَلاًۜ وَهُوَ الْعَز۪يزُ الْغَفُورُۙ",
+          "transcription": "Ellezi halakal mevte vel hayate li yebluvekum eyyukum ahsenu amela, ve huvel azi zul gafur.",
+          "translation": "O, hanginizin daha güzel amel yapacağını sınamak için ölümü ve hayatı yaratandır. O, mutlak güç sahibidir, çok bağışlayandır.",
+          "start_time": null
+        },
+        {
+          "verse_number": 3,
+          "verse": "اَلَّذ۪ي خَلَقَ سَبْعَ سَمٰوَاتٍ طِبَاقاًۜ مَا تَرٰى ف۪ي خَلْقِ الرَّحْمٰنِ مِنْ تَفَاوُتٍۜ فَارْجِعِ الْبَصَرَۙ هَلْ تَرٰى مِنْ فُطُورٍ",
+          "transcription": "Ellezi halaka seb'a semavatin tibaka, ma tera fi halkır rahmani min tefavut, ferciıl basara hel tera min futur.",
+          "translation": "O, yedi göğü tabaka tabaka yaratandır. Rahman'ın yaratışında hiçbir uyumsuzluk göremezsin. Bir kere daha bak! Hiçbir çatlak (ve düzensizlik) görüyor musun?",
+          "start_time": null
+        },
+        {
+          "verse_number": 4,
+          "verse": "ثُمَّ ارْجِعِ الْبَصَرَ كَرَّتَيْنِ يَنْقَلِبْ اِلَيْكَ الْبَصَرُ خَاسِئاً وَهُوَ حَس۪يرٌ",
+          "transcription": "Summerciıl basara kerreteyni yenkalib ileykel basaru hasien ve huve hasir.",
+          "translation": "Sonra tekrar tekrar bak; bakışların (aradığı çatlak ve düzensizliği bulamayıp) aciz ve bitkin halde sana dönecektir.",
+          "start_time": null
+        },
+        {
+          "verse_number": 5,
+          "verse": "وَلَقَدْ زَيَّنَّا السَّمَٓاءَ الدُّنْيَا بِمَصَاب۪يحَ وَجَعَلْنَاهَا رُجُوماً لِلشَّيَاط۪ينِ وَاَعْتَدْنَا لَهُمْ عَذَابَ السَّع۪يرِ",
+          "transcription": "Ve lekad zeyyennes semaed dunya bi mesabiha ve cealnaha rucumen liş şeyatini ve a'tedna lehum azabes sair.",
+          "translation": "Andolsun biz, en yakın göğü kandillerle donattık. Onları şeytanlara atılan taşlar yaptık ve (ahirette de) onlara alevli ateş azabını hazırladık.",
+          "start_time": null
+        },
+        {
+          "verse_number": 6,
+          "verse": "وَلِلَّذ۪ينَ كَفَرُوا بِرَبِّهِمْ عَذَابُ جَهَنَّمَۜ  وَبِئْسَ الْمَص۪يرُ",
+          "transcription": "Ve lillezine keferu bi rabbihim azabu cehennem, ve bi'sel masir.",
+          "translation": "Rablerini inkar edenler için cehennem azabı vardır. Ne kötü varılacak yerdir orası!",
+          "start_time": null
+        },
+        {
+          "verse_number": 7,
+          "verse": "اِذَٓا اُلْقُوا ف۪يهَا سَمِعُوا لَهَا شَه۪يقاً وَهِيَ تَفُورُۙ",
+          "transcription": "İza ulku fiha semiu leha şehikan ve hiye tefur.",
+          "translation": "Oraya atıldıklarında, onun kaynarken çıkardığı korkunç uğultuyu işitirler.",
+          "start_time": null
+        },
+        {
+          "verse_number": 8,
+          "verse": "تَكَادُ تَمَيَّزُ مِنَ الْغَيْظِۜ  كُلَّمَٓا اُلْقِيَ ف۪يهَا فَوْجٌ سَاَلَهُمْ خَزَنَتُهَٓا اَلَمْ يَأْتِكُمْ نَذ۪يرٌ",
+          "transcription": "Tekadu temeyyezu minel gayz, kullema ulkıye fiha fevcun seelehum hazenetuha e lem ye'tikum nezir.",
+          "translation": "Neredeyse cehennem öfkeden çatlayacaktır! Oraya her bir topluluk atıldıkça oranın bekçileri onlara, \"Size bir uyarıcı gelmemiş miydi?\" diye sorarlar.",
+          "start_time": null
+        },
+        {
+          "verse_number": 9,
+          "verse": "قَالُوا بَلٰى قَدْ جَٓاءَنَا نَذ۪يرٌ فَكَذَّبْنَا وَقُلْنَا مَا نَزَّلَ اللّٰهُ مِنْ شَيْءٍۚ اِنْ اَنْتُمْ اِلَّا ف۪ي ضَلَالٍ كَب۪يرٍ",
+          "transcription": "Kalu bela kad caena nezirun fe kezzebna ve kulna ma nezzelallahu min şey'in entum illa fi dalalin kebir.",
+          "translation": "Onlar da şöyle derler: \"Evet, bize bir uyarıcı gelmişti. Fakat biz onu yalanlamış ve 'Allah hiçbir şey indirmemiştir. Siz ancak büyük bir sapıklık içindesiniz' demiştik.\"",
+          "start_time": null
+        },
+        {
+          "verse_number": 10,
+          "verse": "وَقَالُوا لَوْ كُنَّا نَسْمَعُ اَوْ نَعْقِلُ مَا كُنَّا ف۪ٓي اَصْحَابِ السَّع۪يرِ",
+          "transcription": "Ve kalu lev kunna nesmeu ev na'kılu ma kunna fi ashabis sair.",
+          "translation": "Yine şöyle derler: \"Eğer kulak vermiş veya aklımızı kullanmış olsaydık, şu alevli ateştekilerden olmazdık.\"",
+          "start_time": null
+        },
+        {
+          "verse_number": 11,
+          "verse": "فَاعْتَرَفُوا بِذَنْبِهِمْۚ فَسُحْقاً لِاَصْحَابِ السَّع۪يرِ",
+          "transcription": "Fa'terefu bi zenbihim, fe suhkan li ashabis sair.",
+          "translation": "İşte böylece günahlarını itiraf ederler. Artık alevli ateştekiler Allah'ın rahmetinden uzak olsun!",
+          "start_time": null
+        },
+        {
+          "verse_number": 12,
+          "verse": "اِنَّ الَّذ۪ينَ يَخْشَوْنَ رَبَّهُمْ بِالْغَيْبِ لَهُمْ مَغْفِرَةٌ وَاَجْرٌ كَب۪يرٌ",
+          "transcription": "İnnellezine yahşevne rabbehum bil gaybi lehum magfiretun ve ecrun kebir.",
+          "translation": "Görmedikleri halde Rablerinden korkanlar için bir bağışlanma ve büyük bir mükafat vardır.",
+          "start_time": null
+        },
+        {
+          "verse_number": 13,
+          "verse": "وَاَسِرُّوا قَوْلَكُمْ اَوِ اجْهَرُوا بِه۪ۜ  اِنَّهُ عَل۪يمٌ بِذَاتِ الصُّدُورِ",
+          "transcription": "Ve esirru kavlekum evicheru bih, innehu alimun bi zatis sudur.",
+          "translation": "Sözünüzü gizleyin, yahut onu açığa vurun; (fark etmez). Şüphesiz Allah, sinelerin özünü (kalplerde olanı) hakkıyla bilir.",
+          "start_time": null
+        },
+        {
+          "verse_number": 14,
+          "verse": "اَلَا يَعْلَمُ مَنْ خَلَقَۜ وَهُوَ اللَّط۪يفُ الْخَب۪يرُ۟",
+          "transcription": "Ela ya'lemu men halak, ve huvel latiful habir.",
+          "translation": "Yaratan bilmez mi? O, en gizli şeyleri bilir, (her şeyden) hakkıyla haberdardır.",
+          "start_time": null
+        },
+        {
+          "verse_number": 15,
+          "verse": "هُوَ الَّذ۪ي جَعَلَ لَكُمُ الْاَرْضَ ذَلُولاً فَامْشُوا ف۪ي مَنَاكِبِهَا وَكُلُوا مِنْ رِزْقِه۪ۜ  وَاِلَيْهِ النُّشُورُ",
+          "transcription": "Huvellezi ceale lekumul arda zelulen femşu fi menakibiha ve kulu min rızkıh, ve ileyhin nuşur.",
+          "translation": "O, yeryüzünü sizin ayaklarınızın altına serendir. Haydi onun üzerinde yürüyün ve Allah'ın rızkından yiyin. Dönüş ancak O'nadır.",
+          "start_time": null
+        },
+        {
+          "verse_number": 16,
+          "verse": "ءَاَمِنْتُمْ مَنْ فِي السَّمَٓاءِ اَنْ يَخْسِفَ بِكُمُ الْاَرْضَ فَاِذَا هِيَ تَمُورُۙ",
+          "transcription": "E emintum men fis semai en yahsife bikumul arda fe iza hiye temur.",
+          "translation": "Göktekinin sizi yere geçirivermeyeceğinden emin mi oldunuz? (O zaman) bir de bakarsınız yeryüzü şiddetle çalkalanıyor.",
+          "start_time": null
+        },
+        {
+          "verse_number": 17,
+          "verse": "اَمْ اَمِنْتُمْ مَنْ فِي السَّمَٓاءِ اَنْ يُرْسِلَ عَلَيْكُمْ حَاصِباًۜ فَسَتَعْلَمُونَ كَيْفَ نَذ۪يرِ",
+          "transcription": "Em emintum men fis semai en yursile aleykum hasıba fe se ta'lemune keyfe nezir.",
+          "translation": "Yahut göktekinin, üzerinize taş yağdıran rüzgar göndermeyeceğinden mi emin oldunuz? O zaman, uyarım nasılmış bileceksiniz!",
+          "start_time": null
+        },
+        {
+          "verse_number": 18,
+          "verse": "وَلَقَدْ كَذَّبَ الَّذ۪ينَ مِنْ قَبْلِهِمْ فَكَيْفَ كَانَ نَك۪يرِ",
+          "transcription": "Ve lekad kezzebellezine min kablihim fe keyfe kane nekir.",
+          "translation": "Andolsun, onlardan öncekiler de yalanlamıştı. Beni inkar etmenin sonucu nasıl oldu!?",
+          "start_time": null
+        },
+        {
+          "verse_number": 19,
+          "verse": "اَوَلَمْ يَرَوْا اِلَى الطَّيْرِ فَوْقَهُمْ صَٓافَّاتٍ وَيَقْبِضْنَۜ مَا يُمْسِكُهُنَّ اِلَّا الرَّحْمٰنُۜ اِنَّهُ بِكُلِّ شَيْءٍ بَص۪يرٌ",
+          "transcription": "E ve lem yerev ilet tayri fevkahum saffatin ve yakbıdn, ma yumsikuhunne iller rahman, innehu bi kulli şey'in basir.",
+          "translation": "Üstlerinde kanat çırparak uçan kuşlara bakmazlar mı? Onları (havada) ancak Rahman tutuyor. Şüphesiz O, her şeyi hakkıyla görendir.",
+          "start_time": null
+        },
+        {
+          "verse_number": 20,
+          "verse": "اَمَّنْ هٰذَا الَّذ۪ي هُوَ جُنْدٌ لَكُمْ يَنْصُرُكُمْ مِنْ دُونِ الرَّحْمٰنِۜ اِنِ الْكَافِرُونَ اِلَّا ف۪ي غُرُورٍۚ",
+          "transcription": "Emmen hazellezi huve cundun lekum yensurukum min dunir rahman, inil kafirune illa fi gurur.",
+          "translation": "Yahut Rahman'dan başka size yardım edecek şu ordunuz (taraftarlarınız) kimlerdir? İnkarcılar ancak bir aldanış içindedirler.",
+          "start_time": null
+        },
+        {
+          "verse_number": 21,
+          "verse": "اَمَّنْ هٰذَا الَّذ۪ي يَرْزُقُكُمْ اِنْ اَمْسَكَ رِزْقَهُۚ بَلْ لَجُّوا ف۪ي عُتُوٍّ وَنُفُورٍ",
+          "transcription": "Emmen hazellezi yerzukukum in emseke rızkah, bel leccu fi utuvvin ve nufur.",
+          "translation": "Peki, Allah rızkını keserse, kimdir size rızık verecek olan? Hayır, onlar azgınlık ve nefretle direnip durdular.",
+          "start_time": null
+        },
+        {
+          "verse_number": 22,
+          "verse": "اَفَمَنْ يَمْش۪ي مُكِباًّ عَلٰى وَجْهِه۪ٓ  اَهْدٰٓى اَمَّنْ يَمْش۪ي سَوِياًّ عَلٰى صِرَاطٍ مُسْتَق۪يمٍ",
+          "transcription": "E fe men yemşi mukibben ala vechihi ehda emmen yemşi seviyyen ala sıratın mustekim.",
+          "translation": "Şimdi, yüzüstü kapanarak düşe kalka yürüyen mi daha doğru gider, yoksa dosdoğru bir yolda dimdik yürüyen mi?",
+          "start_time": null
+        },
+        {
+          "verse_number": 23,
+          "verse": "قُلْ هُوَ الَّـذ۪ٓي اَنْشَاَكُمْ وَجَعَلَ لَكُمُ السَّمْعَ وَالْاَبْصَارَ وَالْاَفْـِٔدَةَۜ قَل۪يلاً مَا تَشْكُرُونَ",
+          "transcription": "Kul huvellezi enşeekum ve ceale lekumus sem'a vel ebsare vel ef'ideh, kalilen ma teşkurun.",
+          "translation": "De ki: \"O, sizi yaratan ve size kulaklar, gözler ve kalpler verendir. Ne kadar da az şükrediyorsunuz!\"",
+          "start_time": null
+        },
+        {
+          "verse_number": 24,
+          "verse": "قُلْ هُوَ الَّذ۪ي ذَرَاَكُمْ فِي الْاَرْضِ وَاِلَيْهِ تُحْشَرُونَ",
+          "transcription": "Kul huvellezi zereekum fil ardı ve ileyhi tuhşerun.",
+          "translation": "De ki: \"O, sizi yeryüzünde yaratıp çoğaltandır. Ancak O'nun huzurunda toplanacaksınız.\"",
+          "start_time": null
+        },
+        {
+          "verse_number": 25,
+          "verse": "وَيَقُولُونَ مَتٰى هٰذَا الْوَعْدُ اِنْ كُنْتُمْ صَادِق۪ينَ",
+          "transcription": "Ve yekulune meta hazel va'du in kuntum sadikin.",
+          "translation": "\"Eğer doğru söyleyenler iseniz, bu tehdit ne zaman gerçekleşecek?\" diyorlar.",
+          "start_time": null
+        },
+        {
+          "verse_number": 26,
+          "verse": "قُلْ اِنَّمَا الْعِلْمُ عِنْدَ اللّٰهِۖ وَاِنَّمَٓا اَنَا۬ نَذ۪يرٌ مُب۪ينٌ",
+          "transcription": "Kul innemel ilmu indallahi ve innema ene nezirun mubin.",
+          "translation": "De ki: \"O bilgi, ancak Allah katındadır. Ben ise sadece apaçık bir uyarıcıyım.\"",
+          "start_time": null
+        },
+        {
+          "verse_number": 27,
+          "verse": "فَلَمَّا رَاَوْهُ زُلْفَةً س۪ٓيـَٔتْ وُجُوهُ الَّذ۪ينَ كَفَرُوا وَق۪يلَ هٰذَا الَّذ۪ي كُنْتُمْ بِه۪ تَدَّعُونَ",
+          "transcription": "Fe lemma reevhu zulfeten siet vucuhullezine keferu ve kile hazellezi kuntum bihi teddeun.",
+          "translation": "Onu (azabı) yakından gördükleri zaman inkar edenlerin yüzleri kötüleşir ve onlara, \"İşte bu, (alaylı bir biçimde) isteyip durduğunuz şeydir\" denir.",
+          "start_time": null
+        },
+        {
+          "verse_number": 28,
+          "verse": "قُلْ اَرَاَيْتُمْ اِنْ اَهْلَكَنِيَ اللّٰهُ وَمَنْ مَعِيَ اَوْ رَحِمَنَاۙ فَمَنْ يُج۪يرُ الْكَافِر۪ينَ مِنْ عَذَابٍ اَل۪يمٍ",
+          "transcription": "Kul ereeytum in ehlekeniyallahu ve men maıye ev rahımena fe men yucirul kafirine min azabin elim.",
+          "translation": "De ki: \"Söyleyin bakalım: Diyelim ki Allah beni ve beraberimdekileri helak etti, yahut bize acıdı. Peki, ya inkarcıları elem dolu bir azaptan kim koruyacak?\"",
+          "start_time": null
+        },
+        {
+          "verse_number": 29,
+          "verse": "قُلْ هُوَ الرَّحْمٰنُ اٰمَنَّا بِه۪ وَعَلَيْهِ تَوَكَّلْنَاۚ فَسَتَعْلَمُونَ مَنْ هُوَ ف۪ي ضَلَالٍ مُب۪ينٍ",
+          "transcription": "Kul huver rahmanu amenna bihi ve aleyhi tevekkelna, fe se ta'lemune men huve fi dalalin mubin.",
+          "translation": "De ki: \"O, Rahman'dır. O'na iman ettik, yalnızca O'na tevekkül ettik. Siz, kimin apaçık bir sapıklık içinde olduğunu yakında öğreneceksiniz!\"",
+          "start_time": null
+        },
+        {
+          "verse_number": 30,
+          "verse": "قُلْ اَرَاَيْتُمْ اِنْ اَصْبَحَ مَٓاؤُ۬كُمْ غَوْراً فَمَنْ يَأْت۪يكُمْ بِمَٓاءٍ مَع۪ينٍ",
+          "transcription": "Kul e re'eytum in asbaha maukum gavren fe men ye'tikum bi main main.",
+          "translation": "De ki: \"Söyleyin bakalım: Suyunuz çekiliverse, size kim temiz bir akar su getirir?\"",
+          "start_time": null
+        }
+      ]
+    },
+    {
+      "id": 56,
+      "name": "Vakıa",
+      "name_translation_tr": "Olay",
+      "verse_count": 96,
+      "audio": {
+        "url": "https://audio.acikkuran.com/tr/56.mp3",
+        "duration": 397
+      },
+      "verses": [
+        {
+          "verse_number": 0,
+          "verse": "بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّح۪يمِ",
+          "transcription": "Bismillahir rahmanir rahim.",
+          "translation": "Bismillahirrahmanirrahim.",
+          "start_time": null
+        },
+        {
+          "verse_number": 1,
+          "verse": "اِذَا وَقَعَتِ الْوَاقِعَةُۙ",
+          "transcription": "İza ve kaatil vakıah.",
+          "translation": "(1-2) Kesin gerçekleşecek (olan Kıyamet) koptuğu zaman, onun kopuşunu yalanlayacak kimse olmayacaktır.",
+          "start_time": null
+        },
+        {
+          "verse_number": 2,
+          "verse": "لَيْسَ لِوَقْعَتِهَا كَاذِبَةٌۢ",
+          "transcription": "Leyse li vak'atiha kazibeh.",
+          "translation": "(1-2) Kesin gerçekleşecek (olan Kıyamet) koptuğu zaman, onun kopuşunu yalanlayacak kimse olmayacaktır.",
+          "start_time": null
+        },
+        {
+          "verse_number": 3,
+          "verse": "خَافِضَةٌ رَافِعَةٌۙ",
+          "transcription": "Hafidatun rafiah.",
+          "translation": "(3-7) Yeryüzü şiddetle sarsıldığı, dağlar parça parça dağılıp saçılmış toz olduğu ve siz de üç sınıf olduğunuz zaman, O, (kimini) yükseltir, (kimini) alçaltır.",
+          "start_time": null
+        },
+        {
+          "verse_number": 4,
+          "verse": "اِذَا رُجَّتِ الْاَرْضُ رَجاًّۙ",
+          "transcription": "İza ruccetil ardu recca.",
+          "translation": "(3-7) Yeryüzü şiddetle sarsıldığı, dağlar parça parça dağılıp saçılmış toz olduğu ve siz de üç sınıf olduğunuz zaman, O, (kimini) yükseltir, (kimini) alçaltır.",
+          "start_time": null
+        },
+        {
+          "verse_number": 5,
+          "verse": "وَبُسَّتِ الْجِبَالُ بَساًّۙ",
+          "transcription": "Ve bussetil cibalu bessa.",
+          "translation": "(3-7) Yeryüzü şiddetle sarsıldığı, dağlar parça parça dağılıp saçılmış toz olduğu ve siz de üç sınıf olduğunuz zaman, O, (kimini) yükseltir, (kimini) alçaltır.",
+          "start_time": null
+        },
+        {
+          "verse_number": 6,
+          "verse": "فَكَانَتْ هَبَٓاءً مُنْبَثاًّۙ",
+          "transcription": "Fe kanet hebaen mun bessa.",
+          "translation": "(3-7) Yeryüzü şiddetle sarsıldığı, dağlar parça parça dağılıp saçılmış toz olduğu ve siz de üç sınıf olduğunuz zaman, O, (kimini) yükseltir, (kimini) alçaltır.",
+          "start_time": null
+        },
+        {
+          "verse_number": 7,
+          "verse": "وَكُنْتُمْ اَزْوَاجاً ثَلٰثَةًۜ",
+          "transcription": "Ve kuntum ezvacen selaseh.",
+          "translation": "(3-7) Yeryüzü şiddetle sarsıldığı, dağlar parça parça dağılıp saçılmış toz olduğu ve siz de üç sınıf olduğunuz zaman, O, (kimini) yükseltir, (kimini) alçaltır.",
+          "start_time": null
+        },
+        {
+          "verse_number": 8,
+          "verse": "فَاَصْحَابُ الْمَيْمَنَةِ مَٓا اَصْحَابُ الْمَيْمَنَةِۜ",
+          "transcription": "Fe ashabul meymeneti ma ashabul meymeneti.",
+          "translation": "Ahiret mutluluğuna erenler var ya; ne mutlu kimselerdir!",
+          "start_time": null
+        },
+        {
+          "verse_number": 9,
+          "verse": "وَاَصْحَابُ الْمَشْـَٔمَةِ مَٓا اَصْحَابُ الْمَشْـَٔمَةِۜ",
+          "transcription": "Ve ashabul meş'emeti ma ashabul meş'emeti.",
+          "translation": "Kötülüğe batanlara gelince; ne mutsuz kimselerdir!",
+          "start_time": null
+        },
+        {
+          "verse_number": 10,
+          "verse": "وَالسَّابِقُونَ السَّابِقُونَۙ",
+          "transcription": "Ves sabikunes sabikun.",
+          "translation": "(10-11) (İman ve amelde) öne geçenler ise (Ahirette de) öne geçenlerdir. İşte onlar (Allah'a) yaklaştırılmış kimselerdir.",
+          "start_time": null
+        },
+        {
+          "verse_number": 11,
+          "verse": "اُو۬لٰٓئِكَ الْمُقَرَّبُونَۚ",
+          "transcription": "Ulaikel mukarrebun.",
+          "translation": "(10-11) (İman ve amelde) öne geçenler ise (Ahirette de) öne geçenlerdir. İşte onlar (Allah'a) yaklaştırılmış kimselerdir.",
+          "start_time": null
+        },
+        {
+          "verse_number": 12,
+          "verse": "ف۪ي جَنَّاتِ النَّع۪يمِ",
+          "transcription": "Fi cennatin naim.",
+          "translation": "Onlar, Naim cennetlerindedirler.",
+          "start_time": null
+        },
+        {
+          "verse_number": 13,
+          "verse": "ثُلَّةٌ مِنَ الْاَوَّل۪ينَۙ",
+          "transcription": "Sulletun minel evvelin.",
+          "translation": "(13-14) Onların çoğu öncekilerden, azı da sonrakilerdendir.",
+          "start_time": null
+        },
+        {
+          "verse_number": 14,
+          "verse": "وَقَل۪يلٌ مِنَ الْاٰخِر۪ينَۜ",
+          "transcription": "Ve kalilun minel ahirin.",
+          "translation": "(13-14) Onların çoğu öncekilerden, azı da sonrakilerdendir.",
+          "start_time": null
+        },
+        {
+          "verse_number": 15,
+          "verse": "عَلٰى سُرُرٍ مَوْضُونَةٍۙ",
+          "transcription": "Ala sururin mevdunetin.",
+          "translation": "(15-16) Onlar, karşılıklı yaslanmış vaziyette mücevheratla işlenmiş tahtlar üzerindedirler.",
+          "start_time": null
+        },
+        {
+          "verse_number": 16,
+          "verse": "مُتَّكِـ۪ٔينَ عَلَيْهَا مُتَقَابِل۪ينَ",
+          "transcription": "Muttekiine aleyha mutekabilin.",
+          "translation": "(15-16) Onlar, karşılıklı yaslanmış vaziyette mücevheratla işlenmiş tahtlar üzerindedirler.",
+          "start_time": null
+        },
+        {
+          "verse_number": 17,
+          "verse": "يَطُوفُ عَلَيْهِمْ وِلْدَانٌ مُخَلَّدُونَۙ",
+          "transcription": "Yetufu aleyhim vildanun muhalledun.",
+          "translation": "(17-21) Ebediyen genç kalan uşaklar, onların etrafında; içmekle başlarının dönmeyeceği ve sarhoş olmayacakları, cennet pınarından doldurulmuş sürahileri, ibrikleri ve kadehleri, beğendikleri meyveleri ve arzu ettikleri kuş etlerini dolaştırırlar.",
+          "start_time": null
+        },
+        {
+          "verse_number": 18,
+          "verse": "بِاَكْوَابٍ وَاَبَار۪يقَ وَكَأْسٍ مِنْ مَع۪ينٍۙ",
+          "transcription": "Bi ekvabin ve ebarika ve ke'sin min main.",
+          "translation": "(17-21) Ebediyen genç kalan uşaklar, onların etrafında; içmekle başlarının dönmeyeceği ve sarhoş olmayacakları, cennet pınarından doldurulmuş sürahileri, ibrikleri ve kadehleri, beğendikleri meyveleri ve arzu ettikleri kuş etlerini dolaştırırlar.",
+          "start_time": null
+        },
+        {
+          "verse_number": 19,
+          "verse": "لَا يُصَدَّعُونَ عَنْهَا وَلَا يُنْزِفُونَۙ",
+          "transcription": "La yusaddeune anha ve la yunzifun.",
+          "translation": "(17-21) Ebediyen genç kalan uşaklar, onların etrafında; içmekle başlarının dönmeyeceği ve sarhoş olmayacakları, cennet pınarından doldurulmuş sürahileri, ibrikleri ve kadehleri, beğendikleri meyveleri ve arzu ettikleri kuş etlerini dolaştırırlar.",
+          "start_time": null
+        },
+        {
+          "verse_number": 20,
+          "verse": "وَفَاكِهَةٍ مِمَّا يَتَخَيَّرُونَۙ",
+          "transcription": "Ve fakihetin mimma yetehayyerun.",
+          "translation": "(17-21) Ebediyen genç kalan uşaklar, onların etrafında; içmekle başlarının dönmeyeceği ve sarhoş olmayacakları, cennet pınarından doldurulmuş sürahileri, ibrikleri ve kadehleri, beğendikleri meyveleri ve arzu ettikleri kuş etlerini dolaştırırlar.",
+          "start_time": null
+        },
+        {
+          "verse_number": 21,
+          "verse": "وَلَحْمِ طَيْرٍ مِمَّا يَشْتَهُونَۜ",
+          "transcription": "Ve lahmi tayrin mimma yeştehun.",
+          "translation": "(17-21) Ebediyen genç kalan uşaklar, onların etrafında; içmekle başlarının dönmeyeceği ve sarhoş olmayacakları, cennet pınarından doldurulmuş sürahileri, ibrikleri ve kadehleri, beğendikleri meyveleri ve arzu ettikleri kuş etlerini dolaştırırlar.",
+          "start_time": null
+        },
+        {
+          "verse_number": 22,
+          "verse": "وَحُورٌ ع۪ينٌۙ",
+          "transcription": "Ve hurun inun.",
+          "translation": "(22-23) Onlar için saklı inciler gibi, iri gözlü huriler de vardır.",
+          "start_time": null
+        },
+        {
+          "verse_number": 23,
+          "verse": "كَاَمْثَالِ اللُّؤْلُؤِ۬ الْمَكْنُونِۚ",
+          "transcription": "Ke emsalil lu'luil meknun.",
+          "translation": "(22-23) Onlar için saklı inciler gibi, iri gözlü huriler de vardır.",
+          "start_time": null
+        },
+        {
+          "verse_number": 24,
+          "verse": "جَزَٓاءً بِمَا كَانُوا يَعْمَلُونَ",
+          "transcription": "Cezaen bi ma kanu ya'melun.",
+          "translation": "(Bütün bunlar) işledikleri amellere karşılık bir mükafat olarak (verilir.)",
+          "start_time": null
+        },
+        {
+          "verse_number": 25,
+          "verse": "لَا يَسْمَعُونَ ف۪يهَا لَغْواً وَلَا تَأْث۪يماًۙ",
+          "transcription": "La yesmeune fiha lagven ve la te'sima.",
+          "translation": "Orada ne boş bir söz, ne de günaha sokan bir şey işitirler.",
+          "start_time": null
+        },
+        {
+          "verse_number": 26,
+          "verse": "اِلَّا ق۪يلاً سَلَاماً سَلَاماً",
+          "transcription": "İlla kilen selamen selama.",
+          "translation": "Sadece \"selam!\", \"selam!\" sözünü işitirler.",
+          "start_time": null
+        },
+        {
+          "verse_number": 27,
+          "verse": "وَاَصْحَابُ الْيَم۪ينِ مَٓا اَصْحَابُ الْيَم۪ينِۜ",
+          "transcription": "Ve ashabul yemini ma ashabul yemin.",
+          "translation": "Ahiret mutluluğuna erenler, ne mutlu kimselerdir!",
+          "start_time": null
+        },
+        {
+          "verse_number": 28,
+          "verse": "ف۪ي سِدْرٍ مَخْضُودٍۙ",
+          "transcription": "Fi sidrin mahdud.",
+          "translation": "(28-34) (Onlar), dikensiz sidir ağaçları ve meyveleri küme küme dizili muz ağaçları altında, yayılmış sürekli bir gölgede, çağlayan bir su başında, tükenmeyen ve yasaklanmayan çok çeşitli meyveler içinde ve yüksek döşekler üzerindedirler.",
+          "start_time": null
+        },
+        {
+          "verse_number": 29,
+          "verse": "وَطَلْحٍ مَنْضُودٍۙ",
+          "transcription": "Ve talhın mendud.",
+          "translation": "(28-34) (Onlar), dikensiz sidir ağaçları ve meyveleri küme küme dizili muz ağaçları altında, yayılmış sürekli bir gölgede, çağlayan bir su başında, tükenmeyen ve yasaklanmayan çok çeşitli meyveler içinde ve yüksek döşekler üzerindedirler.",
+          "start_time": null
+        },
+        {
+          "verse_number": 30,
+          "verse": "وَظِلٍّ مَمْدُودٍۙ",
+          "transcription": "Ve zıllin memdud.",
+          "translation": "(28-34) (Onlar), dikensiz sidir ağaçları ve meyveleri küme küme dizili muz ağaçları altında, yayılmış sürekli bir gölgede, çağlayan bir su başında, tükenmeyen ve yasaklanmayan çok çeşitli meyveler içinde ve yüksek döşekler üzerindedirler.",
+          "start_time": null
+        },
+        {
+          "verse_number": 31,
+          "verse": "وَمَٓاءٍ مَسْكُوبٍۙ",
+          "transcription": "Ve main meskub.",
+          "translation": "(28-34) (Onlar), dikensiz sidir ağaçları ve meyveleri küme küme dizili muz ağaçları altında, yayılmış sürekli bir gölgede, çağlayan bir su başında, tükenmeyen ve yasaklanmayan çok çeşitli meyveler içinde ve yüksek döşekler üzerindedirler.",
+          "start_time": null
+        },
+        {
+          "verse_number": 32,
+          "verse": "وَفَاكِهَةٍ كَث۪يرَةٍۙ",
+          "transcription": "Ve fakihetin kesirah",
+          "translation": "(28-34) (Onlar), dikensiz sidir ağaçları ve meyveleri küme küme dizili muz ağaçları altında, yayılmış sürekli bir gölgede, çağlayan bir su başında, tükenmeyen ve yasaklanmayan çok çeşitli meyveler içinde ve yüksek döşekler üzerindedirler.",
+          "start_time": null
+        },
+        {
+          "verse_number": 33,
+          "verse": "لَا مَقْطُوعَةٍ وَلَا مَمْنُوعَةٍۙ",
+          "transcription": "La maktuatin ve la memnuah.",
+          "translation": "(28-34) (Onlar), dikensiz sidir ağaçları ve meyveleri küme küme dizili muz ağaçları altında, yayılmış sürekli bir gölgede, çağlayan bir su başında, tükenmeyen ve yasaklanmayan çok çeşitli meyveler içinde ve yüksek döşekler üzerindedirler.",
+          "start_time": null
+        },
+        {
+          "verse_number": 34,
+          "verse": "وَفُرُشٍ مَرْفُوعَةٍۜ",
+          "transcription": "Ve furuşin merfuah.",
+          "translation": "(28-34) (Onlar), dikensiz sidir ağaçları ve meyveleri küme küme dizili muz ağaçları altında, yayılmış sürekli bir gölgede, çağlayan bir su başında, tükenmeyen ve yasaklanmayan çok çeşitli meyveler içinde ve yüksek döşekler üzerindedirler.",
+          "start_time": null
+        },
+        {
+          "verse_number": 35,
+          "verse": "اِنَّٓا اَنْشَأْنَاهُنَّ اِنْشَٓاءًۙ",
+          "transcription": "İnna enşe'na hunne inşaa.",
+          "translation": "Biz onları (hurileri) yepyeni bir yaratılışta yarattık.",
+          "start_time": null
+        },
+        {
+          "verse_number": 36,
+          "verse": "فَجَعَلْنَاهُنَّ اَبْكَاراًۙ",
+          "transcription": "Fe cealna hunne ebkaran.",
+          "translation": "(36-38) Onları ahiret mutluluğuna erenler için, hep bir yaşta eşlerini çok seven gösterişli bakireler yaptık.",
+          "start_time": null
+        },
+        {
+          "verse_number": 37,
+          "verse": "عُـرُباً اَتْـرَاباًۙ",
+          "transcription": "Uruben etraba.",
+          "translation": "(36-38) Onları ahiret mutluluğuna erenler için, hep bir yaşta eşlerini çok seven gösterişli bakireler yaptık.",
+          "start_time": null
+        },
+        {
+          "verse_number": 38,
+          "verse": "لِاَصْحَـابِ الْيَم۪ينِۜ ۟",
+          "transcription": "Li ashabil yemin.",
+          "translation": "(36-38) Onları ahiret mutluluğuna erenler için, hep bir yaşta eşlerini çok seven gösterişli bakireler yaptık.",
+          "start_time": null
+        },
+        {
+          "verse_number": 39,
+          "verse": "ثُلَّةٌ مِنَ الْاَوَّل۪ينَۙ",
+          "transcription": "Sulletun minel evvelin.",
+          "translation": "(39-40) Bunların birçoğu öncekilerden, birçoğu da sonrakilerdendir.",
+          "start_time": null
+        },
+        {
+          "verse_number": 40,
+          "verse": "وَثُلَّةٌ مِنَ الْاٰخِر۪ينَۜ",
+          "transcription": "Ve sulletun minel ahırin.",
+          "translation": "(39-40) Bunların birçoğu öncekilerden, birçoğu da sonrakilerdendir.",
+          "start_time": null
+        },
+        {
+          "verse_number": 41,
+          "verse": "وَاَصْحَابُ الشِّمَالِۙ مَٓا اَصْحَابُ الشِّمَالِۜ",
+          "transcription": "Ve ashabuş şimali ma ashabuş şimal.",
+          "translation": "Kötülüğe batanlar ise ne mutsuz kimselerdir!",
+          "start_time": null
+        },
+        {
+          "verse_number": 42,
+          "verse": "ف۪ي سَمُومٍ وَحَم۪يمٍۙ",
+          "transcription": "Fi semumin ve hamim.",
+          "translation": "(42-44) Onlar, iliklere işleyen bir ateş ve bir kaynar su içindedirler. Ne serin ve ne de yararlı olan zifiri bir gölge içinde!.",
+          "start_time": null
+        },
+        {
+          "verse_number": 43,
+          "verse": "وَظِلٍّ مِنْ يَحْمُومٍۙ",
+          "transcription": "Ve zıllin min yahmum.",
+          "translation": "(42-44) Onlar, iliklere işleyen bir ateş ve bir kaynar su içindedirler. Ne serin ve ne de yararlı olan zifiri bir gölge içinde!.",
+          "start_time": null
+        },
+        {
+          "verse_number": 44,
+          "verse": "لَا بَارِدٍ وَلَا كَر۪يمٍ",
+          "transcription": "La baridin ve la kerim.",
+          "translation": "(42-44) Onlar, iliklere işleyen bir ateş ve bir kaynar su içindedirler. Ne serin ve ne de yararlı olan zifiri bir gölge içinde!.",
+          "start_time": null
+        },
+        {
+          "verse_number": 45,
+          "verse": "اِنَّهُمْ كَانُوا قَبْلَ ذٰلِكَ مُتْرَف۪ينَۚ",
+          "transcription": "İnnehum kanu kable zalike mutrefin.",
+          "translation": "Çünkü onlar, bundan önce (dünyada varlık içinde) sefahata dalmış ve azgın kimselerdi.",
+          "start_time": null
+        },
+        {
+          "verse_number": 46,
+          "verse": "وَكَانُوا يُصِرُّونَ عَلَى الْحِنْثِ الْعَظ۪يمِۚ",
+          "transcription": "Ve kanu yusirrune alel hınsil azim.",
+          "translation": "Büyük günah üzerinde ısrar ediyorlardı.",
+          "start_time": null
+        },
+        {
+          "verse_number": 47,
+          "verse": "وَكَانُوا يَقُولُونَ اَئِذَا مِتْنَا وَكُنَّا تُرَاباً وَعِظَاماً ءَاِنَّا لَمَبْعُوثُونَۙ",
+          "transcription": "Ve kanu yekulune e iza mitna ve kunna turaben ve iza men e inna le meb'usun.",
+          "translation": "Diyorlardı ki: \"Biz öldükten, toprak ve kemik yığını haline geldikten sonra mı, biz mi bir daha diriltilecekmişiz?\"",
+          "start_time": null
+        },
+        {
+          "verse_number": 48,
+          "verse": "اَوَاٰبَٓاؤُ۬نَا الْاَوَّلُونَ",
+          "transcription": "E ve abaunel evvelun.",
+          "translation": "\"Evvelki atalarımız da mı?\"",
+          "start_time": null
+        },
+        {
+          "verse_number": 49,
+          "verse": "قُلْ اِنَّ الْاَوَّل۪ينَ وَالْاٰخِر۪ينَۙ",
+          "transcription": "Kul innel evveline vel ahirin.",
+          "translation": "(49-50) De ki: \"Şüphesiz öncekiler ve sonrakiler, mutlaka belli bir günün belli bir vaktinde toplanacaklardır.\"",
+          "start_time": null
+        },
+        {
+          "verse_number": 50,
+          "verse": "لَمَجْمُوعُونَ اِلٰى م۪يقَاتِ يَوْمٍ مَعْلُومٍ",
+          "transcription": "Le mecmuune ila mikati yevmin ma'lum.",
+          "translation": "(49-50) De ki: \"Şüphesiz öncekiler ve sonrakiler, mutlaka belli bir günün belli bir vaktinde toplanacaklardır.\"",
+          "start_time": null
+        },
+        {
+          "verse_number": 51,
+          "verse": "ثُمَّ اِنَّكُمْ اَيُّهَا الضَّٓالُّونَ الْمُكَذِّبُونَۙ",
+          "transcription": "Summe innekum eyyuhed dallunel mukezzibun.",
+          "translation": "(51-52) Sonra siz ey haktan sapan yalanlayıcılar! Mutlaka (cehennemde) bir ağaçtan, zakkumdan yiyeceksiniz.",
+          "start_time": null
+        },
+        {
+          "verse_number": 52,
+          "verse": "لَاٰكِلُونَ مِنْ شَجَرٍ مِنْ زَقُّومٍۙ",
+          "transcription": "Le akilune min şecerin min zakkumin.",
+          "translation": "(51-52) Sonra siz ey haktan sapan yalanlayıcılar! Mutlaka (cehennemde) bir ağaçtan, zakkumdan yiyeceksiniz.",
+          "start_time": null
+        },
+        {
+          "verse_number": 53,
+          "verse": "فَمَالِـؤُ۫نَ مِنْهَا الْبُطُونَۚ",
+          "transcription": "Fe ma liune minhel butun.",
+          "translation": "Karınlarınızı ondan dolduracaksınız.",
+          "start_time": null
+        },
+        {
+          "verse_number": 54,
+          "verse": "فَشَارِبُونَ عَلَيْهِ مِنَ الْحَم۪يمِۚ",
+          "transcription": "Fe şaribune aleyhi minel hamim.",
+          "translation": "Üstüne de o kaynar sudan içeceksiniz.",
+          "start_time": null
+        },
+        {
+          "verse_number": 55,
+          "verse": "فَشَارِبُونَ شُرْبَ الْه۪يمِۜ",
+          "transcription": "Fe şaribune şurbel him.",
+          "translation": "Kanmak bilmez susamış develerin suya saldırışı gibi içeceksiniz.",
+          "start_time": null
+        },
+        {
+          "verse_number": 56,
+          "verse": "هٰذَا نُزُلُهُمْ يَوْمَ الدّ۪ينِۜ",
+          "transcription": "Haza nuzuluhum yevmed din.",
+          "translation": "İşte bu hesap ve ceza gününde onlara ziyafetleridir.",
+          "start_time": null
+        },
+        {
+          "verse_number": 57,
+          "verse": "نَحْنُ خَلَقْنَاكُمْ فَلَوْلَا تُصَدِّقُونَ۟",
+          "transcription": "Nahnu halaknakum fe lev la tusaddikun.",
+          "translation": "Sizi biz yarattık. Hala tasdik etmeyecek misiniz?",
+          "start_time": null
+        },
+        {
+          "verse_number": 58,
+          "verse": "اَفَرَاَيْتُمْ مَا تُمْنُونَۜ",
+          "transcription": "E fe reeytum ma tumnun.",
+          "translation": "Attığınız o meniye ne dersiniz?!",
+          "start_time": null
+        },
+        {
+          "verse_number": 59,
+          "verse": "ءَاَنْتُمْ تَخْلُقُونَهُٓ اَمْ نَحْنُ الْخَالِقُونَ",
+          "transcription": "E entum tahlukunehu em nahnul halikun.",
+          "translation": "Onu siz mi yaratıyorsunuz, yoksa yaratan biz miyiz?",
+          "start_time": null
+        },
+        {
+          "verse_number": 60,
+          "verse": "نَحْنُ قَدَّرْنَا بَيْنَكُمُ الْمَوْتَ وَمَا نَحْنُ بِمَسْبُوق۪ينَۙ",
+          "transcription": "Nahnu kadderna beynekumul mevte ve ma nahnu bi mes- bukin.",
+          "translation": "(60-61) Sizin yerinize benzerlerinizi getirmek ve sizi bilemeyeceğiniz bir şekilde yeniden yaratmak üzere aranızda ölümü biz takdir ettik. (Bu konuda) bizim önümüze geçilmez.",
+          "start_time": null
+        },
+        {
+          "verse_number": 61,
+          "verse": "عَلٰٓى اَنْ نُبَدِّلَ اَمْثَالَكُمْ وَنُنْشِئَكُمْ ف۪ي مَا لَا تَعْلَمُونَ",
+          "transcription": "Ala en nubeddile emsalekum ve nunşiekum fi ma la ta'lemun.",
+          "translation": "(60-61) Sizin yerinize benzerlerinizi getirmek ve sizi bilemeyeceğiniz bir şekilde yeniden yaratmak üzere aranızda ölümü biz takdir ettik. (Bu konuda) bizim önümüze geçilmez.",
+          "start_time": null
+        },
+        {
+          "verse_number": 62,
+          "verse": "وَلَقَدْ عَلِمْتُمُ النَّشْاَةَ الْاُو۫لٰى فَلَوْلَا تَذَكَّرُونَ",
+          "transcription": "Ve lekad alimtumunneş etel ula fe lev la tezekkerun.",
+          "translation": "Andolsun, birinci yaratılışı(nızı) biliyorsunuz. O halde düşünseniz ya!",
+          "start_time": null
+        },
+        {
+          "verse_number": 63,
+          "verse": "اَفَرَاَيْتُمْ مَا تَحْرُثُونَۜ",
+          "transcription": "E fe reeytum ma tahrusun.",
+          "translation": "Ektiğiniz tohuma ne dersiniz?!",
+          "start_time": null
+        },
+        {
+          "verse_number": 64,
+          "verse": "ءَاَنْتُمْ تَزْرَعُونَهُٓ  اَمْ نَحْنُ الزَّارِعُونَ",
+          "transcription": "E entum tezre unehu em nahnuz zariun.",
+          "translation": "Onu siz mi bitiriyorsunuz, yoksa bitiren biz miyiz?",
+          "start_time": null
+        },
+        {
+          "verse_number": 65,
+          "verse": "لَوْ نَشَٓاءُ لَجَعَلْنَاهُ حُطَاماً فَظَلْتُمْ تَفَكَّهُونَ",
+          "transcription": "Lev neşau le cealnahu hutamen fe zaltum tefekkehun.",
+          "translation": "Dileseydik, onu kuru bir çöp yapardık da şaşkınlık içinde şöyle geveleyip dururdunuz:",
+          "start_time": null
+        },
+        {
+          "verse_number": 66,
+          "verse": "اِنَّا لَمُغْرَمُونَۙ",
+          "transcription": "İnna le mugremun.",
+          "translation": "\"Muhakkak biz çok ziyandayız!\"",
+          "start_time": null
+        },
+        {
+          "verse_number": 67,
+          "verse": "بَلْ نَحْنُ مَحْرُومُونَ",
+          "transcription": "Bel nahnu mahrumun.",
+          "translation": "\"Daha doğrusu büsbütün mahrumuz!\"",
+          "start_time": null
+        },
+        {
+          "verse_number": 68,
+          "verse": "اَفَرَاَيْتُمُ الْمَٓاءَ الَّذ۪ي تَشْرَبُونَۜ",
+          "transcription": "E fe reeytumul maellezi teşrebun.",
+          "translation": "İçtiğiniz suya ne dersiniz?!",
+          "start_time": null
+        },
+        {
+          "verse_number": 69,
+          "verse": "ءَاَنْتُمْ اَنْزَلْتُمُوهُ مِنَ الْمُزْنِ اَمْ نَحْنُ الْمُنْزِلُونَ",
+          "transcription": "E entum enzeltumuhu minel muzni em nahnul munzilun.",
+          "translation": "Siz mi onu buluttan indirdiniz, yoksa indiren biz miyiz?",
+          "start_time": null
+        },
+        {
+          "verse_number": 70,
+          "verse": "لَوْ نَشَٓاءُ جَعَلْنَاهُ اُجَاجاً فَلَوْلَا تَشْكُرُونَ",
+          "transcription": "Lev neşau cealnahu ucacen fe levla teşkurun.",
+          "translation": "Dileseydik onu acı bir su yapardık. O halde şükretseydiniz ya!.",
+          "start_time": null
+        },
+        {
+          "verse_number": 71,
+          "verse": "اَفَرَاَيْتُمُ النَّارَ الَّت۪ي تُورُونَۜ",
+          "transcription": "E fe reeytumun narelleti turun.",
+          "translation": "Tutuşturduğunuz ateşe ne dersiniz?!",
+          "start_time": null
+        },
+        {
+          "verse_number": 72,
+          "verse": "ءَاَنْتُمْ اَنْشَأْتُمْ شَجَرَتَـهَٓا اَمْ نَحْنُ الْمُنْشِؤُ۫نَ",
+          "transcription": "E entum enşe'tum şecereteha em nahnul munşiun.",
+          "translation": "Onun ağacını siz mi yarattınız, yoksa yaratan biz miyiz?",
+          "start_time": null
+        },
+        {
+          "verse_number": 73,
+          "verse": "نَحْنُ جَعَلْنَاهَا تَذْكِرَةً وَمَتَاعاً لِلْمُقْو۪ينَۚ",
+          "transcription": "Nahnu cealnaha tezkireten ve metaan lil mukvin.",
+          "translation": "Biz onu bir ibret ve ıssız yerlerde yaşayanlara bir yarar kaynağı kıldık.",
+          "start_time": null
+        },
+        {
+          "verse_number": 74,
+          "verse": "فَسَبِّحْ بِاسْمِ رَبِّكَ الْعَظ۪يمِ۟",
+          "transcription": "Fe sebbih bismi rabbikel azim.",
+          "translation": "O halde, O yüce Rabbinin adını tesbih et (yücelt).",
+          "start_time": null
+        },
+        {
+          "verse_number": 75,
+          "verse": "فَلَٓا اُقْسِمُ بِمَوَاقِـعِ النُّجُومِۙ",
+          "transcription": "Fe la uksimu bi mevakiin nucum.",
+          "translation": "(75-76) Yıldızların yerlerine yemin ederim ki, -eğer bilirseniz, gerçekten bu, büyük bir yemindir-",
+          "start_time": null
+        },
+        {
+          "verse_number": 76,
+          "verse": "وَاِنَّهُ لَقَسَمٌ لَوْ تَعْلَمُونَ عَظ۪يمٌۙ",
+          "transcription": "Ve innehu le kasemun lev ta'lemune azim.",
+          "translation": "(75-76) Yıldızların yerlerine yemin ederim ki, -eğer bilirseniz, gerçekten bu, büyük bir yemindir-",
+          "start_time": null
+        },
+        {
+          "verse_number": 77,
+          "verse": "اِنَّهُ لَقُرْاٰنٌ كَر۪يمٌۙ",
+          "transcription": "İnnehu le kur'anun kerim.",
+          "translation": "O, elbette değerli bir Kur'an'dır.",
+          "start_time": null
+        },
+        {
+          "verse_number": 78,
+          "verse": "ف۪ي كِتَابٍ مَكْنُونٍۙ",
+          "transcription": "Fi kitabin meknun.",
+          "translation": "Korunmuş bir kitaptadır.",
+          "start_time": null
+        },
+        {
+          "verse_number": 79,
+          "verse": "لَا يَمَسُّهُٓ اِلَّا الْمُطَهَّرُونَۜ",
+          "transcription": "La yemessuhu illel mutahherun.",
+          "translation": "Ona, ancak tertemiz olanlar dokunabilir.",
+          "start_time": null
+        },
+        {
+          "verse_number": 80,
+          "verse": "تَنْز۪يلٌ مِنْ رَبِّ الْعَالَم۪ينَ",
+          "transcription": "Tenzilun min rabbil alemin.",
+          "translation": "Alemlerin Rabb'inden indirilmedir.",
+          "start_time": null
+        },
+        {
+          "verse_number": 81,
+          "verse": "اَفَبِهٰذَا الْحَد۪يثِ اَنْتُمْ مُدْهِنُونَۙ",
+          "transcription": "E fe bi hazel hadisi entum mudhinun.",
+          "translation": "(81-82) Şimdi siz, bu sözü mü küçümsüyorsunuz ve Allah'ın verdiği rızka O'nu yalanlayarak mı şükrediyorsunuz?",
+          "start_time": null
+        },
+        {
+          "verse_number": 82,
+          "verse": "وَتَجْعَلُونَ رِزْقَـكُمْ اَنَّكُمْ تُكَذِّبُونَ",
+          "transcription": "Ve tec'alune rızkakum ennekum tukezzibun.",
+          "translation": "(81-82) Şimdi siz, bu sözü mü küçümsüyorsunuz ve Allah'ın verdiği rızka O'nu yalanlayarak mı şükrediyorsunuz?",
+          "start_time": null
+        },
+        {
+          "verse_number": 83,
+          "verse": "فَلَوْلَٓا اِذَا بَلَغَتِ الْحُلْقُومَۙ",
+          "transcription": "Fe lev la iza belegatil hulkume.",
+          "translation": "Can boğaza geldiğinde, onu geri döndürsenize!",
+          "start_time": null
+        },
+        {
+          "verse_number": 84,
+          "verse": "وَاَنْتُمْ ح۪ينَئِذٍ تَنْظُرُونَۙ",
+          "transcription": "Ve entum hine izin tenzurun.",
+          "translation": "Oysa siz o zaman bakıp durursunuz.",
+          "start_time": null
+        },
+        {
+          "verse_number": 85,
+          "verse": "وَنَحْنُ اَقْرَبُ اِلَيْهِ مِنْكُمْ وَلٰـكِنْ لَا تُبْصِرُونَ",
+          "transcription": "Ve nahnu akrabu ileyhi minkum ve lakin la tubsirun",
+          "translation": "Biz ise ona sizden daha yakınız. Fakat siz göremezsiniz.",
+          "start_time": null
+        },
+        {
+          "verse_number": 86,
+          "verse": "فَلَوْلَٓا اِنْ كُنْتُمْ غَيْرَ مَد۪ين۪ينَۙ",
+          "transcription": "Fe lev la in kuntum gayre medinin.",
+          "translation": "(86-87) Eğer hesaba çekilmeyecekseniz ve doğru söyleyenler iseniz, onu geri döndürsenize!",
+          "start_time": null
+        },
+        {
+          "verse_number": 87,
+          "verse": "تَرْجِعُونَـهَٓا اِنْ كُنْتُمْ صَادِق۪ينَ",
+          "transcription": "Terciuneha in kuntum sadikin.",
+          "translation": "(86-87) Eğer hesaba çekilmeyecekseniz ve doğru söyleyenler iseniz, onu geri döndürsenize!",
+          "start_time": null
+        },
+        {
+          "verse_number": 88,
+          "verse": "فَاَمَّٓا اِنْ كَانَ مِنَ الْمُقَرَّب۪ينَۙ",
+          "transcription": "Fe emma in kane minel mukarrebine.",
+          "translation": "(88-89) Fakat (ölen kişi) Allah'a yakın kılınmışlardan ise, ona rahatlık, güzel rızık ve Naim cenneti vardır.",
+          "start_time": null
+        },
+        {
+          "verse_number": 89,
+          "verse": "فَرَوْحٌ وَرَيْحَانٌ وَجَنَّتُ نَع۪يمٍ",
+          "transcription": "Fe revhun ve reyhanun ve cennetu naim.",
+          "translation": "(88-89) Fakat (ölen kişi) Allah'a yakın kılınmışlardan ise, ona rahatlık, güzel rızık ve Naim cenneti vardır.",
+          "start_time": null
+        },
+        {
+          "verse_number": 90,
+          "verse": "وَاَمَّٓا اِنْ كَانَ مِنْ اَصْحَابِ الْيَم۪ينِۙ",
+          "transcription": "Ve emma in kane min ashabil yemin.",
+          "translation": "(90-91) Eğer Ahiret mutluluğuna ermiş kişilerden ise, kendisine, \"Selam sana Ahiret mutluluğuna ermişlerden!\" denir.",
+          "start_time": null
+        },
+        {
+          "verse_number": 91,
+          "verse": "فَسَلَامٌ لَكَ مِنْ اَصْحَابِ الْيَم۪ينِ",
+          "transcription": "Fe selamun leke min ashabil yemin.",
+          "translation": "(90-91) Eğer Ahiret mutluluğuna ermiş kişilerden ise, kendisine, \"Selam sana Ahiret mutluluğuna ermişlerden!\" denir.",
+          "start_time": null
+        },
+        {
+          "verse_number": 92,
+          "verse": "وَاَمَّٓا اِنْ كَانَ مِنَ الْمُكَذِّب۪ينَ الضَّٓالّ۪ينَۙ",
+          "transcription": "Ve emma in kane minel mukezzibined dallin.",
+          "translation": "(92-93) Ama haktan sapan yalancılardan ise, işte ona da kaynar sudan bir ziyafet vardır.",
+          "start_time": null
+        },
+        {
+          "verse_number": 93,
+          "verse": "فَنُزُلٌ مِنْ حَم۪يمٍۙ",
+          "transcription": "Fe nuzulun min hamim.",
+          "translation": "(92-93) Ama haktan sapan yalancılardan ise, işte ona da kaynar sudan bir ziyafet vardır.",
+          "start_time": null
+        },
+        {
+          "verse_number": 94,
+          "verse": "وَتَصْلِيَةُ جَح۪يمٍۙ",
+          "transcription": "Ve tasliyetu cahim.",
+          "translation": "Bir de cehenneme atılma vardır.",
+          "start_time": null
+        },
+        {
+          "verse_number": 95,
+          "verse": "اِنَّ هٰذَا لَهُوَ حَقُّ الْيَق۪ينِۚ",
+          "transcription": "İnne haza le huve hakkul yakin.",
+          "translation": "Şüphesiz bu, kesin gerçektir.",
+          "start_time": null
+        },
+        {
+          "verse_number": 96,
+          "verse": "فَسَبِّـحْ بِاسْمِ رَبِّكَ الْعَظ۪يمِ",
+          "transcription": "Fe sebbih bismi rabbikel azim.",
+          "translation": "Öyleyse yüce Rabbinin adını tesbih et.",
+          "start_time": null
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "name": "Kehf",
+      "name_translation_tr": "Mağara",
+      "verse_count": 110,
+      "audio": {
+        "url": "https://audio.acikkuran.com/tr/18.mp3",
+        "duration": 1473
+      },
+      "verses": [
+        {
+          "verse_number": 0,
+          "verse": "بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّح۪يمِ",
+          "transcription": "Bismillahir rahmanir rahim.",
+          "translation": "Bismillahirrahmanirrahim.",
+          "start_time": null
+        },
+        {
+          "verse_number": 1,
+          "verse": "اَلْحَمْدُ لِلّٰهِ الَّـذ۪ٓي اَنْزَلَ عَلٰى عَبْدِهِ الْـكِتَابَ وَلَمْ يَجْعَلْ لَهُ عِـوَجا۔ًۜ",
+          "transcription": "El hamdulillahillezi enzele ala abdihil kitabe ve lem yec'al lehu ıveca.",
+          "translation": "Hamd, kuluna Kitab'ı (Kur'an'ı) indiren ve onda hiçbir eğrilik yapmayan Allah'a mahsustur.",
+          "start_time": null
+        },
+        {
+          "verse_number": 2,
+          "verse": "قَيِّماً لِيُنْذِرَ بَأْساً شَد۪يداً مِنْ لَدُنْـهُ وَيُبَشِّرَ الْمُؤْمِن۪ينَ الَّذ۪ينَ يَعْمَلُونَ الصَّالِحَاتِ اَنَّ لَهُمْ اَجْراً حَسَناًۙ",
+          "transcription": "Kayyimen li yunzire be'sen şediden min ledunhu ve yubeşşirel mu'mininellezine ya'melunes salihati enne lehum ecren hasena.",
+          "translation": "(2-4) (Allah onu), katından gelecek şiddetli bir azap ile (inanmayanları) uyarmak, salih ameller işleyen mü'minleri, içlerinde ebedi olarak kalacakları güzel bir mükafat (cennet) ile müjdelemek ve \"Allah, bir çocuk edindi\" diyenleri de uyarmak için dosdoğru bir kitap kıldı.",
+          "start_time": null
+        },
+        {
+          "verse_number": 3,
+          "verse": "مَاكِث۪ينَ ف۪يهِ اَبَداًۙ",
+          "transcription": "Makisine fihi ebeda.",
+          "translation": "(2-4) (Allah onu), katından gelecek şiddetli bir azap ile (inanmayanları) uyarmak, salih ameller işleyen mü'minleri, içlerinde ebedi olarak kalacakları güzel bir mükafat (cennet) ile müjdelemek ve \"Allah, bir çocuk edindi\" diyenleri de uyarmak için dosdoğru bir kitap kıldı.",
+          "start_time": null
+        },
+        {
+          "verse_number": 4,
+          "verse": "وَيُنْذِرَ الَّذ۪ينَ قَالُوا اتَّخَذَ اللّٰهُ وَلَداًۗ",
+          "transcription": "Ve yunzirellezine kaluttehazellahu veleda.",
+          "translation": "(2-4) (Allah onu), katından gelecek şiddetli bir azap ile (inanmayanları) uyarmak, salih ameller işleyen mü'minleri, içlerinde ebedi olarak kalacakları güzel bir mükafat (cennet) ile müjdelemek ve \"Allah, bir çocuk edindi\" diyenleri de uyarmak için dosdoğru bir kitap kıldı.",
+          "start_time": null
+        },
+        {
+          "verse_number": 5,
+          "verse": "مَا لَهُمْ بِه۪ مِنْ عِلْمٍ وَلَا لِاٰبَٓائِهِمْۜ كَبُرَتْ كَلِمَةً تَخْرُجُ مِنْ اَفْوَاهِهِمْۜ اِنْ يَقُولُونَ اِلَّا كَذِباً",
+          "transcription": "Ma lehum bihi min ilmin ve la li abaihim, keburet kelimeten tahrucu min efvahihim, in yekulune illa keziba.",
+          "translation": "Bu konuda ne kendilerinin, ne de atalarının hiçbir bilgisi yoktur. Ne büyük bir söz (bu) ağızlarından çıkan! Onlar ancak yalan söylüyorlar.",
+          "start_time": null
+        },
+        {
+          "verse_number": 6,
+          "verse": "فَلَعَلَّكَ بَاخِـعٌ نَفْسَكَ عَلٰٓى اٰثَارِهِمْ اِنْ لَمْ يُؤْمِنُوا بِهٰذَا الْحَد۪يثِ اَسَفاً",
+          "transcription": "Fe lealleke bahiun nefseke ala asarihim in lem yu'minu bi hazel hadisi esefa.",
+          "translation": "Demek sen, bu söze (Kur'an'a) inanmazlarsa, arkalarından üzülerek adeta kendini tüketeceksin!",
+          "start_time": null
+        },
+        {
+          "verse_number": 7,
+          "verse": "اِنَّا جَعَلْنَا مَا عَلَى الْاَرْضِ ز۪ينَةً لَهَا لِنَبْلُوَهُمْ اَيُّهُمْ اَحْسَنُ عَمَلاً",
+          "transcription": "İnna cealna ma alel ardı zineten leha li nebluvehum eyyuhum ahsenu amela.",
+          "translation": "İnsanların hangisinin daha güzel amel yaptığını deneyelim diye şüphesiz biz yeryüzündeki şeyleri ona bir zinet yaptık.",
+          "start_time": null
+        },
+        {
+          "verse_number": 8,
+          "verse": "وَاِنَّا لَجَاعِلُونَ مَا عَلَيْهَا صَع۪يداً جُرُزاًۜ",
+          "transcription": "Ve inna le cailune ma aleyha saiden curuza.",
+          "translation": "Biz, elbette (zamanı gelince) yeryüzündeki her şeyi bir kuru toprak haline getireceğiz.",
+          "start_time": null
+        },
+        {
+          "verse_number": 9,
+          "verse": "اَمْ حَسِبْتَ اَنَّ اَصْحَابَ الْكَهْفِ وَالرَّق۪يمِ كَانُوا مِنْ اٰيَاتِنَا عَجَباً",
+          "transcription": "Em hasibte enne ashabel kehfi ver rakimi kanu min ayatina acaba.",
+          "translation": "Yoksa sen, (sadece) Ashab-ı Kehf ve Ashab-ı Rakim'i mi bizim ibret verici delillerimizden sandın?",
+          "start_time": null
+        },
+        {
+          "verse_number": 10,
+          "verse": "اِذْ اَوَى الْفِتْيَةُ اِلَى الْكَهْفِ فَقَالُوا رَبَّنَٓا اٰتِنَا مِنْ لَدُنْكَ رَحْمَةً وَهَيِّئْ لَنَا مِنْ اَمْرِنَا رَشَداً",
+          "transcription": "İz evel fityetu ilel kehfi fe kalu rabbena atina min ledunke rahmeten ve heyyi' lena min emrina reşeda.",
+          "translation": "Hani o gençler mağaraya sığınmışlardı da, \"Ey Rabbimiz! Bize katından bir rahmet ver ve içinde bulunduğumuz şu durumda bize kurtuluş ve doğruluğa ulaşmayı kolaylaştır\" demişlerdi.",
+          "start_time": null
+        },
+        {
+          "verse_number": 11,
+          "verse": "فَضَرَبْنَا عَلٰٓى اٰذَانِهِمْ فِي الْكَهْفِ سِن۪ينَ عَدَداًۙ",
+          "transcription": "Fe darabna ala azanihim fil kehfi sinine adeda.",
+          "translation": "Bunun üzerine biz de nice yıllar onların kulaklarını (dış dünyaya) kapattık (Onları uyuttuk).",
+          "start_time": null
+        },
+        {
+          "verse_number": 12,
+          "verse": "ثُمَّ بَعَثْنَاهُمْ لِنَعْلَمَ اَيُّ الْحِزْبَيْنِ اَحْصٰى لِمَا لَبِثُٓوا اَمَداً۟",
+          "transcription": "Summe beasnahum li na'leme eyyul hızbeyni ahsa lima lebisu emeda.",
+          "translation": "Sonra onları uyandırdık ki, iki zümreden hangisinin bekledikleri süreyi daha iyi hesap ettiğini bilelim.",
+          "start_time": null
+        },
+        {
+          "verse_number": 13,
+          "verse": "نَحْنُ نَقُصُّ عَلَيْكَ نَبَاَهُمْ بِالْحَقِّۜ اِنَّهُمْ فِتْيَةٌ اٰمَنُوا بِرَبِّهِمْ وَزِدْنَاهُمْ هُدًىۗ",
+          "transcription": "Nahnu nakussu aleyke nebeehum bil hakk, innehum fityetun amenu bi rabbihim ve zidnahum huda.",
+          "translation": "Biz sana onların haberlerini gerçek olarak anlatıyoruz: Şüphesiz onlar Rablerine inanmış birkaç genç yiğitti. Biz de onların hidayetlerini artırmıştık.",
+          "start_time": null
+        },
+        {
+          "verse_number": 14,
+          "verse": "وَرَبَطْنَا عَلٰى قُلُوبِهِمْ اِذْ قَامُوا فَقَالُوا رَبُّنَا رَبُّ السَّمٰوَاتِ وَالْاَرْضِ لَنْ نَدْعُوَ۬ا مِنْ دُونِه۪ٓ اِلٰهاً لَقَدْ قُلْـنَٓا اِذاً شَطَطاً",
+          "transcription": "Ve rabatna ala kulubihim iz kamu fe kalu rabbuna rabbus semavati vel ardı len ned'uve min dunihi ilahen lekad kulna izen şetata.",
+          "translation": "(14-15) Kalkıp da, \"Rabbimiz, göklerin ve yerin Rabbidir. O'ndan başkasına asla ilah demeyiz. Yoksa andolsun ki saçma bir söz söylemiş oluruz. Şunlar, şu kavmimiz, O'ndan başka tanrılar edindiler. Onlar hakkında açık bir delil getirselerdi ya! Artık kim Allah'a karşı yalan uydurandan daha zalimdir?\" dediklerinde onların kalplerine kuvvet vermiştik.",
+          "start_time": null
+        },
+        {
+          "verse_number": 15,
+          "verse": "هٰٓؤُ۬لَٓاءِ قَوْمُنَا اتَّخَذُوا مِنْ دُونِه۪ٓ اٰلِهَةًۜ  لَوْلَا يَأْتُونَ عَلَيْهِمْ بِسُلْطَانٍ بَيِّنٍۜ فَمَنْ اَظْلَمُ مِمَّنِ افْتَرٰى عَلَى اللّٰهِ كَذِباًۜ",
+          "transcription": "Haulai kavmunettehazu min dunihi aliheh, lev la ye'tune aleyhim bi sultanin beyyin, fe men azlemu mimmeniftera alallahi keziba.",
+          "translation": "(14-15) Kalkıp da, \"Rabbimiz, göklerin ve yerin Rabbidir. O'ndan başkasına asla ilah demeyiz. Yoksa andolsun ki saçma bir söz söylemiş oluruz. Şunlar, şu kavmimiz, O'ndan başka tanrılar edindiler. Onlar hakkında açık bir delil getirselerdi ya! Artık kim Allah'a karşı yalan uydurandan daha zalimdir?\" dediklerinde onların kalplerine kuvvet vermiştik.",
+          "start_time": null
+        },
+        {
+          "verse_number": 16,
+          "verse": "وَاِذِ اعْتَزَلْتُمُوهُمْ وَمَا يَعْبُدُونَ اِلَّا اللّٰهَ فَأْوُٓ۫ا اِلَى الْكَهْفِ يَنْشُرْ لَكُمْ رَبُّكُمْ مِنْ رَحْمَتِه۪ وَيُهَيِّئْ لَكُمْ مِنْ اَمْرِكُمْ مِرْفَقاً",
+          "transcription": "Ve izi'tezeltumuhum ve ma ya'budune illallahe fe'vu ilel kehfi yenşur lekum rabbukum min rahmetihi ve yuheyyi' lekum min emrikum mirfeka.",
+          "translation": "(İçlerinden biri şöyle dedi:) \"Mademki onlardan ve Allah'tan başkasına tapmakta olduklarından yüz çevirip ayrıldınız, o halde mağaraya çekilin ki, Rabbiniz size rahmetini yaysın ve içinde bulunduğunuz durumda yararlanacağınız şeyler hazırlasın.\"",
+          "start_time": null
+        },
+        {
+          "verse_number": 17,
+          "verse": "وَتَرَى الشَّمْسَ اِذَا طَلَعَتْ تَزَاوَرُ عَنْ كَهْفِهِمْ ذَاتَ الْيَم۪ينِ وَاِذَا غَرَبَتْ تَقْرِضُهُمْ ذَاتَ الشِّمَالِ وَهُمْ ف۪ي فَجْوَةٍ مِنْهُۜ ذٰلِكَ مِنْ اٰيَاتِ اللّٰهِۜ مَنْ يَهْدِ اللّٰهُ فَهُوَ الْمُهْتَدِۚ وَمَنْ يُضْلِلْ فَلَنْ تَجِدَ لَهُ وَلِياًّ مُرْشِداً۟",
+          "transcription": "Ve tereş şemse iza taleat tezaveru an kehfihim zatel yemini ve iza garabet takrıduhum zateş şimali ve hum fi fecvetin minh, zalike min ayatillah, men yehdillahu fe huvel muhted, ve men yudlil fe len tecide lehu veliyyen murşida.",
+          "translation": "(Orada olsaydın) güneş doğduğunda onun; mağaralarının sağ tarafına kaydığını, batarken de onlara dokunmadan sol tarafa gittiğini görürdün. Kendileri ise mağaranın geniş bir yerinde idiler. Bu, Allah'ın mucizelerindendir. Allah, kime hidayet ederse işte o, doğru yolu bulandır. Kimi de şaşırtırsa, artık ona doğru yolu gösterecek bir dost bulamazsın.",
+          "start_time": null
+        },
+        {
+          "verse_number": 18,
+          "verse": "وَتَحْسَبُهُمْ اَيْقَاظاً وَهُمْ رُقُودٌۗ وَنُقَلِّبُهُمْ ذَاتَ الْيَم۪ينِ وَذَاتَ الشِّمَالِۗ وَكَلْبُهُمْ بَاسِطٌ ذِرَاعَيْهِ بِالْوَص۪يدِۜ لَوِ اطَّـلَعْتَ عَلَيْهِمْ لَوَلَّيْتَ مِنْهُمْ فِرَاراً وَلَمُلِئْتَ مِنْهُمْ رُعْباً",
+          "transcription": "Ve tahsebuhum eykazan ve hum rukud, ve nukallibuhum zatel yemini ve zateş şimal, ve kelbuhum basitun ziraayhi bil vasid, levittala'te aleyhim le velleyte minhum firaren ve le muli'te minhum ru'ba.",
+          "translation": "Uykuda oldukları halde, sen onları uyanık sanırsın. Biz onları sağa sola çeviriyorduk. Köpekleri de mağaranın girişinde iki kolunu uzatmış (yatmakta idi.) Onları görseydin, mutlaka onlardan yüz çevirip kaçardın ve gördüklerin yüzünden için korku ile dolardı.",
+          "start_time": null
+        },
+        {
+          "verse_number": 19,
+          "verse": "وَكَذٰلِكَ بَعَثْنَاهُمْ لِيَتَسَٓاءَلُوا بَيْنَهُمْۜ قَالَ قَٓائِلٌ مِنْهُمْ كَمْ لَبِثْتُمْۜ قَالُوا لَبِثْنَا يَوْماً اَوْ بَعْضَ يَوْمٍۜ قَالُوا رَبُّكُمْ اَعْلَمُ بِمَا لَبِثْتُمْ فَابْعَثُٓوا اَحَدَكُمْ بِوَرِقِكُمْ هٰذِه۪ٓ اِلَى الْمَد۪ينَةِ فَلْيَنْظُرْ اَيُّهَٓا اَزْكٰى طَعَاماً فَلْيَأْتِكُمْ بِرِزْقٍ مِنْهُ وَلْيَتَلَطَّفْ وَلَا يُشْعِرَنَّ بِكُمْ اَحَداً",
+          "transcription": "Ve kezalike beasnahum li yetesaelu beynehum, kale kailun minhum kem lebistum, kalu lebisna yevmen ev ba'da yevm, kalu rabbukum a'lemu bi ma lebistum feb'asu ehadekum bi verıkıkum hazihi ilel medineti fel yanzur eyyuha ezka taamen fel ye'tikum bi rızkın minhu vel yetelattaf ve la yuş'ırenne bikum ehada.",
+          "translation": "Böylece biz, birbirlerine sorsunlar diye onları uyandırdık. İçlerinden biri: \"Ne kadar kaldınız\"? dedi. (Bir kısmı) \"Bir gün, ya da bir günden az\", dediler. (Diğerleri de) şöyle dediler: \"Ne kadar kaldığınızı Rabbiniz daha iyi bilir. Şimdi siz birinizi şu gümüş para ile kente gönderin de baksın; (şehir halkından) hangisinin yiyeceği daha temiz ve lezzetli ise ondan size bir rızık getirsin. Ayrıca, çok nazik davransın (da dikkat çekmesin) ve sizi hiçbir kimseye sakın sezdirmesin.\"",
+          "start_time": null
+        },
+        {
+          "verse_number": 20,
+          "verse": "اِنَّهُمْ اِنْ يَظْهَرُوا عَلَيْكُمْ يَرْجُمُوكُمْ اَوْ يُع۪يدُوكُمْ ف۪ي مِلَّتِهِمْ وَلَنْ تُفْلِحُٓوا اِذاً اَبَداً",
+          "transcription": "İnnehum in yazheru aleykum yercumukum ev yuidukum fi milletihim ve len tuflihu izen ebeda.",
+          "translation": "\"Çünkü onlar sizi ele geçirirlerse ya taşlayarak öldürürler, yahut kendi dinlerine döndürürler. O zaman da bir daha asla kurtuluşa eremezsiniz.\"",
+          "start_time": null
+        },
+        {
+          "verse_number": 21,
+          "verse": "وَكَذٰلِكَ اَعْثَرْنَا عَلَيْهِمْ لِيَعْلَمُٓوا اَنَّ وَعْدَ اللّٰهِ حَقٌّ وَاَنَّ السَّاعَةَ لَا رَيْبَ ف۪يهَاۚ اِذْ يَتَنَازَعُونَ بَيْنَهُمْ اَمْرَهُمْ فَقَالُوا ابْنُوا عَلَيْهِمْ بُنْيَاناًۜ رَبُّهُمْ اَعْلَمُ بِهِمْۜ قَالَ الَّذ۪ينَ غَلَبُوا عَلٰٓى اَمْرِهِمْ لَنَتَّخِذَنَّ عَلَيْهِمْ مَسْجِداً",
+          "transcription": "Ve kezalike a'serna aleyhim li ya'lemu enne va'dallahi hakkun ve ennes saate la reybe fiha, iz yetenazeune beynehum emrehum fe kalubnu aleyhim bunyana, rabbuhum a'lemu bihim, kalellezine galebu ala emrihim le nettehızenne aleyhim mescida.",
+          "translation": "Böylece biz, (insanları) onların halinden haberdar ettik ki, Allah'ın va'dinin hak olduğunu ve kıyametin gerçekleşmesinde de hiçbir şüphe olmadığını bilsinler. Hani onlar (olayın mucizevi tarafını ve asıl hikmetini bırakmışlar da) aralarında onların durumunu tartışıyorlardı. (Bazıları), \"Onların üstüne bir bina yapın, Rableri onların halini daha iyi bilir\" dediler. Duruma hakim olanlar ise, \"Üzerlerine mutlaka bir mescit yapacağız\" dediler.",
+          "start_time": null
+        },
+        {
+          "verse_number": 22,
+          "verse": "سَيَقُولُونَ ثَلٰثَةٌ رَابِعُهُمْ كَلْبُهُمْۚ وَيَقُولُونَ خَمْسَةٌ سَادِسُهُمْ كَلْبُهُمْ رَجْماً بِالْغَيْبِۚ وَيَقُولُونَ سَبْعَةٌ وَثَامِنُهُمْ كَلْبُهُمْۜ قُلْ رَبّ۪ٓي اَعْلَمُ بِعِدَّتِهِمْ مَا يَعْلَمُهُمْ اِلَّا قَل۪يلٌ۠ فَلَا تُمَارِ ف۪يهِمْ اِلَّا مِرَٓاءً ظَاهِراًۖ وَلَا تَسْتَفْتِ ف۪يهِمْ مِنْهُمْ اَحَداً۟",
+          "transcription": "Se yekulune selasetun rabiuhum kelbuhum, ve yekulune hamsetun sadisuhum kelbuhum recmen bil gayb, ve yekulune seb'atun ve saminuhum kelbuhum, kul rabbi a'lemu bi ıddetihim ma ya'lemuhum illa kalil, fe la tumari fihim illa miraen zahira, ve la testefti fihim minhum ehada.",
+          "translation": "(Ey Muhammed!) Bazıları bilmedikleri şey hakkında atıp tutarak: \"Onlar üç kişidirler, dördüncüleri köpekleridir\" diyecekler. Yine, \"Beş kişidirler, altıncıları köpekleridir\" diyecekler. Şöyle de diyecekler: \"Yedi kişidirler, sekizincileri köpekleridir.\" De ki: \"Onların sayısını Rabbim daha iyi bilir. Zaten onları pek az kimse bilir. O halde, onlar hakkında (Kur'an'daki) apaçık tartışma(yı aktarmak)dan başka tartışmaya girme ve bunlar hakkında onlardan hiçbirine bir şey sorma.\"",
+          "start_time": null
+        },
+        {
+          "verse_number": 23,
+          "verse": "وَلَا تَقُولَنَّ لِشَايْءٍ اِنّ۪ي فَاعِلٌ ذٰلِكَ غَداًۙ",
+          "transcription": "Ve la tekulenne li şey'in inni faılun zalike gada.",
+          "translation": "Hiçbir şey hakkında sakın \"yarın şunu yapacağım\" deme!",
+          "start_time": null
+        },
+        {
+          "verse_number": 24,
+          "verse": "اِلَّٓا اَنْ يَشَٓاءَ اللّٰهُۘ وَاذْكُرْ رَبَّكَ اِذَا نَس۪يتَ وَقُلْ عَسٰٓى اَنْ يَهْدِيَنِ رَبّ۪ي لِاَقْرَبَ مِنْ هٰذَا رَشَداً",
+          "transcription": "İlla en yeşaallahu vezkur rabbeke iza nesite ve kul asa en yehdiyeni rabbi li akrabe min haza reşeda.",
+          "translation": "Ancak, \"Allah dilerse yapacağım\" de. Unuttuğun zaman Rabbini an ve \"Umarım Rabbim beni, bundan daha doğru olana ulaştırır\" de.",
+          "start_time": null
+        },
+        {
+          "verse_number": 25,
+          "verse": "وَلَبِثُوا ف۪ي كَـهْفِهِمْ ثَلٰثَ مِائَةٍ سِن۪ينَ وَازْدَادُوا تِسْعاً",
+          "transcription": "Ve lebisu fi kehfihim selase mietin sinine vezdadu tis'a.",
+          "translation": "Onlar mağaralarında üç yüz yıl kaldılar. Buna dokuz daha eklediler.",
+          "start_time": null
+        },
+        {
+          "verse_number": 26,
+          "verse": "قُلِ اللّٰهُ اَعْلَمُ بِمَا لَبِثُواۚ لَهُ غَيْبُ السَّمٰوَاتِ وَالْاَرْضِۜ اَبْصِرْ بِه۪ وَاَسْمِـعْۜ مَا لَهُمْ مِنْ دُونِه۪ مِنْ وَلِيٍّۘ وَلَا يُشْرِكُ ف۪ي حُكْمِه۪ٓ اَحَداً",
+          "transcription": "Kulillahu a'lemu bima lebisu, lehu gaybus semavati vel ard, ebsır bihi ve esmı', ma lehum min dunihi min veliyyin ve la yuşriku fi hukmihi ehada.",
+          "translation": "De ki: \"Kaldıkları süreyi Allah daha iyi bilir. Göklerin ve yerin gaybını bilmek O'na aittir. O, ne güzel görür; O, ne güzel işitir! Onların, O'ndan başka hiçbir dostu da yoktur. O, hükmüne hiçbir kimseyi ortak etmez.\"",
+          "start_time": null
+        },
+        {
+          "verse_number": 27,
+          "verse": "وَاتْلُ مَٓا اُو۫حِيَ اِلَيْكَ مِنْ كِتَابِ رَبِّكَۚ لَا مُبَدِّلَ لِكَلِمَاتِه۪ وَلَنْ تَجِدَ مِنْ دُونِه۪ مُلْتَحَداً",
+          "transcription": "Vetlu ma uhıye ileyke min kitabi rabbik, la mubeddile li kelimatihi ve len tecide min dunihi multehada.",
+          "translation": "Rabbinin kitabından sana vahyedileni oku. O'nun kelimelerini değiştirecek hiçbir kimse yoktur. O'ndan başka asla bir sığınak da bulamazsın.",
+          "start_time": null
+        },
+        {
+          "verse_number": 28,
+          "verse": "وَاصْبِرْ نَفْسَكَ مَعَ الَّذ۪ينَ يَدْعُونَ رَبَّهُمْ بِالْغَدٰوةِ وَالْعَشِيِّ يُر۪يدُونَ وَجْهَهُ وَلَا تَعْدُ عَيْنَاكَ عَنْهُمْۚ تُر۪يدُ ز۪ينَةَ الْحَيٰوةِ الدُّنْيَا وَلَا تُطِـعْ مَنْ اَغْفَلْنَا قَلْبَهُ عَنْ ذِكْرِنَا وَاتَّبَعَ هَوٰيهُ وَكَانَ اَمْرُهُ فُرُطاً",
+          "transcription": "Vasbır nefseke meallezine yed'une rabbehum bil gadati vel aşiyyi yuridune vechehu ve la ta'du aynake anhum, turidu zinetel hayatid dunya ve la tutı' men agfelna kalbehu an zikrina vettebea hevahu ve kane emruhu furuta.",
+          "translation": "Sabah akşam Rablerine, O'nun rızasını dileyerek dua edenlerle birlikte ol. Dünya hayatının zinetini arzu edip de gözlerini onlardan ayırma. Kalbini bizi anmaktan gafil kıldığımız, boş arzularına uymuş ve işi hep aşırılık olmuş kimselere boyun eğme.",
+          "start_time": null
+        },
+        {
+          "verse_number": 29,
+          "verse": "وَقُلِ الْحَقُّ مِنْ رَبِّكُمْ فَمَنْ شَٓاءَ فَلْيُؤْمِنْ وَمَنْ شَٓاءَ فَلْيَكْفُرْۙ اِنَّٓا اَعْتَدْنَا لِلظَّالِم۪ينَ نَاراًۙ اَحَاطَ بِهِمْ سُرَادِقُهَاۜ وَاِنْ يَسْتَغ۪يثُوا يُغَاثُوا بِمَٓاءٍ كَالْمُهْلِ يَشْوِي الْوُجُوهَۜ بِئْسَ الشَّرَابُۜ وَسَٓاءَتْ مُرْتَفَقاً",
+          "transcription": "Ve kulil hakku min rabbikum fe men şae fel yu'min ve men şae fel yekfur inna a'tedna liz zalimine naren ehata bihim suradikuha, ve in yestegisu yugasu bi main kel muhli yeşvil vucuh, bi'seş şerab ve saet murtefeka.",
+          "translation": "De ki: \"Hak, Rabbinizdendir. Artık dileyen iman etsin, dileyen inkar etsin.\" Biz zalimlere öyle bir ateş hazırladık ki, onun alevden duvarları kendilerini çepeçevre kuşatmıştır. (Susuzluktan) feryat edip yardım dilediklerinde, maden eriyiği gibi, yüzleri yakıp kavuran bir su ile kendilerine yardım edilir. O ne kötü bir içecektir! Cehennem ne korkunç bir yaslanacak yerdir.",
+          "start_time": null
+        },
+        {
+          "verse_number": 30,
+          "verse": "اِنَّ الَّذ۪ينَ اٰمَنُوا وَعَمِلُوا الصَّالِحَاتِ اِنَّا لَا نُض۪يعُ اَجْرَ مَنْ اَحْسَنَ عَمَلاًۚ",
+          "transcription": "İnnellezine amenu ve amilus salihati inna la nudiu ecre men ahsene amela.",
+          "translation": "Gerçek şu ki, iman edip iyi işler yapanlara gelince, elbette biz iyi iş yapanların ecrini zayi etmeyiz.",
+          "start_time": null
+        },
+        {
+          "verse_number": 31,
+          "verse": "اُو۬لٰٓئِكَ لَهُمْ جَنَّاتُ عَدْنٍ تَجْر۪ي مِنْ تَحْتِهِمُ الْاَنْهَارُ يُحَلَّوْنَ ف۪يهَا مِنْ اَسَاوِرَ مِنْ ذَهَبٍ وَيَلْبَسُونَ ثِيَاباً خُضْراً مِنْ سُنْدُسٍ وَاِسْتَبْرَقٍ مُتَّكِـ۪ٔينَ ف۪يهَا عَلَى الْاَرَٓائِكِۜ نِعْمَ الثَّوَابُۜ وَحَسُنَتْ مُرْتَفَقاً۟",
+          "transcription": "Ulaike lehum cennatu adnin tecri min tahtihimul enharu yuhallevne fiha min esavire min zehebin ve yelbesune siyaben hudren min sundusin ve istebrekın muttekiine fiha alel eraik, ni'mes sevab, ve hasunet murtefeka.",
+          "translation": "İşte onlar için içlerinden ırmaklar akan Adn cennetleri vardır. Orada tahtlar üzerine kurularak altın bileziklerle süslenecekler, ince ve kalın ipekten yeşil giysiler giyeceklerdir. O ne güzel karşılıktır! Cennet de ne güzel bir yaslanacak yerdir!",
+          "start_time": null
+        },
+        {
+          "verse_number": 32,
+          "verse": "وَاضْرِبْ لَهُمْ مَثَلاً رَجُلَيْنِ جَعَلْنَا لِاَحَدِهِمَا جَنَّتَيْنِ مِنْ اَعْنَابٍ وَحَفَفْنَاهُمَا بِنَخْلٍ وَجَعَلْنَا بَيْنَهُمَا زَرْعاًۜ",
+          "transcription": "Vadrıb lehum meselen raculeyni cealna li ehadihima cenneteyni min a'nabin ve hafefnahuma bi nahlin ve cealna beynehuma zer'a.",
+          "translation": "Onlara şu iki adamı örnek ver: Onlardan birine iki üzüm bağı vermiş, bağların çevresini hurmalarla donatmış, ikisinin arasına da bir ekinlik koymuştuk.",
+          "start_time": null
+        },
+        {
+          "verse_number": 33,
+          "verse": "كِلْتَا الْجَنَّتَيْنِ اٰتَتْ اُكُلَهَا وَلَمْ تَظْلِمْ مِنْهُ شَيْـٔاًۙ وَفَجَّرْنَا خِلَالَهُمَا نَهَراًۙ",
+          "transcription": "Kiltel cenneteyni atet ukuleha ve lem tazlim minhu şey'en ve feccerna hılalehuma nehera.",
+          "translation": "Her iki bağ da meyvelerini vermiş ve ürünlerinden hiçbir şeyi eksik bırakmamıştı. Bu iki bağın arasından bir de nehir fışkırtmıştık.",
+          "start_time": null
+        },
+        {
+          "verse_number": 34,
+          "verse": "وَكَانَ لَهُ ثَمَرٌۚ فَقَالَ لِصَاحِبِه۪ وَهُوَ يُحَاوِرُهُٓ اَنَا۬ اَكْثَرُ مِنْكَ مَالاً وَاَعَزُّ نَفَراً",
+          "transcription": "Ve kane lehu semer, fe kale li sahıbihi ve huve yuhaviruhu ene ekseru minke malen ve eazzu nefera.",
+          "translation": "Derken onun büyük bir serveti oldu. Arkadaşıyla konuşurken ona dedi ki: \"Benim malım seninkinden daha çok. Adamlardan yana da senden daha üstünüm.\"",
+          "start_time": null
+        },
+        {
+          "verse_number": 35,
+          "verse": "وَدَخَلَ جَنَّتَهُ وَهُوَ ظَالِمٌ لِنَفْسِه۪ۚ قَالَ مَٓا اَظُنُّ اَنْ تَب۪يدَ هٰذِه۪ٓ اَبَداًۙ",
+          "transcription": "Ve dehale cennetehu ve huve zalimun li nefsih, kale ma ezunnu en tebide hazihi ebeda.",
+          "translation": "Derken kendine zulmederek bağına girdi. Şöyle dedi: \"Bunun sonsuza değin yok olacağını sanmıyorum.\"",
+          "start_time": null
+        },
+        {
+          "verse_number": 36,
+          "verse": "وَمَٓا اَظُنُّ السَّاعَةَ قَٓائِمَةًۙ وَلَئِنْ رُدِدْتُ اِلٰى رَبّ۪ي لَاَجِدَنَّ خَيْراً مِنْهَا مُنْقَلَباً",
+          "transcription": "Ve ma ezunnus saate kaimeten ve le in rudidtu ila rabbi le ecidenne hayren minha munkaleba.",
+          "translation": "\"Kıyametin kopacağını da sanmıyorum. Rabbime döndürülsem bile andolsun bundan daha iyi bir sonuç bulurum.\"",
+          "start_time": null
+        },
+        {
+          "verse_number": 37,
+          "verse": "قَالَ لَهُ صَاحِبُهُ وَهُوَ يُحَاوِرُهُٓ  اَكَفَرْتَ بِالَّذ۪ي خَلَقَكَ مِنْ تُرَابٍ ثُمَّ مِنْ نُطْفَةٍ ثُمَّ سَوّٰيكَ رَجُلاًۜ",
+          "transcription": "Kale lehu sahıbuhu ve huve yuhaviruhu e keferte billezi halakake min turabin summe min nutfetin summe sevvake racula.",
+          "translation": "Arkadaşı, ona cevap vererek dedi ki: \"Seni topraktan, sonra bir damla döl suyundan yaratan, sonra da seni (eksiksiz) bir insan şeklinde düzenleyen Allah'ı inkar mı ediyorsun?\"",
+          "start_time": null
+        },
+        {
+          "verse_number": 38,
+          "verse": "لٰكِنَّا۬ هُوَ اللّٰهُ رَبّ۪ي وَلَٓا اُشْرِكُ بِرَبّ۪ٓي اَحَداً",
+          "transcription": "Lakinne huvallahu rabbi ve la uşriku bi rabbi ehada.",
+          "translation": "\"Fakat O Allah benim Rabbimdir. Ben Rabbime hiç kimseyi ortak koşmam.\"",
+          "start_time": null
+        },
+        {
+          "verse_number": 39,
+          "verse": "وَلَوْلَٓا اِذْ دَخَلْتَ جَنَّتَكَ قُلْتَ مَا شَٓاءَ اللّٰهُۙ لَا قُوَّةَ اِلَّا بِاللّٰهِۚ اِنْ تَرَنِ اَنَا۬ اَقَلَّ مِنْكَ مَالاً وَوَلَداًۚ",
+          "transcription": "Ve lev la iz dehalte cenneteke kulte ma şaallahu la kuvvete illa billah, in tereni ene ekalle minke malen ve veleda.",
+          "translation": "(39-40) \"Bağına girdiğinde 'Maşaallah! Kuvvet yalnız Allah'ındır' deseydin ya!. Eğer benim malımı ve çocuklarımı kendininkilerden daha az görüyorsan, belki Rabbim bana, senin bağından daha iyisini verir. Seninkinin üzerine de gökten bir afet indirir de bağ kupkuru ve yalçın bir toprak haline geliverir.\"",
+          "start_time": null
+        },
+        {
+          "verse_number": 40,
+          "verse": "فَعَسٰى رَبّ۪ٓي اَنْ يُؤْتِيَنِ خَيْراً مِنْ جَنَّتِكَ وَيُرْسِلَ عَلَيْهَا حُسْبَاناً مِنَ السَّمَٓاءِ فَتُصْبِحَ صَع۪يداً زَلَقاًۙ",
+          "transcription": "Fe asa rabbi en yu'tiyeni hayran min cennetike ve yursile aleyha husbanen mines semai fe tusbiha saiden zeleka.",
+          "translation": "(39-40) \"Bağına girdiğinde 'Maşaallah! Kuvvet yalnız Allah'ındır' deseydin ya!. Eğer benim malımı ve çocuklarımı kendininkilerden daha az görüyorsan, belki Rabbim bana, senin bağından daha iyisini verir. Seninkinin üzerine de gökten bir afet indirir de bağ kupkuru ve yalçın bir toprak haline geliverir.\"",
+          "start_time": null
+        },
+        {
+          "verse_number": 41,
+          "verse": "اَوْ يُصْبِحَ مَٓاؤُ۬هَا غَوْراً فَلَنْ تَسْتَط۪يعَ لَهُ طَلَباً",
+          "transcription": "Ev yusbiha mauha gavren fe len testetia lehu taleba.",
+          "translation": "\"Ya da suyu çekiliverir de (bırak bir daha bulmayı) artık onu arayamazsın bile.\"",
+          "start_time": null
+        },
+        {
+          "verse_number": 42,
+          "verse": "وَاُح۪يطَ بِثَمَرِه۪ فَاَصْبَحَ يُقَلِّبُ كَفَّيْهِ عَلٰى مَٓا اَنْفَقَ ف۪يهَا وَهِيَ خَاوِيَةٌ عَلٰى عُرُوشِهَا وَيَقُولُ يَا لَيْتَن۪ي لَمْ اُشْرِكْ بِرَبّ۪ٓي اَحَداً",
+          "transcription": "Ve uhita bi semerihi fe asbeha yukallibu keffeyhi ala ma enfeka fiha ve hiye haviyetun ala uruşiha ve yekulu ya leyteni lem uşrik bi rabbi ehada.",
+          "translation": "Derken bütün serveti helak edildi. (Yıkılmış) çardakları üzerine çökmüş haldeki bağına yaptığı harcamalar karşısında ellerini oğuşturuyor ve şöyle diyordu: \"Keşke Rabbime hiçbir kimseyi ortak koşmasaydım..\"",
+          "start_time": null
+        },
+        {
+          "verse_number": 43,
+          "verse": "وَلَمْ تَكُنْ لَهُ فِئَةٌ يَنْصُرُونَهُ مِنْ دُونِ اللّٰهِ وَمَا كَانَ مُنْتَصِراًۜ",
+          "transcription": "Ve lem tekun lehu fietun yansurunehu min dunillahi ve ma kane muntesira.",
+          "translation": "Onun, Allah'tan başka kendisine yardım edebilecek kimseleri yoktu. Kendi kendini kurtaracak güçte de değildi.",
+          "start_time": null
+        },
+        {
+          "verse_number": 44,
+          "verse": "هُنَالِكَ الْوَلَايَةُ لِلّٰهِ الْحَقِّۜ هُوَ خَيْرٌ ثَوَاباً وَخَيْرٌ عُقْباً۟",
+          "transcription": "Hunalikel velayetu lillahil hakk, huve hayrun sevaben ve hayrun ukba.",
+          "translation": "İşte bu durumda velayet (himaye ve koruyuculuk) yalnızca hak olan Allah'a mahsustur. O'nun mükafatı da daha hayırlıdır, vereceği sonuç da daha hayırlıdır.",
+          "start_time": null
+        },
+        {
+          "verse_number": 45,
+          "verse": "وَاضْرِبْ لَهُمْ مَثَلَ الْحَيٰوةِ الدُّنْيَا كَمَٓاءٍ اَنْزَلْنَاهُ مِنَ السَّمَٓاءِ فَاخْتَلَطَ بِه۪ نَبَاتُ الْاَرْضِ فَاَصْبَحَ هَش۪يماً تَذْرُوهُ الرِّيَاحُۜ وَكَانَ اللّٰهُ عَلٰى كُلِّ شَيْءٍ مُقْتَدِراً",
+          "transcription": "Vadrıb lehum meselel hayatid dunya ke main enzelnahu mines semai fahteleta bihi nebatul ardı fe asbeha heşimen tezruhur riyah, ve kanallahu ala kulli şey'in muktedira.",
+          "translation": "Onlara dünya hayatının örneğini ver: (Dünya hayatı), gökten indirdiğimiz yağmur gibidir ki, onun sebebiyle yeryüzünün bitkileri boy verip birbirine karışırlar. Fakat bütün bu canlılık sonunda rüzgarın savurduğu kuru bir çer çöpe döner. Allah, her şey üzerinde kudret sahibidir.",
+          "start_time": null
+        },
+        {
+          "verse_number": 46,
+          "verse": "اَلْمَالُ وَالْبَنُونَ ز۪ينَةُ الْحَيٰوةِ الدُّنْيَاۚ وَالْبَاقِيَاتُ الصَّالِحَاتُ خَيْرٌ عِنْدَ رَبِّكَ ثَوَاباً وَخَيْرٌ اَمَلاً",
+          "transcription": "El malu vel benune zinetul hayatid dunya, vel bakıyatus salihatu hayrun inde rabbike sevaben ve hayrun emela.",
+          "translation": "Mallar ve evlatlar, dünya hayatının süsüdür. Baki kalacak salih ameller ise, Rabbinin katında, sevap olarak da ümit olarak da daha hayırlıdır.",
+          "start_time": null
+        },
+        {
+          "verse_number": 47,
+          "verse": "وَيَوْمَ نُسَيِّرُ الْجِبَالَ وَتَرَى الْاَرْضَ بَارِزَةًۙ وَحَشَرْنَاهُمْ فَلَمْ نُغَادِرْ مِنْهُمْ اَحَداًۚ",
+          "transcription": "Ve yevme nuseyyirul cibale ve terel arda barizeten ve haşernahum fe lem nugadir minhum ehada.",
+          "translation": "Dağları yürüteceğimiz ve senin yeryüzünü çırılçıplak göreceğin günü bir hatırla. Biz onları mahşerde toplarız da içlerinden hiçbirini bırakmayız.",
+          "start_time": null
+        },
+        {
+          "verse_number": 48,
+          "verse": "وَعُرِضُوا عَلٰى رَبِّكَ صَفاًّۜ لَقَدْ جِئْتُمُونَا كَمَا خَلَقْنَاكُمْ اَوَّلَ مَرَّةٍۘ بَلْ زَعَمْتُمْ اَلَّنْ نَجْعَلَ لَكُمْ مَوْعِداً",
+          "transcription": "Ve uridu ala rabbike saffa, lekad ci'tumuna kema halaknakum evvele merreh, bel zeamtum ellen nec'ale lekum mev'ıda.",
+          "translation": "Hepsi saf saf Rabbinin huzuruna çıkarılırlar. Onlara, \"Andolsun, sizi ilk önce yarattığımız gibi bize geldiniz. Oysa siz, sizin için hesaba çekileceğiniz bir zaman belirlemediğimizi sanmıştınız\" denir.",
+          "start_time": null
+        },
+        {
+          "verse_number": 49,
+          "verse": "وَوُضِعَ الْكِتَابُ فَتَرَى الْمُجْرِم۪ينَ مُشْفِق۪ينَ مِمَّا ف۪يهِ وَيَقُولُونَ يَا وَيْلَتَنَا مَالِ هٰذَا الْكِتَابِ لَا يُغَادِرُ صَغ۪يرَةً وَلَا كَب۪يرَةً اِلَّٓا اَحْصٰيهَاۚ وَوَجَدُوا مَا عَمِلُوا حَاضِراًۜ وَلَا يَظْلِمُ رَبُّكَ اَحَداً۟",
+          "transcription": "Ve vudıal kitabu fe terel mucrimine muşfikine mimma fihi ve yekulune ya veyletena mali hazel kitabi la yugadiru sagireten ve la kebireten illa ahsaha, ve vecedu ma amilu hadıra, ve la yazlimu rabbuke ehada.",
+          "translation": "Kitap ortaya konur. Suçluları, kitabın içindekilerden korkuya kapılmış görürsün. \"Eyvah bize! Bu nasıl bir kitaptır ki küçük, büyük hiçbir şey bırakmadan hepsini sayıp dökmüş!\" derler. Onlar bütün yaptıklarını karşılarında bulurlar. Senin Rabbin hiç kimseye zulmetmez.",
+          "start_time": null
+        },
+        {
+          "verse_number": 50,
+          "verse": "وَاِذْ قُلْنَا لِلْمَلٰٓئِكَةِ اسْجُدُوا لِاٰدَمَ فَسَجَدُٓوا اِلَّٓا اِبْل۪يسَۜ كَانَ مِنَ الْجِنِّ فَفَسَقَ عَنْ اَمْرِ رَبِّه۪ۜ  اَفَتَتَّخِذُونَهُ وَذُرِّيَّتَهُٓ اَوْلِيَٓاءَ مِنْ دُون۪ي وَهُمْ لَكُمْ عَدُوٌّۜ بِئْسَ لِلظَّالِم۪ينَ بَدَلاً",
+          "transcription": "Ve iz kulna lil melaiketiscudu li ademe fe secedu illa iblis, kane minel cinni fe feseka an emri rabbih, e fe tettehızunehu ve zurriyyetehu evliyae min duni ve hum lekum aduvv, bi'se liz zalimine bedela.",
+          "translation": "Hani biz meleklere, \"Adem için saygı ile eğilin\" demiştik de İblis'ten başka hepsi saygı ile eğilmişlerdi. İblis ise cinlerdendi de Rabbinin emri dışına çıktı. Şimdi siz, beni bırakıp da İblis'i ve neslini, kendinize dostlar mı ediniyorsunuz? Halbuki onlar sizin için birer düşmandırlar. Bu, zalimler için ne kötü bir bedeldir!",
+          "start_time": null
+        },
+        {
+          "verse_number": 51,
+          "verse": "مَٓا اَشْهَدْتُهُمْ خَلْقَ السَّمٰوَاتِ وَالْاَرْضِ وَلَا خَلْقَ اَنْفُسِهِمْۖ وَمَا كُنْتُ مُتَّخِذَ الْمُضِلّ۪ينَ عَضُداً",
+          "transcription": "Ma eşhedtuhum halkas semavati vel ardı ve la halka enfusihim ve ma kuntu muttehızel mudılline aduda.",
+          "translation": "Ben onları ne göklerin ve yerin yaratılışına, ne de kendilerinin yaratılışına şahit tuttum. Saptıranları da hiçbir zaman yardımcı edinmiş değilim.",
+          "start_time": null
+        },
+        {
+          "verse_number": 52,
+          "verse": "وَيَوْمَ يَقُولُ نَادُوا شُرَكَٓاءِيَ الَّذ۪ينَ زَعَمْتُمْ فَدَعَوْهُمْ فَلَمْ يَسْتَج۪يبُوا لَهُمْ وَجَعَلْنَا بَيْنَهُمْ مَوْبِقاً",
+          "transcription": "Ve yevme yekulu nadu şurekaiyellezine zeamtum fe deavhum fe lem yestecibu lehum ve cealna beynehum mevbika.",
+          "translation": "(Ey Muhammed!) Allah'ın, \"Ortağım olduklarını iddia ettiklerinizi çağırın\" diyeceği, onların da çağıracakları, fakat kendilerine (çağırdıklarının) cevap vermeyecekleri ve bizim de aralarına bir uçurum koyacağımız günü hatırla!",
+          "start_time": null
+        },
+        {
+          "verse_number": 53,
+          "verse": "وَرَاَ الْمُجْرِمُونَ النَّارَ فَظَنُّٓوا اَنَّهُمْ مُوَاقِعُوهَا وَلَمْ يَجِدُوا عَنْهَا مَصْرِفاً۟",
+          "transcription": "Ve reel mucrimunen nare fe zannu ennehum muvakıuha ve lem yecidu anha masrifa.",
+          "translation": "Suçlular (o gün) ateşi görünce, onun içine düşeceklerini iyice anlayacaklar ve ondan kurtuluş yolu da bulamayacaklardır.",
+          "start_time": null
+        },
+        {
+          "verse_number": 54,
+          "verse": "وَلَقَدْ صَرَّفْنَا ف۪ي هٰذَا الْقُرْاٰنِ لِلنَّاسِ مِنْ كُلِّ مَثَلٍۜ وَكَانَ الْاِنْسَانُ اَكْثَرَ شَيْءٍ جَدَلاً",
+          "transcription": "Ve lekad sarrafna fi hazel kur'ani lin nasi min kulli mesel, ve kanel insanu eksere şey'in cedela.",
+          "translation": "Andolsun, biz bu Kur'an'da insanlar için her türlü misali değişik şekillerde açıkladık. Fakat insan tartışmaya her şeyden daha çok düşkündür.",
+          "start_time": null
+        },
+        {
+          "verse_number": 55,
+          "verse": "وَمَا مَنَعَ النَّاسَ اَنْ يُؤْمِنُٓوا اِذْ جَٓاءَهُمُ الْهُدٰى وَيَسْتَغْفِرُوا رَبَّهُمْ اِلَّٓا اَنْ تَأْتِيَهُمْ سُنَّةُ الْاَوَّل۪ينَ اَوْ يَأْتِيَهُمُ الْعَذَابُ قُبُلاً",
+          "transcription": "Ve ma menean nase en yu'minu iz cae humul huda ve yestagfiru rabbehum illa en te'tiyehum sunnetul evveline ev ye'tiyehumul azabu kubula.",
+          "translation": "İnsanlara hidayet geldikten sonra onların inanmalarına ve Rab'lerinden mağfiret dilemelerine, ancak, öncekilerin başına gelenlerin kendi başlarına da gelmesi, ya da kendilerine azabın göz göre göre gelmesi (yönündeki beklentileri) engel olmuştur.",
+          "start_time": null
+        },
+        {
+          "verse_number": 56,
+          "verse": "وَمَا نُرْسِلُ الْمُرْسَل۪ينَ اِلَّا مُبَشِّر۪ينَ وَمُنْذِر۪ينَۚ وَيُجَادِلُ الَّذ۪ينَ كَفَرُوا بِالْبَاطِلِ لِيُدْحِضُوا بِهِ الْحَقَّ وَاتَّخَذُٓوا اٰيَات۪ي وَمَٓا اُنْذِرُوا هُزُواً",
+          "transcription": "Ve ma nursilul murseline illa mubeşşirine ve munzirin, ve yucadilullezine keferu bil batılı li yudhıdu bihil hakka vettehazu ayati ve ma unziru huzuva.",
+          "translation": "Biz, peygamberleri ancak müjdeleyiciler ve uyarıcılar olarak göndeririz. İnkar edenler ise, hakkı batılla çürütmek için mücadele ederler. Ayetlerimizi ve kendilerine yapılan uyarıları alaya alırlar.",
+          "start_time": null
+        },
+        {
+          "verse_number": 57,
+          "verse": "وَمَنْ اَظْلَمُ مِمَّنْ ذُكِّرَ بِاٰيَاتِ رَبِّه۪ فَاَعْرَضَ عَنْهَا وَنَسِيَ مَا قَدَّمَتْ يَدَاهُۜ اِنَّا جَعَلْنَا عَلٰى قُلُوبِهِمْ اَكِنَّةً اَنْ يَفْقَهُوهُ وَف۪ٓي اٰذَانِهِمْ وَقْراًۜ وَاِنْ تَدْعُهُمْ اِلَى الْهُدٰى فَلَنْ يَهْتَدُٓوا اِذاً اَبَداً",
+          "transcription": "Ve men azlemu mimmen zukkire bi ayati rabbihi fe a'rada anha ve nesiye ma kaddemet yedah, inna cealna ala kulubihim ekinneten en yefkahuhu ve fi azanihim vakra ve in ted'uhum ilel huda fe len yehtedu izen ebeda.",
+          "translation": "Kim, kendisine Rabbinin ayetleri hatırlatılıp da onlardan yüz çeviren ve elleriyle yaptığını unutandan daha zalimdir? Şüphesiz biz, onu anlamamaları için, kalplerine perdeler gerdik, kulaklarına da ağırlıklar koyduk. Sen onları hidayete çağırsan da artık ebediyen hidayet bulamazlar.",
+          "start_time": null
+        },
+        {
+          "verse_number": 58,
+          "verse": "وَرَبُّكَ الْغَفُورُ ذُوالرَّحْمَةِۜ لَوْ يُؤَاخِذُهُمْ بِمَا كَسَبُوا لَعَجَّلَ لَهُمُ الْعَذَابَۜ بَلْ لَهُمْ مَوْعِدٌ لَنْ يَجِدُوا مِنْ دُونِه۪ مَوْئِلاً",
+          "transcription": "Ve rabbukel gafuru zur rahmeh, lev yuahızuhum bi ma kesebu le accele lehumul azab, bel lehum mev'ıdun len yecidu min dunihi mev'ila.",
+          "translation": "Rabbin, çok bağışlayıcıdır, merhamet sahibidir. Eğer yaptıkları yüzünden onları (dünyada) cezaya çarptırsaydı, elbette azaplarını çarçabuk verirdi. Hayır, onlar için belirlenmiş bir gün vardır ki (o gün gelince) hiçbir kurtuluş çaresi bulamazlar.",
+          "start_time": null
+        },
+        {
+          "verse_number": 59,
+          "verse": "وَتِلْكَ الْقُرٰٓى اَهْلَكْنَاهُمْ لَمَّا ظَلَمُوا وَجَعَلْنَا لِمَهْلِكِهِمْ مَوْعِداً۟",
+          "transcription": "Ve tilkel kura ehleknahum lemma zalemu ve cealna li mehlikihim mev'ıda.",
+          "translation": "İşte zulmettiklerinde yok ettiğimiz memleketler.. Helak edilmeleri için de belli bir zaman tayin etmiştik.",
+          "start_time": null
+        },
+        {
+          "verse_number": 60,
+          "verse": "وَاِذْ قَالَ مُوسٰى لِفَتٰيهُ لَٓا اَبْرَحُ حَتّٰٓى اَبْلُغَ مَجْمَعَ الْبَحْرَيْنِ اَوْ اَمْضِيَ حُقُباً",
+          "transcription": "Ve iz kale musa li fetahu la ebrehu hatta ebluga mecmeal bahreyni ev emdıye hukuba.",
+          "translation": "Hani Musa, beraberindeki gence şöyle demişti: \"İki denizin birleştiği yere varıncaya kadar durmayacağım, ya da uzun zaman gideceğim.\"",
+          "start_time": null
+        },
+        {
+          "verse_number": 61,
+          "verse": "فَلَمَّا بَلَغَا مَجْمَعَ بَيْنِهِمَا نَسِيَا حُوتَهُمَا فَاتَّخَذَ سَب۪يلَهُ فِي الْبَحْرِ سَرَباً",
+          "transcription": "Fe lemma belega mecmea beynihima nesiya hutehuma fettehaze sebilehu fil bahri sereba.",
+          "translation": "Onlar iki denizin birleştiği yere varınca, balıklarını unuttular. Balık denizde yolunu tutup kayıp gitti.",
+          "start_time": null
+        },
+        {
+          "verse_number": 62,
+          "verse": "فَلَمَّا جَاوَزَا قَالَ لِفَتٰيهُ اٰتِنَا غَدَٓاءَنَاۘ لَقَدْ لَق۪ينَا مِنْ سَفَرِنَا هٰذَا نَصَباً",
+          "transcription": "Fe lemma caveza kale li fetahu atina gadaena lekad lekina min seferina haza nasaba.",
+          "translation": "Oradan uzaklaştıklarında Musa beraberindeki gence, \"Öğle yemeğimizi getir, bu yolculuğumuzdan dolayı çok yorgun düştük\" dedi.",
+          "start_time": null
+        },
+        {
+          "verse_number": 63,
+          "verse": "قَالَ اَرَاَيْتَ اِذْ اَوَيْنَٓا اِلَى الصَّخْرَةِ فَاِنّ۪ي نَس۪يتُ الْحُوتَۘ وَمَٓا اَنْسَان۪يهُ اِلَّا الشَّيْطَانُ اَنْ اَذْكُرَهُۚ وَاتَّخَذَ سَب۪يلَهُ فِي الْبَحْرِۗ عَجَباً",
+          "transcription": "Kale eraeyte iz eveyna ilas sahrati fe inni nesitul hut, ve ma ensanihu illeş şeytanu en ezkureh, vettehaze sebilehu fil bahri aceba.",
+          "translation": "Genç, \"Gördün mü! Kayaya sığındığımız sırada balığı unutmuşum. –Doğrusu onu sana söylememi bana ancak şeytan unutturdu- Balık şaşılacak bir şekilde denizde yolunu tutup gitmişti\" dedi.",
+          "start_time": null
+        },
+        {
+          "verse_number": 64,
+          "verse": "قَالَ ذٰلِكَ مَا كُنَّا نَبْغِۗ فَارْتَدَّا عَلٰٓى اٰثَارِهِمَا قَصَصاًۙ",
+          "transcription": "Kale zalike ma kunna nebgı fertedda ala asarihima kasasa.",
+          "translation": "Musa: \"İşte aradığımız bu idi\" dedi. Bunun üzerine tekrar izlerini takip ederek gerisingeri döndüler.",
+          "start_time": null
+        },
+        {
+          "verse_number": 65,
+          "verse": "فَوَجَدَا عَبْداً مِنْ عِبَادِنَٓا اٰتَيْنَاهُ رَحْمَةً مِنْ عِنْدِنَا وَعَلَّمْنَاهُ مِنْ لَدُنَّا عِلْماً",
+          "transcription": "Fe veceda abden min ibadina ateynahu rahmeten min indina ve allemnahu min ledunna ilma.",
+          "translation": "Derken kullarımızdan bir kul buldular ki, biz ona katımızdan bir rahmet vermiş, kendisine tarafımızdan bir ilim öğretmiştik.",
+          "start_time": null
+        },
+        {
+          "verse_number": 66,
+          "verse": "قَالَ لَهُ مُوسٰى هَلْ اَتَّبِعُكَ عَلٰٓى اَنْ تُعَلِّمَنِ مِمَّا عُلِّمْتَ رُشْداً",
+          "transcription": "Kale lehu musa hel ettebiuke ala en tuallimeni mimma ullimte ruşda.",
+          "translation": "Musa ona, \"Sana öğretilen bilgilerden bana, doğruya iletici bir bilgi öğretmen için sana tabi olayım mı?\" dedi.",
+          "start_time": null
+        },
+        {
+          "verse_number": 67,
+          "verse": "قَالَ اِنَّكَ لَنْ تَسْتَط۪يعَ مَعِيَ صَبْراً",
+          "transcription": "Kale inneke len testetia maiye sabra.",
+          "translation": "Adam, şöyle dedi: \"Doğrusu sen benimle beraberliğe asla sabredemezsin.\"",
+          "start_time": null
+        },
+        {
+          "verse_number": 68,
+          "verse": "وَكَيْفَ تَصْبِرُ عَلٰى مَا لَمْ تُحِطْ بِه۪ خُبْراً",
+          "transcription": "Ve keyfe tesbiru ala ma lem tuhıt bihi hubra.",
+          "translation": "\"İç yüzünü kavrayamadığın bir şeye nasıl sabredebilirsin?\"",
+          "start_time": null
+        },
+        {
+          "verse_number": 69,
+          "verse": "قَالَ سَتَجِدُن۪ٓي اِنْ شَٓاءَ اللّٰهُ صَابِراً وَلَٓا اَعْص۪ي لَكَ اَمْراً",
+          "transcription": "Kale se teciduni inşaallahu sabiren ve la a'si leke emra.",
+          "translation": "Musa, \"İnşaallah beni sabırlı bulacaksın. Hiçbir işte de sana karşı gelmeyeceğim\" dedi.",
+          "start_time": null
+        },
+        {
+          "verse_number": 70,
+          "verse": "قَالَ فَاِنِ اتَّبَعْتَن۪ي فَلَا تَسْـَٔلْن۪ي عَنْ شَيْءٍ حَتّٰٓى اُحْدِثَ لَكَ مِنْهُ ذِكْراً۟",
+          "transcription": "Kale fe initteba'teni fe la tes'elni an şey'in hatta uhdise leke minhu zikra.",
+          "translation": "O da şöyle dedi: \"O halde, eğer bana tabi olacaksan, ben sana söylemedikçe hiçbir şey hakkında bana soru sormayacaksın.\"",
+          "start_time": null
+        },
+        {
+          "verse_number": 71,
+          "verse": "فَانْطَلَقَا۠ حَتّٰٓى اِذَا رَكِبَا فِي السَّف۪ينَةِ خَرَقَهَاۜ قَالَ اَخَرَقْتَهَا لِتُغْرِقَ اَهْلَهَاۚ لَقَدْ جِئْتَ شَيْـٔاً اِمْراً",
+          "transcription": "Fentalaka, hatta iza rakiba fis sefineti harakaha kale e harakteha li tugrika ehleha, lekad ci'te şey'en imra.",
+          "translation": "Derken yola koyuldular. Nihayet, bir gemiye bindiklerinde (adam) gemiyi deldi. Musa, \"Sen onu içindekileri boğmak için mi deldin? Doğrusu, şaşılacak bir iş yaptın.\" dedi.",
+          "start_time": null
+        },
+        {
+          "verse_number": 72,
+          "verse": "قَالَ اَلَمْ اَقُلْ اِنَّكَ لَنْ تَسْتَط۪يعَ مَعِيَ صَبْراً",
+          "transcription": "Kale e lem ekul inneke len testetia maiye sabra.",
+          "translation": "Adam, \"Sen benimle beraberliğe asla sabredemezsin, demedim mi?\" dedi.",
+          "start_time": null
+        },
+        {
+          "verse_number": 73,
+          "verse": "قَالَ لَا تُؤَاخِذْن۪ي بِمَا نَس۪يتُ وَلَا تُرْهِقْن۪ي مِنْ اَمْر۪ي عُسْراً",
+          "transcription": "Kale la tuahızni bima nesitu ve la turhıkni min emri usra.",
+          "translation": "Musa, \"Unuttuğum için bana çıkışma ve bu işimde bana güçlük çıkarma!\" dedi.",
+          "start_time": null
+        },
+        {
+          "verse_number": 74,
+          "verse": "فَانْطَلَقَا۠ حَتّٰٓى اِذَا لَقِيَا غُلَاماً فَقَتَلَهُۙ قَالَ اَقَتَلْتَ نَفْساً زَكِيَّةً بِغَيْرِ نَفْسٍۜ لَقَدْ جِئْتَ شَيْـٔاً نُكْراً",
+          "transcription": "Fentaleka, hatta iza lekıya gulamen fe katelehu kale e katelte nefsen zekiyyeten bi gayri nefs, lekad ci'te şey'en nukra.",
+          "translation": "Yine yola koyuldular. Nihayet bir erkek çocukla karşılaştıklarında, adam (hemen) onu öldürdü. Musa, \"Bir cana karşılık olmaksızın suçsuz birini mi öldürdün? Andolsun çok kötü bir iş yaptın!\" dedi.",
+          "start_time": null
+        },
+        {
+          "verse_number": 75,
+          "verse": "قَالَ اَلَمْ اَقُلْ لَكَ اِنَّكَ لَنْ تَسْتَط۪يعَ مَعِيَ صَبْراً",
+          "transcription": "Kale e lem ekul leke inneke len testetia maıye sabra.",
+          "translation": "Adam, \"Sana, benimle beraberliğe asla sabredemezsin demedim mi?\" dedi.",
+          "start_time": null
+        },
+        {
+          "verse_number": 76,
+          "verse": "قَالَ اِنْ سَاَلْتُكَ عَنْ شَيْءٍ بَعْدَهَا فَلَا تُصَاحِبْن۪يۚ قَدْ بَلَغْتَ مِنْ لَدُنّ۪ي عُذْراً",
+          "transcription": "Kale in seeltuke an şey'in ba'deha fe la tusahıbni, kad belagte min ledunni uzra.",
+          "translation": "Musa, \"Eğer bundan sonra sana bir şey hakkında soru sorarsam, artık benimle arkadaşlık etme. Doğrusu, tarafımdan (dilenecek son) özre ulaştın (bu son özür dileyişim)\" dedi.",
+          "start_time": null
+        },
+        {
+          "verse_number": 77,
+          "verse": "فَانْطَلَقَا۠ حَتّٰٓى اِذَٓا اَتَيَٓا اَهْلَ قَرْيَةٍۨ اسْتَطْعَمَٓا اَهْلَهَا فَاَبَوْا اَنْ يُضَيِّفُوهُمَا فَوَجَدَا ف۪يهَا جِدَاراً يُر۪يدُ اَنْ يَنْقَضَّ فَاَقَامَهُۜ قَالَ لَوْ شِئْتَ لَتَّخَذْتَ عَلَيْهِ اَجْراً",
+          "transcription": "Fentaleka, hatta iza eteya ehle karyetin istat'ama ehleha fe ebev en yudayyifuhuma fe veceda fiha cidaren yuridu en yenkadda fe ekameh, kale lev şi'te lettehazte aleyhi ecra.",
+          "translation": "Yine yola koyuldular. Nihayet bir şehir halkına varıp onlardan yiyecek istediler. Halk onları konuk etmek istemedi. Derken orada yıkılmaya yüz tutmuş bir duvar gördüler. Adam hemen o duvarı doğrulttu. Musa, \"İsteseydin bu iş için bir ücret alırdın\" dedi.",
+          "start_time": null
+        },
+        {
+          "verse_number": 78,
+          "verse": "قَالَ هٰذَا فِرَاقُ بَيْن۪ي وَبَيْنِكَۚ سَاُنَبِّئُكَ بِتَأْو۪يلِ مَا لَمْ تَسْتَطِـعْ عَلَيْهِ صَبْراً",
+          "transcription": "Kale haza firaku beyni ve beynik, se unebbiuke bi te'vili ma lem testetı' aleyhi sabra.",
+          "translation": "Adam, \"İşte bu birbirimizden ayrılmamız demektir\" dedi. \"Şimdi sana sabredemediğin şeylerin içyüzünü anlatacağım.\"",
+          "start_time": null
+        },
+        {
+          "verse_number": 79,
+          "verse": "اَمَّا السَّف۪ينَةُ فَكَانَتْ لِمَسَاك۪ينَ يَعْمَلُونَ فِي الْبَحْرِ فَاَرَدْتُ اَنْ اَع۪يبَهَا وَكَانَ وَرَٓاءَهُمْ مَلِكٌ يَأْخُذُ كُلَّ سَف۪ينَةٍ غَصْباً",
+          "transcription": "Emmes sefinetu fe kanet li mesakine ya'melune fil bahri fe eradtu en eibeha ve kane veraehum melikun ye'huzu kulle sefinetin gasba.",
+          "translation": "\"O gemi, denizde çalışan birtakım yoksul kimselere ait idi. Onu yaralamak istedim, çünkü onların ilerisinde, her gemiyi zorla ele geçiren bir kral vardı.\"",
+          "start_time": null
+        },
+        {
+          "verse_number": 80,
+          "verse": "وَاَمَّا الْغُلَامُ فَكَانَ اَبَوَاهُ مُؤْمِنَيْنِ فَخَش۪ينَٓا اَنْ يُرْهِقَهُمَا طُغْيَاناً وَكُفْراًۚ",
+          "transcription": "Ve emmel gulamu fe kane ebevahu mu'mineyni fe haşina en yurhikahuma tugyanen ve kufra.",
+          "translation": "\"Çocuğa gelince, anası babası mü'min insanlardı. Onları azgınlığa ve küfre sürüklemesinden korktuk.\"",
+          "start_time": null
+        },
+        {
+          "verse_number": 81,
+          "verse": "فَاَرَدْنَٓا اَنْ يُبْدِلَهُمَا رَبُّهُمَا خَيْراً مِنْهُ زَكٰوةً وَاَقْرَبَ رُحْماً",
+          "transcription": "Fe eredna en yubdilehuma rabbuhuma hayren minhu zekaten ve akrebe ruhma.",
+          "translation": "\"Böylece, Rablerinin onlara, bu çocuğun yerine daha hayırlı ve daha merhametli bir çocuk vermesini diledik.\"",
+          "start_time": null
+        },
+        {
+          "verse_number": 82,
+          "verse": "وَاَمَّا الْجِدَارُ فَكَانَ لِغُلَامَيْنِ يَت۪يمَيْنِ فِي الْمَد۪ينَةِ وَكَانَ تَحْتَهُ كَنْزٌ لَهُمَا وَكَانَ اَبُوهُمَا صَالِحاًۚ فَاَرَادَ رَبُّكَ اَنْ يَبْلُغَٓا اَشُدَّهُمَا وَيَسْتَخْرِجَا كَنْزَهُمَاۗ رَحْمَةً مِنْ رَبِّكَۚ وَمَا فَعَلْتُهُ عَنْ اَمْر۪يۜ ذٰلِكَ تَأْو۪يلُ مَا لَمْ تَسْطِـعْ عَلَيْهِ صَبْراًۜ۟",
+          "transcription": "Ve emmel cidaru fe kane li gulameyni yetimeyni fil medineti ve kane tahtehu kenzun lehuma ve kane ebuhuma saliha, fe erade rabbuke en yebluga eşuddehuma ve yestahrica kenzehuma rahmeten min rabbik ve ma fealtuhu an emri, zalike te'vilu ma lem testı' aleyhi sabra.",
+          "translation": "\"Duvar ise şehirdeki iki yetim çocuğa ait idi. Altında onlara ait bir define vardı. Babaları da iyi bir insandı. Rabbin, onların olgunluk çağına ulaşmalarını ve Rabbinden bir rahmet olarak definelerini çıkarmalarını istedi. Bunları ben kendi görüşüme göre yapmadım. İşte senin, sabredemediğin şeylerin içyüzü budur.\"",
+          "start_time": null
+        },
+        {
+          "verse_number": 83,
+          "verse": "وَيَسْـَٔلُونَكَ عَنْ ذِي الْقَرْنَيْنِۜ قُلْ سَاَتْلُوا عَلَيْكُمْ مِنْهُ ذِكْراًۜ",
+          "transcription": "Ve yes'eluneke an zil karneyn, kul se etlu aleykum minhu zikra.",
+          "translation": "(Ey Muhammed!) Bir de sana Zülkarneyn hakkında soru soruyorlar. De ki: \"Size ondan bir anı okuyacağım.\"",
+          "start_time": null
+        },
+        {
+          "verse_number": 84,
+          "verse": "اِنَّا مَكَّنَّا لَهُ فِي الْاَرْضِ وَاٰتَيْنَاهُ مِنْ كُلِّ شَيْءٍ سَبَباًۙ",
+          "transcription": "İnna mekkenna lehu fil ardı ve ateynahu min kulli şey'in sebeba.",
+          "translation": "Biz onu yeryüzünde kudret sahibi kıldık ve kendisine her konuda (amacına ulaşabileceği) bir yol verdik.",
+          "start_time": null
+        },
+        {
+          "verse_number": 85,
+          "verse": "فَاَتْبَعَ سَبَباً",
+          "transcription": "Fe etbea sebeba.",
+          "translation": "O da (Batı'ya gitmek istedi ve) bir yol tuttu.",
+          "start_time": null
+        },
+        {
+          "verse_number": 86,
+          "verse": "حَتّٰٓى اِذَا بَلَغَ مَغْرِبَ الشَّمْسِ وَجَدَهَا تَغْرُبُ ف۪ي عَيْنٍ حَمِئَةٍ وَوَجَدَ عِنْدَهَا قَوْماًۜ قُلْنَا يَا ذَا الْقَرْنَيْنِ اِمَّٓا اَنْ تُعَذِّبَ وَاِمَّٓا اَنْ تَتَّخِذَ ف۪يهِمْ حُسْناً",
+          "transcription": "Hatta iza belega magribeş şemsi vecedeha tagrubu fi aynin hamietin ve vecede indeha kavma, kulna ya zel karneyni imma en tuazzibe ve imma en tettehıze fihim husna.",
+          "translation": "Güneşin battığı yere varınca, onu siyah balçıklı bir su gözesinde batar (gibi) buldu. Orada (kafir) bir kavim gördü. \"Ey Zülkarneyn! Ya (onları) cezalandırırsın ya da haklarında iyilik yolunu tutarsın\" dedik.",
+          "start_time": null
+        },
+        {
+          "verse_number": 87,
+          "verse": "قَالَ اَمَّا مَنْ ظَلَمَ فَسَوْفَ نُعَذِّبُهُ ثُمَّ يُرَدُّ اِلٰى رَبِّه۪ فَيُعَذِّبُهُ عَذَاباً نُكْراً",
+          "transcription": "Kale emma men zaleme fe sevfe nuazzibuhu summe yureddu ila rabbihi fe yuazzibuhu azaben nukra.",
+          "translation": "Zülkarneyn, \"Her kim zulmederse, biz onu cezalandıracağız. Sonra o Rabbine döndürülür. O da kendisini görülmedik bir azaba uğratır\" dedi.",
+          "start_time": null
+        },
+        {
+          "verse_number": 88,
+          "verse": "وَاَمَّا مَنْ اٰمَنَ وَعَمِلَ صَالِحاً فَلَهُ جَزَٓاءًۨ الْحُسْنٰىۚ وَسَنَقُولُ لَهُ مِنْ اَمْرِنَا يُسْراًۜ",
+          "transcription": "Ve emma men amene ve amile salihan fe lehu cezaenil husna ve se nekulu lehu min emrina yusra.",
+          "translation": "\"Her kim de iman eder ve salih amel işlerse, ona mükafat olarak daha güzeli var. (Üstelik) ona emrimizden kolay olanı söyleyeceğiz.\"",
+          "start_time": null
+        },
+        {
+          "verse_number": 89,
+          "verse": "ثُمَّ اَتْـبَعَ سَبَباً",
+          "transcription": "Summe etbea sebeba.",
+          "translation": "Sonra yine (doğuya doğru) bir yol tuttu.",
+          "start_time": null
+        },
+        {
+          "verse_number": 90,
+          "verse": "حَتّٰٓى اِذَا بَلَغَ مَطْلِعَ الشَّمْسِ وَجَدَهَا تَطْلُعُ عَلٰى قَوْمٍ لَمْ نَجْعَلْ لَهُمْ مِنْ دُونِهَا سِتْراًۙ",
+          "transcription": "Hatta iza belega matlıaş şemsi vecedeha tatluu ala kavmin lem nec'al lehum min duniha sitra.",
+          "translation": "Güneşin doğduğu yere ulaşınca, onu kendileriyle güneş arasına örtü koymadığımız bir halk üzerine doğar buldu.",
+          "start_time": null
+        },
+        {
+          "verse_number": 91,
+          "verse": "كَذٰلِكَۜ وَقَدْ اَحَطْنَا بِمَا لَدَيْهِ خُبْراً",
+          "transcription": "Kezalik, ve kad ehatna bima ledeyhi hubra.",
+          "translation": "İşte böyle. Şüphesiz biz onun yanındakileri ilmimizle kuşatmışızdır.",
+          "start_time": null
+        },
+        {
+          "verse_number": 92,
+          "verse": "ثُمَّ اَتْبَعَ سَبَباً",
+          "transcription": "Summe etbea sebeba.",
+          "translation": "Sonra yine bir yol tuttu.",
+          "start_time": null
+        },
+        {
+          "verse_number": 93,
+          "verse": "حَتّٰٓى اِذَا بَلَغَ بَيْنَ السَّدَّيْنِ وَجَدَ مِنْ دُونِهِمَا قَوْماًۙ لَا يَكَادُونَ يَفْقَهُونَ قَوْلاً",
+          "transcription": "Hatta iza belega beynes seddeyni vecede min dunihima kavmen la yekadune yefkahune kavla.",
+          "translation": "İki dağ arasına ulaşınca, bunların önünde, neredeyse hiçbir sözü anlamayan bir halk buldu.",
+          "start_time": null
+        },
+        {
+          "verse_number": 94,
+          "verse": "قَالُوا يَا ذَا الْقَرْنَيْنِ اِنَّ يَأْجُوجَ وَمَأْجُوجَ مُفْسِدُونَ فِي الْاَرْضِ فَهَلْ نَجْعَلُ لَكَ خَرْجاً عَلٰٓى اَنْ تَجْعَلَ بَيْنَنَا وَبَيْنَهُمْ سَداًّ",
+          "transcription": "Kalu ya zel karneyni inne ye'cuce ve me'cuce mufsidune fil ardı fe hel nec'alu leke harcen ala en tec'ale beynena ve beynehum sedda.",
+          "translation": "Dediler ki: \"Ey Zülkarneyn! Ye'cüc ve Me'cüc (adlı kavimler) yeryüzünde bozgunculuk yapmaktadırlar. Onlarla bizim aramıza bir engel yapman karşılığında sana bir vergi verelim mi?\"",
+          "start_time": null
+        },
+        {
+          "verse_number": 95,
+          "verse": "قَالَ مَا مَكَّنّ۪ي ف۪يهِ رَبّ۪ي خَيْرٌ فَاَع۪ينُون۪ي بِقُوَّةٍ اَجْعَلْ بَيْنَكُمْ وَبَيْنَهُمْ رَدْماًۙ",
+          "transcription": "Kale ma mekkenni fihi rabbi hayrun fe einuni bi kuvvetin ec'al beynekum ve beynehum redma.",
+          "translation": "Zülkarneyn, \"Rabbimin bana verdiği (imkan ve kudret, sizin vereceğiniz vergiden) daha hayırlıdır. Şimdi siz bana gücünüzle yardım edin de, sizinle onların arasına sağlam bir engel yapayım\" dedi.",
+          "start_time": null
+        },
+        {
+          "verse_number": 96,
+          "verse": "اٰتُون۪ي زُبَرَ الْحَد۪يدِۜ حَتّٰٓى اِذَا سَاوٰى بَيْنَ الصَّدَفَيْنِ قَالَ انْفُخُواۜ حَتّٰٓى اِذَا جَعَلَهُ نَاراًۙ قَالَ اٰتُون۪ٓي اُفْرِ غْ عَلَيْهِ قِطْراًۜ",
+          "transcription": "Atuni zuberel hadid, hatta iza sava beynes sadafeyni kalenfuhu, hatta iza cealehu naren kale atuni ufrig aleyhi kıtra.",
+          "translation": "\"Bana (yeterince) demir madeni getirin\" dedi. İki yamacın arasındaki boşluğu (dağlarla) bir hizaya getirince, \"körükleyin!\" dedi. Demiri eritip kor (gibi) yapınca da, \"Bana erimiş bakır getirin, bunun üzerine boşaltayım\" dedi.",
+          "start_time": null
+        },
+        {
+          "verse_number": 97,
+          "verse": "فَمَا اسْطَاعُٓوا اَنْ يَظْهَرُوهُ وَمَا اسْتَطَاعُوا لَهُ نَقْباً",
+          "transcription": "Femestau en yazheruhu ve mestetau lehu nakba.",
+          "translation": "Artık onu ne aşabildiler, ne de delebildiler.",
+          "start_time": null
+        },
+        {
+          "verse_number": 98,
+          "verse": "قَالَ هٰذَا رَحْمَةٌ مِنْ رَبّ۪يۚ فَاِذَا جَٓاءَ وَعْدُ رَبّ۪ي جَعَلَهُ دَكَّٓاءَۚ وَكَانَ وَعْدُ رَبّ۪ي حَقاًّۜ",
+          "transcription": "Kale haza rahmetun min rabbi, fe iza cae va'du rabbi cealehu dekka', ve kane va'du rabbi hakka.",
+          "translation": "Zülkarneyn, \"Bu, Rabbimin bir rahmetidir. Rabbimin vaadi (kıyametin kopma vakti) gelince onu yerle bir eder. Rabbimin vaadi gerçektir\" dedi.",
+          "start_time": null
+        },
+        {
+          "verse_number": 99,
+          "verse": "وَتَرَكْنَا بَعْضَهُمْ يَوْمَئِذٍ يَمُوجُ ف۪ي بَعْضٍ وَنُفِخَ فِي الصُّورِ فَجَمَعْنَاهُمْ جَمْعاًۙ",
+          "transcription": "Ve terakna ba'dahum yevmeizin yemucu fi ba'dın ve nufiha fis suri fe cema'nahum cem'a.",
+          "translation": "O gün biz onları bırakırız, dalga dalga birbirlerine karışırlar. Sonra sura üfürülür de onları toptan bir araya getiririz.",
+          "start_time": null
+        },
+        {
+          "verse_number": 100,
+          "verse": "وَعَرَضْنَا جَهَنَّمَ يَوْمَئِذٍ لِلْكَافِر۪ينَ عَرْضاًۙ",
+          "transcription": "Ve aradna cehenneme yevmeizin lil kafirine arda.",
+          "translation": "(100-101) O gün cehennemi; gözleri Zikr'ime (Kur'an'a) karşı perdeli olan ve onu dinleme zahmetine dahi katlanamayan kafirlerin karşısına (bütün dehşetiyle) dikeriz!",
+          "start_time": null
+        },
+        {
+          "verse_number": 101,
+          "verse": "اَلَّذ۪ينَ كَانَتْ اَعْيُنُهُمْ ف۪ي غِطَٓاءٍ عَنْ ذِكْر۪ي وَكَانُوا لَا يَسْتَط۪يعُونَ سَمْعاً۟",
+          "transcription": "Ellezine kanet a'yunuhum fi gıtain an zikri ve kanu la yestetiune sem'a.",
+          "translation": "(100-101) O gün cehennemi; gözleri Zikr'ime (Kur'an'a) karşı perdeli olan ve onu dinleme zahmetine dahi katlanamayan kafirlerin karşısına (bütün dehşetiyle) dikeriz!",
+          "start_time": null
+        },
+        {
+          "verse_number": 102,
+          "verse": "اَفَحَسِبَ الَّذ۪ينَ كَفَرُٓوا اَنْ يَتَّخِذُوا عِبَاد۪ي مِنْ دُون۪ٓي اَوْلِيَٓاءَۜ اِنَّٓا اَعْتَدْنَا جَهَنَّمَ لِلْكَافِر۪ينَ نُزُلاً",
+          "transcription": "E fe hasibellezine keferu en yettehızu ibadi min duni evliya', inna a'tedna cehenneme lil kafirine nuzula.",
+          "translation": "İnkar edenler, beni bırakıp da kullarımı dost edineceklerini mi sandılar? Biz cehennemi kafirlere konak olarak hazırladık.",
+          "start_time": null
+        },
+        {
+          "verse_number": 103,
+          "verse": "قُلْ هَلْ نُنَبِّئُكُمْ بِالْاَخْسَر۪ينَ اَعْمَالاًۜ",
+          "transcription": "Kul hel nunebbiukum bil ahserine a'mala.",
+          "translation": "(103-104) (Ey Muhammed!) De ki: \"Amelce en çok ziyana uğrayan; iyi iş yaptıklarını sandıkları halde, dünya hayatındaki çabaları kaybolup giden kimseleri size haber verelim mi?\"",
+          "start_time": null
+        },
+        {
+          "verse_number": 104,
+          "verse": "اَلَّذ۪ينَ ضَلَّ سَعْيُهُمْ فِي الْحَيٰوةِ الدُّنْيَا وَهُمْ يَحْسَبُونَ اَنَّهُمْ يُحْسِنُونَ صُنْعاً",
+          "transcription": "Ellezine dalle sa'yuhum fil hayatid dunya ve hum yahsebune ennehum yuhsinune sun'a.",
+          "translation": "(103-104) (Ey Muhammed!) De ki: \"Amelce en çok ziyana uğrayan; iyi iş yaptıklarını sandıkları halde, dünya hayatındaki çabaları kaybolup giden kimseleri size haber verelim mi?\"",
+          "start_time": null
+        },
+        {
+          "verse_number": 105,
+          "verse": "اُو۬لٰٓئِكَ الَّذ۪ينَ كَفَرُوا بِاٰيَاتِ رَبِّهِمْ وَلِقَٓائِه۪ فَحَبِطَتْ اَعْمَالُهُمْ فَلَا نُق۪يمُ لَهُمْ يَوْمَ الْقِيٰمَةِ وَزْناً",
+          "transcription": "Ulaikellezine keferu bi ayati rabbihim ve likaihi fe habitat a'maluhum fe la nukimu lehum yevmel kıyameti vezna.",
+          "translation": "Onlar, Rab'lerinin ayetlerini ve O'na kavuşacaklarını inkar eden, böylece amelleri boşa çıkan, o yüzden de kıyamet gününde amelleri için bir terazi kurmayacağımız kimselerdir.",
+          "start_time": null
+        },
+        {
+          "verse_number": 106,
+          "verse": "ذٰلِكَ جَزَٓاؤُ۬هُمْ جَهَنَّمُ بِمَا كَفَرُوا وَاتَّخَذُٓوا اٰيَات۪ي وَرُسُل۪ي هُزُواً",
+          "transcription": "Zalike cezauhum cehennemu bima keferu vettehazu ayati ve rusuli huzuva.",
+          "translation": "İşte böyle. İnkar etmeleri, ayetlerimi ve Peygamberlerimi alay konusu yapmaları yüzünden onların cezası cehennemdir.",
+          "start_time": null
+        },
+        {
+          "verse_number": 107,
+          "verse": "اِنَّ الَّذ۪ينَ اٰمَنُوا وَعَمِلُوا الصَّالِحَاتِ كَانَتْ لَهُمْ جَنَّاتُ الْفِرْدَوْسِ نُزُلاًۙ",
+          "transcription": "İnnellezine amenu ve amilus salihati kanet lehum cennatul firdevsi nuzula.",
+          "translation": "(107-108) Şüphesiz, inanıp yararlı işler yapanlara gelince, onlar için içlerinde ebedi kalacakları Firdevs cennetleri bir konaktır. Oradan ayrılmak istemezler.",
+          "start_time": null
+        },
+        {
+          "verse_number": 108,
+          "verse": "خَالِد۪ينَ ف۪يهَا لَا يَبْغُونَ عَنْهَا حِوَلاً",
+          "transcription": "Halidine fiha la yebgune anha hıvela.",
+          "translation": "(107-108) Şüphesiz, inanıp yararlı işler yapanlara gelince, onlar için içlerinde ebedi kalacakları Firdevs cennetleri bir konaktır. Oradan ayrılmak istemezler.",
+          "start_time": null
+        },
+        {
+          "verse_number": 109,
+          "verse": "قُلْ لَوْ كَانَ الْبَحْرُ مِدَاداً لِكَلِمَاتِ رَبّ۪ي لَنَفِدَ الْبَحْرُ قَبْلَ اَنْ تَنْفَدَ كَلِمَاتُ رَبّ۪ي وَلَوْ جِئْنَا بِمِثْلِه۪ مَدَداً",
+          "transcription": "Kul lev kanel bahru midaden li kelimati rabbi le nefidel bahru kable en tenfede kelimatu rabbi ve lev ci'na bi mislihi mededa.",
+          "translation": "De ki: \"Rabbimin sözlerini yazmak için denizler mürekkep olsa ve bir o kadar da ilave etsek (denizlere deniz katsak); Rabbimin sözleri tükenmeden önce denizler tükenirdi.\"",
+          "start_time": null
+        },
+        {
+          "verse_number": 110,
+          "verse": "قُلْ اِنَّـمَٓا اَنَا۬ بَشَرٌ مِثْلُكُمْ يُوحٰٓى اِلَيَّ اَنَّـمَٓا اِلٰهُكُمْ اِلٰهٌ وَاحِدٌۚ فَمَنْ كَانَ يَرْجُوا لِقَٓاءَ رَبِّه۪ فَلْيَعْمَلْ عَمَلاً صَالِحاً وَلَا يُشْرِكْ بِعِبَادَةِ رَبِّه۪ٓ اَحَداً",
+          "transcription": "Kul innema ene beşerun mislukum yuha ileyye ennema ilahukum ilahun vahid, fe men kane yercu likae rabbihi fel ya'mel amelen salihan ve la yuşrik bi ıbadeti rabbihi ehada.",
+          "translation": "De ki: \"Ben de ancak sizin gibi bir insanım. (Ne var ki) bana, 'Sizin ilah'ınız ancak bir tek ilahtır\" diye vahyolunuyor. Kim Rabbine kavuşmayı umuyorsa yararlı bir iş yapsın ve Rabbine ibadette kimseyi ortak koşmasın.\"",
+          "start_time": null
+        }
+      ]
+    }
+  ]
+}
