@@ -32,7 +32,19 @@ export async function downloadAudio(url, { onProgress, signal } = {}) {
     throw new Error("Bu tarayıcı offline indirmeyi desteklemiyor.");
   }
 
-  const response = await fetch(url, { signal });
+  let response;
+  try {
+    response = await fetch(url, { signal });
+  } catch (err) {
+    if (signal?.aborted) throw err;
+    // Ses sunucusu CORS başlığı göndermiyorsa tarayıcı isteği engeller.
+    // Dinlemek yine de çalışır (<audio> CORS istemez), yalnızca offline
+    // indirme mümkün olmaz.
+    throw new Error(
+      "Ses dosyasına erişilemedi. Sunucu tarayıcıdan indirmeye izin vermiyor olabilir; dinlemek için internet gerekir.",
+    );
+  }
+
   if (!response.ok) {
     throw new Error(`İndirme başarısız (${response.status})`);
   }

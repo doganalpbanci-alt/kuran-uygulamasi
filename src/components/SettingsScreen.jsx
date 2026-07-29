@@ -88,6 +88,26 @@ export default function SettingsScreen({ onBack, onOpenSyncPicker }) {
 
       <section className="mt-4 rounded-2xl border border-teal-600/15 p-4 dark:border-cream-200/15">
         <h2 className="text-sm font-semibold text-ink-900 dark:text-cream-100">
+          Okuma
+        </h2>
+        <label className="mt-3 flex items-center justify-between text-sm text-ink-900 dark:text-cream-100">
+          Kelime imleci
+          <input
+            type="checkbox"
+            checked={prefs.wordCursor}
+            onChange={(e) => setPrefs(updatePrefs({ wordCursor: e.target.checked }))}
+            className="h-5 w-5 accent-teal-600"
+          />
+        </label>
+        <p className="mt-1 text-xs text-ink-700/60 dark:text-cream-200/60">
+          Ses çalarken okunuşta o an okunan kelimeyi vurgular. Kelime zaman
+          damgası olmadığı için konum tahminidir; senkron modunda ayet
+          başlangıçlarını girdikçe isabet artar.
+        </p>
+      </section>
+
+      <section className="mt-4 rounded-2xl border border-teal-600/15 p-4 dark:border-cream-200/15">
+        <h2 className="text-sm font-semibold text-ink-900 dark:text-cream-100">
           Senkron modu
         </h2>
         <p className="mt-1 text-xs text-ink-700/60 dark:text-cream-200/60">

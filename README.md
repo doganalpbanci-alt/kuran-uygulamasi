@@ -22,6 +22,14 @@ Veriyi yeniden çekmek için:
 node scripts/fetch-surahs.mjs
 ```
 
+## Kelime imleci
+
+Ses çalarken aktif ayetin okunuşunda o an okunan kelime vurgulanır;
+öncesi koyu, sonrası soluk gösterilir. Kelime bazlı zaman damgası
+olmadığı için konum, ayet içindeki ilerlemeden kelime uzunluklarına göre
+tahmin edilir — bu yüzden yaklaşıktır ve aşağıdaki senkron adımı
+yapıldıkça isabeti artar. Ayarlar'dan kapatılabilir.
+
 ## Ayet-ses senkronu
 
 Sure sesleri tek parça mp3 olduğundan ayet başlangıç zamanları otomatik
@@ -45,6 +53,22 @@ Bu adım şart: `<audio>` elementi ses dosyalarını her zaman Range
 yani sadece dinlemek dosyayı offline'a almaz. İndirme, tam dosyayı
 service worker'ın okuduğu cache'e yazar; workbox'ın `rangeRequests`
 eklentisi de bu tam yanıttan Range dilimlerini servis eder.
+
+> **Bilinen kısıt:** `audio.acikkuran.com` yanıtlarında
+> `Access-Control-Allow-Origin` başlığı yok. Dinleme etkilenmez
+> (`<audio>` CORS istemez), ancak indirme `fetch()` kullandığı için
+> tarayıcı bunu engeller. Sesin de offline çalışması için mp3'leri
+> repoya alıp aynı origin'den sunmak gerekir.
+
+## GitHub Pages
+
+`.github/workflows/deploy.yml`, `main` dalına her push'ta siteyi yayınlar.
+Depo ayarlarından **Settings → Pages → Source: GitHub Actions** seçilmesi
+yeterlidir.
+
+Pages projeyi `/<depo-adı>/` altında sunduğu için build `BASE_PATH` ile
+yapılır; workflow bunu depo adından otomatik verir. Yerelde kök dizin
+kullanılır, ek bir şey gerekmez.
 
 ## Build
 

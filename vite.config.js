@@ -3,8 +3,14 @@ import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 import { VitePWA } from 'vite-plugin-pwa'
 
+// GitHub Pages projeyi alt dizinde yayınlar
+// (https://<kullanıcı>.github.io/kuran-uygulamasi/). Deploy workflow'u
+// BASE_PATH'i verir; yerel geliştirmede kök dizin kullanılır.
+const base = process.env.BASE_PATH ?? '/'
+
 // https://vite.dev/config/
 export default defineConfig({
+  base,
   plugins: [
     react(),
     tailwindcss(),
@@ -12,6 +18,8 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.svg', 'apple-touch-icon.png'],
       manifest: {
+        id: base,
+        scope: base,
         name: "Günlük Kur'an",
         short_name: "Kur'an",
         description: "Günlük Kur'an okuma alışkanlığı için offline okuma ve dinleme uygulaması.",
@@ -19,7 +27,7 @@ export default defineConfig({
         background_color: '#faf7ef',
         display: 'standalone',
         lang: 'tr',
-        start_url: '/',
+        start_url: base,
         icons: [
           { src: 'pwa-64x64.png', sizes: '64x64', type: 'image/png' },
           { src: 'pwa-192x192.png', sizes: '192x192', type: 'image/png' },

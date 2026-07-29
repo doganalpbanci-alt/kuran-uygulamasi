@@ -3,12 +3,15 @@ import { useAudioPlayer } from "../hooks/useAudioPlayer";
 import {
   computeEffectiveStartTimes,
   findActiveVerseIndex,
+  getVerseProgress,
   getVersesWithOverrides,
 } from "../lib/verses";
 import { markSurahCompleted } from "../lib/streak";
 import { clearProgress, getProgress, saveProgress } from "../lib/progress";
+import { getPrefs } from "../lib/prefs";
 import AudioPlayer from "./AudioPlayer";
 import OfflineToggle from "./OfflineToggle";
+import TrackedTranscription from "./TrackedTranscription";
 
 export default function ReadingScreen({ surah, onBack, onOpenSync }) {
   const verses = useMemo(() => getVersesWithOverrides(surah), [surah]);
@@ -38,6 +41,14 @@ export default function ReadingScreen({ surah, onBack, onOpenSync }) {
   );
 
   const activeIndex = findActiveVerseIndex(effectiveStartTimes, currentTime);
+
+  const wordCursor = getPrefs().wordCursor;
+  const verseProgress = getVerseProgress(
+    effectiveStartTimes,
+    activeIndex,
+    currentTime,
+    duration || surah.audio.duration,
+  );
 
   // Kaldığı yerden devam: metadata yüklenince kayıtlı konuma atla.
   const restoredRef = useRef(false);
@@ -153,7 +164,15 @@ export default function ReadingScreen({ surah, onBack, onOpenSync }) {
               >
                 {verse.verse_number}
               </button>
-              {verse.transcription}
+              <span>
+                <TrackedTranscription
+                  text={verse.transcription}
+                  progress={i === activeIndex ? verseProgress : 0}
+                  // Kelime imleci yalnızca aktif ayette ve ses çalarken;
+                  // durunca metin normal okunabilirliğine döner.
+                  enabled={wordCursor && i === activeIndex && isPlaying}
+                />
+              </span>
             </p>
             <p className="mt-1.5 pl-6 text-sm leading-relaxed text-ink-700/70 dark:text-cream-200/60">
               {verse.translation}

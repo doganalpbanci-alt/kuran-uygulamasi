@@ -5,6 +5,7 @@ const PREFS_KEY = "quran-app:prefs";
 const DEFAULT_PREFS = {
   lastSurahId: null,
   playbackRate: 1,
+  wordCursor: true,
   reminderEnabled: false,
   reminderTime: "20:00",
   lastNotifiedDate: null,
