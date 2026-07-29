@@ -8,6 +8,8 @@ const DEFAULT_PREFS = {
   wordCursor: true,
   // "arabic" (tilavet) veya "meal" (Türkçe meal sesi)
   audioMode: "arabic",
+  // null ise veri dosyasındaki varsayılan kari kullanılır.
+  reciterId: null,
   reminderEnabled: false,
   reminderTime: "20:00",
   lastNotifiedDate: null,

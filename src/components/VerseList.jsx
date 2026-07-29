@@ -14,6 +14,7 @@ export default function VerseList({
   verses,
   activeIndex,
   showArabic,
+  arabicWordsFor,
   arabicTimeMs,
   transcriptionProgress,
   wordCursorEnabled,
@@ -46,9 +47,9 @@ export default function VerseList({
               </button>
 
               <div className="min-w-0 flex-1">
-                {showArabic && verse.arabic?.words?.length > 0 && (
+                {showArabic && verse.arabic_words?.length > 0 && (
                   <ArabicVerse
-                    words={verse.arabic.words}
+                    words={arabicWordsFor(verse)}
                     timeMs={isActive && isPlaying ? arabicTimeMs : null}
                   />
                 )}

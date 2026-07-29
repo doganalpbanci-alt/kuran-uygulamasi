@@ -1,9 +1,10 @@
 /**
- * Ayetin Arapça metnini kelime kelime gösterir. Tilavet modunda kelime
- * zaman damgaları gerçek olduğu için (quran.com segments) vurgulanan
- * kelime tahmin değil, sesin tam olarak okuduğu kelimedir.
+ * Ayetin Arapça metnini kelime kelime gösterir. Kelime zaman damgaları
+ * gerçek olduğu için (quran.com segments) vurgulanan kelime tahmin değil,
+ * sesin tam olarak okuduğu kelimedir.
  *
- * timeMs null ise (o ayet çalmıyorsa) metin sade gösterilir.
+ * timeMs null ise (o ayet çalmıyorsa) metin sade gösterilir. Kaynakta
+ * zaman damgası olmayan kelimeler vurgulanmaz ama normal görünür.
  */
 export default function ArabicVerse({ words, timeMs }) {
   if (!words?.length) return null;

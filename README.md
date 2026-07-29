@@ -7,10 +7,13 @@ MVP kapsamı: Yasin, Mülk, Vakıa, Kehf sureleri.
 
 İki ses kaynağı var, okuma ekranından geçiş yapılır:
 
-- **Arapça tilavet** — Mishari Rashid al-Afasy, ayet başına ayrı kayıt
+- **Arapça tilavet** — 12 kari arasından seçilebilir (varsayılan Mishari
+  Rashid al-Afasy), ayet başına ayrı kayıt
   ([Quran.com API](https://api-docs.quran.foundation/)). Ayet senkronu
   kendiliğinden kesin; kelime zaman damgaları da geldiği için imleç
-  okunan kelimeyi birebir takip eder.
+  okunan kelimeyi birebir takip eder. Kari, Ayarlar'dan değiştirilir ve
+  zaman damgaları kari başına ayrı tutulduğu için imleç her karide
+  doğrudur.
 - **Türkçe meal sesi** — Diyanet İşleri meali, sure başına tek mp3
   ([Açık Kuran API](https://acikkuran.com/api)).
 
@@ -41,7 +44,9 @@ gösterilir. İki modda kaynağı farklıdır:
 
 - **Tilavet modunda kesin.** Quran.com kelime bazlı zaman damgası
   (segments) verdiği için vurgulanan kelime sesin tam olarak okuduğu
-  kelimedir. Ek bir ayar veya senkron gerekmez.
+  kelimedir. Ek bir ayar veya senkron gerekmez. Zaman damgaları her kari
+  için ayrı tutulur. Kaynakta 36.384 kelime-zamanının 172'si (%0,5) eksik;
+  o kelimeler vurgulanmadan geçilir, oynatma etkilenmez.
 - **Meal modunda tahmini.** Kelime zaman damgası olmadığından konum,
   ayet içindeki ilerlemeden kelime uzunluklarına göre kestirilir;
   aşağıdaki senkron adımı yapıldıkça isabeti artar. Ayarlar'dan

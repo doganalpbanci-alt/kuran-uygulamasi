@@ -2,14 +2,16 @@ import { useMemo, useState } from "react";
 import { getVersesWithOverrides } from "../lib/verses";
 import { getPrefs, updatePrefs } from "../lib/prefs";
 import { markSurahCompleted } from "../lib/streak";
+import { getReciter, reciterLabel } from "../lib/recitation";
 import ArabicReader from "./ArabicReader";
 import MealReader from "./MealReader";
 
 export default function ReadingScreen({ surah, onBack, onOpenSync }) {
   const verses = useMemo(() => getVersesWithOverrides(surah), [surah]);
   const [mode, setMode] = useState(() => getPrefs().audioMode);
+  const reciter = getReciter(getPrefs().reciterId);
 
-  const hasArabic = verses.some((v) => v.arabic?.url);
+  const hasArabic = verses.some((v) => v.arabic_words?.length > 0);
   const effectiveMode = hasArabic ? mode : "meal";
 
   const changeMode = (next) => {
@@ -67,9 +69,20 @@ export default function ReadingScreen({ surah, onBack, onOpenSync }) {
         </div>
       )}
 
-      {/* Mod değişince oynatıcı sıfırdan kurulsun diye key veriyoruz. */}
+      {effectiveMode === "arabic" && (
+        <p className="px-4 pt-2 text-center text-xs text-ink-700/60 dark:text-cream-200/60">
+          {reciterLabel(reciter)}
+        </p>
+      )}
+
+      {/* Mod veya kari değişince oynatıcı sıfırdan kurulsun diye key. */}
       {effectiveMode === "arabic" ? (
-        <ArabicReader key="arabic" surah={surah} verses={verses} />
+        <ArabicReader
+          key={`arabic-${reciter.id}`}
+          surah={surah}
+          verses={verses}
+          reciter={reciter}
+        />
       ) : (
         <MealReader key="meal" surah={surah} verses={verses} />
       )}

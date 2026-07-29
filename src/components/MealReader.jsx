@@ -101,6 +101,7 @@ export default function MealReader({ surah, verses }) {
         verses={verses}
         activeIndex={activeIndex}
         showArabic={false}
+        arabicWordsFor={() => []}
         arabicTimeMs={null}
         transcriptionProgress={verseProgress}
         wordCursorEnabled={wordCursor}

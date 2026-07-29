@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { getPrefs, updatePrefs } from "../lib/prefs";
+import { RECITERS, getReciter } from "../lib/recitation";
 import {
   notificationsSupported,
   requestNotificationPermission,
@@ -7,6 +8,7 @@ import {
 
 export default function SettingsScreen({ onBack, onOpenSyncPicker }) {
   const [prefs, setPrefs] = useState(getPrefs);
+  const currentReciterId = getReciter(prefs.reciterId).id;
   const [permission, setPermission] = useState(
     notificationsSupported ? Notification.permission : "unsupported",
   );
@@ -88,6 +90,54 @@ export default function SettingsScreen({ onBack, onOpenSyncPicker }) {
 
       <section className="mt-4 rounded-2xl border border-teal-600/15 p-4 dark:border-cream-200/15">
         <h2 className="text-sm font-semibold text-ink-900 dark:text-cream-100">
+          Kari (Arapça tilavet)
+        </h2>
+        <p className="mt-1 text-xs text-ink-700/60 dark:text-cream-200/60">
+          Seçilen kari tüm surelerde kullanılır. Her kariye ait ses ayrı
+          indirilir; kari değiştirirseniz offline için yeniden indirmeniz
+          gerekir.
+        </p>
+        <div className="mt-3 flex flex-col gap-1">
+          {RECITERS.map((r) => {
+            const selected = r.id === currentReciterId;
+            return (
+              <button
+                key={r.id}
+                type="button"
+                onClick={() => {
+                  setPrefs(updatePrefs({ reciterId: r.id }));
+                }}
+                aria-pressed={selected}
+                className={`flex items-center justify-between rounded-lg px-3 py-2 text-left text-sm transition ${
+                  selected
+                    ? "bg-teal-600 text-cream-50"
+                    : "text-ink-900 hover:bg-teal-600/10 dark:text-cream-100"
+                }`}
+              >
+                <span>
+                  {r.name}
+                  {r.style && (
+                    <span
+                      className={
+                        selected
+                          ? "text-cream-100/80"
+                          : "text-ink-700/50 dark:text-cream-200/50"
+                      }
+                    >
+                      {" "}
+                      — {r.style}
+                    </span>
+                  )}
+                </span>
+                {selected && <span aria-hidden="true">✓</span>}
+              </button>
+            );
+          })}
+        </div>
+      </section>
+
+      <section className="mt-4 rounded-2xl border border-teal-600/15 p-4 dark:border-cream-200/15">
+        <h2 className="text-sm font-semibold text-ink-900 dark:text-cream-100">
           Okuma
         </h2>
         <label className="mt-3 flex items-center justify-between text-sm text-ink-900 dark:text-cream-100">
@@ -100,9 +150,10 @@ export default function SettingsScreen({ onBack, onOpenSyncPicker }) {
           />
         </label>
         <p className="mt-1 text-xs text-ink-700/60 dark:text-cream-200/60">
-          Ses çalarken okunuşta o an okunan kelimeyi vurgular. Kelime zaman
-          damgası olmadığı için konum tahminidir; senkron modunda ayet
-          başlangıçlarını girdikçe isabet artar.
+          Arapça tilavette kelime vurgusu gerçek zaman damgalarından gelir ve
+          her zaman açıktır. Bu ayar yalnızca Türkçe meal sesindeki okunuş
+          imlecini kapatır — orada konum tahmin edildiği için şaşırtıcı
+          olabiliyor.
         </p>
       </section>
 

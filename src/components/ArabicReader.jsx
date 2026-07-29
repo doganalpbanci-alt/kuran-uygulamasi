@@ -2,19 +2,26 @@ import { useCallback, useEffect, useMemo, useRef } from "react";
 import { usePlaylistPlayer } from "../hooks/usePlaylistPlayer";
 import { markSurahCompleted } from "../lib/streak";
 import { clearProgress, getProgress, saveProgress } from "../lib/progress";
+import { getTimedWords, reciterLabel, verseAudioUrl } from "../lib/recitation";
 import PlaylistPlayer from "./PlaylistPlayer";
 import VerseList from "./VerseList";
 import OfflineToggle from "./OfflineToggle";
 
 /** Arapça tilavet: ayet başına ayrı mp3, kesin ayet ve kelime senkronu. */
-export default function ArabicReader({ surah, verses }) {
+export default function ArabicReader({ surah, verses, reciter }) {
   const verseRefs = useRef([]);
 
-  // Tilaveti olmayan ayet olursa listeden düşmesin diye index eşleşmesini
-  // koruyoruz; url'i olmayanı playlist atlar.
   const items = useMemo(
-    () => verses.map((v) => ({ url: v.arabic?.url })).filter((x) => x.url),
-    [verses],
+    () =>
+      verses.map((v) => ({
+        url: verseAudioUrl(reciter, surah.id, v.verse_number),
+      })),
+    [verses, reciter, surah.id],
+  );
+
+  const arabicWordsFor = useCallback(
+    (verse) => getTimedWords(verse, reciter.id),
+    [reciter.id],
   );
 
   const handleFinished = useCallback(() => {
@@ -70,13 +77,14 @@ export default function ArabicReader({ surah, verses }) {
 
       <OfflineToggle
         urls={items.map((i) => i.url)}
-        label="Tilaveti offline'a indir"
+        label={`Tilaveti offline'a indir (${reciterLabel(reciter)})`}
       />
 
       <VerseList
         verses={verses}
         activeIndex={index}
         showArabic
+        arabicWordsFor={arabicWordsFor}
         arabicTimeMs={currentTime * 1000}
         transcriptionProgress={0}
         wordCursorEnabled={false}
