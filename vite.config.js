@@ -31,17 +31,18 @@ export default defineConfig({
         globPatterns: ['**/*.{js,css,html,svg,png,ico,json}'],
         runtimeCaching: [
           {
-            // Sure sesleri büyük olduğu için önceden değil, ilk dinlemede cache'lenir.
-            urlPattern: ({ url }) => url.hostname === 'audio.acikkuran.com',
+            // Sure sesleri 13-59 MB arası; otomatik precache edilmez. Kullanıcı
+            // "Offline'a indir" dediğinde src/lib/offline.js bu cache'e tam
+            // dosyayı yazar. <audio> her zaman Range isteği attığı için
+            // rangeRequests, cache'teki tam yanıttan dilim servis edilmesini
+            // sağlar (bu olmadan offline oynatma çalışmaz).
+            urlPattern: ({ url }) => url.pathname.endsWith('.mp3'),
             handler: 'CacheFirst',
             options: {
               cacheName: 'surah-audio',
-              expiration: {
-                maxEntries: 10,
-                maxAgeSeconds: 60 * 60 * 24 * 365,
-              },
+              rangeRequests: true,
               cacheableResponse: {
-                statuses: [0, 200],
+                statuses: [200],
               },
             },
           },

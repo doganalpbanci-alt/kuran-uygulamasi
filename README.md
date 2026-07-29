@@ -31,6 +31,21 @@ damgası girilebilir. Bu değerler tarayıcının localStorage'ında saklanır v
 "Dışa aktar (JSON)" ile yedeklenebilir. Zaman damgası girilmemiş ayetler için
 uygulama sure süresine oranlayarak kaba bir tahmin kullanır.
 
+## Offline kullanım
+
+Uygulama kabuğu (arayüz, ayet metinleri, mealler) service worker ile
+precache edilir; ilk açılıştan sonra internet olmadan da çalışır.
+
+Ses dosyaları büyük olduğu için (Mülk 13 MB, Yasin 28 MB, Vakıa 15 MB,
+Kehf 59 MB) otomatik indirilmez. Okuma ekranındaki **"Offline'a indir"**
+ile sure sure indirilir; indirilen sesler "Kaldır" ile silinebilir.
+
+Bu adım şart: `<audio>` elementi ses dosyalarını her zaman Range
+(206 Partial Content) isteğiyle çeker ve kısmi yanıtlar cache'lenmez —
+yani sadece dinlemek dosyayı offline'a almaz. İndirme, tam dosyayı
+service worker'ın okuduğu cache'e yazar; workbox'ın `rangeRequests`
+eklentisi de bu tam yanıttan Range dilimlerini servis eder.
+
 ## Build
 
 ```bash
