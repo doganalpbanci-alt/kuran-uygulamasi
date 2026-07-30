@@ -9,7 +9,13 @@ import VerseList from "./VerseList";
 import OfflineToggle from "./OfflineToggle";
 
 /** Arapça tilavet: ayet başına ayrı mp3, kesin ayet ve kelime senkronu. */
-export default function ArabicReader({ surah, verses, reciter }) {
+export default function ArabicReader({
+  surah,
+  verses,
+  reciter,
+  layout,
+  translationId,
+}) {
   const verseRefs = useRef([]);
 
   const items = useMemo(
@@ -85,12 +91,11 @@ export default function ArabicReader({ surah, verses, reciter }) {
 
       <VerseList
         verses={verses}
+        layout={layout}
+        translationId={translationId}
         activeIndex={index}
-        showArabic
         arabicWordsFor={arabicWordsFor}
         arabicTimeMs={wordCursor ? currentTime * 1000 : null}
-        transcriptionProgress={0}
-        wordCursorEnabled={false}
         isPlaying={isPlaying}
         onSelectVerse={(i) => player.goTo(i, { autoplay: true })}
         verseRefs={verseRefs}

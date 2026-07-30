@@ -1,29 +1,28 @@
 import ArabicVerse from "./ArabicVerse";
-import TrackedTranscription from "./TrackedTranscription";
+import { translationText } from "../lib/translations";
 
 /**
- * Ayet listesi. İki modda da aynı bileşen kullanılır; fark, aktif ayetin
- * nasıl belirlendiği ve kelime imlecinin nereden beslendiğidir:
+ * Tilavet eşliğindeki iki sekmenin ortak ayet listesi.
  *
- *  - tilavet modunda aktif ayet zaten çalan dosyadır, kelime vurgusu
- *    gerçek zaman damgalarından gelir (arabicTimeMs).
- *  - meal modunda aktif ayet start_time'lardan hesaplanır, kelime vurgusu
- *    ayet içi ilerlemeden tahmin edilir (transcriptionProgress).
+ * layout:
+ *   "arabic-meal"    — Arapça üstte, altında seçili meal
+ *   "translit-arabic" — Arapça üstte, altında Latin okunuşu (takip için)
+ *
+ * Aktif ayet çalan dosyadır, kelime vurgusu gerçek zaman damgalarından gelir.
  */
 export default function VerseList({
   verses,
+  layout,
+  translationId,
   activeIndex,
-  showArabic,
   arabicWordsFor,
   arabicTimeMs,
-  transcriptionProgress,
-  wordCursorEnabled,
   isPlaying,
   onSelectVerse,
   verseRefs,
 }) {
   return (
-    <div className="flex-1 space-y-6 px-5 py-6">
+    <div className="flex-1 space-y-5 px-5 py-6">
       {verses.map((verse, i) => {
         const isActive = i === activeIndex;
         return (
@@ -47,30 +46,22 @@ export default function VerseList({
               </button>
 
               <div className="min-w-0 flex-1">
-                {showArabic && verse.arabic_words?.length > 0 && (
+                {verse.arabic_words?.length > 0 && (
                   <ArabicVerse
                     words={arabicWordsFor(verse)}
                     timeMs={isActive && isPlaying ? arabicTimeMs : null}
                   />
                 )}
 
-                <p
-                  className={`font-[var(--font-reading)] leading-relaxed text-ink-900 dark:text-cream-100 ${
-                    showArabic ? "mt-2 text-base" : "text-xl"
-                  }`}
-                >
-                  <TrackedTranscription
-                    text={verse.transcription}
-                    progress={isActive ? transcriptionProgress : 0}
-                    enabled={
-                      wordCursorEnabled && isActive && isPlaying && !showArabic
-                    }
-                  />
-                </p>
-
-                <p className="mt-1.5 text-sm leading-relaxed text-ink-700/70 dark:text-cream-200/60">
-                  {verse.translation}
-                </p>
+                {layout === "translit-arabic" ? (
+                  <p className="mt-2 font-[var(--font-reading)] text-base leading-relaxed text-ink-700/80 dark:text-cream-200/70">
+                    {verse.transcription}
+                  </p>
+                ) : (
+                  <p className="mt-2 font-[var(--font-reading)] text-base leading-relaxed text-ink-900 dark:text-cream-100">
+                    {translationText(verse, translationId)}
+                  </p>
+                )}
               </div>
             </div>
           </div>

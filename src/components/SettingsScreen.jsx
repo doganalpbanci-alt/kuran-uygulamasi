@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { getPrefs, updatePrefs } from "../lib/prefs";
 import { RECITERS, getReciter } from "../lib/recitation";
+import { TRANSLATIONS, getTranslation } from "../lib/translations";
 import {
   notificationsSupported,
   requestNotificationPermission,
@@ -9,6 +10,7 @@ import {
 export default function SettingsScreen({ onBack, onOpenSyncPicker }) {
   const [prefs, setPrefs] = useState(getPrefs);
   const currentReciterId = getReciter(prefs.reciterId).id;
+  const currentTranslationId = getTranslation(prefs.translationId).id;
   const [permission, setPermission] = useState(
     notificationsSupported ? Notification.permission : "unsupported",
   );
@@ -86,6 +88,36 @@ export default function SettingsScreen({ onBack, onOpenSyncPicker }) {
             </p>
           </>
         )}
+      </section>
+
+      <section className="mt-4 rounded-2xl border border-teal-600/15 p-4 dark:border-cream-200/15">
+        <h2 className="text-sm font-semibold text-ink-900 dark:text-cream-100">
+          Meal
+        </h2>
+        <p className="mt-1 text-xs text-ink-700/60 dark:text-cream-200/60">
+          Seçilen meal bütün sekmelerde kullanılır.
+        </p>
+        <div className="mt-3 flex flex-col gap-1">
+          {TRANSLATIONS.map((t) => {
+            const selected = t.id === currentTranslationId;
+            return (
+              <button
+                key={t.id}
+                type="button"
+                onClick={() => setPrefs(updatePrefs({ translationId: t.id }))}
+                aria-pressed={selected}
+                className={`flex items-center justify-between rounded-lg px-3 py-2 text-left text-sm transition ${
+                  selected
+                    ? "bg-teal-600 text-cream-50"
+                    : "text-ink-900 hover:bg-teal-600/10 dark:text-cream-100"
+                }`}
+              >
+                <span>{t.name}</span>
+                {selected && <span aria-hidden="true">✓</span>}
+              </button>
+            );
+          })}
+        </div>
       </section>
 
       <section className="mt-4 rounded-2xl border border-teal-600/15 p-4 dark:border-cream-200/15">

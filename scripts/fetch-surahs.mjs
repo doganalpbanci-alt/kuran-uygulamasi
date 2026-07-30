@@ -29,7 +29,20 @@ const OUT_FILE = path.join(
 
 // MVP kapsamındaki sureler.
 const SURAH_IDS = [36, 67, 56, 18]; // Yasin, Mülk, Vakıa, Kehf
-const PREFERRED_AUTHOR_NAME = "Diyanet İşleri";
+
+// Ayarlardan seçilebilecek mealler. Offline çalışması için hepsi
+// uygulamaya gömülüyor, o yüzden liste bilinçli olarak dar tutuldu.
+const TRANSLATION_IDS = [
+  11, // Diyanet İşleri (varsayılan)
+  14, // Elmalılı Hamdi Yazır
+  15, // Elmalılı (sadeleştirilmiş)
+  6, // Ali Bulaç
+  22, // Muhammed Esed
+  27, // Süleyman Ateş
+  26, // Suat Yıldırım
+  30, // Yaşar Nuri Öztürk
+];
+const DEFAULT_TRANSLATION_ID = 11;
 
 async function fetchJson(url) {
   const res = await fetch(url);
@@ -40,30 +53,20 @@ async function fetchJson(url) {
   return body.data;
 }
 
-async function findAuthorId() {
+/** Seçilen meal id'lerini isimleriyle birlikte doğrular. */
+async function fetchTranslations() {
   const authors = await fetchJson(`${API_BASE}/authors`);
-  const preferred = authors.find((a) => a.name === PREFERRED_AUTHOR_NAME);
-  if (preferred) return preferred.id;
-
-  const fallback = authors.find((a) => a.language === "tr");
-  if (fallback) {
-    console.warn(
-      `"${PREFERRED_AUTHOR_NAME}" bulunamadı, yerine "${fallback.name}" kullanılıyor.`,
-    );
-    return fallback.id;
+  const out = [];
+  for (const id of TRANSLATION_IDS) {
+    const found = authors.find((a) => a.id === id);
+    if (!found) {
+      console.warn(`  atlandı: meal id ${id} bulunamadı`);
+      continue;
+    }
+    out.push({ id: found.id, name: found.name });
   }
-
-  throw new Error("Türkçe meal yazarı bulunamadı.");
-}
-
-function mapVerse(raw) {
-  return {
-    verse_number: raw.verse_number,
-    verse: raw.verse,
-    transcription: raw.transcription,
-    translation: raw.translation.text,
-    start_time: null,
-  };
+  if (out.length === 0) throw new Error("Hiç meal bulunamadı.");
+  return out;
 }
 
 async function fetchQuranJson(url) {
@@ -144,27 +147,51 @@ function audioBaseFrom(sampleUrl) {
   return absolute.replace(/\d{6}\.mp3$/, "");
 }
 
-async function fetchSurah(id, authorId, reciters, bismillah) {
-  const raw = await fetchJson(`${API_BASE}/surah/${id}?author=${authorId}`);
+async function fetchSurah(id, translations, reciters, bismillah) {
+  // Her meal ayrı bir istek gerektiriyor; ilkini yapı için de kullanıyoruz.
+  const byTranslation = new Map();
+  for (const t of translations) {
+    byTranslation.set(
+      t.id,
+      await fetchJson(`${API_BASE}/surah/${id}?author=${t.id}`),
+    );
+  }
+  const raw = byTranslation.get(translations[0].id);
+
   const wordsByVerse = await fetchArabicWords(id);
 
-  // Tüm kariler için zaman damgaları.
   const timingsByReciter = new Map();
   for (const r of reciters) {
     timingsByReciter.set(r.id, await fetchTimings(r.id, id, wordsByVerse));
   }
 
-  const buildVerse = (base, verseNumber) => {
-    const words = wordsByVerse.get(verseNumber) ?? [];
+  /** Bir ayetin tüm meallerini toplar. */
+  const translationsFor = (verseNumber, isZero) => {
+    const out = {};
+    for (const t of translations) {
+      const surah = byTranslation.get(t.id);
+      const v = isZero
+        ? surah.zero
+        : surah.verses.find((x) => x.verse_number === verseNumber);
+      if (v?.translation?.text) out[t.id] = v.translation.text;
+    }
+    return out;
+  };
+
+  const buildVerse = (raw2, verseNumber, isZero = false) => {
+    const words = wordsByVerse.get(isZero ? 1 : verseNumber) ?? [];
     const timings = {};
     for (const r of reciters) {
       const t = timingsByReciter.get(r.id)?.get(verseNumber);
       if (t) timings[r.id] = t;
     }
     return {
-      ...base,
+      verse_number: verseNumber,
+      transcription: raw2.transcription,
+      translations: translationsFor(verseNumber, isZero),
       arabic_words: words.map((w) => w.text),
       timings,
+      start_time: null,
     };
   };
 
@@ -173,10 +200,10 @@ async function fetchSurah(id, authorId, reciters, bismillah) {
   // ilk satır olarak 0 numaralı ayet gibi ele alıyoruz. Sesi ve kelimeleri
   // Fatiha 1:1'den gelir.
   if (raw.zero) {
-    verses.push({ ...mapVerse(raw.zero), verse_number: 0, ...bismillah });
+    verses.push({ ...buildVerse(raw.zero, 0, true), ...bismillah });
   }
   for (const v of raw.verses) {
-    verses.push(buildVerse(mapVerse(v), v.verse_number));
+    verses.push(buildVerse(v, v.verse_number));
   }
 
   const missing = verses.filter((v) => !v.arabic_words?.length).length;
@@ -232,18 +259,19 @@ async function fetchBismillah(reciters) {
     const flat = t.get(1);
     if (flat) timings[r.id] = flat;
   }
+  // Ses adresi 0. ayet için verseAudioUrl tarafından 001001'e çevrildiğinden
+  // burada tutulmasına gerek yok.
   return {
     arabic_words: (words.get(1) ?? []).map((w) => w.text),
     timings,
-    // Besmele Fatiha'nın 1. ayeti olduğu için ses adresi 001001.
-    audio_key: "001001",
   };
 }
 
 async function main() {
-  console.log("Yazar listesi alınıyor...");
-  const authorId = await findAuthorId();
-  console.log(`Kullanılan meal yazarı id: ${authorId}`);
+  console.log("Meal listesi alınıyor...");
+  const translations = await fetchTranslations();
+  console.log(`Kullanılacak meal: ${translations.length}`);
+  for (const t of translations) console.log(`  ${t.id}: ${t.name}`);
 
   console.log("Kari listesi ve segment desteği kontrol ediliyor...");
   const reciters = await fetchReciters();
@@ -258,12 +286,12 @@ async function main() {
   const surahs = [];
   for (const id of SURAH_IDS) {
     console.log(`Sure ${id} çekiliyor...`);
-    surahs.push(await fetchSurah(id, authorId, reciters, bismillah));
+    surahs.push(await fetchSurah(id, translations, reciters, bismillah));
   }
 
   const output = {
-    author_id: authorId,
-    author_name: PREFERRED_AUTHOR_NAME,
+    translations,
+    default_translation_id: DEFAULT_TRANSLATION_ID,
     reciters,
     default_reciter_id: DEFAULT_RECITER_ID,
     fetched_at: new Date().toISOString(),

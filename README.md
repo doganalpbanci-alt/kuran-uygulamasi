@@ -5,13 +5,16 @@ Kıraat dinlerken Türkçe okunuşu ve meali eş zamanlı takip edebileceğin, o
 
 MVP kapsamı: Yasin, Mülk, Vakıa, Kehf sureleri.
 
-Sure ekranı ikiye ayrılır:
+Sure ekranı üç sekmeden oluşur:
 
-- **Okuma** — ses yok. Her ayet önce Türkçe meal, altında Arapça metin, en
-  altta Latin okunuşu.
-- **Dinleme** — aşağıdaki iki kaynaktan biri seçilir.
+- **Arapça + Meal** (varsayılan) — Arapça metin, altında seçili meal.
+  Arka planda Arapça tilavet çalar, aktif ayet ve okunan kelime vurgulanır.
+- **Okunuş** — Arapça metin, altında Latin okunuşu. Yine tilavet eşliğinde;
+  sesi takip ederek okumak için.
+- **Meal** — sadece meal, kesintisiz okuma için. Ayrıca "Meali dinle" ile
+  Türkçe meal sesi çalınabilir.
 
-Dinleme kaynakları:
+Ses kaynakları:
 
 - **Arapça tilavet** — 12 kari arasından seçilebilir (varsayılan Mishari
   Rashid al-Afasy), ayet başına ayrı kayıt
@@ -23,11 +26,30 @@ Dinleme kaynakları:
 - **Türkçe meal sesi** — sure başına tek mp3
   ([Açık Kuran API](https://acikkuran.com/api)).
 
-  > **Dikkat:** Bu kayıt, ekranda yazan Diyanet meali değildir. Açık Kuran
-  > sure başına tek bir Türkçe ses sunuyor ve `author` parametresi ne
-  > olursa olsun aynı dosyayı döndürüyor — yani ses başka bir çeviriden
-  > okunuyor. Bu yüzden bu kaynakta kelime imleci kapalıdır ve ayet
-  > vurgusu yalnızca sesin sure içindeki konumundan tahmin edilir.
+  > **Dikkat:** Bu kayıt, ekranda seçili mealin seslendirmesi değildir.
+  > Açık Kuran sure başına tek bir Türkçe ses sunuyor ve `author`
+  > parametresi ne olursa olsun aynı dosyayı döndürüyor — yani ses başka
+  > bir çeviriden okunuyor. Bu yüzden meal dinlerken metinde ayet ya da
+  > kelime vurgusu yapılmaz. Bu ses arka planda çalmaya devam eder ve
+  > kilit ekranı kontrollerini destekler (Media Session API).
+
+## Meal seçimi
+
+Ayarlar'dan 8 meal arasından seçim yapılır (Diyanet İşleri, Elmalılı
+Hamdi Yazır, Elmalılı sadeleştirilmiş, Ali Bulaç, Muhammed Esed, Süleyman
+Ateş, Suat Yıldırım, Yaşar Nuri Öztürk). Seçim bütün sekmelere uygulanır.
+Offline çalışması için hepsi uygulamaya gömülüdür; liste bu yüzden dar
+tutulmuştur — genişletmek için `scripts/fetch-surahs.mjs` içindeki
+`TRANSLATION_IDS` listesine ekleyip scripti yeniden çalıştırmak yeterli.
+
+### Birleşik ayet mealleri
+
+Bazı mealler birden çok ayeti tek cümlede çevirip aynı metni o aralıktaki
+her ayete tekrar yazıyor. Meal sekmesinde ardışık aynı metinler tek bloğa
+toplanır ve `3-7` gibi tek bir aralık etiketiyle gösterilir, metnin
+başındaki `(3-7)` öneki ayıklanır. Gruplama meale bağlıdır — Yasin'de
+Diyanet 78 blok verirken Ali Bulaç 84 blok verir — bu yüzden derleme
+anında değil, seçili meale göre çalışma anında hesaplanır.
 
 Okunuş ve meal metinleri Açık Kuran'dan, Arapça kelime metinleri
 Quran.com'dan gelir; hepsi build-time çekilip `src/data/surahs.json`

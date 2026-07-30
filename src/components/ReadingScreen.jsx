@@ -3,64 +3,32 @@ import { getVersesWithOverrides } from "../lib/verses";
 import { getPrefs, updatePrefs } from "../lib/prefs";
 import { markSurahCompleted } from "../lib/streak";
 import { getReciter, reciterLabel } from "../lib/recitation";
-import ReadingView from "./ReadingView";
+import { getTranslation } from "../lib/translations";
 import ArabicReader from "./ArabicReader";
-import MealReader from "./MealReader";
+import MealView from "./MealView";
+import MealListener from "./MealListener";
 
-const MODES = [
-  { id: "read", label: "Okuma" },
-  { id: "listen", label: "Dinleme" },
+const TABS = [
+  { id: "arabic-meal", label: "Arapça + Meal" },
+  { id: "translit", label: "Okunuş" },
+  { id: "meal", label: "Meal" },
 ];
-
-const SOURCES = [
-  { id: "arabic", label: "Arapça tilavet" },
-  { id: "meal", label: "Türkçe meal sesi" },
-];
-
-function Segmented({ options, value, onChange, ariaLabel }) {
-  return (
-    <div
-      role="group"
-      aria-label={ariaLabel}
-      className="flex rounded-full bg-teal-600/10 p-0.5 text-xs dark:bg-white/5"
-    >
-      {options.map((opt) => (
-        <button
-          key={opt.id}
-          type="button"
-          onClick={() => onChange(opt.id)}
-          aria-pressed={value === opt.id}
-          className={`flex-1 rounded-full px-3 py-1.5 font-medium transition ${
-            value === opt.id
-              ? "bg-teal-600 text-cream-50 shadow-sm"
-              : "text-teal-700 dark:text-cream-100"
-          }`}
-        >
-          {opt.label}
-        </button>
-      ))}
-    </div>
-  );
-}
 
 export default function ReadingScreen({ surah, onBack, onOpenSync }) {
   const verses = useMemo(() => getVersesWithOverrides(surah), [surah]);
-  const [mode, setMode] = useState(() => getPrefs().mode);
-  const [source, setSource] = useState(() => getPrefs().audioMode);
+  const [tab, setTab] = useState(() => getPrefs().tab);
+  const [mealAudio, setMealAudio] = useState(false);
+
   const reciter = getReciter(getPrefs().reciterId);
+  const translation = getTranslation(getPrefs().translationId);
 
-  const hasArabic = verses.some((v) => v.arabic_words?.length > 0);
-  const effectiveSource = hasArabic ? source : "meal";
-
-  const changeMode = (next) => {
-    setMode(next);
-    updatePrefs({ mode: next });
+  const changeTab = (next) => {
+    setTab(next);
+    setMealAudio(false);
+    updatePrefs({ tab: next });
   };
 
-  const changeSource = (next) => {
-    setSource(next);
-    updatePrefs({ audioMode: next });
-  };
+  const activeTab = TABS.some((t) => t.id === tab) ? tab : "arabic-meal";
 
   return (
     <div className="flex min-h-full flex-col">
@@ -85,43 +53,71 @@ export default function ReadingScreen({ surah, onBack, onOpenSync }) {
         </button>
       </div>
 
-      <div className="mx-4 mt-3">
-        <Segmented
-          options={MODES}
-          value={mode}
-          onChange={changeMode}
-          ariaLabel="Okuma veya dinleme"
-        />
+      <div
+        role="tablist"
+        aria-label="Görünüm"
+        className="mx-4 mt-3 flex rounded-full bg-teal-600/10 p-0.5 text-xs dark:bg-white/5"
+      >
+        {TABS.map((t) => (
+          <button
+            key={t.id}
+            type="button"
+            role="tab"
+            aria-selected={activeTab === t.id}
+            onClick={() => changeTab(t.id)}
+            className={`flex-1 rounded-full px-3 py-1.5 font-medium transition ${
+              activeTab === t.id
+                ? "bg-teal-600 text-cream-50 shadow-sm"
+                : "text-teal-700 dark:text-cream-100"
+            }`}
+          >
+            {t.label}
+          </button>
+        ))}
       </div>
 
-      {mode === "listen" && hasArabic && (
-        <div className="mx-4 mt-2">
-          <Segmented
-            options={SOURCES}
-            value={effectiveSource}
-            onChange={changeSource}
-            ariaLabel="Ses kaynağı"
+      <p className="px-4 pt-2 text-center text-xs text-ink-700/60 dark:text-cream-200/60">
+        {activeTab === "meal"
+          ? translation.name
+          : `${reciterLabel(reciter)}${
+              activeTab === "arabic-meal" ? ` · ${translation.name}` : ""
+            }`}
+      </p>
+
+      {activeTab === "meal" && !mealAudio && (
+        <button
+          type="button"
+          onClick={() => setMealAudio(true)}
+          className="mx-auto mt-3 rounded-full border border-teal-600/30 px-4 py-1.5 text-xs text-teal-700 dark:border-cream-200/30 dark:text-cream-100"
+        >
+          ▶ Meali dinle
+        </button>
+      )}
+
+      {activeTab === "meal" ? (
+        mealAudio ? (
+          <MealListener
+            key="meal-listen"
+            surah={surah}
+            verses={verses}
+            translationId={translation.id}
           />
-        </div>
-      )}
-
-      {mode === "listen" && effectiveSource === "arabic" && (
-        <p className="px-4 pt-2 text-center text-xs text-ink-700/60 dark:text-cream-200/60">
-          {reciterLabel(reciter)}
-        </p>
-      )}
-
-      {mode === "read" ? (
-        <ReadingView key="read" verses={verses} />
-      ) : effectiveSource === "arabic" ? (
+        ) : (
+          <MealView
+            key="meal-read"
+            verses={verses}
+            translationId={translation.id}
+          />
+        )
+      ) : (
         <ArabicReader
-          key={`arabic-${reciter.id}`}
+          key={`${activeTab}-${reciter.id}`}
           surah={surah}
           verses={verses}
           reciter={reciter}
+          layout={activeTab === "translit" ? "translit-arabic" : "arabic-meal"}
+          translationId={translation.id}
         />
-      ) : (
-        <MealReader key="meal" surah={surah} verses={verses} />
       )}
 
       <button
