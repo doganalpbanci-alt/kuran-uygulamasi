@@ -3,6 +3,7 @@ import { usePlaylistPlayer } from "../hooks/usePlaylistPlayer";
 import { markSurahCompleted } from "../lib/streak";
 import { clearProgress, getProgress, saveProgress } from "../lib/progress";
 import { getTimedWords, reciterLabel, verseAudioUrl } from "../lib/recitation";
+import { getPrefs } from "../lib/prefs";
 import PlaylistPlayer from "./PlaylistPlayer";
 import VerseList from "./VerseList";
 import OfflineToggle from "./OfflineToggle";
@@ -23,6 +24,8 @@ export default function ArabicReader({ surah, verses, reciter }) {
     (verse) => getTimedWords(verse, reciter.id),
     [reciter.id],
   );
+
+  const wordCursor = getPrefs().wordCursor;
 
   const handleFinished = useCallback(() => {
     markSurahCompleted(surah.id);
@@ -85,7 +88,7 @@ export default function ArabicReader({ surah, verses, reciter }) {
         activeIndex={index}
         showArabic
         arabicWordsFor={arabicWordsFor}
-        arabicTimeMs={currentTime * 1000}
+        arabicTimeMs={wordCursor ? currentTime * 1000 : null}
         transcriptionProgress={0}
         wordCursorEnabled={false}
         isPlaying={isPlaying}

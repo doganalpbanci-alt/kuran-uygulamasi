@@ -6,7 +6,9 @@ const DEFAULT_PREFS = {
   lastSurahId: null,
   playbackRate: 1,
   wordCursor: true,
-  // "arabic" (tilavet) veya "meal" (Türkçe meal sesi)
+  // "read" (sessiz okuma) veya "listen" (ses eşliğinde)
+  mode: "read",
+  // Dinleme kaynağı: "arabic" (tilavet) veya "meal" (Türkçe meal sesi)
   audioMode: "arabic",
   // null ise veri dosyasındaki varsayılan kari kullanılır.
   reciterId: null,

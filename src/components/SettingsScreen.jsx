@@ -150,10 +150,9 @@ export default function SettingsScreen({ onBack, onOpenSyncPicker }) {
           />
         </label>
         <p className="mt-1 text-xs text-ink-700/60 dark:text-cream-200/60">
-          Arapça tilavette kelime vurgusu gerçek zaman damgalarından gelir ve
-          her zaman açıktır. Bu ayar yalnızca Türkçe meal sesindeki okunuş
-          imlecini kapatır — orada konum tahmin edildiği için şaşırtıcı
-          olabiliyor.
+          Tilavet dinlerken o an okunan kelimeyi vurgular. Zaman damgaları
+          gerçek olduğu için konum kesindir; sade bir metin tercih ediyorsanız
+          kapatabilirsiniz.
         </p>
       </section>
 

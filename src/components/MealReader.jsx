@@ -3,11 +3,10 @@ import { useAudioPlayer } from "../hooks/useAudioPlayer";
 import {
   computeEffectiveStartTimes,
   findActiveVerseIndex,
-  getVerseProgress,
 } from "../lib/verses";
 import { markSurahCompleted } from "../lib/streak";
 import { clearProgress, getProgress, saveProgress } from "../lib/progress";
-import { getPrefs } from "../lib/prefs";
+import { AUTHOR_NAME } from "../lib/recitation";
 import AudioPlayer from "./AudioPlayer";
 import VerseList from "./VerseList";
 import OfflineToggle from "./OfflineToggle";
@@ -32,13 +31,6 @@ export default function MealReader({ surah, verses }) {
   );
 
   const activeIndex = findActiveVerseIndex(effectiveStartTimes, currentTime);
-  const wordCursor = getPrefs().wordCursor;
-  const verseProgress = getVerseProgress(
-    effectiveStartTimes,
-    activeIndex,
-    currentTime,
-    totalDuration,
-  );
 
   const restoredRef = useRef(false);
   useEffect(() => {
@@ -95,7 +87,14 @@ export default function MealReader({ surah, verses }) {
       />
       <audio ref={audioRef} src={surah.audio.url} preload="metadata" />
 
-      <OfflineToggle urls={[surah.audio.url]} label="Meali offline'a indir" />
+      <p className="px-5 pt-3 text-xs leading-relaxed text-ink-700/60 dark:text-cream-200/50">
+        Bu ses, ekranda yazan {AUTHOR_NAME} mealinin okunuşu değildir — Açık
+        Kuran tek bir Türkçe kayıt sunuyor ve o kayıt başka bir çeviriden
+        okunuyor. Kelimeler birebir tutmaz; vurgulanan ayet de sesin sure
+        içindeki konumundan tahmin edilir.
+      </p>
+
+      <OfflineToggle urls={[surah.audio.url]} label="Meal sesini offline'a indir" />
 
       <VerseList
         verses={verses}
@@ -103,8 +102,10 @@ export default function MealReader({ surah, verses }) {
         showArabic={false}
         arabicWordsFor={() => []}
         arabicTimeMs={null}
-        transcriptionProgress={verseProgress}
-        wordCursorEnabled={wordCursor}
+        transcriptionProgress={0}
+        // Ses başka bir çeviriyi okuduğu için kelime imleci anlamsız:
+        // ekrandaki okunuş metniyle sesin kelimeleri hiç örtüşmüyor.
+        wordCursorEnabled={false}
         isPlaying={isPlaying}
         // MP3 çerçeve yuvarlaması bir önceki ayete düşürmesin diye küçük pay.
         onSelectVerse={(i) => seekTo(effectiveStartTimes[i] + 0.25)}

@@ -2,6 +2,8 @@ import data from "../data/surahs.json";
 
 export const RECITERS = data.reciters;
 export const DEFAULT_RECITER_ID = data.default_reciter_id;
+/** Ekranda gösterilen mealin yazarı (sesle karıştırılmaması için). */
+export const AUTHOR_NAME = data.author_name;
 
 export function getReciter(id) {
   return (

@@ -5,7 +5,13 @@ Kıraat dinlerken Türkçe okunuşu ve meali eş zamanlı takip edebileceğin, o
 
 MVP kapsamı: Yasin, Mülk, Vakıa, Kehf sureleri.
 
-İki ses kaynağı var, okuma ekranından geçiş yapılır:
+Sure ekranı ikiye ayrılır:
+
+- **Okuma** — ses yok. Her ayet önce Türkçe meal, altında Arapça metin, en
+  altta Latin okunuşu.
+- **Dinleme** — aşağıdaki iki kaynaktan biri seçilir.
+
+Dinleme kaynakları:
 
 - **Arapça tilavet** — 12 kari arasından seçilebilir (varsayılan Mishari
   Rashid al-Afasy), ayet başına ayrı kayıt
@@ -14,8 +20,14 @@ MVP kapsamı: Yasin, Mülk, Vakıa, Kehf sureleri.
   okunan kelimeyi birebir takip eder. Kari, Ayarlar'dan değiştirilir ve
   zaman damgaları kari başına ayrı tutulduğu için imleç her karide
   doğrudur.
-- **Türkçe meal sesi** — Diyanet İşleri meali, sure başına tek mp3
+- **Türkçe meal sesi** — sure başına tek mp3
   ([Açık Kuran API](https://acikkuran.com/api)).
+
+  > **Dikkat:** Bu kayıt, ekranda yazan Diyanet meali değildir. Açık Kuran
+  > sure başına tek bir Türkçe ses sunuyor ve `author` parametresi ne
+  > olursa olsun aynı dosyayı döndürüyor — yani ses başka bir çeviriden
+  > okunuyor. Bu yüzden bu kaynakta kelime imleci kapalıdır ve ayet
+  > vurgusu yalnızca sesin sure içindeki konumundan tahmin edilir.
 
 Okunuş ve meal metinleri Açık Kuran'dan, Arapça kelime metinleri
 Quran.com'dan gelir; hepsi build-time çekilip `src/data/surahs.json`

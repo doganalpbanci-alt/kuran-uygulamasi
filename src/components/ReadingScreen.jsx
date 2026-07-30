@@ -3,19 +3,62 @@ import { getVersesWithOverrides } from "../lib/verses";
 import { getPrefs, updatePrefs } from "../lib/prefs";
 import { markSurahCompleted } from "../lib/streak";
 import { getReciter, reciterLabel } from "../lib/recitation";
+import ReadingView from "./ReadingView";
 import ArabicReader from "./ArabicReader";
 import MealReader from "./MealReader";
 
+const MODES = [
+  { id: "read", label: "Okuma" },
+  { id: "listen", label: "Dinleme" },
+];
+
+const SOURCES = [
+  { id: "arabic", label: "Arapça tilavet" },
+  { id: "meal", label: "Türkçe meal sesi" },
+];
+
+function Segmented({ options, value, onChange, ariaLabel }) {
+  return (
+    <div
+      role="group"
+      aria-label={ariaLabel}
+      className="flex rounded-full bg-teal-600/10 p-0.5 text-xs dark:bg-white/5"
+    >
+      {options.map((opt) => (
+        <button
+          key={opt.id}
+          type="button"
+          onClick={() => onChange(opt.id)}
+          aria-pressed={value === opt.id}
+          className={`flex-1 rounded-full px-3 py-1.5 font-medium transition ${
+            value === opt.id
+              ? "bg-teal-600 text-cream-50 shadow-sm"
+              : "text-teal-700 dark:text-cream-100"
+          }`}
+        >
+          {opt.label}
+        </button>
+      ))}
+    </div>
+  );
+}
+
 export default function ReadingScreen({ surah, onBack, onOpenSync }) {
   const verses = useMemo(() => getVersesWithOverrides(surah), [surah]);
-  const [mode, setMode] = useState(() => getPrefs().audioMode);
+  const [mode, setMode] = useState(() => getPrefs().mode);
+  const [source, setSource] = useState(() => getPrefs().audioMode);
   const reciter = getReciter(getPrefs().reciterId);
 
   const hasArabic = verses.some((v) => v.arabic_words?.length > 0);
-  const effectiveMode = hasArabic ? mode : "meal";
+  const effectiveSource = hasArabic ? source : "meal";
 
   const changeMode = (next) => {
     setMode(next);
+    updatePrefs({ mode: next });
+  };
+
+  const changeSource = (next) => {
+    setSource(next);
     updatePrefs({ audioMode: next });
   };
 
@@ -42,41 +85,35 @@ export default function ReadingScreen({ surah, onBack, onOpenSync }) {
         </button>
       </div>
 
-      {hasArabic && (
-        <div
-          role="group"
-          aria-label="Ses kaynağı"
-          className="mx-4 mt-3 flex rounded-full bg-teal-600/10 p-0.5 text-xs dark:bg-white/5"
-        >
-          {[
-            { id: "arabic", label: "Arapça tilavet" },
-            { id: "meal", label: "Türkçe meal" },
-          ].map((opt) => (
-            <button
-              key={opt.id}
-              type="button"
-              onClick={() => changeMode(opt.id)}
-              aria-pressed={effectiveMode === opt.id}
-              className={`flex-1 rounded-full px-3 py-1.5 font-medium transition ${
-                effectiveMode === opt.id
-                  ? "bg-teal-600 text-cream-50 shadow-sm"
-                  : "text-teal-700 dark:text-cream-100"
-              }`}
-            >
-              {opt.label}
-            </button>
-          ))}
+      <div className="mx-4 mt-3">
+        <Segmented
+          options={MODES}
+          value={mode}
+          onChange={changeMode}
+          ariaLabel="Okuma veya dinleme"
+        />
+      </div>
+
+      {mode === "listen" && hasArabic && (
+        <div className="mx-4 mt-2">
+          <Segmented
+            options={SOURCES}
+            value={effectiveSource}
+            onChange={changeSource}
+            ariaLabel="Ses kaynağı"
+          />
         </div>
       )}
 
-      {effectiveMode === "arabic" && (
+      {mode === "listen" && effectiveSource === "arabic" && (
         <p className="px-4 pt-2 text-center text-xs text-ink-700/60 dark:text-cream-200/60">
           {reciterLabel(reciter)}
         </p>
       )}
 
-      {/* Mod veya kari değişince oynatıcı sıfırdan kurulsun diye key. */}
-      {effectiveMode === "arabic" ? (
+      {mode === "read" ? (
+        <ReadingView key="read" verses={verses} />
+      ) : effectiveSource === "arabic" ? (
         <ArabicReader
           key={`arabic-${reciter.id}`}
           surah={surah}
@@ -90,7 +127,7 @@ export default function ReadingScreen({ surah, onBack, onOpenSync }) {
       <button
         type="button"
         onClick={() => markSurahCompleted(surah.id)}
-        className="mx-auto mb-6 block rounded-full border border-teal-600/30 px-5 py-2 text-sm text-teal-700 dark:border-cream-200/30 dark:text-cream-100"
+        className="mx-auto mb-8 mt-2 block rounded-full border border-teal-600/30 px-5 py-2 text-sm text-teal-700 dark:border-cream-200/30 dark:text-cream-100"
       >
         ✓ Okudum olarak işaretle
       </button>
