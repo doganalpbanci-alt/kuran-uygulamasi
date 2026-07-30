@@ -3,7 +3,15 @@
 Kıraat dinlerken Türkçe okunuşu ve meali eş zamanlı takip edebileceğin, offline
 çalışan bir PWA. Günlük okuma alışkanlığı için basit bir streak takibi içerir.
 
-MVP kapsamı: Yasin, Mülk, Vakıa, Kehf sureleri.
+Kapsam: Yasin, Mülk, Vakıa, Kehf, Duhan sureleri ve Âmenerrasûlü
+(Bakara 285-286).
+
+Bölüm eklemek için `scripts/fetch-surahs.mjs` içindeki `ENTRIES` listesine
+`{ surah: 44 }` gibi bir kayıt eklemek yeterli. Bir surenin bir bölümü
+alınacaksa `from`/`to` verilir; bu durumda besmele satırı eklenmez ve
+Türkçe meal sesi olmaz (Açık Kuran sesi sure başına tek dosya sunuyor,
+Âmenerrasûlü için bu Bakara'nın tamamı olurdu). Arapça tilavet ayet
+başına ayrı dosya olduğundan kısmi bölümlerde de sorunsuz çalışır.
 
 Sure ekranı üç sekmeden oluşur:
 

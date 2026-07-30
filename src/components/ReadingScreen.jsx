@@ -31,7 +31,7 @@ export default function ReadingScreen({ surah, onBack, onOpenSync }) {
   const activeTab = TABS.some((t) => t.id === tab) ? tab : "arabic-meal";
   // Oynatıcı ekranın altına sabitlendiği için içeriğin son satırı onun
   // altında kalmasın diye boşluk bırakıyoruz.
-  const hasPlayer = activeTab !== "meal" || mealAudio;
+  const hasPlayer = activeTab !== "meal" || (mealAudio && Boolean(surah.audio));
 
   return (
     <div
@@ -91,7 +91,9 @@ export default function ReadingScreen({ surah, onBack, onOpenSync }) {
             }`}
       </p>
 
-      {activeTab === "meal" && !mealAudio && (
+      {/* Meal sesi sure başına tek dosya; sure ortasından alınan
+          bölümlerde (Âmenerrasûlü) böyle bir kayıt yok. */}
+      {activeTab === "meal" && !mealAudio && surah.audio && (
         <button
           type="button"
           onClick={() => setMealAudio(true)}
@@ -102,7 +104,7 @@ export default function ReadingScreen({ surah, onBack, onOpenSync }) {
       )}
 
       {activeTab === "meal" ? (
-        mealAudio ? (
+        mealAudio && surah.audio ? (
           <MealListener
             key="meal-listen"
             surah={surah}

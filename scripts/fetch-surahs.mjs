@@ -27,8 +27,27 @@ const OUT_FILE = path.join(
   "surahs.json",
 );
 
-// MVP kapsamındaki sureler.
-const SURAH_IDS = [36, 67, 56, 18]; // Yasin, Mülk, Vakıa, Kehf
+// Uygulamadaki bölümler. Tamamı okunan sureler için sadece `surah`
+// yeterli; bir surenin bir bölümü alınacaksa `from`/`to` verilir.
+//
+// Kısmi bölümlerde Türkçe meal sesi olmaz: Açık Kuran sesi sure başına tek
+// dosya sunuyor, Âmenerrasûlü için bu Bakara'nın tamamı olurdu. Arapça
+// tilavet ayet başına ayrı dosya olduğu için kısmi bölümlerde de çalışır.
+const ENTRIES = [
+  { surah: 36 }, // Yasin
+  { surah: 67 }, // Mülk
+  { surah: 56 }, // Vakıa
+  { surah: 18 }, // Kehf
+  { surah: 44 }, // Duhan
+  {
+    surah: 2,
+    from: 285,
+    to: 286,
+    id: "amenerrasulu",
+    name: "Âmenerrasûlü",
+    subtitle: "Bakara suresi 285-286",
+  },
+];
 
 // Ayarlardan seçilebilecek mealler. Offline çalışması için hepsi
 // uygulamaya gömülüyor, o yüzden liste bilinçli olarak dar tutuldu.
@@ -195,7 +214,9 @@ function audioBaseFrom(sampleUrl) {
   return absolute.replace(/\d{6}\.mp3$/, "");
 }
 
-async function fetchSurah(id, translations, reciters, bismillah) {
+async function fetchSurah(entry, translations, reciters, bismillah) {
+  const id = entry.surah;
+  const isPartial = entry.from != null;
   const trList = translations.filter((t) => t.lang === "tr");
   const enList = translations.filter((t) => t.lang === "en");
 
@@ -262,13 +283,16 @@ async function fetchSurah(id, translations, reciters, bismillah) {
   const verses = [];
   // "zero" alanı besmeleyi ayrı taşır (Tevbe suresi hariç); okuma akışında
   // ilk satır olarak 0 numaralı ayet gibi ele alıyoruz. Sesi ve kelimeleri
-  // Fatiha 1:1'den gelir.
-  if (raw.zero) {
+  // Fatiha 1:1'den gelir. Sure ortasından alınan bölümlerde besmele olmaz.
+  if (raw.zero && !isPartial) {
     // english yalnızca translationsFor içinde kullanılıyor, ayete yazılmaz.
     const { english: _ignored, ...bismillahVerse } = bismillah;
     verses.push({ ...buildVerse(raw.zero, 0, true), ...bismillahVerse });
   }
   for (const v of raw.verses) {
+    if (isPartial && (v.verse_number < entry.from || v.verse_number > entry.to)) {
+      continue;
+    }
     verses.push(buildVerse(v, v.verse_number));
   }
 
@@ -278,14 +302,17 @@ async function fetchSurah(id, translations, reciters, bismillah) {
   }
 
   return {
-    id: raw.id,
-    name: raw.name,
-    name_translation_tr: raw.name_translation_tr,
-    verse_count: raw.verse_count,
-    audio: {
-      url: raw.audio.mp3,
-      duration: raw.audio.duration,
-    },
+    id: entry.id ?? raw.id,
+    // Tilavet adresleri <sure3><ayet3>.mp3 kalıbından üretiliyor; kısmi
+    // bölümlerde id metinsel olduğu için kaynak sure numarası ayrı tutuluyor.
+    audio_surah: id,
+    name: entry.name ?? raw.name,
+    subtitle: entry.subtitle ?? raw.name_translation_tr,
+    verse_count: verses.filter((v) => v.verse_number > 0).length,
+    // Türkçe meal sesi yalnızca tam surelerde var.
+    audio: isPartial
+      ? null
+      : { url: raw.audio.mp3, duration: raw.audio.duration },
     verses,
   };
 }
@@ -359,9 +386,12 @@ async function main() {
   const bismillah = await fetchBismillah(reciters, translations);
 
   const surahs = [];
-  for (const id of SURAH_IDS) {
-    console.log(`Sure ${id} çekiliyor...`);
-    surahs.push(await fetchSurah(id, translations, reciters, bismillah));
+  for (const entry of ENTRIES) {
+    const label = entry.from
+      ? `Sure ${entry.surah} ayet ${entry.from}-${entry.to}`
+      : `Sure ${entry.surah}`;
+    console.log(`${label} çekiliyor...`);
+    surahs.push(await fetchSurah(entry, translations, reciters, bismillah));
   }
 
   const output = {

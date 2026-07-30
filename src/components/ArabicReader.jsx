@@ -21,9 +21,11 @@ export default function ArabicReader({
   const items = useMemo(
     () =>
       verses.map((v) => ({
-        url: verseAudioUrl(reciter, surah.id, v.verse_number),
+        // Kısmi bölümlerde id metinsel olduğu için kaynak sure numarası
+        // kullanılıyor (örn. Âmenerrasûlü -> Bakara).
+        url: verseAudioUrl(reciter, surah.audio_surah, v.verse_number),
       })),
-    [verses, reciter, surah.id],
+    [verses, reciter, surah.audio_surah],
   );
 
   const arabicWordsFor = useCallback(

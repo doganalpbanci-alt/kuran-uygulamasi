@@ -30,7 +30,7 @@ export default function SurahList({ surahs, onSelectSurah }) {
                   {surah.name}
                 </h2>
                 <p className="text-sm text-ink-700/70 dark:text-cream-200/70">
-                  {surah.name_translation_tr} · {surah.verse_count} ayet
+                  {surah.subtitle} · {surah.verse_count} ayet
                 </p>
               </div>
               <span className="text-xs text-teal-700 dark:text-gold-500">

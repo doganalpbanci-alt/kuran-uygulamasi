@@ -69,24 +69,38 @@ export default function SyncMode({ surah, onBack }) {
         <span className="w-10" />
       </div>
 
-      <p className="px-5 pt-2 text-xs text-ink-700/60 dark:text-cream-200/60">
-        Sesi dinlerken bir ayete geldiğinde "Bu ayet burada başlıyor" tuşuna
-        bas. {syncedCount}/{verses.length} ayet işaretlendi.
-      </p>
+      {/* Senkron yalnızca Türkçe meal sesi için anlamlı; Arapça tilavet
+          zaten ayet başına ayrı dosya olduğu için senkron gerektirmiyor. */}
+      {!surah.audio && (
+        <p className="px-5 py-6 text-sm text-ink-700/70 dark:text-cream-200/60">
+          Bu bölümün Türkçe meal sesi yok, bu yüzden senkronlanacak bir kayıt
+          da yok. Arapça tilavet ayet başına ayrı dosya olduğundan zaten
+          senkron gerektirmiyor.
+        </p>
+      )}
 
-      <AudioPlayer
-        isPlaying={isPlaying}
-        currentTime={currentTime}
-        duration={duration || surah.audio.duration}
-        playbackRate={playbackRate}
-        onTogglePlay={togglePlay}
-        onSeekBy={seekBy}
-        onSeekTo={seekTo}
-        onCycleRate={cycleRate}
-      />
-      <audio ref={audioRef} src={surah.audio.url} preload="metadata" />
+      {surah.audio && (
+        <>
+          <p className="px-5 pt-2 text-xs text-ink-700/60 dark:text-cream-200/60">
+            Sesi dinlerken bir ayete geldiğinde "Bu ayet burada başlıyor"
+            tuşuna bas. {syncedCount}/{verses.length} ayet işaretlendi.
+          </p>
 
-      <div className="px-5 py-4">
+          <AudioPlayer
+            isPlaying={isPlaying}
+            currentTime={currentTime}
+            duration={duration || surah.audio.duration}
+            playbackRate={playbackRate}
+            onTogglePlay={togglePlay}
+            onSeekBy={seekBy}
+            onSeekTo={seekTo}
+            onCycleRate={cycleRate}
+          />
+          <audio ref={audioRef} src={surah.audio.url} preload="metadata" />
+        </>
+      )}
+
+      <div className={`px-5 py-4 ${surah.audio ? "" : "hidden"}`}>
         <button
           type="button"
           onClick={markCurrentVerse}
