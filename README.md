@@ -35,21 +35,44 @@ Ses kaynakları:
 
 ## Meal seçimi
 
-Ayarlar'dan 8 meal arasından seçim yapılır (Diyanet İşleri, Elmalılı
-Hamdi Yazır, Elmalılı sadeleştirilmiş, Ali Bulaç, Muhammed Esed, Süleyman
-Ateş, Suat Yıldırım, Yaşar Nuri Öztürk). Seçim bütün sekmelere uygulanır.
-Offline çalışması için hepsi uygulamaya gömülüdür; liste bu yüzden dar
-tutulmuştur — genişletmek için `scripts/fetch-surahs.mjs` içindeki
-`TRANSLATION_IDS` listesine ekleyip scripti yeniden çalıştırmak yeterli.
+Ayarlar'dan 12 meal arasından seçim yapılır; seçim bütün sekmelere
+uygulanır.
 
-### Birleşik ayet mealleri
+- **Türkçe** (Açık Kuran): Diyanet İşleri, Elmalılı Hamdi Yazır, Elmalılı
+  (sadeleştirilmiş), Ali Bulaç, Muhammed Esed, Süleyman Ateş, Suat
+  Yıldırım, Yaşar Nuri Öztürk
+- **English** (Quran.com): Saheeh International, M.A.S. Abdel Haleem,
+  M. Pickthall, A. Yusuf Ali
+
+Offline çalışması için hepsi uygulamaya gömülüdür; liste bu yüzden dar
+tutulmuştur. Genişletmek için `scripts/fetch-surahs.mjs` içindeki
+`TR_TRANSLATION_IDS` / `EN_TRANSLATION_IDS` listelerine ekleyip scripti
+yeniden çalıştırmak yeterli.
+
+İki kaynağın id uzayları çakıştığı için (Açık Kuran'da 22 = Muhammed
+Esed, Quran.com'da 22 = A. Yusuf Ali) id'ler `tr-11`, `en-20` biçiminde
+öneklenir.
+
+### Ayet ayet çeviren mealler
 
 Bazı mealler birden çok ayeti tek cümlede çevirip aynı metni o aralıktaki
-her ayete tekrar yazıyor. Meal sekmesinde ardışık aynı metinler tek bloğa
-toplanır ve `3-7` gibi tek bir aralık etiketiyle gösterilir, metnin
-başındaki `(3-7)` öneki ayıklanır. Gruplama meale bağlıdır — Yasin'de
-Diyanet 78 blok verirken Ali Bulaç 84 blok verir — bu yüzden derleme
-anında değil, seçili meale göre çalışma anında hesaplanır.
+her ayete tekrar yazar. 4 sure genelinde:
+
+| Meal | Durum |
+|---|---|
+| Ali Bulaç, Muhammed Esed, Süleyman Ateş, Yaşar Nuri Öztürk | tamamen ayet ayet |
+| Saheeh International, Abdel Haleem, Pickthall, Yusuf Ali | tamamen ayet ayet |
+| Elmalılı (sadeleştirilmiş) | 2 grup |
+| Elmalılı Hamdi Yazır | 3 grup |
+| Suat Yıldırım | 30 grup (%20 ayet birleşik) |
+| Diyanet İşleri | 31 grup (%24 ayet birleşik) |
+
+Tilavet ve okunuş sekmelerinde meal her ayetin altında gösterilir —
+birleşik çevirilerde metin tekrar eder, bu ayet takibini kolaylaştırdığı
+için bilinçli bir tercihtir. **Meal sekmesinde** ise ardışık aynı metinler
+tek bloğa toplanır ve `3-7` gibi bir aralık etiketiyle gösterilir; metnin
+başındaki `(3-7)` öneki ayıklanır. Gruplama seçili meale göre çalışma
+anında hesaplanır (Yasin'de Diyanet 78 blok, Ali Bulaç 84 blok verir).
 
 Okunuş ve meal metinleri Açık Kuran'dan, Arapça kelime metinleri
 Quran.com'dan gelir; hepsi build-time çekilip `src/data/surahs.json`

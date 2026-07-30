@@ -97,27 +97,40 @@ export default function SettingsScreen({ onBack, onOpenSyncPicker }) {
         <p className="mt-1 text-xs text-ink-700/60 dark:text-cream-200/60">
           Seçilen meal bütün sekmelerde kullanılır.
         </p>
-        <div className="mt-3 flex flex-col gap-1">
-          {TRANSLATIONS.map((t) => {
-            const selected = t.id === currentTranslationId;
-            return (
-              <button
-                key={t.id}
-                type="button"
-                onClick={() => setPrefs(updatePrefs({ translationId: t.id }))}
-                aria-pressed={selected}
-                className={`flex items-center justify-between rounded-lg px-3 py-2 text-left text-sm transition ${
-                  selected
-                    ? "bg-teal-600 text-cream-50"
-                    : "text-ink-900 hover:bg-teal-600/10 dark:text-cream-100"
-                }`}
-              >
-                <span>{t.name}</span>
-                {selected && <span aria-hidden="true">✓</span>}
-              </button>
-            );
-          })}
-        </div>
+
+        {[
+          { lang: "tr", label: "Türkçe" },
+          { lang: "en", label: "English" },
+        ].map(({ lang, label }) => (
+          <div key={lang} className="mt-3">
+            <h3 className="mb-1 text-xs font-medium uppercase tracking-wide text-ink-700/50 dark:text-cream-200/40">
+              {label}
+            </h3>
+            <div className="flex flex-col gap-1">
+              {TRANSLATIONS.filter((t) => t.lang === lang).map((t) => {
+                const selected = t.id === currentTranslationId;
+                return (
+                  <button
+                    key={t.id}
+                    type="button"
+                    onClick={() =>
+                      setPrefs(updatePrefs({ translationId: t.id }))
+                    }
+                    aria-pressed={selected}
+                    className={`flex items-center justify-between rounded-lg px-3 py-2 text-left text-sm transition ${
+                      selected
+                        ? "bg-teal-600 text-cream-50"
+                        : "text-ink-900 hover:bg-teal-600/10 dark:text-cream-100"
+                    }`}
+                  >
+                    <span>{t.name}</span>
+                    {selected && <span aria-hidden="true">✓</span>}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        ))}
       </section>
 
       <section className="mt-4 rounded-2xl border border-teal-600/15 p-4 dark:border-cream-200/15">
