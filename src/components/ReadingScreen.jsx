@@ -29,9 +29,16 @@ export default function ReadingScreen({ surah, onBack, onOpenSync }) {
   };
 
   const activeTab = TABS.some((t) => t.id === tab) ? tab : "arabic-meal";
+  // Oynatıcı ekranın altına sabitlendiği için içeriğin son satırı onun
+  // altında kalmasın diye boşluk bırakıyoruz.
+  const hasPlayer = activeTab !== "meal" || mealAudio;
 
   return (
-    <div className="flex min-h-full flex-col">
+    <div
+      className={`flex min-h-full flex-col ${
+        hasPlayer ? "pb-[13rem]" : "pb-8"
+      }`}
+    >
       <div className="flex items-center justify-between px-4 pt-3">
         <button
           type="button"

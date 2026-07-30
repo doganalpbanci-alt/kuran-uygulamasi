@@ -25,7 +25,8 @@ export default function PlaylistPlayer({
   const progress = duration > 0 ? (currentTime / duration) * 100 : 0;
 
   return (
-    <div className="sticky top-0 z-10 border-b border-teal-700/10 bg-cream-50/95 px-4 py-3 backdrop-blur dark:border-cream-200/10 dark:bg-[#14211c]/95">
+    // Alta sabit: başparmakla durdurup okumaya devam etmek için.
+    <div className="fixed inset-x-0 bottom-0 z-20 border-t border-teal-700/10 bg-cream-50/95 px-4 pt-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))] backdrop-blur dark:border-cream-200/10 dark:bg-[#14211c]/95">
       <input
         type="range"
         min={0}

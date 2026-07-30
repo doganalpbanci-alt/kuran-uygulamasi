@@ -1,5 +1,10 @@
+import { useMemo } from "react";
 import ArabicVerse from "./ArabicVerse";
-import { translationText } from "../lib/translations";
+import {
+  groupByTranslation,
+  rangeLabel,
+  stripRangePrefix,
+} from "../lib/translations";
 
 /**
  * Tilavet eşliğindeki iki sekmenin ortak ayet listesi.
@@ -21,6 +26,22 @@ export default function VerseList({
   onSelectVerse,
   verseRefs,
 }) {
+  // Bir meal birden çok ayeti tek cümlede çevirdiğinde aynı paragraf o
+  // aralıktaki her ayette tekrar ediyor. Meali grubun ilk ayetinde bir kez
+  // gösterip aralığı etiketliyoruz; sonraki ayetlerde tekrar etmiyor.
+  const mealByIndex = useMemo(() => {
+    const map = new Map();
+    let i = 0;
+    for (const group of groupByTranslation(verses, translationId)) {
+      map.set(i, {
+        text: stripRangePrefix(group.text),
+        label: group.verses.length > 1 ? rangeLabel(group) : null,
+      });
+      i += group.verses.length;
+    }
+    return map;
+  }, [verses, translationId]);
+
   return (
     <div className="flex-1 space-y-5 px-5 py-6">
       {verses.map((verse, i) => {
@@ -53,13 +74,26 @@ export default function VerseList({
                   />
                 )}
 
-                {layout === "translit-arabic" ? (
-                  <p className="mt-2 font-[var(--font-reading)] text-base leading-relaxed text-ink-700/80 dark:text-cream-200/70">
+                {layout === "translit-arabic" && (
+                  <p className="mt-2 font-[var(--font-reading)] text-base leading-relaxed text-ink-900 dark:text-cream-100">
                     {verse.transcription}
                   </p>
-                ) : (
-                  <p className="mt-2 font-[var(--font-reading)] text-base leading-relaxed text-ink-900 dark:text-cream-100">
-                    {translationText(verse, translationId)}
+                )}
+
+                {mealByIndex.has(i) && (
+                  <p
+                    className={`font-[var(--font-reading)] leading-relaxed ${
+                      layout === "translit-arabic"
+                        ? "mt-1.5 text-sm text-ink-700/70 dark:text-cream-200/55"
+                        : "mt-2 text-base text-ink-900 dark:text-cream-100"
+                    }`}
+                  >
+                    {mealByIndex.get(i).label && (
+                      <span className="mr-1 text-xs font-medium text-teal-700/70 dark:text-gold-500/70">
+                        [{mealByIndex.get(i).label}]
+                      </span>
+                    )}
+                    {mealByIndex.get(i).text}
                   </p>
                 )}
               </div>

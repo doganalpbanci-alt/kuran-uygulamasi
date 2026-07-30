@@ -86,16 +86,6 @@ export default function MealListener({ surah, verses, translationId }) {
 
   return (
     <>
-      <AudioPlayer
-        isPlaying={isPlaying}
-        currentTime={currentTime}
-        duration={totalDuration}
-        playbackRate={player.playbackRate}
-        onTogglePlay={togglePlay}
-        onSeekBy={seekBy}
-        onSeekTo={player.seekTo}
-        onCycleRate={player.cycleRate}
-      />
       <audio ref={audioRef} src={surah.audio.url} preload="metadata" />
 
       <p className="px-5 pt-3 text-xs leading-relaxed text-ink-700/60 dark:text-cream-200/50">
@@ -121,6 +111,18 @@ export default function MealListener({ surah, verses, translationId }) {
           </section>
         ))}
       </div>
+
+      {/* Oynatıcı en sonda: ekranın altına sabitleniyor. */}
+      <AudioPlayer
+        isPlaying={isPlaying}
+        currentTime={currentTime}
+        duration={totalDuration}
+        playbackRate={player.playbackRate}
+        onTogglePlay={togglePlay}
+        onSeekBy={seekBy}
+        onSeekTo={player.seekTo}
+        onCycleRate={player.cycleRate}
+      />
     </>
   );
 }

@@ -77,11 +77,6 @@ export default function ArabicReader({
 
   return (
     <>
-      <PlaylistPlayer
-        {...player}
-        total={items.length}
-        verseNumber={verses[index]?.verse_number}
-      />
       <audio ref={player.audioRef} preload="auto" />
 
       <OfflineToggle
@@ -99,6 +94,13 @@ export default function ArabicReader({
         isPlaying={isPlaying}
         onSelectVerse={(i) => player.goTo(i, { autoplay: true })}
         verseRefs={verseRefs}
+      />
+
+      {/* Oynatıcı en sonda: ekranın altına sabitleniyor. */}
+      <PlaylistPlayer
+        {...player}
+        total={items.length}
+        verseNumber={verses[index]?.verse_number}
       />
     </>
   );
