@@ -5,6 +5,7 @@ import { getLastReadDate, markSurahCompleted } from "../lib/streak";
 import { localDateString } from "../lib/storage";
 import { continuousUrl, getReciter, reciterLabel } from "../lib/recitation";
 import { getTranslation } from "../lib/translations";
+import { useScrollDirection } from "../hooks/useScrollDirection";
 import ArabicReader from "./ArabicReader";
 import ContinuousReader from "./ContinuousReader";
 import MealView from "./MealView";
@@ -23,6 +24,7 @@ export default function ReadingScreen({ surah, onBack, onOpenSync }) {
   const [marked, setMarked] = useState(
     () => getLastReadDate(surah.id) === localDateString(),
   );
+  const headerVisible = useScrollDirection();
 
   const reciter = getReciter(getPrefs().reciterId);
   const translation = getTranslation(getPrefs().translationId);
@@ -52,7 +54,14 @@ export default function ReadingScreen({ surah, onBack, onOpenSync }) {
         hasPlayer ? "pb-[13rem]" : "pb-8"
       }`}
     >
-      <div className="flex items-center justify-between px-4 pt-3">
+      {/* Okurken yer kaplamasın diye aşağı kaydırırken gizlenir, yukarı
+          kaydırınca geri gelir — sayfanın sonundan başa dönmek için ta
+          yukarı kaydırmak gerekmesin. */}
+      <div
+        className={`sticky top-0 z-30 flex items-center justify-between border-b border-teal-700/10 bg-cream-50/95 px-4 py-3 backdrop-blur transition-transform duration-200 dark:border-cream-200/10 dark:bg-[#14211c]/95 ${
+          headerVisible ? "translate-y-0" : "-translate-y-full"
+        }`}
+      >
         <button
           type="button"
           onClick={onBack}
@@ -60,7 +69,7 @@ export default function ReadingScreen({ surah, onBack, onOpenSync }) {
         >
           ← Sureler
         </button>
-        <h1 className="text-base font-semibold text-ink-900 dark:text-cream-100">
+        <h1 className="truncate px-2 text-base font-semibold text-ink-900 dark:text-cream-100">
           {surah.name}
         </h1>
         <button
