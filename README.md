@@ -25,7 +25,19 @@ Sure ekranı üç sekmeden oluşur:
 Ses kaynakları:
 
 - **Arapça tilavet** — 12 kari arasından seçilebilir (varsayılan Mishari
-  Rashid al-Afasy), ayet başına ayrı kayıt
+  Rashid al-Afasy). Ayarlardan iki oynatma biçimi seçilir:
+
+  - **Ayet ayet** (varsayılan) — her ayet ayrı kayıt. Geçişler için iki ses
+    elementi dönüşümlü kullanılır: biri çalarken diğeri sıradaki ayeti
+    tamamen yükler, böylece ayet arası bekleme kalmaz.
+  - **Baştan sona kesintisiz** — sure tek kayıt olarak akar. Aktif ayet ve
+    okunan kelime, dosyaya göre mutlak zaman damgalarından bulunur.
+
+  Her iki biçimde de ayete dokununca o ayetin başına dönülür ve imleç
+  oraya senkronlanır. Kesintisiz kayıt yalnızca tam surelerde vardır;
+  Âmenerrasûlü gibi kısmi bölümlerde ayet ayet çalınır.
+
+  Kaynak: ayet başına kayıt
   ([Quran.com API](https://api-docs.quran.foundation/)). Ayet senkronu
   kendiliğinden kesin; kelime zaman damgaları da geldiği için imleç
   okunan kelimeyi birebir takip eder. Kari, Ayarlar'dan değiştirilir ve

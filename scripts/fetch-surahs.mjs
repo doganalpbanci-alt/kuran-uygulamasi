@@ -202,6 +202,45 @@ async function fetchTimings(reciterId, surahId, wordsByVerse) {
 }
 
 /**
+ * Sure başına tek dosya tilavet + o dosyaya göre MUTLAK ayet ve kelime
+ * zaman damgaları. Ayet ayet dosyalardaki göreli zamanlardan türetmek
+ * mümkün değil: iki kayıttaki sessizlik payları farklı, Mülk/Alafasy'de
+ * sapma 3.5 saniyeye kadar çıkıyor.
+ *
+ * Dönen yapı: { url, byVerse: Map<verseNumber, [from, to, w1s, w1e, ...]> }
+ */
+async function fetchContinuous(reciterId, surahId) {
+  const { audio_file: file } = await fetchQuranJson(
+    `${QURAN_API}/chapter_recitations/${reciterId}/${surahId}?segments=true`,
+  );
+  if (!file?.timestamps?.length) return null;
+
+  const byVerse = new Map();
+  for (const t of file.timestamps) {
+    const verseNumber = Number(t.verse_key.split(":")[1]);
+    const from = Number(t.timestamp_from);
+
+    // Mutlak milisaniyeler 6-7 haneli; ayet başına göreli + ardışık fark
+    // olarak saklayınca sayılar küçülüyor ve gzip belirgin şekilde
+    // daralıyor (177 KB -> 101 KB). Çözme lib/recitation.js içinde.
+    const out = [from, Number(t.timestamp_to) - from];
+    let prev = 0;
+    for (const seg of t.segments ?? []) {
+      // Kaynakta eksik segment olabiliyor (örn. Kehf 18:60'ta bitiş yok);
+      // o kelime sıfır uzunlukta kalır, yani hiç vurgulanmaz.
+      const s = seg.length >= 3 ? Number(seg[1]) - from : prev;
+      const e = seg.length >= 3 ? Number(seg[2]) - from : prev;
+      out.push(s - prev);
+      out.push(e - s);
+      prev = e;
+    }
+    byVerse.set(verseNumber, out);
+  }
+
+  return { url: file.audio_url, byVerse };
+}
+
+/**
  * Kari başına ses adresi şablonu. Adresler formülsel olduğu için ayet ayet
  * saklamak yerine önek tutuyoruz: önek + <sure3><ayet3>.mp3
  */
@@ -243,6 +282,22 @@ async function fetchSurah(entry, translations, reciters, bismillah) {
     timingsByReciter.set(r.id, await fetchTimings(r.id, id, wordsByVerse));
   }
 
+  // Sürekli (tek dosya) tilavet. Kısmi bölümlerde anlamsız: Âmenerrasûlü
+  // için dosya Bakara'nın tamamı olurdu.
+  const continuousByReciter = new Map();
+  const continuousAudio = {};
+  if (!isPartial) {
+    for (const r of reciters) {
+      const c = await fetchContinuous(r.id, id);
+      if (!c) {
+        console.warn(`  uyarı: kari ${r.id} için sürekli tilavet yok`);
+        continue;
+      }
+      continuousByReciter.set(r.id, c.byVerse);
+      continuousAudio[r.id] = c.url;
+    }
+  }
+
   /** Bir ayetin tüm meallerini toplar. */
   const translationsFor = (verseNumber, isZero) => {
     const out = {};
@@ -270,12 +325,20 @@ async function fetchSurah(entry, translations, reciters, bismillah) {
       const t = timingsByReciter.get(r.id)?.get(verseNumber);
       if (t) timings[r.id] = t;
     }
+    // Sürekli tilavetin mutlak zamanları (varsa).
+    const ctimings = {};
+    for (const r of reciters) {
+      const c = continuousByReciter.get(r.id)?.get(verseNumber);
+      if (c) ctimings[r.id] = c;
+    }
+
     return {
       verse_number: verseNumber,
       transcription: raw2.transcription,
       translations: translationsFor(verseNumber, isZero),
       arabic_words: words.map((w) => w.text),
       timings,
+      ctimings,
       start_time: null,
     };
   };
@@ -313,6 +376,8 @@ async function fetchSurah(entry, translations, reciters, bismillah) {
     audio: isPartial
       ? null
       : { url: raw.audio.mp3, duration: raw.audio.duration },
+    // Kari id -> sure başına tek dosya tilavet adresi.
+    continuous_audio: continuousAudio,
     verses,
   };
 }

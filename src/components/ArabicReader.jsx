@@ -79,8 +79,7 @@ export default function ArabicReader({
 
   return (
     <>
-      <audio ref={player.audioRef} preload="auto" />
-
+      {/* Ses elemanları hook içinde tutuluyor (çift tampon), DOM'da yok. */}
       <OfflineToggle
         urls={items.map((i) => i.url)}
         label={`Tilaveti offline'a indir (${reciterLabel(reciter)})`}

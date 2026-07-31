@@ -11,6 +11,9 @@ const DEFAULT_PREFS = {
   // null ise veri dosyasındaki varsayılanlar kullanılır.
   reciterId: null,
   translationId: null,
+  // Tilavet oynatma biçimi: "verse" (ayet ayet dosyalar) veya
+  // "continuous" (sure başına tek dosya, kesintisiz)
+  recitationMode: "verse",
   reminderEnabled: false,
   reminderTime: "20:00",
   lastNotifiedDate: null,

@@ -1,10 +1,12 @@
 import { useMemo, useState } from "react";
 import { getVersesWithOverrides } from "../lib/verses";
 import { getPrefs, updatePrefs } from "../lib/prefs";
-import { markSurahCompleted } from "../lib/streak";
-import { getReciter, reciterLabel } from "../lib/recitation";
+import { getLastReadDate, markSurahCompleted } from "../lib/streak";
+import { localDateString } from "../lib/storage";
+import { continuousUrl, getReciter, reciterLabel } from "../lib/recitation";
 import { getTranslation } from "../lib/translations";
 import ArabicReader from "./ArabicReader";
+import ContinuousReader from "./ContinuousReader";
 import MealView from "./MealView";
 import MealListener from "./MealListener";
 
@@ -18,9 +20,20 @@ export default function ReadingScreen({ surah, onBack, onOpenSync }) {
   const verses = useMemo(() => getVersesWithOverrides(surah), [surah]);
   const [tab, setTab] = useState(() => getPrefs().tab);
   const [mealAudio, setMealAudio] = useState(false);
+  const [marked, setMarked] = useState(
+    () => getLastReadDate(surah.id) === localDateString(),
+  );
 
   const reciter = getReciter(getPrefs().reciterId);
   const translation = getTranslation(getPrefs().translationId);
+
+  // Sürekli tilavet yalnızca tam surelerde var; Âmenerrasûlü gibi kısmi
+  // bölümlerde dosya Bakara'nın tamamı olurdu, o yüzden ayet ayet moda
+  // düşülüyor.
+  const contUrl =
+    getPrefs().recitationMode === "continuous"
+      ? continuousUrl(surah, reciter.id)
+      : null;
 
   const changeTab = (next) => {
     setTab(next);
@@ -118,6 +131,16 @@ export default function ReadingScreen({ surah, onBack, onOpenSync }) {
             translationId={translation.id}
           />
         )
+      ) : contUrl ? (
+        <ContinuousReader
+          key={`cont-${activeTab}-${reciter.id}`}
+          surah={surah}
+          verses={verses}
+          reciter={reciter}
+          url={contUrl}
+          layout={activeTab === "translit" ? "translit-arabic" : "arabic-meal"}
+          translationId={translation.id}
+        />
       ) : (
         <ArabicReader
           key={`${activeTab}-${reciter.id}`}
@@ -129,12 +152,22 @@ export default function ReadingScreen({ surah, onBack, onOpenSync }) {
         />
       )}
 
+      {/* Buton localStorage'a yazıyordu ama ekranda hiçbir şey değişmediği
+          için çalışmıyor gibi duruyordu; artık işaretlendiğini gösteriyor. */}
       <button
         type="button"
-        onClick={() => markSurahCompleted(surah.id)}
-        className="mx-auto mb-8 mt-2 block rounded-full border border-teal-600/30 px-5 py-2 text-sm text-teal-700 dark:border-cream-200/30 dark:text-cream-100"
+        onClick={() => {
+          markSurahCompleted(surah.id);
+          setMarked(true);
+        }}
+        aria-pressed={marked}
+        className={`mx-auto mb-8 mt-2 block rounded-full px-5 py-2 text-sm transition ${
+          marked
+            ? "bg-teal-600 text-cream-50"
+            : "border border-teal-600/30 text-teal-700 dark:border-cream-200/30 dark:text-cream-100"
+        }`}
       >
-        ✓ Okudum olarak işaretle
+        {marked ? "✓ Bugün okundu olarak işaretlendi" : "Okudum olarak işaretle"}
       </button>
     </div>
   );

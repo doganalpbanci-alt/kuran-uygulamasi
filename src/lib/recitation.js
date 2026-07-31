@@ -32,19 +32,54 @@ export function verseAudioUrl(reciter, surahId, verseNumber) {
  * Ayetin kelimelerini seçili karinin zaman damgalarıyla birleştirir.
  * Kaynakta zaman damgası olmayan kelimeler -1 taşır; bunları null'a
  * çevirip imlecin atlamasını sağlıyoruz.
+ *
+ * continuous=true ise sürekli (tek dosya) tilavetin mutlak zamanları
+ * kullanılır; aksi halde ayet dosyasına göreli olanlar.
  */
-export function getTimedWords(verse, reciterId) {
+export function getTimedWords(verse, reciterId, { continuous = false } = {}) {
   const words = verse.arabic_words ?? [];
-  const flat = verse.timings?.[reciterId];
+  const flat = continuous
+    ? decodeContinuous(verse.ctimings?.[reciterId])?.slice(2)
+    : verse.timings?.[reciterId];
 
   return words.map((text, i) => {
     const start = flat?.[i * 2];
     const end = flat?.[i * 2 + 1];
-    const hasTiming = start != null && start >= 0 && end >= 0;
+    // Sürekli modda eksik kelimeler sıfır uzunlukta gelir (start === end).
+    const hasTiming =
+      start != null && end != null && start >= 0 && end > start;
     return {
       text,
       start: hasTiming ? start : null,
       end: hasTiming ? end : null,
     };
   });
+}
+
+/**
+ * Sürekli tilavet zamanlarını çözer. Veri, ayet başına göreli ardışık
+ * farklar olarak saklanıyor (bkz. scripts/fetch-surahs.mjs).
+ * Dönen dizi: [ayetBaşı, ayetSonu, k1Başı, k1Sonu, k2Başı, ...] — mutlak ms.
+ */
+export function decodeContinuous(encoded) {
+  if (!encoded?.length) return null;
+  const from = encoded[0];
+  const out = [from, from + encoded[1]];
+  let prev = 0;
+  for (let i = 2; i < encoded.length; i++) {
+    prev += encoded[i];
+    out.push(from + prev);
+  }
+  return out;
+}
+
+/** Sürekli tilavette ayetin [başlangıç, bitiş] milisaniyesi. */
+export function verseSpan(verse, reciterId) {
+  const d = decodeContinuous(verse.ctimings?.[reciterId]);
+  return d ? [d[0], d[1]] : null;
+}
+
+/** Bu bölüm için seçili karinin sure bazlı tilavet adresi (yoksa null). */
+export function continuousUrl(surah, reciterId) {
+  return surah.continuous_audio?.[reciterId] ?? null;
 }

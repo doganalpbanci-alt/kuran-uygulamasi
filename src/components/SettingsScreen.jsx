@@ -135,6 +135,61 @@ export default function SettingsScreen({ onBack, onOpenSyncPicker }) {
 
       <section className="mt-4 rounded-2xl border border-teal-600/15 p-4 dark:border-cream-200/15">
         <h2 className="text-sm font-semibold text-ink-900 dark:text-cream-100">
+          Tilavet oynatma
+        </h2>
+        <div className="mt-3 flex flex-col gap-1">
+          {[
+            {
+              id: "verse",
+              label: "Ayet ayet",
+              desc: "Her ayet ayrı kayıt. Ayet tekrarı ve tek ayet dinlemek kolay.",
+            },
+            {
+              id: "continuous",
+              label: "Baştan sona kesintisiz",
+              desc: "Sure tek kayıt olarak akar, ayet geçişlerinde hiç boşluk olmaz. İmleç ve vurgu yine takip eder.",
+            },
+          ].map((opt) => {
+            const selected = prefs.recitationMode === opt.id;
+            return (
+              <button
+                key={opt.id}
+                type="button"
+                onClick={() =>
+                  setPrefs(updatePrefs({ recitationMode: opt.id }))
+                }
+                aria-pressed={selected}
+                className={`rounded-lg px-3 py-2 text-left transition ${
+                  selected
+                    ? "bg-teal-600 text-cream-50"
+                    : "text-ink-900 hover:bg-teal-600/10 dark:text-cream-100"
+                }`}
+              >
+                <span className="flex items-center justify-between text-sm">
+                  {opt.label}
+                  {selected && <span aria-hidden="true">✓</span>}
+                </span>
+                <span
+                  className={`mt-0.5 block text-xs ${
+                    selected
+                      ? "text-cream-100/80"
+                      : "text-ink-700/60 dark:text-cream-200/50"
+                  }`}
+                >
+                  {opt.desc}
+                </span>
+              </button>
+            );
+          })}
+        </div>
+        <p className="mt-2 text-xs text-ink-700/60 dark:text-cream-200/60">
+          Âmenerrasûlü gibi sure ortasından alınan bölümlerde kesintisiz kayıt
+          yok; orada ayet ayet çalınır.
+        </p>
+      </section>
+
+      <section className="mt-4 rounded-2xl border border-teal-600/15 p-4 dark:border-cream-200/15">
+        <h2 className="text-sm font-semibold text-ink-900 dark:text-cream-100">
           Kari (Arapça tilavet)
         </h2>
         <p className="mt-1 text-xs text-ink-700/60 dark:text-cream-200/60">
