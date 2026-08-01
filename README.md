@@ -31,8 +31,12 @@ Ses kaynakları:
   | Seviye | Kari | Takip |
   |---|---|---|
   | `word` | Quran.com'un 12 karisi | kelime + ayet |
-  | `verse` | everyayah'dan 10 kari (Yasser Al-Dosari, Maher Al-Muaiqly, Saad Al-Ghamdi, Al-Juhany, Al-Qatami, Jibreel, Fares Abbad, Al-Hudhaify, Ayyoub, Al-Budair) | yalnızca ayet |
+  | `verse` | everyayah'dan 11 kari (Yasser Al-Dosari, Maher Al-Muaiqly, Saad Al-Ghamdi, Al-Juhany, Al-Qatami, Jibreel, Fares Abbad, Al-Hudhaify, Ayyoub, Al-Budair, Mahmoud Ali Al-Banna) | yalnızca ayet |
   | `none` | Islam Sobhi (mp3quran) | takip yok, yalnızca dinleme |
+
+  Zaman damgası taşımayan kariler (`verse` ve `none`) veri dosyasında
+  değil `src/lib/extraReciters.js` içinde tanımlıdır — yeni bir tane
+  eklemek tek satırdır, veriyi yeniden çekmek gerekmez.
 
   `verse` seviyesinde ayet başına ayrı dosya olduğu için çalan dosya
   zaten o ayettir — vurgu ve otomatik kaydırma çalışır, kelime imleci

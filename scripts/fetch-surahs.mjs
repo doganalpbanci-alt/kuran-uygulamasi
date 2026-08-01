@@ -20,47 +20,10 @@ const VERSE_AUDIO_BASE = "https://verses.quran.com/";
 // değiştirebilir; hepsi çekilir.
 const DEFAULT_RECITER_ID = 7;
 
-// Quran.com dışı kariler. Kelime zaman damgası yalnızca Quran.com'da var,
-// bu yüzden bunlarda kelime imleci çalışmaz — `sync` alanı hangi
-// seviyede takip yapılabildiğini söyler:
-//
-//   "word"  — kelime + ayet (Quran.com'un 12 karisi)
-//   "verse" — ayet (ayet başına ayrı dosya var, çalan dosya = o ayet)
-//   "none"  — takip yok (yalnızca sure başına tek kayıt)
-//
-// everyayah adresleri Quran.com ile aynı kalıbı kullanıyor:
-// önek + <sure3><ayet3>.mp3
-const EVERYAYAH_BASE = "https://everyayah.com/data/";
-const EXTRA_RECITERS = [
-  ["ea-dosari", "Yasser Al-Dosari", "Yasser_Ad-Dussary_128kbps"],
-  ["ea-muaiqly", "Maher Al-Muaiqly", "MaherAlMuaiqly128kbps"],
-  ["ea-ghamdi", "Saad Al-Ghamdi", "Ghamadi_40kbps"],
-  ["ea-juhany", "Abdullah Al-Juhany", "Abdullaah_3awwaad_Al-Juhaynee_128kbps"],
-  ["ea-qatami", "Nasser Al-Qatami", "Nasser_Alqatami_128kbps"],
-  ["ea-jibreel", "Muhammad Jibreel", "Muhammad_Jibreel_128kbps"],
-  ["ea-abbad", "Fares Abbad", "Fares_Abbad_64kbps"],
-  ["ea-hudhaify", "Ali Al-Hudhaify", "Hudhaify_128kbps"],
-  ["ea-ayyoub", "Muhammad Ayyoub", "Muhammad_Ayyoub_128kbps"],
-  ["ea-budair", "Salah Al-Budair", "Salah_Al_Budair_128kbps"],
-].map(([id, name, folder]) => ({
-  id,
-  name,
-  style: null,
-  sync: "verse",
-  audio_base: `${EVERYAYAH_BASE}${folder}/`,
-}));
+// Zaman damgası olmayan kariler artık veri dosyasında değil,
+// src/lib/extraReciters.js içinde tanımlı — eklemek için veriyi
+// yeniden çekmeye gerek yok.
 
-// Yalnızca sure başına kaydı olan kariler. Ayet ayet bölünmüş dosyaları
-// olmadığı için takip yapılamaz; sadece dinlemek için.
-const SURAH_ONLY_RECITERS = [
-  {
-    id: "mq-sobhi",
-    name: "Islam Sobhi",
-    style: null,
-    sync: "none",
-    surah_base: "https://server14.mp3quran.net/islam/Rewayat-Hafs-A-n-Assem/",
-  },
-];
 const OUT_FILE = path.join(
   path.dirname(fileURLToPath(import.meta.url)),
   "..",
@@ -451,7 +414,7 @@ async function fetchReciters() {
       audio_base: audioBaseFrom(file.url),
     });
   }
-  return [...out, ...EXTRA_RECITERS, ...SURAH_ONLY_RECITERS];
+  return out;
 }
 
 /** Besmele (Fatiha 1:1) — her surenin 0. ayeti için. */

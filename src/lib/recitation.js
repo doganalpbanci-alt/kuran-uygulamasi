@@ -1,6 +1,12 @@
 import data from "../data/surahs.json";
+import { EXTRA_RECITERS } from "./extraReciters";
 
-export const RECITERS = data.reciters;
+// Quran.com karileri veriyle birlikte gelir (zaman damgaları onlarda),
+// zaman damgası olmayanlar koddan eklenir — bkz. extraReciters.js
+export const RECITERS = [
+  ...data.reciters.filter((r) => (r.sync ?? "word") === "word"),
+  ...EXTRA_RECITERS,
+];
 export const DEFAULT_RECITER_ID = data.default_reciter_id;
 
 export function getReciter(id) {
