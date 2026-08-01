@@ -72,10 +72,15 @@ Ses kaynakları:
   > kelime vurgusu yapılmaz. Bu ses arka planda çalmaya devam eder ve
   > kilit ekranı kontrollerini destekler (Media Session API).
 
-## Meal seçimi
+## Kari ve meal seçimi
 
-Ayarlar'dan 12 meal arasından seçim yapılır; seçim bütün sekmelere
-uygulanır.
+Sure ekranındaki ⚙ ile açılan panelden kari ve meal anında
+değiştirilebilir — ana ekrana dönüp Ayarlar'a girmeye gerek yok. Seçim
+uygulandığında panel açık kalır, böylece karileri dinleyerek
+karşılaştırmak kolaydır. Aynı listeler Ayarlar ekranında da var; ikisi
+`src/components/Pickers.jsx` içindeki ortak bileşenleri kullanır.
+
+12 meal arasından seçim yapılır; seçim bütün sekmelere uygulanır.
 
 - **Türkçe** (Açık Kuran): Diyanet İşleri, Elmalılı Hamdi Yazır, Elmalılı
   (sadeleştirilmiş), Ali Bulaç, Muhammed Esed, Süleyman Ateş, Suat

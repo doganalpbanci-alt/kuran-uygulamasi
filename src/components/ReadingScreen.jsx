@@ -15,6 +15,7 @@ import ArabicReader from "./ArabicReader";
 import ContinuousReader from "./ContinuousReader";
 import MealView from "./MealView";
 import MealListener from "./MealListener";
+import QuickSettings from "./QuickSettings";
 
 const TABS = [
   { id: "arabic-meal", label: "Arapça + Meal" },
@@ -22,7 +23,7 @@ const TABS = [
   { id: "meal", label: "Meal" },
 ];
 
-export default function ReadingScreen({ surah, onBack, onOpenSync }) {
+export default function ReadingScreen({ surah, onBack }) {
   const verses = useMemo(() => getVersesWithOverrides(surah), [surah]);
   const [tab, setTab] = useState(() => getPrefs().tab);
   const [mealAudio, setMealAudio] = useState(false);
@@ -31,8 +32,18 @@ export default function ReadingScreen({ surah, onBack, onOpenSync }) {
   );
   const headerVisible = useScrollDirection();
 
-  const reciter = getReciter(getPrefs().reciterId);
-  const translation = getTranslation(getPrefs().translationId);
+  // Kari ve meal state'te tutuluyor ki hızlı seçim panelinden değişince
+  // ekran anında yenilensin.
+  const [reciterId, setReciterId] = useState(
+    () => getReciter(getPrefs().reciterId).id,
+  );
+  const [translationId, setTranslationId] = useState(
+    () => getTranslation(getPrefs().translationId).id,
+  );
+  const [quickOpen, setQuickOpen] = useState(false);
+
+  const reciter = getReciter(reciterId);
+  const translation = getTranslation(translationId);
 
   // Sürekli tilavet yalnızca tam surelerde var; Âmenerrasûlü gibi kısmi
   // bölümlerde dosya Bakara'nın tamamı olurdu, o yüzden ayet ayet moda
@@ -84,9 +95,9 @@ export default function ReadingScreen({ surah, onBack, onOpenSync }) {
         </h1>
         <button
           type="button"
-          onClick={onOpenSync}
-          aria-label="Senkron modu"
-          className="text-sm text-ink-700/50 dark:text-cream-200/50"
+          onClick={() => setQuickOpen(true)}
+          aria-label="Kari ve meal seçimi"
+          className="text-base text-ink-700/60 dark:text-cream-200/60"
         >
           ⚙
         </button>
@@ -155,7 +166,7 @@ export default function ReadingScreen({ surah, onBack, onOpenSync }) {
           <p className="text-sm leading-relaxed text-ink-700/70 dark:text-cream-200/60">
             {reciter.name} bu bölümde kullanılamıyor: bu kariden yalnızca sure
             başına tek kayıt var, Âmenerrasûlü ise Bakara'nın içinden iki ayet.
-            Ayarlardan başka bir kari seçebilirsiniz.
+            Yukarıdaki ⚙ ile başka bir kari seçebilirsiniz.
           </p>
         </div>
       ) : contUrl ? (
@@ -196,6 +207,21 @@ export default function ReadingScreen({ surah, onBack, onOpenSync }) {
       >
         {marked ? "✓ Bugün okundu olarak işaretlendi" : "Okudum olarak işaretle"}
       </button>
+
+      <QuickSettings
+        open={quickOpen}
+        onClose={() => setQuickOpen(false)}
+        reciterId={reciter.id}
+        translationId={translation.id}
+        onReciterChange={(id) => {
+          setReciterId(id);
+          updatePrefs({ reciterId: id });
+        }}
+        onTranslationChange={(id) => {
+          setTranslationId(id);
+          updatePrefs({ translationId: id });
+        }}
+      />
     </div>
   );
 }

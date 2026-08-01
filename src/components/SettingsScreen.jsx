@@ -1,12 +1,8 @@
 import { useState } from "react";
 import { getPrefs, updatePrefs } from "../lib/prefs";
-import {
-  RECITERS,
-  SYNC_LABELS,
-  getReciter,
-  reciterSync,
-} from "../lib/recitation";
-import { TRANSLATIONS, getTranslation } from "../lib/translations";
+import { getReciter } from "../lib/recitation";
+import { getTranslation } from "../lib/translations";
+import { ReciterPicker, TranslationPicker } from "./Pickers";
 import {
   notificationsSupported,
   requestNotificationPermission,
@@ -103,39 +99,10 @@ export default function SettingsScreen({ onBack, onOpenSyncPicker }) {
           Seçilen meal bütün sekmelerde kullanılır.
         </p>
 
-        {[
-          { lang: "tr", label: "Türkçe" },
-          { lang: "en", label: "English" },
-        ].map(({ lang, label }) => (
-          <div key={lang} className="mt-3">
-            <h3 className="mb-1 text-xs font-medium uppercase tracking-wide text-ink-700/50 dark:text-cream-200/40">
-              {label}
-            </h3>
-            <div className="flex flex-col gap-1">
-              {TRANSLATIONS.filter((t) => t.lang === lang).map((t) => {
-                const selected = t.id === currentTranslationId;
-                return (
-                  <button
-                    key={t.id}
-                    type="button"
-                    onClick={() =>
-                      setPrefs(updatePrefs({ translationId: t.id }))
-                    }
-                    aria-pressed={selected}
-                    className={`flex items-center justify-between rounded-lg px-3 py-2 text-left text-sm transition ${
-                      selected
-                        ? "bg-teal-600 text-cream-50"
-                        : "text-ink-900 hover:bg-teal-600/10 dark:text-cream-100"
-                    }`}
-                  >
-                    <span>{t.name}</span>
-                    {selected && <span aria-hidden="true">✓</span>}
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-        ))}
+        <TranslationPicker
+          value={currentTranslationId}
+          onChange={(id) => setPrefs(updatePrefs({ translationId: id }))}
+        />
       </section>
 
       <section className="mt-4 rounded-2xl border border-teal-600/15 p-4 dark:border-cream-200/15">
@@ -202,54 +169,10 @@ export default function SettingsScreen({ onBack, onOpenSyncPicker }) {
           indirilir; kari değiştirirseniz offline için yeniden indirmeniz
           gerekir.
         </p>
-        {/* Takip seviyesine göre gruplu: kelime zaman damgası yalnızca
-            Quran.com karilerinde var, diğerlerinde imleç çalışmaz. */}
-        {["word", "verse", "none"].map((sync) => {
-          const group = RECITERS.filter((r) => reciterSync(r) === sync);
-          if (group.length === 0) return null;
-          return (
-            <div key={sync} className="mt-3">
-              <h3 className="mb-1 text-xs font-medium uppercase tracking-wide text-ink-700/50 dark:text-cream-200/40">
-                {SYNC_LABELS[sync]}
-              </h3>
-              <div className="flex flex-col gap-1">
-                {group.map((r) => {
-                  const selected = r.id === currentReciterId;
-                  return (
-                    <button
-                      key={r.id}
-                      type="button"
-                      onClick={() => setPrefs(updatePrefs({ reciterId: r.id }))}
-                      aria-pressed={selected}
-                      className={`flex items-center justify-between rounded-lg px-3 py-2 text-left text-sm transition ${
-                        selected
-                          ? "bg-teal-600 text-cream-50"
-                          : "text-ink-900 hover:bg-teal-600/10 dark:text-cream-100"
-                      }`}
-                    >
-                      <span>
-                        {r.name}
-                        {r.style && (
-                          <span
-                            className={
-                              selected
-                                ? "text-cream-100/80"
-                                : "text-ink-700/50 dark:text-cream-200/50"
-                            }
-                          >
-                            {" "}
-                            — {r.style}
-                          </span>
-                        )}
-                      </span>
-                      {selected && <span aria-hidden="true">✓</span>}
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
-          );
-        })}
+        <ReciterPicker
+          value={currentReciterId}
+          onChange={(id) => setPrefs(updatePrefs({ reciterId: id }))}
+        />
       </section>
 
       <section className="mt-4 rounded-2xl border border-teal-600/15 p-4 dark:border-cream-200/15">

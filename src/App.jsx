@@ -85,7 +85,6 @@ export default function App() {
       <ReadingScreen
         surah={selectedSurah}
         onBack={() => setScreen("home")}
-        onOpenSync={() => setScreen("sync")}
       />
     );
   }
