@@ -33,7 +33,12 @@ export function useContinuousPlayer({ url, verses, reciterId, onFinished }) {
 
   // Aktif ayet: zamanı kapsayan son ayet. Ayetler arası sessizlikte
   // önceki ayet aktif kalır, böylece vurgu titremez.
+  //
+  // Hiç zaman damgası yoksa (yalnızca sure kaydı olan kariler) -1 dönüyoruz:
+  // aksi halde ilk ayet sürekli vurgulu kalıp olmayan bir senkron varmış
+  // izlenimi veriyordu.
   const activeIndex = useMemo(() => {
+    if (!spans.some(Boolean)) return -1;
     let active = 0;
     for (let i = 0; i < spans.length; i++) {
       const s = spans[i];

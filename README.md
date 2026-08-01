@@ -24,8 +24,23 @@ Sure ekranı üç sekmeden oluşur:
 
 Ses kaynakları:
 
-- **Arapça tilavet** — 12 kari arasından seçilebilir (varsayılan Mishari
-  Rashid al-Afasy). Ayarlardan iki oynatma biçimi seçilir:
+- **Arapça tilavet** — 23 kari arasından seçilebilir (varsayılan Mishari
+  Rashid al-Afasy). Kariler takip seviyesine göre gruplanır, çünkü kelime
+  zaman damgasını yalnızca Quran.com veriyor:
+
+  | Seviye | Kari | Takip |
+  |---|---|---|
+  | `word` | Quran.com'un 12 karisi | kelime + ayet |
+  | `verse` | everyayah'dan 10 kari (Yasser Al-Dosari, Maher Al-Muaiqly, Saad Al-Ghamdi, Al-Juhany, Al-Qatami, Jibreel, Fares Abbad, Al-Hudhaify, Ayyoub, Al-Budair) | yalnızca ayet |
+  | `none` | Islam Sobhi (mp3quran) | takip yok, yalnızca dinleme |
+
+  `verse` seviyesinde ayet başına ayrı dosya olduğu için çalan dosya
+  zaten o ayettir — vurgu ve otomatik kaydırma çalışır, kelime imleci
+  çalışmaz. `none` seviyesinde yalnızca sure başına tek kayıt vardır;
+  hiçbir vurgu yapılmaz ve sure ortasından alınan bölümlerde (Âmenerrasûlü)
+  bu kari kullanılamaz.
+
+  Ayarlardan iki oynatma biçimi seçilir:
 
   - **Ayet ayet** (varsayılan) — her ayet ayrı kayıt. Geçişler için iki ses
     elementi dönüşümlü kullanılır: biri çalarken diğeri sıradaki ayeti

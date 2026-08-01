@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef } from "react";
 import { useContinuousPlayer } from "../hooks/useContinuousPlayer";
 import { markSurahCompleted } from "../lib/streak";
 import { clearProgress, getProgress, saveProgress } from "../lib/progress";
-import { getTimedWords, reciterLabel } from "../lib/recitation";
+import { getTimedWords, reciterLabel, reciterSync } from "../lib/recitation";
 import { getPrefs } from "../lib/prefs";
 import AudioPlayer from "./AudioPlayer";
 import VerseList from "./VerseList";
@@ -21,7 +21,8 @@ export default function ContinuousReader({
   translationId,
 }) {
   const verseRefs = useRef([]);
-  const wordCursor = getPrefs().wordCursor;
+  // Kelime imleci yalnızca kelime zaman damgası olan karilerde.
+  const wordCursor = getPrefs().wordCursor && reciterSync(reciter) === "word";
 
   const handleFinished = useCallback(() => {
     markSurahCompleted(surah.id);

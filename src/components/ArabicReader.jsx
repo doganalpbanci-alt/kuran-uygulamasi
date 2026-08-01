@@ -2,7 +2,12 @@ import { useCallback, useEffect, useMemo, useRef } from "react";
 import { usePlaylistPlayer } from "../hooks/usePlaylistPlayer";
 import { markSurahCompleted } from "../lib/streak";
 import { clearProgress, getProgress, saveProgress } from "../lib/progress";
-import { getTimedWords, reciterLabel, verseAudioUrl } from "../lib/recitation";
+import {
+  getTimedWords,
+  reciterLabel,
+  reciterSync,
+  verseAudioUrl,
+} from "../lib/recitation";
 import { getPrefs } from "../lib/prefs";
 import PlaylistPlayer from "./PlaylistPlayer";
 import VerseList from "./VerseList";
@@ -33,7 +38,8 @@ export default function ArabicReader({
     [reciter.id],
   );
 
-  const wordCursor = getPrefs().wordCursor;
+  // Kelime imleci yalnızca kelime zaman damgası olan karilerde.
+  const wordCursor = getPrefs().wordCursor && reciterSync(reciter) === "word";
 
   const handleFinished = useCallback(() => {
     markSurahCompleted(surah.id);

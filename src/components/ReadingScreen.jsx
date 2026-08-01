@@ -3,7 +3,12 @@ import { getVersesWithOverrides } from "../lib/verses";
 import { getPrefs, updatePrefs } from "../lib/prefs";
 import { getLastReadDate, markSurahCompleted } from "../lib/streak";
 import { localDateString } from "../lib/storage";
-import { continuousUrl, getReciter, reciterLabel } from "../lib/recitation";
+import {
+  continuousUrl,
+  getReciter,
+  reciterLabel,
+  reciterSync,
+} from "../lib/recitation";
 import { getTranslation } from "../lib/translations";
 import { useScrollDirection } from "../hooks/useScrollDirection";
 import ArabicReader from "./ArabicReader";
@@ -31,11 +36,14 @@ export default function ReadingScreen({ surah, onBack, onOpenSync }) {
 
   // Sürekli tilavet yalnızca tam surelerde var; Âmenerrasûlü gibi kısmi
   // bölümlerde dosya Bakara'nın tamamı olurdu, o yüzden ayet ayet moda
-  // düşülüyor.
-  const contUrl =
-    getPrefs().recitationMode === "continuous"
-      ? continuousUrl(surah, reciter.id)
-      : null;
+  // düşülüyor. Ayet ayet kaydı olmayan karilerde (sync "none") tek seçenek
+  // sürekli kayıttır, ayar ne olursa olsun.
+  const sync = reciterSync(reciter);
+  const wantsContinuous =
+    sync === "none" || getPrefs().recitationMode === "continuous";
+  const contUrl = wantsContinuous ? continuousUrl(surah, reciter.id) : null;
+  // Sadece sure kaydı olan bir kari, kısmi bölümde hiç çalınamaz.
+  const reciterUnavailable = sync === "none" && !contUrl;
 
   const changeTab = (next) => {
     setTab(next);
@@ -46,7 +54,9 @@ export default function ReadingScreen({ surah, onBack, onOpenSync }) {
   const activeTab = TABS.some((t) => t.id === tab) ? tab : "arabic-meal";
   // Oynatıcı ekranın altına sabitlendiği için içeriğin son satırı onun
   // altında kalmasın diye boşluk bırakıyoruz.
-  const hasPlayer = activeTab !== "meal" || (mealAudio && Boolean(surah.audio));
+  const hasPlayer =
+    (activeTab !== "meal" && !reciterUnavailable) ||
+    (mealAudio && Boolean(surah.audio));
 
   return (
     <div
@@ -140,6 +150,14 @@ export default function ReadingScreen({ surah, onBack, onOpenSync }) {
             translationId={translation.id}
           />
         )
+      ) : reciterUnavailable ? (
+        <div className="flex-1 px-6 py-8">
+          <p className="text-sm leading-relaxed text-ink-700/70 dark:text-cream-200/60">
+            {reciter.name} bu bölümde kullanılamıyor: bu kariden yalnızca sure
+            başına tek kayıt var, Âmenerrasûlü ise Bakara'nın içinden iki ayet.
+            Ayarlardan başka bir kari seçebilirsiniz.
+          </p>
+        </div>
       ) : contUrl ? (
         <ContinuousReader
           key={`cont-${activeTab}-${reciter.id}`}

@@ -79,7 +79,36 @@ export function verseSpan(verse, reciterId) {
   return d ? [d[0], d[1]] : null;
 }
 
-/** Bu bölüm için seçili karinin sure bazlı tilavet adresi (yoksa null). */
+/**
+ * Bu bölüm için seçili karinin sure bazlı tilavet adresi (yoksa null).
+ *
+ * Quran.com karilerinde adres veriyle birlikte gelir. Yalnızca sure kaydı
+ * olan karilerde (Islam Sobhi) adres kalıptan üretilir; kısmi bölümlerde
+ * dosya tüm sure olacağı için null döner.
+ */
 export function continuousUrl(surah, reciterId) {
-  return surah.continuous_audio?.[reciterId] ?? null;
+  const stored = surah.continuous_audio?.[reciterId];
+  if (stored) return stored;
+
+  const reciter = getReciter(reciterId);
+  if (reciter?.surah_base && surah.audio && surah.audio_surah) {
+    return `${reciter.surah_base}${pad3(surah.audio_surah)}.mp3`;
+  }
+  return null;
 }
+
+/**
+ * Karinin destekleyebildiği takip seviyesi:
+ *   "word"  — kelime imleci + ayet vurgusu
+ *   "verse" — yalnızca ayet vurgusu (kelime zaman damgası yok)
+ *   "none"  — takip yok, yalnızca sure kaydı var
+ */
+export function reciterSync(reciter) {
+  return reciter?.sync ?? "word";
+}
+
+export const SYNC_LABELS = {
+  word: "Kelime kelime takip",
+  verse: "Ayet takibi (kelime imleci yok)",
+  none: "Takipsiz — yalnızca dinleme",
+};
