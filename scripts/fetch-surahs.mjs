@@ -8,7 +8,7 @@
 //
 // Usage: node scripts/fetch-surahs.mjs
 
-import { writeFile } from "node:fs/promises";
+import { writeFile, mkdir } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 
@@ -24,13 +24,18 @@ const DEFAULT_RECITER_ID = 7;
 // src/lib/extraReciters.js içinde tanımlı — eklemek için veriyi
 // yeniden çekmeye gerek yok.
 
-const OUT_FILE = path.join(
-  path.dirname(fileURLToPath(import.meta.url)),
-  "..",
-  "src",
-  "data",
-  "surahs.json",
-);
+const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
+// Küçük ve her açılışta gereken meta veri uygulamayla birlikte paketlenir.
+const INDEX_FILE = path.join(ROOT, "src", "data", "index.json");
+// Ayet ve tefsir verisi public/ altında: paketlenmez, açıldıkça indirilir
+// ve service worker tarafından kalıcı olarak cache'lenir.
+const DATA_DIR = path.join(ROOT, "public", "data");
+
+// Tefsirler. quran.com'da Türkçe tefsir yok; İngilizce İbn Kesir blok
+// bazlı (bir kayıt birden çok ayeti kapsıyor), tam istenen biçimde.
+const TAFSIRS = [
+  { id: "en-ibn-kathir", source_id: 169, name: "Ibn Kathir (Abridged)", lang: "en" },
+];
 
 // Uygulamadaki bölümler. Tamamı okunan sureler için sadece `surah`
 // yeterli; bir surenin bir bölümü alınacaksa `from`/`to` verilir.
@@ -39,6 +44,8 @@ const OUT_FILE = path.join(
 // dosya sunuyor, Âmenerrasûlü için bu Bakara'nın tamamı olurdu. Arapça
 // tilavet ayet başına ayrı dosya olduğu için kısmi bölümlerde de çalışır.
 const ENTRIES = [
+  { surah: 96 }, // Alak  — nüzûl sırası 1
+  { surah: 68 }, // Kalem — nüzûl sırası 2
   { surah: 36 }, // Yasin
   { surah: 67 }, // Mülk
   { surah: 56 }, // Vakıa
@@ -85,6 +92,20 @@ async function fetchJson(url) {
   }
   const body = await res.json();
   return body.data;
+}
+
+/**
+ * Tefsir metni HTML olarak geliyor ve uygulamada dangerouslySetInnerHTML ile
+ * basılıyor. Çalışma anında temizlemek yerine burada bir kez arındırıyoruz:
+ * script/style/iframe blokları ve olay öznitelikleri atılıyor.
+ */
+function sanitizeHtml(html) {
+  return html
+    .replace(/<(script|style|iframe|object|embed)[\s\S]*?<\/\1>/gi, "")
+    .replace(/<\/?(script|style|iframe|object|embed)[^>]*>/gi, "")
+    .replace(/\son[a-z]+\s*=\s*("[^"]*"|'[^']*'|[^\s>]+)/gi, "")
+    .replace(/javascript:/gi, "")
+    .trim();
 }
 
 /** Quran.com çevirileri dipnotları HTML olarak gömüyor; sade metne indiriyoruz. */
@@ -390,6 +411,45 @@ async function fetchSurah(entry, translations, reciters, bismillah) {
   };
 }
 
+/**
+ * Bir bölümün tefsirini blok blok toplar.
+ *
+ * Tefsir ayet ayet değil, ayet gruplarına göre yazılıyor: 96:1 sorgusu
+ * 1-5. ayetleri birlikte kapsıyor. Bloğun kapsadığı son ayetten devam
+ * ederek aynı metni tekrar tekrar indirmemiş oluyoruz.
+ */
+async function fetchTafsir(tafsirId, entry) {
+  const first = entry.from ?? 1;
+  const last = entry.to ?? entry.verse_count;
+
+  const blocks = [];
+  let v = first;
+  while (v <= last) {
+    const url = `${QURAN_API}/tafsirs/${tafsirId}/by_ayah/${entry.surah}:${v}`;
+    let data;
+    try {
+      data = (await fetchQuranJson(url)).tafsir;
+    } catch {
+      console.warn(`  uyarı: tefsir alınamadı ${entry.surah}:${v}`);
+      break;
+    }
+
+    const covered = Object.keys(data?.verses ?? {})
+      .map((k) => Number(k.split(":")[1]))
+      .sort((a, b) => a - b);
+    const from = covered[0] ?? v;
+    const to = covered[covered.length - 1] ?? v;
+    const text = sanitizeHtml(data?.text ?? "");
+
+    // Kısmi bölümlerde blok, istenen aralığın dışına taşabilir; kırpmıyoruz
+    // ama etiketi gerçek kapsamıyla saklıyoruz ki okuyan yanılmasın.
+    if (text) blocks.push({ from, to, text });
+    v = Math.max(to + 1, v + 1);
+  }
+
+  return blocks;
+}
+
 /** Tüm karileri, ses adresi öneki ve segment desteğiyle birlikte getirir. */
 async function fetchReciters() {
   const { recitations } = await fetchQuranJson(
@@ -447,40 +507,81 @@ async function main() {
   console.log("Meal listesi alınıyor...");
   const translations = await fetchTranslations();
   console.log(`Kullanılacak meal: ${translations.length}`);
-  for (const t of translations) console.log(`  ${t.id}: ${t.name}`);
 
   console.log("Kari listesi ve segment desteği kontrol ediliyor...");
   const reciters = await fetchReciters();
   console.log(`Kullanılabilir kari: ${reciters.length}`);
-  for (const r of reciters) {
-    console.log(`  ${r.id}: ${r.name}${r.style ? ` (${r.style})` : ""}`);
-  }
+
+  console.log("Sure meta bilgileri (nüzûl sırası) alınıyor...");
+  const { chapters } = await fetchQuranJson(`${QURAN_API}/chapters`);
+  const chapterMeta = new Map(chapters.map((c) => [c.id, c]));
 
   console.log("Besmele kaydı alınıyor...");
   const bismillah = await fetchBismillah(reciters, translations);
 
-  const surahs = [];
+  await mkdir(DATA_DIR, { recursive: true });
+
+  const entries = [];
   for (const entry of ENTRIES) {
     const label = entry.from
       ? `Sure ${entry.surah} ayet ${entry.from}-${entry.to}`
       : `Sure ${entry.surah}`;
     console.log(`${label} çekiliyor...`);
-    surahs.push(await fetchSurah(entry, translations, reciters, bismillah));
+
+    const surah = await fetchSurah(entry, translations, reciters, bismillah);
+    const meta = chapterMeta.get(entry.surah);
+
+    // Ayet verisi ayrı dosyaya: uygulama açılışta hepsini indirmesin,
+    // sure açıldıkça insin ve service worker cache'lesin.
+    await writeFile(
+      path.join(DATA_DIR, `surah-${surah.id}.json`),
+      JSON.stringify({ verses: surah.verses }),
+      "utf-8",
+    );
+
+    for (const t of TAFSIRS) {
+      console.log(`  tefsir: ${t.name}`);
+      const blocks = await fetchTafsir(t.source_id, {
+        ...entry,
+        verse_count: surah.verse_count,
+      });
+      if (blocks.length === 0) continue;
+      await writeFile(
+        path.join(DATA_DIR, `tafsir-${t.id}-${surah.id}.json`),
+        JSON.stringify({ blocks }),
+        "utf-8",
+      );
+      console.log(`    ${blocks.length} blok`);
+    }
+
+    const { verses: _drop, ...rest } = surah;
+    entries.push({
+      ...rest,
+      revelation_order: meta?.revelation_order ?? null,
+      revelation_place: meta?.revelation_place ?? null,
+      // Kısmi bölümlerde tefsir bloğu aralığın dışına taşabildiği için
+      // hangi ayetleri kapsadığı ayrıca tutuluyor.
+      range: entry.from ? [entry.from, entry.to] : null,
+    });
   }
 
-  const output = {
+  const index = {
     translations,
     default_translation_id: DEFAULT_TRANSLATION_ID,
     reciters,
     default_reciter_id: DEFAULT_RECITER_ID,
+    tafsirs: TAFSIRS.map(({ source_id: _s, ...t }) => t),
+    // Sure dosyaları public/ altında olduğu için isimleri hash'lenmiyor;
+    // sürüm numarası cache'i tazelemek için sorgu dizesine ekleniyor.
+    data_version: Date.now().toString(36),
     fetched_at: new Date().toISOString(),
-    surahs,
+    entries,
   };
 
-  // Zaman damgaları çok sayıda olduğu için çıktı sıkıştırılmış yazılıyor;
-  // girintili hali dosyayı gereksiz yere iki katına çıkarıyor.
-  await writeFile(OUT_FILE, JSON.stringify(output), "utf-8");
-  console.log(`Kaydedildi: ${OUT_FILE}`);
+  await writeFile(INDEX_FILE, JSON.stringify(index), "utf-8");
+  console.log(`\nKaydedildi:`);
+  console.log(`  ${INDEX_FILE}`);
+  console.log(`  ${DATA_DIR}/surah-*.json (${entries.length} bölüm)`);
 }
 
 main().catch((err) => {

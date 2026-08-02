@@ -1,4 +1,6 @@
 import { useMemo, useState } from "react";
+import { useVerses } from "../hooks/useEntryData";
+import { TAFSIRS } from "../lib/dataStore";
 import { getVersesWithOverrides } from "../lib/verses";
 import { getPrefs, updatePrefs } from "../lib/prefs";
 import { getLastReadDate, markSurahCompleted } from "../lib/streak";
@@ -16,6 +18,7 @@ import ContinuousReader from "./ContinuousReader";
 import MealView from "./MealView";
 import MealListener from "./MealListener";
 import QuickSettings from "./QuickSettings";
+import TafsirScreen from "./TafsirScreen";
 
 const TABS = [
   { id: "arabic-meal", label: "Arapça + Meal" },
@@ -24,7 +27,15 @@ const TABS = [
 ];
 
 export default function ReadingScreen({ surah, onBack }) {
-  const verses = useMemo(() => getVersesWithOverrides(surah), [surah]);
+  // Ayet verisi uygulamayla paketlenmiyor, bölüm açıldığında iniyor.
+  const { verses: loaded, error } = useVerses(surah.id);
+  const verses = useMemo(
+    () => (loaded ? getVersesWithOverrides({ ...surah, verses: loaded }) : []),
+    [surah, loaded],
+  );
+
+  const tafsirId = getPrefs().tafsirId ?? TAFSIRS[0]?.id ?? null;
+  const [tafsirFocus, setTafsirFocus] = useState(null);
   const [tab, setTab] = useState(() => getPrefs().tab);
   const [mealAudio, setMealAudio] = useState(false);
   const [marked, setMarked] = useState(
@@ -68,6 +79,17 @@ export default function ReadingScreen({ surah, onBack }) {
   const hasPlayer =
     (activeTab !== "meal" && !reciterUnavailable) ||
     (mealAudio && Boolean(surah.audio));
+
+  if (tafsirFocus !== null) {
+    return (
+      <TafsirScreen
+        surah={surah}
+        tafsirId={tafsirId}
+        focusVerse={tafsirFocus === "all" ? null : tafsirFocus}
+        onBack={() => setTafsirFocus(null)}
+      />
+    );
+  }
 
   return (
     <div
@@ -146,7 +168,22 @@ export default function ReadingScreen({ surah, onBack }) {
         </button>
       )}
 
-      {activeTab === "meal" ? (
+      {!loaded && !error && (
+        <p className="flex-1 px-5 py-16 text-center text-sm text-ink-700/60 dark:text-cream-200/60">
+          Yükleniyor…
+        </p>
+      )}
+
+      {error && (
+        <div className="flex-1 px-6 py-12 text-center">
+          <p className="text-sm leading-relaxed text-ink-700/70 dark:text-cream-200/60">
+            Bu bölümün metni indirilemedi. İlk açılışta internet gerekiyor;
+            bir kez indirildikten sonra çevrimdışı da açılır.
+          </p>
+        </div>
+      )}
+
+      {loaded && (activeTab === "meal" ? (
         mealAudio && surah.audio ? (
           <MealListener
             key="meal-listen"
@@ -188,6 +225,19 @@ export default function ReadingScreen({ surah, onBack }) {
           layout={activeTab === "translit" ? "translit-arabic" : "arabic-meal"}
           translationId={translation.id}
         />
+      ))}
+
+      {/* Mealde takılınan yerde tefsire geçiş. Tefsir ayet ayet değil
+          bölüm bölüm olduğu için ayet numarası yalnızca hangi bloğa
+          gidileceğini belirtiyor. */}
+      {loaded && tafsirId && (
+        <button
+          type="button"
+          onClick={() => setTafsirFocus("all")}
+          className="mx-auto mt-2 block rounded-full border border-teal-600/30 px-5 py-2 text-sm text-teal-700 dark:border-cream-200/30 dark:text-cream-100"
+        >
+          Tefsiri aç
+        </button>
       )}
 
       {/* Buton localStorage'a yazıyordu ama ekranda hiçbir şey değişmediği

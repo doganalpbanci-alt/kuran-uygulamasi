@@ -1,4 +1,4 @@
-import data from "../data/surahs.json";
+import data from "../data/index.json";
 
 export const TRANSLATIONS = data.translations;
 export const DEFAULT_TRANSLATION_ID = data.default_translation_id;

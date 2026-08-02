@@ -3,8 +3,42 @@
 Kıraat dinlerken Türkçe okunuşu ve meali eş zamanlı takip edebileceğin, offline
 çalışan bir PWA. Günlük okuma alışkanlığı için basit bir streak takibi içerir.
 
-Kapsam: Yasin, Mülk, Vakıa, Kehf, Duhan sureleri ve Âmenerrasûlü
-(Bakara 285-286).
+Kapsam: Alak, Kalem, Yasin, Mülk, Vakıa, Kehf, Duhan sureleri ve
+Âmenerrasûlü (Bakara 285-286).
+
+Ana ekrandan **Mushaf sırası** ile **Nüzûl sırası** (iniş sırası) arasında
+geçiş yapılır; nüzûl seçilince bölümler iniş sırasına dizilir ve sıra
+numarası görünür.
+
+## Veri mimarisi
+
+Ayet ve tefsir verisi uygulamayla paketlenmez. `src/data/index.json`
+(~11 KB) yalnızca bölüm listesi, kariler, mealler ve tefsir listesini
+taşır; her bölümün ayetleri `public/data/surah-<id>.json`, tefsiri
+`public/data/tafsir-<tefsir>-<id>.json` dosyasındadır ve bölüm ilk
+açıldığında indirilip service worker tarafından kalıcı olarak
+cache'lenir.
+
+Sebep boyut: her şey tek pakettiyken 6 bölüm 602 KB gzip tutuyordu ve
+nüzûl sırasıyla okumak için gereken sure sayısında bu birkaç MB'a
+çıkıyordu. Şimdi uygulama 76 KB gzip; indirilen bölüm ise kalıcı olarak
+çevrimdışı çalışır. Bedeli, bir bölümün **ilk** açılışında internet
+gerekmesidir.
+
+## Tefsir
+
+Okuma ekranındaki **"Tefsiri aç"** ile açılır. Tefsirler ayet ayet değil
+ayet gruplarına göre yazıldığı için blok blok gösterilir (İbn Kesir'de
+Alak 1-5 tek blok).
+
+Şu an tek kaynak var: **Ibn Kathir (Abridged)**, İngilizce, quran.com
+üzerinden. **Türkçe tefsir hiçbir açık API'de bulunamadı** — quran.com'un
+20 tefsirinin hiçbiri Türkçe değil (Arapça 7, Urduca 4, Bengalce 4,
+İngilizce 3, Rusça 1, Kürtçe 1), Açık Kuran'da tefsir ucu yok, Diyanet'in
+açık API'si yok. Türkçe kaynak araştırması sürüyor.
+
+Tefsir metni kaynakta HTML olarak geliyor; çekerken script/style/olay
+öznitelikleri ayıklanıyor (`sanitizeHtml`).
 
 Bölüm eklemek için `scripts/fetch-surahs.mjs` içindeki `ENTRIES` listesine
 `{ surah: 44 }` gibi bir kayıt eklemek yeterli. Bir surenin bir bölümü

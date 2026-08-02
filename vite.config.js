@@ -37,7 +37,19 @@ export default defineConfig({
       },
       workbox: {
         globPatterns: ['**/*.{js,css,html,svg,png,ico,json}'],
+        // Ayet ve tefsir dosyaları bilerek precache edilmiyor: amaç
+        // uygulamayı küçük tutup her bölümü açıldığında indirmek.
+        globIgnores: ['**/data/**'],
         runtimeCaching: [
+          {
+            // Bölüm verisi: bir kez indirilince kalıcı olarak offline.
+            urlPattern: ({ url }) => url.pathname.includes('/data/'),
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'surah-data',
+              cacheableResponse: { statuses: [200] },
+            },
+          },
           {
             // Sure sesleri 13-59 MB arası; otomatik precache edilmez. Kullanıcı
             // "Offline'a indir" dediğinde src/lib/offline.js bu cache'e tam

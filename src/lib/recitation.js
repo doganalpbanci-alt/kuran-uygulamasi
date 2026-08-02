@@ -1,4 +1,4 @@
-import data from "../data/surahs.json";
+import data from "../data/index.json";
 import { EXTRA_RECITERS } from "./extraReciters";
 
 // Quran.com karileri veriyle birlikte gelir (zaman damgaları onlarda),

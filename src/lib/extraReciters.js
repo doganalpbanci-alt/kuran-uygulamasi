@@ -2,7 +2,7 @@
  * Zaman damgası taşımayan kariler.
  *
  * Kelime zaman damgasını yalnızca Quran.com veriyor; onun 12 karisi
- * surahs.json içinde, ayet ve kelime zamanlarıyla birlikte duruyor.
+ * index.json içinde, zaman damgaları ise sure dosyalarında duruyor.
  * Buradakilerin ise saklanacak verisi yok — sadece ses adresi kalıbı.
  * Bu yüzden veri dosyasında değil burada tutuluyorlar: yeni bir kari
  * eklemek için veriyi yeniden çekmek gerekmiyor.

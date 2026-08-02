@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import { useAudioPlayer } from "../hooks/useAudioPlayer";
 import { getVersesWithOverrides } from "../lib/verses";
+import { useVerses } from "../hooks/useEntryData";
 import {
   clearOverridesForSurah,
   downloadOverridesFile,
@@ -16,7 +17,15 @@ function formatTime(seconds) {
 }
 
 export default function SyncMode({ surah, onBack }) {
-  const [verses, setVerses] = useState(() => getVersesWithOverrides(surah));
+  // Ayet verisi artık ayrı dosyada; bölüm açıldığında iniyor.
+  const { verses: loaded } = useVerses(surah.id);
+  const [overridden, setOverridden] = useState(null);
+  const verses = useMemo(
+    () =>
+      overridden ??
+      (loaded ? getVersesWithOverrides({ ...surah, verses: loaded }) : []),
+    [overridden, loaded, surah],
+  );
   const [pointer, setPointer] = useState(0);
 
   const {
@@ -31,7 +40,8 @@ export default function SyncMode({ surah, onBack }) {
     cycleRate,
   } = useAudioPlayer();
 
-  const refreshVerses = () => setVerses(getVersesWithOverrides(surah));
+  const refreshVerses = () =>
+    loaded && setOverridden(getVersesWithOverrides({ ...surah, verses: loaded }));
 
   const markCurrentVerse = () => {
     const verse = verses[pointer];
@@ -46,6 +56,7 @@ export default function SyncMode({ surah, onBack }) {
     clearOverridesForSurah(surah.id);
     refreshVerses();
     setPointer(0);
+    setOverridden(null);
   };
 
   const syncedCount = useMemo(

@@ -8,6 +8,10 @@ const DEFAULT_PREFS = {
   wordCursor: true,
   // Okuma ekranı sekmesi: "arabic-meal" | "translit" | "meal"
   tab: "arabic-meal",
+  // Ana ekran sıralaması: "mushaf" | "revelation" (nüzûl)
+  surahOrder: "mushaf",
+  // Seçili tefsir (index.json'daki tafsirs listesinden)
+  tafsirId: null,
   // null ise veri dosyasındaki varsayılanlar kullanılır.
   reciterId: null,
   translationId: null,

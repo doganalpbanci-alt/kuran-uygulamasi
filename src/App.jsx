@@ -1,23 +1,40 @@
 import { useEffect, useState } from "react";
-import data from "./data/surahs.json";
+import { ENTRIES } from "./lib/dataStore";
 import SurahList from "./components/SurahList";
 import StreakSummary from "./components/StreakSummary";
 import ReadingScreen from "./components/ReadingScreen";
 import SyncMode from "./components/SyncMode";
 import SettingsScreen from "./components/SettingsScreen";
 import { getCurrentStreak, getLast7Days } from "./lib/streak";
+import { getPrefs, updatePrefs } from "./lib/prefs";
 import { checkAndNotify } from "./lib/notifications";
 
-const SURAHS = data.surahs;
+/**
+ * Nüzûl sırası, surelerin indirilme sırası — mushaf sırasından farklı.
+ * Kısmi bölümlerin (Âmenerrasûlü) kendi nüzûl sırası yok; ait olduğu
+ * surenin sırasını kullanıp listenin sonuna yakın tutuyoruz.
+ */
+function sortEntries(entries, order) {
+  if (order !== "revelation") return entries;
+  return [...entries].sort(
+    (a, b) => (a.revelation_order ?? 999) - (b.revelation_order ?? 999),
+  );
+}
 
 function Home({ onSelectSurah, onOpenSettings }) {
   const [streak, setStreak] = useState(getCurrentStreak);
   const [last7Days, setLast7Days] = useState(getLast7Days);
+  const [order, setOrder] = useState(() => getPrefs().surahOrder);
 
   useEffect(() => {
     setStreak(getCurrentStreak());
     setLast7Days(getLast7Days());
   }, []);
+
+  const changeOrder = (next) => {
+    setOrder(next);
+    updatePrefs({ surahOrder: next });
+  };
 
   return (
     <div className="flex min-h-full flex-col px-5 py-5">
@@ -37,10 +54,38 @@ function Home({ onSelectSurah, onOpenSettings }) {
 
       <StreakSummary streak={streak} last7Days={last7Days} />
 
-      <h2 className="mb-2 mt-6 text-sm font-medium text-ink-700/70 dark:text-cream-200/70">
-        Sureler
-      </h2>
-      <SurahList surahs={SURAHS} onSelectSurah={onSelectSurah} />
+      <div
+        role="group"
+        aria-label="Sıralama"
+        className="mt-6 flex rounded-full bg-teal-600/10 p-0.5 text-xs dark:bg-white/5"
+      >
+        {[
+          { id: "mushaf", label: "Mushaf sırası" },
+          { id: "revelation", label: "Nüzûl sırası" },
+        ].map((o) => (
+          <button
+            key={o.id}
+            type="button"
+            onClick={() => changeOrder(o.id)}
+            aria-pressed={order === o.id}
+            className={`flex-1 rounded-full px-3 py-1.5 font-medium transition ${
+              order === o.id
+                ? "bg-teal-600 text-cream-50 shadow-sm"
+                : "text-teal-700 dark:text-cream-100"
+            }`}
+          >
+            {o.label}
+          </button>
+        ))}
+      </div>
+
+      <div className="mt-3">
+        <SurahList
+          surahs={sortEntries(ENTRIES, order)}
+          showRevelationOrder={order === "revelation"}
+          onSelectSurah={onSelectSurah}
+        />
+      </div>
     </div>
   );
 }
@@ -62,7 +107,7 @@ function SyncPicker({ onSelectSurah, onBack }) {
         <span className="w-10" />
       </div>
       <div className="mt-4">
-        <SurahList surahs={SURAHS} onSelectSurah={onSelectSurah} />
+        <SurahList surahs={ENTRIES} onSelectSurah={onSelectSurah} />
       </div>
     </div>
   );
@@ -78,14 +123,12 @@ export default function App() {
     return () => clearInterval(interval);
   }, []);
 
-  const selectedSurah = SURAHS.find((s) => s.id === selectedSurahId) ?? null;
+  const selectedSurah =
+    ENTRIES.find((s) => String(s.id) === String(selectedSurahId)) ?? null;
 
   if (screen === "reading" && selectedSurah) {
     return (
-      <ReadingScreen
-        surah={selectedSurah}
-        onBack={() => setScreen("home")}
-      />
+      <ReadingScreen surah={selectedSurah} onBack={() => setScreen("home")} />
     );
   }
 
