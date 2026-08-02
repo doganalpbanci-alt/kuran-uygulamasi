@@ -152,9 +152,9 @@ tek bloğa toplanır ve `3-7` gibi bir aralık etiketiyle gösterilir; metnin
 başındaki `(3-7)` öneki ayıklanır. Gruplama seçili meale göre çalışma
 anında hesaplanır (Yasin'de Diyanet 78 blok, Ali Bulaç 84 blok verir).
 
-Okunuş ve meal metinleri Açık Kuran'dan, Arapça kelime metinleri
-Quran.com'dan gelir; hepsi build-time çekilip `src/data/surahs.json`
-içine yazılır.
+Okunuş ve meal metinleri Açık Kuran'dan, Arapça kelime metinleri ve
+tefsir Quran.com'dan gelir; hepsi build-time çekilip yukarıdaki veri
+dosyalarına yazılır.
 
 ## Geliştirme
 
@@ -165,8 +165,8 @@ npm run dev
 
 ## Sure verisini yeniden çekmek
 
-`src/data/surahs.json` build-time üretilir, uygulama çalışırken API'ye gitmez.
-Veriyi yeniden çekmek için:
+Veri dosyaları build-time üretilir, uygulama çalışırken API'ye gitmez.
+Yeniden çekmek için:
 
 ```bash
 node scripts/fetch-surahs.mjs
