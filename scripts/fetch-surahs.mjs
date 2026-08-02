@@ -44,8 +44,18 @@ const TAFSIRS = [
 // dosya sunuyor, Âmenerrasûlü için bu Bakara'nın tamamı olurdu. Arapça
 // tilavet ayet başına ayrı dosya olduğu için kısmi bölümlerde de çalışır.
 const ENTRIES = [
-  { surah: 96 }, // Alak  — nüzûl sırası 1
-  { surah: 68 }, // Kalem — nüzûl sırası 2
+  // Nüzûl (iniş) sırasının ilk onu
+  { surah: 96 }, //  1. Alak
+  { surah: 68 }, //  2. Kalem
+  { surah: 73 }, //  3. Müzzemmil
+  { surah: 74 }, //  4. Müddessir
+  { surah: 1 }, //  5. Fatiha
+  { surah: 111 }, //  6. Tebbet (Mesed)
+  { surah: 81 }, //  7. Tekvir
+  { surah: 87 }, //  8. A'lâ
+  { surah: 92 }, //  9. Leyl
+  { surah: 89 }, // 10. Fecr
+  // Sonradan eklenen sureler
   { surah: 36 }, // Yasin
   { surah: 67 }, // Mülk
   { surah: 56 }, // Vakıa
@@ -148,17 +158,34 @@ async function fetchTranslations() {
 }
 
 /**
- * Bir sure için İngilizce çeviriyi ayet numarasına eşler.
- * Quran.com bu uçta verse_key döndürmüyor, dizi ayet sırasında geliyor.
+ * Bir sure için İngilizce çevirileri ayet numarasına eşler.
+ *
+ * Önemli: /quran/translations ucu verse_key döndürmüyor, yalnızca ayet
+ * sırasında bir dizi veriyor — dizideki tek bir eksik/fazla kayıt tüm
+ * sureyi sessizce kaydırır. Meal doğruluğu kritik olduğu için ayet
+ * anahtarı döndüren /verses/by_chapter ucu kullanılıyor ve eşleştirme
+ * verse_key ile yapılıyor.
+ *
+ * Dönen yapı: Map<verseNumber, Map<resourceId, text>>
  */
-async function fetchEnglishTranslation(sourceId, surahId) {
-  const { translations } = await fetchQuranJson(
-    `${QURAN_API}/quran/translations/${sourceId}?chapter_number=${surahId}`,
+async function fetchEnglishTranslations(sourceIds, surahId) {
+  const data = await fetchQuranJson(
+    `${QURAN_API}/verses/by_chapter/${surahId}` +
+      `?translations=${sourceIds.join(",")}&fields=verse_key&per_page=300`,
   );
+
   const byVerseNumber = new Map();
-  translations.forEach((t, i) => {
-    byVerseNumber.set(i + 1, stripHtml(t.text));
-  });
+  for (const v of data.verses) {
+    const [chapter, verseNumber] = v.verse_key.split(":").map(Number);
+    if (chapter !== surahId) {
+      throw new Error(`Beklenmedik sure: ${v.verse_key} (beklenen ${surahId})`);
+    }
+    const byResource = new Map();
+    for (const t of v.translations ?? []) {
+      byResource.set(t.resource_id, stripHtml(t.text));
+    }
+    byVerseNumber.set(verseNumber, byResource);
+  }
   return byVerseNumber;
 }
 
@@ -295,11 +322,14 @@ async function fetchSurah(entry, translations, reciters, bismillah) {
   }
   const raw = byTranslation.get(trList[0].id);
 
-  // İngilizce mealler Quran.com'dan, ayet numarasına eşlenmiş halde.
-  const byEnglish = new Map();
-  for (const t of enList) {
-    byEnglish.set(t.id, await fetchEnglishTranslation(t.source_id, id));
-  }
+  // İngilizce mealler Quran.com'dan, ayet anahtarına göre eşlenmiş halde.
+  const englishByVerse =
+    enList.length > 0
+      ? await fetchEnglishTranslations(
+          enList.map((t) => t.source_id),
+          id,
+        )
+      : new Map();
 
   const wordsByVerse = await fetchArabicWords(id);
 
@@ -341,7 +371,7 @@ async function fetchSurah(entry, translations, reciters, bismillah) {
       // Besmele satırı için Fatiha 1:1 çevirisi ayrıca alınıyor.
       const text = isZero
         ? bismillah?.english?.[t.id]
-        : byEnglish.get(t.id)?.get(verseNumber);
+        : englishByVerse.get(verseNumber)?.get(t.source_id);
       if (text) out[t.id] = text;
     }
     return out;
@@ -414,40 +444,72 @@ async function fetchSurah(entry, translations, reciters, bismillah) {
 /**
  * Bir bölümün tefsirini blok blok toplar.
  *
- * Tefsir ayet ayet değil, ayet gruplarına göre yazılıyor: 96:1 sorgusu
- * 1-5. ayetleri birlikte kapsıyor. Bloğun kapsadığı son ayetten devam
- * ederek aynı metni tekrar tekrar indirmemiş oluyoruz.
+ * Tefsir ayet ayet değil, ayet gruplarına göre yazılıyor: 96:1 metni
+ * 1-5. ayetleri birlikte kapsıyor. by_chapter ucu sureyi ayet ayet
+ * döndürüyor ve metni yalnızca bloğun *ilk* ayetine koyuyor; sonraki
+ * ayetler boş geliyor. Blok sınırı da tam olarak budur: bir metin, bir
+ * sonraki dolu ayete kadar sürer.
+ *
+ * Not: by_ayah ucu kullanılmıyor. O uç `verses` alanında bloğun gerçek
+ * aralığını değil sabit 10'luk bir pencere veriyor (74:11 sorgusunda
+ * 11-20 diyor, oysa blok 11-30'u kapsıyor) ve aralık dışı bir ayet
+ * sorulduğunda sessizce bir önceki bloğu döndürüyor. Bu yüzden eski
+ * sürüm hem aralıkları yanlış etiketliyor hem aynı bloğu tekrar tekrar
+ * kaydediyordu.
  */
 async function fetchTafsir(tafsirId, entry) {
   const first = entry.from ?? 1;
   const last = entry.to ?? entry.verse_count;
 
-  const blocks = [];
-  let v = first;
-  while (v <= last) {
-    const url = `${QURAN_API}/tafsirs/${tafsirId}/by_ayah/${entry.surah}:${v}`;
-    let data;
-    try {
-      data = (await fetchQuranJson(url)).tafsir;
-    } catch {
-      console.warn(`  uyarı: tefsir alınamadı ${entry.surah}:${v}`);
-      break;
-    }
-
-    const covered = Object.keys(data?.verses ?? {})
-      .map((k) => Number(k.split(":")[1]))
-      .sort((a, b) => a - b);
-    const from = covered[0] ?? v;
-    const to = covered[covered.length - 1] ?? v;
-    const text = sanitizeHtml(data?.text ?? "");
-
-    // Kısmi bölümlerde blok, istenen aralığın dışına taşabilir; kırpmıyoruz
-    // ama etiketi gerçek kapsamıyla saklıyoruz ki okuyan yanılmasın.
-    if (text) blocks.push({ from, to, text });
-    v = Math.max(to + 1, v + 1);
+  let rows;
+  try {
+    rows = (
+      await fetchQuranJson(
+        `${QURAN_API}/tafsirs/${tafsirId}/by_chapter/${entry.surah}?per_page=300`,
+      )
+    ).tafsirs;
+  } catch {
+    console.warn(`  uyarı: tefsir alınamadı (sure ${entry.surah})`);
+    return [];
   }
 
-  return blocks;
+  // Ayet sırasına göre; gelen sıraya güvenmiyoruz.
+  const byVerse = rows
+    .map((r) => ({
+      verse: Number(r.verse_key.split(":")[1]),
+      text: sanitizeHtml(r.text ?? ""),
+    }))
+    .sort((a, b) => a.verse - b.verse);
+
+  // Kaynak sureyi ayet ayet döndürdüğü için satır sayısı surenin gerçek
+  // ayet sayısıdır. Kısmi bölümlerde (Âmenerrasûlü) entry.verse_count
+  // bölümün uzunluğu olduğundan son bloğun bitişi buradan hesaplanmalı.
+  const surahVerseCount = byVerse.length;
+  if (surahVerseCount < last) {
+    throw new Error(
+      `Tefsir ayet sayısı yetersiz (sure ${entry.surah}): ` +
+        `${surahVerseCount} < ${last}`,
+    );
+  }
+  if (!entry.from && surahVerseCount !== entry.verse_count) {
+    throw new Error(
+      `Tefsir ayet sayısı tutmuyor (sure ${entry.surah}): ` +
+        `${surahVerseCount} != ${entry.verse_count}`,
+    );
+  }
+
+  // Dolu metinler blok başlangıcı; blok bir sonraki dolu ayetten önce biter.
+  const starts = byVerse.filter((r) => r.text);
+  const blocks = starts.map((r, i) => ({
+    from: r.verse,
+    to: (starts[i + 1]?.verse ?? surahVerseCount + 1) - 1,
+    text: r.text,
+  }));
+
+  // Kısmi bölümlerde (Âmenerrasûlü) yalnızca kesişen bloklar gerekiyor.
+  // Blok aralığı istenenin dışına taşabilir; kırpmıyoruz ama etiketi
+  // gerçek kapsamıyla saklıyoruz ki okuyan yanılmasın.
+  return blocks.filter((b) => b.to >= first && b.from <= last);
 }
 
 /** Tüm karileri, ses adresi öneki ve segment desteğiyle birlikte getirir. */
@@ -488,11 +550,18 @@ async function fetchBismillah(reciters, translations) {
   }
 
   // İngilizce mealler besmeleyi Fatiha'nın 1. ayeti olarak veriyor.
+  // Besmele: Fatiha 1:1 çevirisi.
+  const enList = translations.filter((x) => x.lang === "en");
   const english = {};
-  for (const t of translations.filter((x) => x.lang === "en")) {
-    const map = await fetchEnglishTranslation(t.source_id, 1);
-    const text = map.get(1);
-    if (text) english[t.id] = text;
+  if (enList.length > 0) {
+    const byVerse = await fetchEnglishTranslations(
+      enList.map((t) => t.source_id),
+      1,
+    );
+    for (const t of enList) {
+      const text = byVerse.get(1)?.get(t.source_id);
+      if (text) english[t.id] = text;
+    }
   }
   // Ses adresi 0. ayet için verseAudioUrl tarafından 001001'e çevrildiğinden
   // burada tutulmasına gerek yok.

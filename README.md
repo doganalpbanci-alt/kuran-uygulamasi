@@ -3,8 +3,9 @@
 Kıraat dinlerken Türkçe okunuşu ve meali eş zamanlı takip edebileceğin, offline
 çalışan bir PWA. Günlük okuma alışkanlığı için basit bir streak takibi içerir.
 
-Kapsam: Alak, Kalem, Yasin, Mülk, Vakıa, Kehf, Duhan sureleri ve
-Âmenerrasûlü (Bakara 285-286).
+Kapsam (16 bölüm): nüzûl sırasının ilk onu — Alak, Kalem, Müzzemmil,
+Müddessir, Fatiha, Tebbet, Tekvir, A'lâ, Leyl, Fecr — ve ayrıca Yasin,
+Mülk, Vakıa, Kehf, Duhan sureleri ile Âmenerrasûlü (Bakara 285-286).
 
 Ana ekrandan **Mushaf sırası** ile **Nüzûl sırası** (iniş sırası) arasında
 geçiş yapılır; nüzûl seçilince bölümler iniş sırasına dizilir ve sıra
@@ -36,6 +37,19 @@ Alak 1-5 tek blok).
 20 tefsirinin hiçbiri Türkçe değil (Arapça 7, Urduca 4, Bengalce 4,
 İngilizce 3, Rusça 1, Kürtçe 1), Açık Kuran'da tefsir ucu yok, Diyanet'in
 açık API'si yok. Türkçe kaynak araştırması sürüyor.
+
+Blok sınırları `tafsirs/<id>/by_chapter/<sure>` ucundan çıkarılıyor: bu uç
+sureyi ayet ayet döndürüyor ve metni yalnızca bloğun **ilk** ayetine
+koyuyor, sonrakiler boş geliyor — yani bir metin, bir sonraki dolu ayete
+kadar sürüyor.
+
+> `by_ayah` ucu bu iş için kullanılamaz. `verses` alanında bloğun gerçek
+> aralığını değil sabit 10'luk bir pencere veriyor (74:11 sorgusunda
+> "11-20" diyor, oysa blok 11-30'u kapsıyor) ve aralık dışı bir ayet
+> sorulduğunda hata vermek yerine sessizce bir önceki bloğu döndürüyor.
+> Bu uca dayanan ilk sürüm hem aralıkları yanlış etiketliyor hem aynı
+> bloğu tekrar tekrar kaydediyordu; Müddessir'de 21-30 ile 48-56 hiçbir
+> bloğa düşmüyordu.
 
 Tefsir metni kaynakta HTML olarak geliyor; çekerken script/style/olay
 öznitelikleri ayıklanıyor (`sanitizeHtml`).
@@ -134,23 +148,23 @@ Esed, Quran.com'da 22 = A. Yusuf Ali) id'ler `tr-11`, `en-20` biçiminde
 ### Ayet ayet çeviren mealler
 
 Bazı mealler birden çok ayeti tek cümlede çevirip aynı metni o aralıktaki
-her ayete tekrar yazar. 4 sure genelinde:
+her ayete tekrar yazar. 16 bölüm genelinde:
 
 | Meal | Durum |
 |---|---|
 | Ali Bulaç, Muhammed Esed, Süleyman Ateş, Yaşar Nuri Öztürk | tamamen ayet ayet |
 | Saheeh International, Abdel Haleem, Pickthall, Yusuf Ali | tamamen ayet ayet |
 | Elmalılı (sadeleştirilmiş) | 2 grup |
-| Elmalılı Hamdi Yazır | 3 grup |
-| Suat Yıldırım | 30 grup (%20 ayet birleşik) |
-| Diyanet İşleri | 31 grup (%24 ayet birleşik) |
+| Elmalılı Hamdi Yazır | 4 grup |
+| Suat Yıldırım | 76 grup (%29 ayet birleşik) |
+| Diyanet İşleri | 76 grup (%29 ayet birleşik) |
 
 Tilavet ve okunuş sekmelerinde meal her ayetin altında gösterilir —
 birleşik çevirilerde metin tekrar eder, bu ayet takibini kolaylaştırdığı
 için bilinçli bir tercihtir. **Meal sekmesinde** ise ardışık aynı metinler
 tek bloğa toplanır ve `3-7` gibi bir aralık etiketiyle gösterilir; metnin
 başındaki `(3-7)` öneki ayıklanır. Gruplama seçili meale göre çalışma
-anında hesaplanır (Yasin'de Diyanet 78 blok, Ali Bulaç 84 blok verir).
+anında hesaplanır (Yasin'de Diyanet 77 blok, Ali Bulaç 83 blok verir).
 
 Okunuş ve meal metinleri Açık Kuran'dan, Arapça kelime metinleri ve
 tefsir Quran.com'dan gelir; hepsi build-time çekilip yukarıdaki veri
@@ -172,6 +186,36 @@ Yeniden çekmek için:
 node scripts/fetch-surahs.mjs
 ```
 
+## Veri doğrulama
+
+Meal ve tefsir hassas içerik: tek ayetlik bir kayma sessizce yanlış anlam
+üretir, üstelik ekranda gayet normal görünür. Bu yüzden çekme adımının
+çıktısı ayrı bir scriptle kaynağa geri sorulur:
+
+```bash
+node scripts/verify-data.mjs   # hata varsa exit 1
+```
+
+Script çekme fonksiyonlarını kullanmaz, API'yi bağımsız olarak yeniden
+sorgular — çekmedeki bir hata doğrulamada tekrarlanmasın diye. Örnekleme
+de yapmaz: **her bölümün her ayetini, her meal için tek tek** karşılaştırır,
+çünkü kayma hatası tam olarak örneklemenin kaçırdığı hatadır. Denetlenenler:
+
+- ayet sayısı ve numaraların sürekliliği,
+- 8 Türkçe mealin her ayeti (Açık Kuran'dan yazar yazar),
+- 4 İngilizce mealin her ayeti (`verse_key` + `resource_id` ile eşleştirilerek),
+- Arapça kelimelerin birleşimi ile ayetin kendi metni,
+- tefsir bloklarının kaynaktan bağımsız yeniden kurulup birebir tutması ve
+  bölümü boşluksuz kapsaması.
+
+Karşılaştırmadan elenen üç fark var; hiçbiri harf/anlam farkı değil:
+dipnot referansları (`<sup>`, uygulamada da gösterilmiyor), yalnızca kelime
+bazlı metinde bulunan iklab işaretleri (U+06ED, U+06E2) ve birleşik işaret
+sırası (NFC ile eşitleniyor: 81:1'de kaynak "şedde + fetha", kelime metni
+"fetha + şedde" veriyor).
+
+Son çalıştırmada 16 bölümün tamamında **320 kontrolün 320'si** geçiyor.
+
 ## Kelime imleci
 
 Ses çalarken o an okunan kelime vurgulanır; öncesi koyu, sonrası soluk
@@ -180,8 +224,8 @@ gösterilir. İki modda kaynağı farklıdır:
 - **Tilavet modunda kesin.** Quran.com kelime bazlı zaman damgası
   (segments) verdiği için vurgulanan kelime sesin tam olarak okuduğu
   kelimedir. Ek bir ayar veya senkron gerekmez. Zaman damgaları her kari
-  için ayrı tutulur. Kaynakta 36.384 kelime-zamanının 172'si (%0,5) eksik;
-  o kelimeler vurgulanmadan geçilir, oynatma etkilenmez.
+  için ayrı tutulur. Kaynakta 57.072 kelime-zamanının 224'ü (%0,4) sıfır
+  uzunlukta; o kelimeler vurgulanmadan geçilir, oynatma etkilenmez.
 - **Meal modunda tahmini.** Kelime zaman damgası olmadığından konum,
   ayet içindeki ilerlemeden kelime uzunluklarına göre kestirilir;
   aşağıdaki senkron adımı yapıldıkça isabeti artar. Ayarlar'dan
