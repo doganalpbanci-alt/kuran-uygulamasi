@@ -69,6 +69,29 @@ const ENTRIES = [
     name: "Âmenerrasûlü",
     subtitle: "Bakara suresi 285-286",
   },
+  // Günlük Okumalar (hadisle sabit zikir/dua listesi) sekmesindeki Kur'an
+  // parçaları. Metni elle yazmak yerine mevcut çekme/doğrulama hattından
+  // geçiyorlar — hassas bir konuda ikinci bir elle transkripsiyon riski
+  // almamak için.
+  { surah: 112 }, // İhlâs
+  { surah: 113 }, // Felâk
+  { surah: 114 }, // Nâs
+  {
+    surah: 2,
+    from: 255,
+    to: 255,
+    id: "ayetelkursi",
+    name: "Âyetü'l-Kürsî",
+    subtitle: "Bakara suresi 255",
+  },
+  {
+    surah: 59,
+    from: 22,
+    to: 24,
+    id: "hasr-son3",
+    name: "Haşr Suresi (Son 3 Âyet)",
+    subtitle: "Haşr suresi 22-24",
+  },
 ];
 
 // Ayarlardan seçilebilecek mealler. Offline çalışması için hepsi

@@ -229,8 +229,9 @@ export default function ReadingScreen({ surah, onBack, focusVerse = null }) {
         <div className="flex-1 px-6 py-8">
           <p className="text-sm leading-relaxed text-ink-700/70 dark:text-cream-200/60">
             {reciter.name} bu bölümde kullanılamıyor: bu kariden yalnızca sure
-            başına tek kayıt var, Âmenerrasûlü ise Bakara'nın içinden iki ayet.
-            Yukarıdaki ⚙ ile başka bir kari seçebilirsiniz.
+            başına tek kayıt var, bu bölüm ise bir surenin yalnızca bir kısmı
+            (örn. Âmenerrasûlü, Âyetü'l-Kürsî). Yukarıdaki ⚙ ile başka bir
+            kari seçebilirsiniz.
           </p>
         </div>
       ) : contUrl ? (

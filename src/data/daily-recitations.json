@@ -1,0 +1,50 @@
+{
+  "note": "Kur'an tabanlı öğeler (type: quran / quran-group) src/data/index.json'daki entryId'lere işaret eder; metin oradan (doğrulanmış Kur'an hattından) gelir, burada tekrar yazılmaz. Hadis kaynaklı zikir/dualar (type: dhikr) burada kendi Arapça/okunuş/meal alanlarını taşır.",
+  "items": [
+    {
+      "id": "ihlas-felak-nas",
+      "type": "quran-group",
+      "name": "İhlâs, Felâk ve Nâs Sureleri",
+      "occasion": "Sabah ve akşam 3'er defa; yatmadan önce eller birleştirilip okunup vücuda sürülerek",
+      "repeat": "3 defa",
+      "source": "Buhârî, De'avât, 12; Ebû Dâvûd, Edeb, 101",
+      "entryIds": [112, 113, 114]
+    },
+    {
+      "id": "ayetelkursi",
+      "type": "quran",
+      "name": "Âyetü'l-Kürsî",
+      "occasion": "Farz namazların akabinde; yatarken",
+      "repeat": "1 defa",
+      "source": "Buhârî, Vekâlet, 10; Nesâî, es-Sünenü'l-kübrâ, 6/30",
+      "entryId": "ayetelkursi"
+    },
+    {
+      "id": "amenerrasulu",
+      "type": "quran",
+      "name": "Âmenerrasûlü",
+      "occasion": "Gece yatmadan önce",
+      "repeat": "1 defa",
+      "source": "Buhârî, Feżâʾilü'l-Ḳurʾân, 10",
+      "entryId": "amenerrasulu"
+    },
+    {
+      "id": "mulk",
+      "type": "quran",
+      "name": "Mülk (Tebâreke) Suresi",
+      "occasion": "Gece yatmadan önce",
+      "repeat": "1 defa",
+      "source": "Tirmizî, Feżâʾilü'l-Ḳurʾân, 9",
+      "entryId": 67
+    },
+    {
+      "id": "hasr-son3",
+      "type": "quran",
+      "name": "Haşr Suresi (Son 3 Âyeti)",
+      "occasion": "Sabah ve akşam namazının akabinde",
+      "repeat": "1 defa",
+      "source": "Tirmizî, Feżâʾilü'l-Ḳurʾân, 22",
+      "entryId": "hasr-son3"
+    }
+  ]
+}

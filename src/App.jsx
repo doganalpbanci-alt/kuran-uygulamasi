@@ -6,6 +6,8 @@ import ReadingScreen from "./components/ReadingScreen";
 import SyncMode from "./components/SyncMode";
 import SettingsScreen from "./components/SettingsScreen";
 import BookmarksScreen from "./components/BookmarksScreen";
+import DailyRecitationsScreen from "./components/DailyRecitationsScreen";
+import DhikrDetailScreen from "./components/DhikrDetailScreen";
 import { getCurrentStreak, getLast7Days } from "./lib/streak";
 import { getPrefs, updatePrefs } from "./lib/prefs";
 import { isFavorite } from "./lib/favorites";
@@ -23,7 +25,7 @@ function sortEntries(entries, order) {
   );
 }
 
-function Home({ onSelectSurah, onOpenSettings, onOpenBookmarks }) {
+function Home({ onSelectSurah, onOpenSettings, onOpenBookmarks, onOpenDaily }) {
   const [streak, setStreak] = useState(getCurrentStreak);
   const [last7Days, setLast7Days] = useState(getLast7Days);
   const [order, setOrder] = useState(() => getPrefs().surahOrder);
@@ -51,6 +53,14 @@ function Home({ onSelectSurah, onOpenSettings, onOpenBookmarks }) {
           Günlük Kur'an
         </h1>
         <div className="flex items-center gap-3">
+          <button
+            type="button"
+            onClick={onOpenDaily}
+            aria-label="Günlük okumalar"
+            className="text-xl text-ink-700/60 dark:text-cream-200/60"
+          >
+            📿
+          </button>
           <button
             type="button"
             onClick={onOpenBookmarks}
@@ -158,6 +168,8 @@ export default function App() {
   // Yer İşaretlerim'den açılan bir ayete o an içindeki bölüm okunmaya
   // başlarken kaydırıp vurgulamak için.
   const [focusVerse, setFocusVerse] = useState(null);
+  // Günlük Okumalar'dan açılan hadis kaynaklı zikir/dua.
+  const [selectedDhikr, setSelectedDhikr] = useState(null);
 
   useEffect(() => {
     checkAndNotify();
@@ -222,11 +234,34 @@ export default function App() {
     );
   }
 
+  if (screen === "dhikr-detail" && selectedDhikr) {
+    return (
+      <DhikrDetailScreen
+        item={selectedDhikr}
+        onBack={() => setScreen("daily")}
+      />
+    );
+  }
+
+  if (screen === "daily") {
+    return (
+      <DailyRecitationsScreen
+        onBack={() => setScreen("home")}
+        onOpenSurah={(id) => openSurah(id)}
+        onOpenDhikr={(item) => {
+          setSelectedDhikr(item);
+          setScreen("dhikr-detail");
+        }}
+      />
+    );
+  }
+
   return (
     <Home
       onSelectSurah={(id) => openSurah(id)}
       onOpenSettings={() => setScreen("settings")}
       onOpenBookmarks={() => setScreen("bookmarks")}
+      onOpenDaily={() => setScreen("daily")}
     />
   );
 }
