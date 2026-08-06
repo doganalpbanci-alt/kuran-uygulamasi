@@ -5,8 +5,10 @@ import StreakSummary from "./components/StreakSummary";
 import ReadingScreen from "./components/ReadingScreen";
 import SyncMode from "./components/SyncMode";
 import SettingsScreen from "./components/SettingsScreen";
+import BookmarksScreen from "./components/BookmarksScreen";
 import { getCurrentStreak, getLast7Days } from "./lib/streak";
 import { getPrefs, updatePrefs } from "./lib/prefs";
+import { isFavorite } from "./lib/favorites";
 import { checkAndNotify } from "./lib/notifications";
 
 /**
@@ -21,10 +23,11 @@ function sortEntries(entries, order) {
   );
 }
 
-function Home({ onSelectSurah, onOpenSettings }) {
+function Home({ onSelectSurah, onOpenSettings, onOpenBookmarks }) {
   const [streak, setStreak] = useState(getCurrentStreak);
   const [last7Days, setLast7Days] = useState(getLast7Days);
   const [order, setOrder] = useState(() => getPrefs().surahOrder);
+  const [favoritesOnly, setFavoritesOnly] = useState(false);
 
   useEffect(() => {
     setStreak(getCurrentStreak());
@@ -36,55 +39,91 @@ function Home({ onSelectSurah, onOpenSettings }) {
     updatePrefs({ surahOrder: next });
   };
 
+  const sorted = sortEntries(ENTRIES, order);
+  const visible = favoritesOnly
+    ? sorted.filter((s) => isFavorite(s.id))
+    : sorted;
+
   return (
     <div className="flex min-h-full flex-col px-5 py-5">
       <div className="mb-5 flex items-center justify-between">
         <h1 className="text-2xl font-semibold text-ink-900 dark:text-cream-100">
           Günlük Kur'an
         </h1>
-        <button
-          type="button"
-          onClick={onOpenSettings}
-          aria-label="Ayarlar"
-          className="text-xl text-ink-700/60 dark:text-cream-200/60"
-        >
-          ⚙
-        </button>
+        <div className="flex items-center gap-3">
+          <button
+            type="button"
+            onClick={onOpenBookmarks}
+            aria-label="Yer işaretlerim"
+            className="text-xl text-ink-700/60 dark:text-cream-200/60"
+          >
+            🔖
+          </button>
+          <button
+            type="button"
+            onClick={onOpenSettings}
+            aria-label="Ayarlar"
+            className="text-xl text-ink-700/60 dark:text-cream-200/60"
+          >
+            ⚙
+          </button>
+        </div>
       </div>
 
       <StreakSummary streak={streak} last7Days={last7Days} />
 
-      <div
-        role="group"
-        aria-label="Sıralama"
-        className="mt-6 flex rounded-full bg-teal-600/10 p-0.5 text-xs dark:bg-white/5"
-      >
-        {[
-          { id: "mushaf", label: "Mushaf sırası" },
-          { id: "revelation", label: "Nüzûl sırası" },
-        ].map((o) => (
-          <button
-            key={o.id}
-            type="button"
-            onClick={() => changeOrder(o.id)}
-            aria-pressed={order === o.id}
-            className={`flex-1 rounded-full px-3 py-1.5 font-medium transition ${
-              order === o.id
-                ? "bg-teal-600 text-cream-50 shadow-sm"
-                : "text-teal-700 dark:text-cream-100"
-            }`}
-          >
-            {o.label}
-          </button>
-        ))}
+      <div className="mt-6 flex items-center gap-2">
+        <div
+          role="group"
+          aria-label="Sıralama"
+          className="flex flex-1 rounded-full bg-teal-600/10 p-0.5 text-xs dark:bg-white/5"
+        >
+          {[
+            { id: "mushaf", label: "Mushaf sırası" },
+            { id: "revelation", label: "Nüzûl sırası" },
+          ].map((o) => (
+            <button
+              key={o.id}
+              type="button"
+              onClick={() => changeOrder(o.id)}
+              aria-pressed={order === o.id}
+              className={`flex-1 rounded-full px-3 py-1.5 font-medium transition ${
+                order === o.id
+                  ? "bg-teal-600 text-cream-50 shadow-sm"
+                  : "text-teal-700 dark:text-cream-100"
+              }`}
+            >
+              {o.label}
+            </button>
+          ))}
+        </div>
+
+        <button
+          type="button"
+          onClick={() => setFavoritesOnly((v) => !v)}
+          aria-pressed={favoritesOnly}
+          className={`shrink-0 rounded-full px-3 py-1.5 text-xs font-medium transition ${
+            favoritesOnly
+              ? "bg-gold-500/20 text-gold-500 ring-1 ring-gold-500/40"
+              : "bg-teal-600/10 text-teal-700 dark:bg-white/5 dark:text-cream-100"
+          }`}
+        >
+          ★ Favoriler
+        </button>
       </div>
 
       <div className="mt-3">
-        <SurahList
-          surahs={sortEntries(ENTRIES, order)}
-          showRevelationOrder={order === "revelation"}
-          onSelectSurah={onSelectSurah}
-        />
+        {visible.length === 0 ? (
+          <p className="px-2 py-10 text-center text-sm text-ink-700/60 dark:text-cream-200/60">
+            Henüz favori işaretlenmedi. Sure kartındaki ☆ ile ekleyebilirsin.
+          </p>
+        ) : (
+          <SurahList
+            surahs={visible}
+            showRevelationOrder={order === "revelation"}
+            onSelectSurah={onSelectSurah}
+          />
+        )}
       </div>
     </div>
   );
@@ -116,6 +155,9 @@ function SyncPicker({ onSelectSurah, onBack }) {
 export default function App() {
   const [screen, setScreen] = useState("home");
   const [selectedSurahId, setSelectedSurahId] = useState(null);
+  // Yer İşaretlerim'den açılan bir ayete o an içindeki bölüm okunmaya
+  // başlarken kaydırıp vurgulamak için.
+  const [focusVerse, setFocusVerse] = useState(null);
 
   useEffect(() => {
     checkAndNotify();
@@ -123,12 +165,22 @@ export default function App() {
     return () => clearInterval(interval);
   }, []);
 
+  const openSurah = (id, verse = null) => {
+    setSelectedSurahId(id);
+    setFocusVerse(verse);
+    setScreen("reading");
+  };
+
   const selectedSurah =
     ENTRIES.find((s) => String(s.id) === String(selectedSurahId)) ?? null;
 
   if (screen === "reading" && selectedSurah) {
     return (
-      <ReadingScreen surah={selectedSurah} onBack={() => setScreen("home")} />
+      <ReadingScreen
+        surah={selectedSurah}
+        focusVerse={focusVerse}
+        onBack={() => setScreen("home")}
+      />
     );
   }
 
@@ -159,13 +211,22 @@ export default function App() {
     );
   }
 
+  if (screen === "bookmarks") {
+    return (
+      <BookmarksScreen
+        onBack={() => setScreen("home")}
+        onOpenBookmark={(surahId, verseNumber) =>
+          openSurah(surahId, verseNumber)
+        }
+      />
+    );
+  }
+
   return (
     <Home
-      onSelectSurah={(id) => {
-        setSelectedSurahId(id);
-        setScreen("reading");
-      }}
+      onSelectSurah={(id) => openSurah(id)}
       onOpenSettings={() => setScreen("settings")}
+      onOpenBookmarks={() => setScreen("bookmarks")}
     />
   );
 }

@@ -20,6 +20,7 @@ export default function ArabicReader({
   reciter,
   layout,
   translationId,
+  focusVerse = null,
 }) {
   const verseRefs = useRef([]);
 
@@ -92,6 +93,7 @@ export default function ArabicReader({
       />
 
       <VerseList
+        surah={surah}
         verses={verses}
         layout={layout}
         translationId={translationId}
@@ -101,6 +103,7 @@ export default function ArabicReader({
         isPlaying={isPlaying}
         onSelectVerse={(i) => player.goTo(i, { autoplay: true })}
         verseRefs={verseRefs}
+        focusVerse={focusVerse}
       />
 
       {/* Oynatıcı en sonda: ekranın altına sabitleniyor. */}

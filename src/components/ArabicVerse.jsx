@@ -15,7 +15,7 @@ export default function ArabicVerse({ words, timeMs }) {
     <p
       dir="rtl"
       lang="ar"
-      className="text-right font-[var(--font-arabic)] text-2xl leading-[2.1] text-ink-900 dark:text-cream-100"
+      className="text-right font-[var(--font-arabic)] text-[calc(1.5rem*var(--font-scale,1))] leading-[2.1] text-ink-900 dark:text-cream-100"
     >
       {words.map((w, i) => {
         if (!tracking || w.start == null) {

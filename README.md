@@ -216,6 +216,38 @@ sırası (NFC ile eşitleniyor: 81:1'de kaynak "şedde + fetha", kelime metni
 
 Son çalıştırmada 16 bölümün tamamında **320 kontrolün 320'si** geçiyor.
 
+## Favoriler, yer işaretleri ve erişilebilirlik
+
+Üçü de `localStorage`'da tutulur (`lib/favorites.js`, `lib/bookmarks.js`,
+`lib/appearance.js`); veri çekme mimarisiyle ilgisi yok, uygulama
+çalışırken eklenip kaldırılır.
+
+- **Favoriler.** Ana ekrandaki sure kartlarının ☆'ı ve okuma ekranı
+  başlığındaki ☆ aynı listeye yazar. "★ Favoriler" filtresi ana ekranda
+  yalnızca favorileri gösterir; sıralama (mushaf/nüzûl) filtreden bağımsız
+  çalışmaya devam eder.
+- **Yer işaretleri.** Arapça+Meal ve Okunuş sekmelerinde her ayetin
+  yanındaki 🔖 ile o ayete yer imi konur. Bölüm verisi lazy yüklendiği
+  için Yer İşaretlerim ekranı ayrıca indirme yapmasın diye sure adı ve
+  kısa bir önizleme (okunuşun ilk ~90 karakteri) işaretlenirken
+  denormalize edilip saklanır. Listeden bir yer imine dokunmak ilgili
+  bölümü açıp o ayete bir kez kaydırır ve teal bir halkayla vurgular —
+  bu, o an çalan ayeti gösteren altın halkadan bilerek farklı bir renk
+  (ikisi karışmasın diye). Meal sekmesi ayetleri aralık bazlı gruplandığı
+  için (bkz. altındaki tablo) yer iminden gelindiğinde sekme otomatik
+  olarak Arapça+Meal'e döner.
+- **Erişilebilirlik.** Ayarlar'daki yazı boyutu (5 kademe) ve okuma fontu
+  (Serif/Sans) seçimi yalnızca okuma alanını ölçekler — Arapça metin,
+  meal, okunuş, tefsir. Üst bar, düğmeler ve boşluklar Tailwind'in sabit
+  sınıflarını kullanmaya devam ettiği için düzen bozulmaz. Uygulama bunu
+  tek bir `--font-scale` CSS değişkeniyle yapar; bileşenler boyutu
+  doğrudan yazmak yerine `calc(1rem*var(--font-scale,1))` gibi ifadelerle
+  bu değişkeni okur. Font seçimi de aynı mantıkla `--font-reading`
+  değişkenini günceller (bileşenler zaten `font-[var(--font-reading)]`
+  kullanıyordu, ek değişiklik gerekmedi). Her iki değişken de sayfa ilk
+  render edilmeden önce `main.jsx`'te uygulanır ki kayıtlı ayar bir an
+  için varsayılana dönüp geri sıçramasın.
+
 ## Kelime imleci
 
 Ses çalarken o an okunan kelime vurgulanır; öncesi koyu, sonrası soluk

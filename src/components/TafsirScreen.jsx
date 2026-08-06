@@ -82,7 +82,7 @@ export default function TafsirScreen({ surah, tafsirId, focusVerse, onBack }) {
                   : `${block.from}-${block.to}. ayetler`}
               </span>
               <div
-                className="tafsir mt-2 text-[15px] leading-relaxed text-ink-900 dark:text-cream-100"
+                className="tafsir mt-2 text-[calc(15px*var(--font-scale,1))] leading-relaxed text-ink-900 dark:text-cream-100"
                 dangerouslySetInnerHTML={{ __html: block.text }}
               />
             </section>

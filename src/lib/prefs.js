@@ -21,6 +21,9 @@ const DEFAULT_PREFS = {
   reminderEnabled: false,
   reminderTime: "20:00",
   lastNotifiedDate: null,
+  // Erişilebilirlik: okuma alanı yazı boyutu ve fontu.
+  fontSize: "base",
+  readingFont: "serif",
 };
 
 export function getPrefs() {

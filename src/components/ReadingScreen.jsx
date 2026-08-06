@@ -5,6 +5,7 @@ import { getVersesWithOverrides } from "../lib/verses";
 import { getPrefs, updatePrefs } from "../lib/prefs";
 import { getLastReadDate, markSurahCompleted } from "../lib/streak";
 import { localDateString } from "../lib/storage";
+import { isFavorite, toggleFavorite } from "../lib/favorites";
 import {
   continuousUrl,
   getReciter,
@@ -26,7 +27,7 @@ const TABS = [
   { id: "meal", label: "Meal" },
 ];
 
-export default function ReadingScreen({ surah, onBack }) {
+export default function ReadingScreen({ surah, onBack, focusVerse = null }) {
   // Ayet verisi uygulamayla paketlenmiyor, bölüm açıldığında iniyor.
   const { verses: loaded, error } = useVerses(surah.id);
   const verses = useMemo(
@@ -36,11 +37,18 @@ export default function ReadingScreen({ surah, onBack }) {
 
   const tafsirId = getPrefs().tafsirId ?? TAFSIRS[0]?.id ?? null;
   const [tafsirFocus, setTafsirFocus] = useState(null);
-  const [tab, setTab] = useState(() => getPrefs().tab);
+  // Yer İşaretlerim'den bir ayete gelindiğinde meal sekmesi ayetleri tek tek
+  // göstermiyor (aralık gruplu); o ayeti görebilmek için ayet ayet bir
+  // sekmeye düşülüyor.
+  const [tab, setTab] = useState(() => {
+    const saved = getPrefs().tab;
+    return focusVerse != null && saved === "meal" ? "arabic-meal" : saved;
+  });
   const [mealAudio, setMealAudio] = useState(false);
   const [marked, setMarked] = useState(
     () => getLastReadDate(surah.id) === localDateString(),
   );
+  const [favorite, setFavorite] = useState(() => isFavorite(surah.id));
   const headerVisible = useScrollDirection();
 
   // Kari ve meal state'te tutuluyor ki hızlı seçim panelinden değişince
@@ -115,14 +123,33 @@ export default function ReadingScreen({ surah, onBack }) {
         <h1 className="truncate px-2 text-base font-semibold text-ink-900 dark:text-cream-100">
           {surah.name}
         </h1>
-        <button
-          type="button"
-          onClick={() => setQuickOpen(true)}
-          aria-label="Kari ve meal seçimi"
-          className="text-base text-ink-700/60 dark:text-cream-200/60"
-        >
-          ⚙
-        </button>
+        <div className="flex shrink-0 items-center gap-3">
+          <button
+            type="button"
+            onClick={() =>
+              setFavorite(toggleFavorite(surah.id).includes(surah.id))
+            }
+            aria-pressed={favorite}
+            aria-label={
+              favorite ? "Favorilerden çıkar" : "Favorilere ekle"
+            }
+            className={`text-lg leading-none ${
+              favorite
+                ? "text-gold-500"
+                : "text-ink-700/40 dark:text-cream-200/40"
+            }`}
+          >
+            {favorite ? "★" : "☆"}
+          </button>
+          <button
+            type="button"
+            onClick={() => setQuickOpen(true)}
+            aria-label="Kari ve meal seçimi"
+            className="text-base text-ink-700/60 dark:text-cream-200/60"
+          >
+            ⚙
+          </button>
+        </div>
       </div>
 
       <div
@@ -215,6 +242,7 @@ export default function ReadingScreen({ surah, onBack }) {
           url={contUrl}
           layout={activeTab === "translit" ? "translit-arabic" : "arabic-meal"}
           translationId={translation.id}
+          focusVerse={focusVerse}
         />
       ) : (
         <ArabicReader
@@ -224,6 +252,7 @@ export default function ReadingScreen({ surah, onBack }) {
           reciter={reciter}
           layout={activeTab === "translit" ? "translit-arabic" : "arabic-meal"}
           translationId={translation.id}
+          focusVerse={focusVerse}
         />
       ))}
 

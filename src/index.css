@@ -21,6 +21,10 @@
 
 html {
   color-scheme: light dark;
+  /* lib/appearance.js bunu inline stil olarak günceller; varsayılan
+     burada olmazsa erişilebilirlik ayarları uygulanmadan önce calc()
+     ifadeleri geçersiz kalıp o an geçerli boyuta düşerdi. */
+  --font-scale: 1;
 }
 
 body {
@@ -45,11 +49,14 @@ body {
 
 /* Tefsir metni kaynakta HTML olarak geliyor (başlık, paragraf, Arapça
    alıntılar). Uygulamanın tipografisine uyacak şekilde biçimlendiriyoruz. */
+/* em: tefsir kapsayıcısının kendi font-size'ı (bileşende --font-scale ile
+   ölçekleniyor) referans alınır, böylece başlık ve alıntılar da orantılı
+   büyür/küçülür. */
 .tafsir h1,
 .tafsir h2,
 .tafsir h3 {
   font-weight: 600;
-  font-size: 1rem;
+  font-size: 1.05em;
   margin: 1.25rem 0 0.5rem;
   color: var(--color-teal-700);
 }
@@ -66,7 +73,7 @@ body {
 .tafsir p:lang(ar),
 .tafsir .arabic {
   font-family: var(--font-arabic);
-  font-size: 1.25rem;
+  font-size: 1.33em;
   line-height: 2;
   direction: rtl;
   text-align: right;

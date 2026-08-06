@@ -19,6 +19,7 @@ export default function ContinuousReader({
   url,
   layout,
   translationId,
+  focusVerse = null,
 }) {
   const verseRefs = useRef([]);
   // Kelime imleci yalnızca kelime zaman damgası olan karilerde.
@@ -91,6 +92,7 @@ export default function ContinuousReader({
       />
 
       <VerseList
+        surah={surah}
         verses={verses}
         layout={layout}
         translationId={translationId}
@@ -100,6 +102,7 @@ export default function ContinuousReader({
         isPlaying={isPlaying}
         onSelectVerse={(i) => player.goTo(i, { autoplay: true })}
         verseRefs={verseRefs}
+        focusVerse={focusVerse}
       />
 
       <AudioPlayer

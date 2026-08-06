@@ -3,6 +3,7 @@ import { getPrefs, updatePrefs } from "../lib/prefs";
 import { getReciter } from "../lib/recitation";
 import { getTranslation } from "../lib/translations";
 import { ReciterPicker, TranslationPicker } from "./Pickers";
+import { FONT_SCALES, READING_FONTS, applyAppearance } from "../lib/appearance";
 import {
   notificationsSupported,
   requestNotificationPermission,
@@ -27,6 +28,18 @@ export default function SettingsScreen({ onBack, onOpenSyncPicker }) {
 
   const handleTimeChange = (time) => {
     setPrefs(updatePrefs({ reminderTime: time }));
+  };
+
+  const handleFontSize = (id) => {
+    const next = updatePrefs({ fontSize: id });
+    setPrefs(next);
+    applyAppearance(next);
+  };
+
+  const handleReadingFont = (id) => {
+    const next = updatePrefs({ readingFont: id });
+    setPrefs(next);
+    applyAppearance(next);
   };
 
   return (
@@ -103,6 +116,60 @@ export default function SettingsScreen({ onBack, onOpenSyncPicker }) {
           value={currentTranslationId}
           onChange={(id) => setPrefs(updatePrefs({ translationId: id }))}
         />
+      </section>
+
+      <section className="mt-4 rounded-2xl border border-teal-600/15 p-4 dark:border-cream-200/15">
+        <h2 className="text-sm font-semibold text-ink-900 dark:text-cream-100">
+          Erişilebilirlik
+        </h2>
+        <p className="mt-1 text-xs text-ink-700/60 dark:text-cream-200/60">
+          Arapça metin, meal, okunuş ve tefsir yazı boyutunu değiştirir.
+          Menüler ve düğmeler etkilenmez.
+        </p>
+
+        <div className="mt-3 flex flex-wrap gap-1.5">
+          {Object.entries(FONT_SCALES).map(([id, s]) => (
+            <button
+              key={id}
+              type="button"
+              onClick={() => handleFontSize(id)}
+              aria-pressed={prefs.fontSize === id}
+              className={`rounded-full px-3 py-1.5 text-xs font-medium transition ${
+                prefs.fontSize === id
+                  ? "bg-teal-600 text-cream-50"
+                  : "bg-teal-600/10 text-teal-700 dark:bg-white/5 dark:text-cream-100"
+              }`}
+            >
+              {s.label}
+            </button>
+          ))}
+        </div>
+
+        <div className="mt-4 flex flex-col gap-1">
+          {Object.entries(READING_FONTS).map(([id, f]) => (
+            <button
+              key={id}
+              type="button"
+              onClick={() => handleReadingFont(id)}
+              aria-pressed={prefs.readingFont === id}
+              style={{ fontFamily: f.stack }}
+              className={`flex items-center justify-between rounded-lg px-3 py-2 text-left text-sm transition ${
+                prefs.readingFont === id
+                  ? "bg-teal-600 text-cream-50"
+                  : "text-ink-900 hover:bg-teal-600/10 dark:text-cream-100"
+              }`}
+            >
+              <span>{f.label}</span>
+              {prefs.readingFont === id && <span aria-hidden="true">✓</span>}
+            </button>
+          ))}
+        </div>
+
+        <div className="mt-4 rounded-xl bg-teal-600/5 px-4 py-3 dark:bg-white/5">
+          <p className="font-[var(--font-reading)] text-[calc(1rem*var(--font-scale,1))] leading-relaxed text-ink-900 dark:text-cream-100">
+            Elif, Lâm, Mîm. İşte bu kitap; kendisinde hiçbir şüphe yoktur.
+          </p>
+        </div>
       </section>
 
       <section className="mt-4 rounded-2xl border border-teal-600/15 p-4 dark:border-cream-200/15">

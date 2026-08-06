@@ -27,7 +27,7 @@ export default function MealView({ verses, translationId }) {
           <span className="text-xs font-medium text-teal-700/70 dark:text-gold-500/70">
             {rangeLabel(group)}
           </span>
-          <p className="mt-1 font-[var(--font-reading)] text-lg leading-[1.85] text-ink-900 dark:text-cream-100">
+          <p className="mt-1 font-[var(--font-reading)] text-[calc(1.125rem*var(--font-scale,1))] leading-[1.85] text-ink-900 dark:text-cream-100">
             {stripRangePrefix(group.text)}
           </p>
         </section>
