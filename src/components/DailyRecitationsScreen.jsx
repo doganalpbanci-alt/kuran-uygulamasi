@@ -1,5 +1,8 @@
+import { useState } from "react";
 import {
   DAILY_RECITATIONS,
+  DAILY_CATEGORIES,
+  TIME_TAGS,
   isItemReady,
   quranEntryFor,
   quranGroupEntries,
@@ -113,8 +116,14 @@ export default function DailyRecitationsScreen({
   onOpenSurah,
   onOpenDhikr,
 }) {
-  const quranItems = DAILY_RECITATIONS.filter((i) => i.type !== "dhikr");
-  const dhikrItems = DAILY_RECITATIONS.filter((i) => i.type === "dhikr");
+  const [category, setCategory] = useState(DAILY_CATEGORIES[0].id);
+  const [timeFilter, setTimeFilter] = useState("all");
+
+  const inCategory = DAILY_RECITATIONS.filter((i) => i.category === category);
+  const visible =
+    timeFilter === "all"
+      ? inCategory
+      : inCategory.filter((i) => i.tags.includes(timeFilter));
 
   return (
     <div className="flex min-h-full flex-col px-5 py-4">
@@ -133,34 +142,83 @@ export default function DailyRecitationsScreen({
       </div>
 
       <p className="mt-3 text-xs leading-relaxed text-ink-700/60 dark:text-cream-200/60">
-        Sahih hadislerde belirtilen sabah-akşam ve namaz sonrası okunması
-        tavsiye edilen sure ve dualar. Her öğenin altında kaynağı belirtilir.
+        Sahih hadislerde belirtilen okunması tavsiye edilen sure ve dualar.
+        Her öğenin altında kaynağı belirtilir.
       </p>
 
-      {quranItems.length > 0 && (
-        <section className="mt-5">
-          <h2 className="mb-2 text-xs font-medium uppercase tracking-wide text-ink-700/50 dark:text-cream-200/40">
-            Kur'an Okumaları
-          </h2>
-          <ul className="flex flex-col gap-3">
-            {quranItems.map((item) => (
-              <QuranItem key={item.id} item={item} onOpenSurah={onOpenSurah} />
-            ))}
-          </ul>
-        </section>
-      )}
+      {/* Ana kategori: Günlük Okumalar (Kur'an) / Dualar (hadis) */}
+      <div
+        role="tablist"
+        aria-label="Kategori"
+        className="mt-4 flex rounded-full bg-teal-600/10 p-0.5 text-xs dark:bg-white/5"
+      >
+        {DAILY_CATEGORIES.map((c) => (
+          <button
+            key={c.id}
+            type="button"
+            role="tab"
+            aria-selected={category === c.id}
+            onClick={() => setCategory(c.id)}
+            className={`flex-1 rounded-full px-3 py-1.5 font-medium transition ${
+              category === c.id
+                ? "bg-teal-600 text-cream-50 shadow-sm"
+                : "text-teal-700 dark:text-cream-100"
+            }`}
+          >
+            {c.label}
+          </button>
+        ))}
+      </div>
 
-      {dhikrItems.length > 0 && (
-        <section className="mb-6 mt-5">
-          <h2 className="mb-2 text-xs font-medium uppercase tracking-wide text-ink-700/50 dark:text-cream-200/40">
-            Zikir ve Dualar
-          </h2>
-          <ul className="flex flex-col gap-3">
-            {dhikrItems.map((item) => (
+      {/* Vakit filtresi: yalnızca bu üç etiket çip olarak seçilebilir. */}
+      <div
+        role="group"
+        aria-label="Vakit filtresi"
+        className="mt-3 flex flex-wrap gap-1.5"
+      >
+        <button
+          type="button"
+          onClick={() => setTimeFilter("all")}
+          aria-pressed={timeFilter === "all"}
+          className={`rounded-full px-3 py-1 text-xs font-medium transition ${
+            timeFilter === "all"
+              ? "bg-teal-600 text-cream-50"
+              : "border border-teal-600/25 text-teal-700 dark:border-cream-200/25 dark:text-cream-100"
+          }`}
+        >
+          Tümü
+        </button>
+        {TIME_TAGS.map((t) => (
+          <button
+            key={t.id}
+            type="button"
+            onClick={() => setTimeFilter(t.id)}
+            aria-pressed={timeFilter === t.id}
+            className={`rounded-full px-3 py-1 text-xs font-medium transition ${
+              timeFilter === t.id
+                ? "bg-gold-500/20 text-gold-500 ring-1 ring-gold-500/40"
+                : "border border-teal-600/25 text-teal-700 dark:border-cream-200/25 dark:text-cream-100"
+            }`}
+          >
+            {t.label}
+          </button>
+        ))}
+      </div>
+
+      {visible.length === 0 ? (
+        <p className="mt-10 px-2 text-center text-sm text-ink-700/60 dark:text-cream-200/60">
+          Bu vakitte bu kategoride öğe yok.
+        </p>
+      ) : (
+        <ul className="mb-6 mt-4 flex flex-col gap-3">
+          {visible.map((item) =>
+            item.type === "dhikr" ? (
               <DhikrItem key={item.id} item={item} onOpenDhikr={onOpenDhikr} />
-            ))}
-          </ul>
-        </section>
+            ) : (
+              <QuranItem key={item.id} item={item} onOpenSurah={onOpenSurah} />
+            ),
+          )}
+        </ul>
       )}
     </div>
   );

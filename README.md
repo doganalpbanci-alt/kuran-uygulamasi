@@ -65,11 +65,12 @@ başına ayrı dosya olduğundan kısmi bölümlerde de sorunsuz çalışır.
 
 ## Günlük Okumalar
 
-Ana ekrandaki 📿 ile açılır. Sahih hadislerde sabah-akşam, namaz sonrası
-veya yatmadan önce okunması geçen 15 öğelik sabit bir liste —
-`src/data/daily-recitations.json`. İki türü var:
+Ana ekrandaki 📿 ile açılır. Sahih hadislerde okunması tavsiye edilen
+17 öğelik sabit bir liste — `src/data/daily-recitations.json`. Ekranda
+iki sekme var:
 
-- **`type: "quran"` / `"quran-group"`** — İhlâs+Felâk+Nâs, Âyetü'l-Kürsî
+- **Günlük Okumalar** — Kur'an tabanlı 5 öğe (`category: "okumalar"`,
+  `type: "quran"` / `"quran-group"`): İhlâs+Felâk+Nâs, Âyetü'l-Kürsî
   (Bakara 255), Âmenerrasûlü, Mülk, Haşr'ın son 3 âyeti. Bunların metni
   burada tekrar yazılmaz; `entryId`/`entryIds` alanı `src/data/index.json`
   içindeki gerçek bölüme işaret eder ve dokununca doğrudan mevcut
@@ -81,11 +82,22 @@ veya yatmadan önce okunması geçen 15 öğelik sabit bir liste —
   Haşr son 3 âyet `acikkuran.com` kesintisi yüzünden ayrı bir kaynaktan
   geliyor). Bir öğenin verisi henüz çekilmemişse (`getEntry` bulamazsa)
   ekran çökmek yerine "Veri hazırlanıyor" gösterip devre dışı bırakır.
-- **`type: "dhikr"`** — 10 hadis kaynaklı zikir/dua (Sayyidü'l-İstiğfar,
-  korunma duası, rıza duası, afiyet duası, sabah rızık duası, sübhânallâhi
-  ve bihamdihî, kelime-i tevhid, "cennet hazinesi", evden çıkış duası,
-  yatış duası). Bunlar Kur'an değil; kendi `arabic`/`transliteration`/
-  `meaning` alanlarını taşıyıp ayrı bir `DhikrDetailScreen`'de gösterilir.
+- **Dualar** — 12 hadis kaynaklı zikir/dua (`category: "dualar"`,
+  `type: "dhikr"`): Sayyidü'l-İstiğfâr, korunma duası, rıza duası,
+  afiyet duası, sabah rızık/ilim/amel duası, işlerin kolaylaşması
+  duası, sıkıntı ve borçtan korunma duası, evden çıkış duası, yatış
+  duası, sübhânallâhi ve bihamdihî, kelime-i tevhid, "cennet hazinesi".
+  Bunlar Kur'an değil; kendi `arabic`/`transliteration`/`meaning`
+  alanlarını taşıyıp ayrı bir `DhikrDetailScreen`'de gösterilir.
+
+Her öğe bir veya daha fazla `tags` taşır: `sabah_rutini`, `gece_rutini`,
+`namaz_sonrasi`, `gun_ici`. Ekranın üstündeki vakit çipleri (**Tümü /
+Sabah Rutini / Gece Rutini / Gün İçi**) yalnızca aktif sekmedeki
+öğeleri filtreler; `namaz_sonrasi` bilinçli olarak ayrı bir çip değil
+(kullanıcı isteğiyle) — o etiketi taşıyan öğeler (Âyetü'l-Kürsî, Haşr
+son 3 âyet) yalnızca kart üzerindeki metinde ("Namaz sonrası…") görünür,
+"Tümü" ile veya diğer eşleşen etiketleriyle (`gece_rutini`/`sabah_rutini`)
+listelenebilirler.
 
 Metinler tek kaynaktan (kullanıcının verdiği hadis atfı) değil, her biri
 için bağımsız aramayla (mümkün olduğunda iki farklı kaynaktan) çapraz
@@ -95,11 +107,16 @@ doğrulandı. Doğrulama bir gerçek sorun çıkardı: **Rıza Duası**'nın
 ediliyor. Uygulamadaki metin bunun yerine yalnızca akşama özgü, daha
 sağlam Tirmizî rivayetini ("...nebiyyen" ile biten, hasen-garîb) kullanır
 ve kaynak alanında bu derecelendirme açıkça belirtilir
-(`"Tirmizî, De'avât, 13 (hasen-garîb)"`). Diğer dokuz zikir/dua sahih
-olarak doğrulandı; ikisinde (Korunma ve Afiyet duaları, Ebû Dâvûd'un
-Edeb kitabındaki 101 ve 110 numaralı babları) metin ve hadis sahihliği
-teyit edildi ama bab numarası farklı baskı/konkordans farkları yüzünden
-bağımsızca doğrulanamadı — yanlış olduklarına dair bir bulgu da yok.
+(`"Tirmizî, De'avât, 13 (hasen-garîb)"`) — ekrandaki "Sabah" etiketi
+yalnızca vakit filtresi içindir, hadisin akşama özgü olduğu gerçeği
+değişmez. Diğer on bir zikir/dua sahih olarak doğrulandı; ikisinde
+(Korunma ve Afiyet duaları, Ebû Dâvûd'un Edeb kitabındaki 101 ve 110
+numaralı babları) metin ve hadis sahihliği teyit edildi ama bab
+numarası farklı baskı/konkordans farkları yüzünden bağımsızca
+doğrulanamadı — yanlış olduklarına dair bir bulgu da yok. Sonradan
+eklenen iki dua da (işlerin kolaylaşması — İbn Hibbân, es-Sahîh IX/311;
+sıkıntı ve borçtan korunma — Buhârî, De'avât 35) aynı titizlikle
+doğrulandı; ikisi de sahih.
 
 ## Kur'an tabanlı öğeler ve sekme
 

@@ -10,6 +10,33 @@ import { getEntry } from "./dataStore";
  */
 export const DAILY_RECITATIONS = data.items;
 
+/** İki ana sekme. */
+export const DAILY_CATEGORIES = [
+  { id: "okumalar", label: "Günlük Okumalar" },
+  { id: "dualar", label: "Dualar" },
+];
+
+/**
+ * Vakit filtre çipleri. Yalnızca bu üçü — namaz_sonrasi ayrı bir çip
+ * değil, kartta bilgi olarak görünür ama filtrelenemez (istenen budur).
+ */
+export const TIME_TAGS = [
+  { id: "sabah_rutini", label: "Sabah Rutini" },
+  { id: "gece_rutini", label: "Gece Rutini" },
+  { id: "gun_ici", label: "Gün İçi" },
+];
+
+const TAG_LABELS = {
+  sabah_rutini: "Sabah Rutini",
+  gece_rutini: "Gece Rutini",
+  namaz_sonrasi: "Namaz Sonrası",
+  gun_ici: "Gün İçi",
+};
+
+export function tagLabel(tag) {
+  return TAG_LABELS[tag] ?? tag;
+}
+
 /** type: "quran" öğesinin bağlı olduğu bölüm; henüz çekilmemişse null. */
 export function quranEntryFor(item) {
   return item.entryId != null ? getEntry(item.entryId) : null;
