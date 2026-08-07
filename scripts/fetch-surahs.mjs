@@ -13,7 +13,7 @@ import { fileURLToPath } from "node:url";
 import path from "node:path";
 
 const API_BASE = "https://api.acikkuran.com";
-const QURAN_API = "https://api.quran.com/api/v4";
+export const QURAN_API = "https://api.quran.com/api/v4";
 const VERSE_AUDIO_BASE = "https://verses.quran.com/";
 
 // Varsayılan kari (Mishari Rashid al-`Afasy). Kullanıcı ayarlardan
@@ -24,16 +24,16 @@ const DEFAULT_RECITER_ID = 7;
 // src/lib/extraReciters.js içinde tanımlı — eklemek için veriyi
 // yeniden çekmeye gerek yok.
 
-const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
+export const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
 // Küçük ve her açılışta gereken meta veri uygulamayla birlikte paketlenir.
-const INDEX_FILE = path.join(ROOT, "src", "data", "index.json");
+export const INDEX_FILE = path.join(ROOT, "src", "data", "index.json");
 // Ayet ve tefsir verisi public/ altında: paketlenmez, açıldıkça indirilir
 // ve service worker tarafından kalıcı olarak cache'lenir.
-const DATA_DIR = path.join(ROOT, "public", "data");
+export const DATA_DIR = path.join(ROOT, "public", "data");
 
 // Tefsirler. quran.com'da Türkçe tefsir yok; İngilizce İbn Kesir blok
 // bazlı (bir kayıt birden çok ayeti kapsıyor), tam istenen biçimde.
-const TAFSIRS = [
+export const TAFSIRS = [
   { id: "en-ibn-kathir", source_id: 169, name: "Ibn Kathir (Abridged)", lang: "en" },
 ];
 
@@ -100,7 +100,7 @@ const ENTRIES = [
 // İki farklı kaynak kullanıldığı ve id uzayları çakıştığı için (Açık
 // Kuran'da 22 = Muhammed Esed, Quran.com'da 22 = Yusuf Ali) id'ler
 // "tr-11", "en-20" biçiminde önekleniyor.
-const TR_TRANSLATION_IDS = [
+export const TR_TRANSLATION_IDS = [
   11, // Diyanet İşleri (varsayılan)
   14, // Elmalılı Hamdi Yazır
   15, // Elmalılı (sadeleştirilmiş)
@@ -110,7 +110,7 @@ const TR_TRANSLATION_IDS = [
   26, // Suat Yıldırım
   30, // Yaşar Nuri Öztürk
 ];
-const EN_TRANSLATION_IDS = [
+export const EN_TRANSLATION_IDS = [
   20, // Saheeh International
   85, // M.A.S. Abdel Haleem
   19, // M. Pickthall
@@ -132,7 +132,7 @@ async function fetchJson(url) {
  * basılıyor. Çalışma anında temizlemek yerine burada bir kez arındırıyoruz:
  * script/style/iframe blokları ve olay öznitelikleri atılıyor.
  */
-function sanitizeHtml(html) {
+export function sanitizeHtml(html) {
   return html
     .replace(/<(script|style|iframe|object|embed)[\s\S]*?<\/\1>/gi, "")
     .replace(/<\/?(script|style|iframe|object|embed)[^>]*>/gi, "")
@@ -142,7 +142,7 @@ function sanitizeHtml(html) {
 }
 
 /** Quran.com çevirileri dipnotları HTML olarak gömüyor; sade metne indiriyoruz. */
-function stripHtml(text) {
+export function stripHtml(text) {
   return text
     .replace(/<sup[^>]*>.*?<\/sup>/gs, "")
     .replace(/<[^>]+>/g, "")
@@ -191,7 +191,7 @@ async function fetchTranslations() {
  *
  * Dönen yapı: Map<verseNumber, Map<resourceId, text>>
  */
-async function fetchEnglishTranslations(sourceIds, surahId) {
+export async function fetchEnglishTranslations(sourceIds, surahId) {
   const data = await fetchQuranJson(
     `${QURAN_API}/verses/by_chapter/${surahId}` +
       `?translations=${sourceIds.join(",")}&fields=verse_key&per_page=300`,
@@ -212,7 +212,7 @@ async function fetchEnglishTranslations(sourceIds, surahId) {
   return byVerseNumber;
 }
 
-async function fetchQuranJson(url) {
+export async function fetchQuranJson(url) {
   const res = await fetch(url);
   if (!res.ok) {
     throw new Error(`Quran.com isteği başarısız: ${url} (${res.status})`);
@@ -221,7 +221,7 @@ async function fetchQuranJson(url) {
 }
 
 /** Bir surenin Arapça kelime metinleri (kariden bağımsız, bir kez saklanır). */
-async function fetchArabicWords(surahId) {
+export async function fetchArabicWords(surahId) {
   const data = await fetchQuranJson(
     `${QURAN_API}/verses/by_chapter/${surahId}?words=true&word_fields=text_uthmani&per_page=300`,
   );
@@ -247,7 +247,7 @@ async function fetchArabicWords(surahId) {
  * kelime sırasına göre düz bir sayı dizisi: [başlangıç, bitiş, başlangıç, ...]
  * — 12 kari × 3000 kelime saklandığı için nesne yerine düz dizi tercih edildi.
  */
-async function fetchTimings(reciterId, surahId, wordsByVerse) {
+export async function fetchTimings(reciterId, surahId, wordsByVerse) {
   const data = await fetchQuranJson(
     `${QURAN_API}/recitations/${reciterId}/by_chapter/${surahId}?fields=segments&per_page=300`,
   );
@@ -285,7 +285,7 @@ async function fetchTimings(reciterId, surahId, wordsByVerse) {
  *
  * Dönen yapı: { url, byVerse: Map<verseNumber, [from, to, w1s, w1e, ...]> }
  */
-async function fetchContinuous(reciterId, surahId) {
+export async function fetchContinuous(reciterId, surahId) {
   const { audio_file: file } = await fetchQuranJson(
     `${QURAN_API}/chapter_recitations/${reciterId}/${surahId}?segments=true`,
   );
@@ -480,7 +480,7 @@ async function fetchSurah(entry, translations, reciters, bismillah) {
  * sürüm hem aralıkları yanlış etiketliyor hem aynı bloğu tekrar tekrar
  * kaydediyordu.
  */
-async function fetchTafsir(tafsirId, entry) {
+export async function fetchTafsir(tafsirId, entry) {
   const first = entry.from ?? 1;
   const last = entry.to ?? entry.verse_count;
 
@@ -536,7 +536,7 @@ async function fetchTafsir(tafsirId, entry) {
 }
 
 /** Tüm karileri, ses adresi öneki ve segment desteğiyle birlikte getirir. */
-async function fetchReciters() {
+export async function fetchReciters() {
   const { recitations } = await fetchQuranJson(
     `${QURAN_API}/resources/recitations`,
   );
@@ -563,7 +563,7 @@ async function fetchReciters() {
 }
 
 /** Besmele (Fatiha 1:1) — her surenin 0. ayeti için. */
-async function fetchBismillah(reciters, translations) {
+export async function fetchBismillah(reciters, translations) {
   const words = await fetchArabicWords(1);
   const timings = {};
   for (const r of reciters.filter((x) => x.sync === "word")) {
@@ -676,7 +676,13 @@ async function main() {
   console.log(`  ${DATA_DIR}/surah-*.json (${entries.length} bölüm)`);
 }
 
-main().catch((err) => {
-  console.error(err);
-  process.exit(1);
-});
+// Bu dosya scripts/fetch-fallback-items.mjs tarafından fonksiyonlarını
+// yeniden kullanmak için import ediliyor; import edilince main()
+// çalışmasın, yalnızca doğrudan "node fetch-surahs.mjs" ile çalıştırılınca
+// çalışsın.
+if (import.meta.url === `file://${process.argv[1]}`) {
+  main().catch((err) => {
+    console.error(err);
+    process.exit(1);
+  });
+}

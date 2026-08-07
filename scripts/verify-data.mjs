@@ -17,7 +17,24 @@ import path from "node:path";
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
 const QURAN_API = "https://api.quran.com/api/v4";
 const AK_API = "https://api.acikkuran.com";
+const ALQURAN_CLOUD = "https://api.alquran.cloud/v1";
 const TAFSIR_SOURCE_ID = 169; // Ibn Kathir (Abridged)
+
+// api.acikkuran.com'un DNS'i kırık olduğu sürece bu 5 öğe
+// scripts/fetch-fallback-items.mjs ile alquran.cloud'dan çekiliyor —
+// doğrulaması da o kaynağa karşı yapılmalı. Bkz. o script'in başındaki
+// açıklama.
+const FALLBACK_ENTRY_IDS = new Set([112, 113, 114, "ayetelkursi", "hasr-son3"]);
+const ALQURAN_CLOUD_TR = [
+  { appId: "tr-11", edition: "tr.diyanet" },
+  { appId: "tr-14", edition: "tr.yazir" },
+  { appId: "tr-6", edition: "tr.bulac" },
+  { appId: "tr-27", edition: "tr.ates" },
+  { appId: "tr-26", edition: "tr.yildirim" },
+  { appId: "tr-30", edition: "tr.ozturk" },
+];
+const ALQURAN_CLOUD_MISSING_TR = ["tr-15", "tr-22"]; // Elmalılı sadeleştirilmiş, Muhammed Esed
+const ALQURAN_CLOUD_TRANSLITERATION = "tr.transliteration";
 
 let failures = 0;
 let checks = 0;
@@ -94,17 +111,13 @@ async function sourceTafsirBlocks(surahNum) {
   };
 }
 
-async function verifyEntry(index, entry) {
-  console.log(`\n${entry.name} (${entry.id})`);
-  // Bölüm id'si sure numarası olmayabilir (Âmenerrasûlü gibi kısmi bölümler).
-  const surahNum = entry.audio_surah;
-
+/** Bölüm başına ortak hazırlık: dosyayı okur, ayet sayısı/sürekliliğini denetler. */
+async function loadAndCheckContinuity(entry) {
   const { verses } = await readJson(
     path.join(ROOT, "public", "data", `surah-${entry.id}.json`),
   );
   const numbered = verses.filter((v) => v.verse_number > 0);
 
-  // 1) Ayet sayısı ve numaraların sürekliliği
   const first = entry.range?.[0] ?? 1;
   const last = entry.range?.[1] ?? entry.verse_count;
   const expected = last - first + 1;
@@ -119,9 +132,218 @@ async function verifyEntry(index, entry) {
     `ilk sapma: ${numbered.find((v, i) => v.verse_number !== first + i)?.verse_number}`,
   );
 
-  const ourVerse = (n) => numbered.find((v) => v.verse_number === n);
   const range = [];
   for (let n = first; n <= last; n++) range.push(n);
+
+  return {
+    verses,
+    numbered,
+    first,
+    last,
+    range,
+    ourVerse: (n) => numbered.find((v) => v.verse_number === n),
+  };
+}
+
+/** Arapça metin ve tefsir: hem Açık Kuran hem alquran.cloud kaynaklı öğelerde ortak (ikisi de Quran.com). */
+async function verifyArabicAndTafsir(index, entry, surahNum, ourVerse, range, first, last) {
+  // Arapça: kelimelerin birleşimi ayetin kendi metnine eşit mi
+  const { verses: arab } = await api(
+    `${QURAN_API}/verses/by_chapter/${surahNum}?fields=text_uthmani&per_page=300`,
+  );
+  const arabByNum = new Map(
+    arab.map((v) => [Number(v.verse_key.split(":")[1]), v.text_uthmani]),
+  );
+  const badArabic = [];
+  const badWords = [];
+  for (const n of range) {
+    const words = ourVerse(n)?.arabic_words ?? [];
+    if (words.length === 0 || words.some((w) => !w?.trim())) badWords.push(n);
+    const ours = normalizeArabic(words.join(" "));
+    const theirs = normalizeArabic(arabByNum.get(n));
+    if (ours !== theirs || !ours) badArabic.push(n);
+  }
+  check(
+    badArabic.length === 0,
+    `Arapça metin (${range.length} ayet)`,
+    `${badArabic.length} ayet farklı, ilki ${surahNum}:${badArabic[0]}`,
+  );
+  check(
+    badWords.length === 0,
+    `Arapça kelime bölünmesi`,
+    `${badWords.length} ayette boş kelime, ilki ${surahNum}:${badWords[0]}`,
+  );
+
+  // Tefsir: blokları kaynaktan bağımsızca kurup birebir karşılaştır
+  for (const taf of index.tafsirs) {
+    let blocks;
+    try {
+      ({ blocks } = await readJson(
+        path.join(ROOT, "public", "data", `tafsir-${taf.id}-${entry.id}.json`),
+      ));
+    } catch {
+      check(false, `${taf.name} dosyası`, "bulunamadı");
+      continue;
+    }
+
+    const src = await sourceTafsirBlocks(surahNum);
+    check(
+      entry.range ? src.rowCount >= last : src.rowCount === entry.verse_count,
+      `${taf.name} kaynak ayet sayısı`,
+      `${src.rowCount} / beklenen ${entry.range ? `>= ${last}` : entry.verse_count}`,
+    );
+
+    const want = src.blocks.filter((b) => b.to >= first && b.from <= last);
+    check(
+      blocks.length === want.length,
+      `${taf.name} blok sayısı`,
+      `${blocks.length} != ${want.length}`,
+    );
+
+    const mismatched = blocks.filter((b, i) => {
+      const w = want[i];
+      return (
+        !w ||
+        b.from !== w.from ||
+        b.to !== w.to ||
+        normalize(b.text) !== w.text
+      );
+    });
+    check(
+      mismatched.length === 0,
+      `${taf.name} bloklar kaynakla birebir`,
+      mismatched.length
+        ? `ilk sapma ${mismatched[0].from}-${mismatched[0].to}`
+        : "",
+    );
+
+    let ok = blocks.length > 0 && blocks[0].from <= first;
+    for (let i = 0; i < blocks.length; i++) {
+      if (blocks[i].from > blocks[i].to) ok = false;
+      if (i > 0 && blocks[i].from !== blocks[i - 1].to + 1) ok = false;
+      if (!blocks[i].text?.trim()) ok = false;
+    }
+    if (blocks.length && blocks[blocks.length - 1].to < last) ok = false;
+    check(
+      ok,
+      `${taf.name} kapsam boşluksuz`,
+      blocks.map((b) => `${b.from}-${b.to}`).join(","),
+    );
+  }
+}
+
+/**
+ * alquran.cloud kaynaklı 5 öğe: Türkçe meal (6/8 yazar) + okunuş
+ * alquran.cloud'dan; İngilizce meal, Arapça, tefsir değişmedi (Quran.com).
+ * Besmele satırı (0. ayet) ayrı: meali eski doğrulanmış dosyadan aynen
+ * kopyalandığı için o dosyaya karşı, okunuşu ise Fatiha 1:1'in
+ * alquran.cloud çevirisine karşı doğrulanıyor (fetch-fallback-items.mjs
+ * ile aynı mantık).
+ */
+async function verifyFallbackEntry(index, entry) {
+  console.log(`\n${entry.name} (${entry.id}) — alquran.cloud kaynaklı`);
+  const surahNum = entry.audio_surah;
+  const { ourVerse, range, first, last } = await loadAndCheckContinuity(entry);
+
+  const editions = [...ALQURAN_CLOUD_TR.map((t) => t.edition), ALQURAN_CLOUD_TRANSLITERATION].join(",");
+  const { data } = await api(`${ALQURAN_CLOUD}/surah/${surahNum}/editions/${editions}`);
+  const translations = new Map(); // verseNumber -> Map<appId, text>
+  const transliteration = new Map(); // verseNumber -> text
+  for (const edition of data) {
+    const id = edition.edition.identifier;
+    const trMatch = ALQURAN_CLOUD_TR.find((t) => t.edition === id);
+    for (const ayah of edition.ayahs) {
+      const n = ayah.numberInSurah;
+      if (trMatch) {
+        if (!translations.has(n)) translations.set(n, new Map());
+        translations.get(n).set(trMatch.appId, ayah.text.trim());
+      } else if (id === ALQURAN_CLOUD_TRANSLITERATION) {
+        transliteration.set(n, ayah.text.trim());
+      }
+    }
+  }
+
+  // Türkçe meal: 6 yazarın her ayeti alquran.cloud'a karşı
+  for (const t of ALQURAN_CLOUD_TR) {
+    const bad = [];
+    for (const n of range) {
+      const ours = normalize(ourVerse(n)?.translations?.[t.appId]);
+      const theirs = normalize(translations.get(n)?.get(t.appId));
+      if (ours !== theirs || !ours) bad.push({ n, ours, theirs });
+    }
+    check(
+      bad.length === 0,
+      `${t.appId} (${range.length} ayet, alquran.cloud)`,
+      bad.length
+        ? `${bad.length} ayet farklı, ilki ${surahNum}:${bad[0].n} — ` +
+            `bizde "${bad[0].ours.slice(0, 40)}" / kaynakta "${bad[0].theirs.slice(0, 40)}"`
+        : "",
+    );
+  }
+
+  // tr-15/tr-22: hiçbir yeni kaynakta yok; ayet satırlarında (0 hariç) hiç
+  // olmamalı — yanlışlıkla eski/bozuk veri sızmadığını doğrular.
+  for (const id of ALQURAN_CLOUD_MISSING_TR) {
+    const leaked = range.filter((n) => ourVerse(n)?.translations?.[id] != null);
+    check(
+      leaked.length === 0,
+      `${id} bu bölümde olmamalı (kaynağı yok)`,
+      leaked.length ? `ayet ${leaked[0]}'de metin var` : "",
+    );
+  }
+
+  // Okunuş: alquran.cloud'un tr.transliteration'ına karşı
+  const badOkunus = [];
+  for (const n of range) {
+    const ours = normalize(ourVerse(n)?.transcription);
+    const theirs = normalize(transliteration.get(n));
+    if (ours !== theirs || !ours) badOkunus.push(n);
+  }
+  check(
+    badOkunus.length === 0,
+    `Okunuş (${range.length} ayet, alquran.cloud)`,
+    badOkunus.length ? `${badOkunus.length} ayet farklı, ilki ${surahNum}:${badOkunus[0]}` : "",
+  );
+
+  // Besmele (0. ayet, yalnızca tam yeni surelerde: İhlâs/Felâk/Nâs)
+  const zero = ourVerse(0);
+  if (zero) {
+    const verified = JSON.parse(
+      await readFile(path.join(ROOT, "public", "data", "surah-96.json"), "utf-8"),
+    ).verses.find((v) => v.verse_number === 0);
+    const badBesmele = Object.keys(verified.translations).filter(
+      (id) => normalize(zero.translations[id]) !== normalize(verified.translations[id]),
+    );
+    check(
+      badBesmele.length === 0,
+      "Besmele meali (doğrulanmış dosyadan kopya)",
+      badBesmele.length ? `farklı: ${badBesmele.join(", ")}` : "",
+    );
+
+    // transliteration Map'i bu bölümün suresine ait (örn. 112); besmele
+    // Fatiha 1:1'den geldiği için ayrı bir sorgu gerekiyor.
+    const { data: fatihaData } = await api(
+      `${ALQURAN_CLOUD}/surah/1/editions/${ALQURAN_CLOUD_TRANSLITERATION}`,
+    );
+    const fatihaOkunus = fatihaData[0].ayahs.find((a) => a.numberInSurah === 1)?.text.trim();
+    check(
+      normalize(zero.transcription) === normalize(fatihaOkunus),
+      "Besmele okunuşu (Fatiha 1:1, alquran.cloud)",
+      `bizde "${zero.transcription}" / kaynakta "${fatihaOkunus}"`,
+    );
+  }
+
+  await verifyArabicAndTafsir(index, entry, surahNum, ourVerse, range, first, last);
+
+  console.log(`  ${checks - failures}/${checks} kontrol geçti`);
+}
+
+async function verifyEntry(index, entry) {
+  console.log(`\n${entry.name} (${entry.id})`);
+  // Bölüm id'si sure numarası olmayabilir (Âmenerrasûlü gibi kısmi bölümler).
+  const surahNum = entry.audio_surah;
+
+  const { ourVerse, range, first, last } = await loadAndCheckContinuity(entry);
 
   // 2) Türkçe meal: her yazarın her ayeti
   for (const t of index.translations.filter((x) => x.lang === "tr")) {
@@ -177,95 +399,7 @@ async function verifyEntry(index, entry) {
     }
   }
 
-  // 4) Arapça: kelimelerin birleşimi ayetin kendi metnine eşit mi
-  const { verses: arab } = await api(
-    `${QURAN_API}/verses/by_chapter/${surahNum}?fields=text_uthmani&per_page=300`,
-  );
-  const arabByNum = new Map(
-    arab.map((v) => [Number(v.verse_key.split(":")[1]), v.text_uthmani]),
-  );
-  const badArabic = [];
-  const badWords = [];
-  for (const n of range) {
-    const words = ourVerse(n)?.arabic_words ?? [];
-    // Boşluk karşılaştırmadan çıktığı için kelime bölünmesi ayrıca denetleniyor.
-    if (words.length === 0 || words.some((w) => !w?.trim())) badWords.push(n);
-    const ours = normalizeArabic(words.join(" "));
-    const theirs = normalizeArabic(arabByNum.get(n));
-    if (ours !== theirs || !ours) badArabic.push(n);
-  }
-  check(
-    badArabic.length === 0,
-    `Arapça metin (${range.length} ayet)`,
-    `${badArabic.length} ayet farklı, ilki ${surahNum}:${badArabic[0]}`,
-  );
-  check(
-    badWords.length === 0,
-    `Arapça kelime bölünmesi`,
-    `${badWords.length} ayette boş kelime, ilki ${surahNum}:${badWords[0]}`,
-  );
-
-  // 5) Tefsir: blokları kaynaktan bağımsızca kurup birebir karşılaştır
-  for (const taf of index.tafsirs) {
-    let blocks;
-    try {
-      ({ blocks } = await readJson(
-        path.join(ROOT, "public", "data", `tafsir-${taf.id}-${entry.id}.json`),
-      ));
-    } catch {
-      check(false, `${taf.name} dosyası`, "bulunamadı");
-      continue;
-    }
-
-    const src = await sourceTafsirBlocks(surahNum);
-    // Tam surelerde kaynak satır sayısı bölümün ayet sayısına eşit olmalı;
-    // kısmi bölümlerde (Âmenerrasûlü) yalnızca aralığı kapsaması yeter.
-    check(
-      entry.range ? src.rowCount >= last : src.rowCount === entry.verse_count,
-      `${taf.name} kaynak ayet sayısı`,
-      `${src.rowCount} / beklenen ${entry.range ? `>= ${last}` : entry.verse_count}`,
-    );
-
-    // Kısmi bölümde yalnızca kesişen bloklar bekleniyor.
-    const want = src.blocks.filter((b) => b.to >= first && b.from <= last);
-    check(
-      blocks.length === want.length,
-      `${taf.name} blok sayısı`,
-      `${blocks.length} != ${want.length}`,
-    );
-
-    const mismatched = blocks.filter((b, i) => {
-      const w = want[i];
-      return (
-        !w ||
-        b.from !== w.from ||
-        b.to !== w.to ||
-        normalize(b.text) !== w.text
-      );
-    });
-    check(
-      mismatched.length === 0,
-      `${taf.name} bloklar kaynakla birebir`,
-      mismatched.length
-        ? `ilk sapma ${mismatched[0].from}-${mismatched[0].to}`
-        : "",
-    );
-
-    // Etiketlenen aralıklar bölümün tamamını boşluksuz kapsamalı: bir
-    // ayetin tefsirine hiç ulaşılamaması sessiz bir eksiklik olurdu.
-    let ok = blocks.length > 0 && blocks[0].from <= first;
-    for (let i = 0; i < blocks.length; i++) {
-      if (blocks[i].from > blocks[i].to) ok = false;
-      if (i > 0 && blocks[i].from !== blocks[i - 1].to + 1) ok = false;
-      if (!blocks[i].text?.trim()) ok = false;
-    }
-    if (blocks.length && blocks[blocks.length - 1].to < last) ok = false;
-    check(
-      ok,
-      `${taf.name} kapsam boşluksuz`,
-      blocks.map((b) => `${b.from}-${b.to}`).join(","),
-    );
-  }
+  await verifyArabicAndTafsir(index, entry, surahNum, ourVerse, range, first, last);
 
   console.log(`  ${checks - failures}/${checks} kontrol geçti`);
 }
@@ -273,14 +407,32 @@ async function verifyEntry(index, entry) {
 async function main() {
   const index = await readJson(path.join(ROOT, "src", "data", "index.json"));
 
+  // api.acikkuran.com'un DNS'i kırık olduğu sürece Açık Kuran kaynaklı
+  // girdiler bu script'te doğrulanamaz. Erişilemezse o girdileri
+  // "atlandı" olarak işaretleyip devam ediyoruz — tek bir kaynağın
+  // engelli olması, erişilebilen (alquran.cloud kaynaklı 5 öğe gibi)
+  // girdilerin doğrulamasını da iptal etmemeli.
+  let skipped = 0;
   for (const entry of index.entries) {
-    await verifyEntry(index, entry);
+    try {
+      if (FALLBACK_ENTRY_IDS.has(entry.id)) {
+        await verifyFallbackEntry(index, entry);
+      } else {
+        await verifyEntry(index, entry);
+      }
+    } catch (err) {
+      skipped++;
+      console.error(`\n${entry.name} (${entry.id}) — ATLANDI: ${err.message}`);
+    }
   }
 
+  if (skipped > 0) {
+    console.log(`\n(${skipped} girdi kaynağa erişilemediği için atlandı, hata sayılmadı)`);
+  }
   console.log(
     `\n${failures === 0 ? "TÜM KONTROLLER GEÇTİ" : `${failures} KONTROL BAŞARISIZ`} (${checks} kontrol)`,
   );
-  process.exit(failures === 0 ? 0 : 1);
+  process.exit(failures === 0 && skipped === 0 ? 0 : failures === 0 ? 2 : 1);
 }
 
 main().catch((err) => {

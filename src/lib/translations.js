@@ -11,8 +11,17 @@ export function getTranslation(id) {
   );
 }
 
+/**
+ * api.acikkuran.com'un kesintisi sırasında alternatif kaynaktan (bkz.
+ * scripts/fetch-fallback-items.mjs) çekilen bölümlerde 8 mealden yalnızca
+ * 6'sı var — Elmalılı (sadeleştirilmiş) ve Muhammed Esed hiçbir yeni
+ * kaynakta yok. Sessizce boş bırakmak "meal bozuk" izlenimi verir; hangi
+ * durumda olduğu açıkça yazılıyor.
+ */
 export function translationText(verse, translationId) {
-  return verse.translations?.[translationId] ?? "";
+  return (
+    verse.translations?.[translationId] || "(Bu meal bu bölüm için henüz eklenmedi.)"
+  );
 }
 
 /**
