@@ -170,6 +170,8 @@ export default function App() {
   const [focusVerse, setFocusVerse] = useState(null);
   // Günlük Okumalar'dan açılan hadis kaynaklı zikir/dua.
   const [selectedDhikr, setSelectedDhikr] = useState(null);
+  // Okuma ekranından geri dönülecek ekran (nereden açıldıysa).
+  const [returnScreen, setReturnScreen] = useState("home");
 
   useEffect(() => {
     checkAndNotify();
@@ -177,9 +179,10 @@ export default function App() {
     return () => clearInterval(interval);
   }, []);
 
-  const openSurah = (id, verse = null) => {
+  const openSurah = (id, verse = null, from = "home") => {
     setSelectedSurahId(id);
     setFocusVerse(verse);
+    setReturnScreen(from);
     setScreen("reading");
   };
 
@@ -191,7 +194,7 @@ export default function App() {
       <ReadingScreen
         surah={selectedSurah}
         focusVerse={focusVerse}
-        onBack={() => setScreen("home")}
+        onBack={() => setScreen(returnScreen)}
       />
     );
   }
@@ -228,7 +231,7 @@ export default function App() {
       <BookmarksScreen
         onBack={() => setScreen("home")}
         onOpenBookmark={(surahId, verseNumber) =>
-          openSurah(surahId, verseNumber)
+          openSurah(surahId, verseNumber, "bookmarks")
         }
       />
     );
@@ -247,7 +250,7 @@ export default function App() {
     return (
       <DailyRecitationsScreen
         onBack={() => setScreen("home")}
-        onOpenSurah={(id) => openSurah(id)}
+        onOpenSurah={(id) => openSurah(id, null, "daily")}
         onOpenDhikr={(item) => {
           setSelectedDhikr(item);
           setScreen("dhikr-detail");

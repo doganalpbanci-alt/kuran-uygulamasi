@@ -44,6 +44,12 @@ export default function DhikrDetailScreen({ item, onBack }) {
         <p className="mt-4 font-[var(--font-reading)] text-[calc(1rem*var(--font-scale,1))] leading-relaxed text-ink-900 dark:text-cream-100">
           {item.meaning}
         </p>
+
+        {item.virtue && (
+          <p className="mt-3 font-[var(--font-reading)] text-[calc(0.9rem*var(--font-scale,1))] italic leading-relaxed text-ink-700/60 dark:text-cream-200/55">
+            Fazileti: "{item.virtue}"
+          </p>
+        )}
       </div>
 
       <p className="mt-6 border-t border-teal-600/10 pt-3 text-xs leading-relaxed text-ink-700/50 dark:border-cream-200/10 dark:text-cream-200/45">

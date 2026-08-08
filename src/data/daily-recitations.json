@@ -80,7 +80,8 @@
       "tags": ["sabah_rutini"],
       "arabic": "بِسْمِ اللَّهِ الَّذِي لَا يَضُرُّ مَعَ اسْمِهِ شَيْءٌ فِي الْأَرْضِ وَلَا فِي السَّمَاءِ وَهُوَ السَّمِيعُ الْعَلِيمُ",
       "transliteration": "Bismillâhillezî lâ yedurru mea'smihî şey'ün fi'l-ardı ve lâ fi's-semâi ve hüve's-semî'ul-alîm.",
-      "meaning": "Kendi adıyla birlikte yerde ve gökte hiçbir şeyin zarar veremeyeceği Allah'ın adıyla. O, hakkıyla işitendir, hakkıyla bilendir. Bunu her sabah ve her akşam üç kez söyleyen kimseye hiçbir şey zarar veremez."
+      "meaning": "Kendi adıyla birlikte yerde ve gökte hiçbir şeyin zarar veremeyeceği Allah'ın adıyla. O, hakkıyla işitendir, hakkıyla bilendir.",
+      "virtue": "Bunu her sabah ve her akşam üç kez söyleyen kimseye hiçbir şey zarar veremez."
     },
     {
       "id": "riza-duasi",
@@ -93,7 +94,8 @@
       "tags": ["sabah_rutini"],
       "arabic": "رَضِيتُ بِاللَّهِ رَبًّا، وَبِالْإِسْلَامِ دِينًا، وَبِمُحَمَّدٍ نَبِيًّا",
       "transliteration": "Radıytü billâhi Rabben, ve bil-İslâmi dînen, ve bi-Muhammedin (sallallahu aleyhi ve sellem) nebiyyen.",
-      "meaning": "Rab olarak Allah'tan, din olarak İslam'dan, peygamber olarak Muhammed'den (sallallahu aleyhi ve sellem) razı oldum. Akşama girerken bunu söyleyen kimseyi Allah'ın kıyamet günü razı etmesi hak olur."
+      "meaning": "Rab olarak Allah'tan, din olarak İslam'dan, peygamber olarak Muhammed'den (sallallahu aleyhi ve sellem) razı oldum.",
+      "virtue": "Akşama girerken bunu söyleyen kimseyi Allah'ın kıyamet günü razı etmesi hak olur."
     },
     {
       "id": "afiyet-duasi",
@@ -158,7 +160,8 @@
       "tags": ["gun_ici"],
       "arabic": "بِسْمِ اللَّهِ تَوَكَّلْتُ عَلَى اللَّهِ لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ",
       "transliteration": "Bismillâhi tevekkeltü alâllâh, lâ havle ve lâ kuvvete illâ billâh.",
-      "meaning": "Allah'ın adıyla, Allah'a tevekkül ettim (güvendim). Güç ve kuvvet ancak Allah iledir. Bunu evinden çıkarken söyleyen kimseye 'Sana yeterli olundu, korundun' denir ve şeytan ondan uzaklaşır."
+      "meaning": "Allah'ın adıyla, Allah'a tevekkül ettim (güvendim). Güç ve kuvvet ancak Allah iledir.",
+      "virtue": "Bunu evinden çıkarken söyleyen kimseye 'Sana yeterli olundu, korundun' denir ve şeytan ondan uzaklaşır."
     },
     {
       "id": "yatis-duasi",
@@ -184,7 +187,8 @@
       "tags": ["gun_ici"],
       "arabic": "سُبْحَانَ اللَّهِ وَبِحَمْدِهِ",
       "transliteration": "Sübhânallâhi ve bihamdihî.",
-      "meaning": "Allah'ı hamd ile birlikte tesbih ederim (Allah'ı noksan sıfatlardan tenzih ederim, O'na hamd ederim). Kim bunu günde yüz kere söylerse, günahları deniz köpüğü kadar çok olsa bile dökülür."
+      "meaning": "Allah'ı hamd ile birlikte tesbih ederim (Allah'ı noksan sıfatlardan tenzih ederim, O'na hamd ederim).",
+      "virtue": "Kim bunu günde yüz kere söylerse, günahları deniz köpüğü kadar çok olsa bile dökülür."
     },
     {
       "id": "kelime-i-tevhid",
