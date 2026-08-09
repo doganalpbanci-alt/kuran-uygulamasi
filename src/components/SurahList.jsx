@@ -65,8 +65,8 @@ export default function SurahList({
               aria-pressed={favorite}
               aria-label={
                 favorite
-                  ? `${surah.name} favorilerden çıkar`
-                  : `${surah.name} favorilere ekle`
+                  ? `${surah.name} işaretlenenlerden çıkar`
+                  : `${surah.name} işaretlenenlere ekle`
               }
               className={`shrink-0 rounded-2xl border px-3 text-lg transition ${
                 favorite

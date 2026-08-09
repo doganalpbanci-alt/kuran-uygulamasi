@@ -131,7 +131,7 @@ export default function ReadingScreen({ surah, onBack, focusVerse = null }) {
             }
             aria-pressed={favorite}
             aria-label={
-              favorite ? "Favorilerden çıkar" : "Favorilere ekle"
+              favorite ? "İşaretlenenlerden çıkar" : "İşaretlenenlere ekle"
             }
             className={`text-lg leading-none ${
               favorite

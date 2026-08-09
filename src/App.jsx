@@ -118,14 +118,14 @@ function Home({ onSelectSurah, onOpenSettings, onOpenBookmarks, onOpenDaily }) {
               : "bg-teal-600/10 text-teal-700 dark:bg-white/5 dark:text-cream-100"
           }`}
         >
-          ★ Favoriler
+          ★ İşaretlenenler
         </button>
       </div>
 
       <div className="mt-3">
         {visible.length === 0 ? (
           <p className="px-2 py-10 text-center text-sm text-ink-700/60 dark:text-cream-200/60">
-            Henüz favori işaretlenmedi. Sure kartındaki ☆ ile ekleyebilirsin.
+            Henüz işaretlenen sure yok. Sure kartındaki ☆ ile ekleyebilirsin.
           </p>
         ) : (
           <SurahList
