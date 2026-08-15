@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { getLastReadDate } from "../lib/streak";
 import { getFavoriteIds, toggleFavorite } from "../lib/favorites";
+import { getCustomItems, toggleCustomItem } from "../lib/dailyCustomItems";
 
 function formatLastRead(dateStr) {
   if (!dateStr) return "Henüz okunmadı";
@@ -21,10 +22,29 @@ export default function SurahList({
   onSelectSurah,
 }) {
   const [favIds, setFavIds] = useState(() => new Set(getFavoriteIds()));
+  const [dailyIds, setDailyIds] = useState(
+    () =>
+      new Set(
+        getCustomItems()
+          .filter((it) => it.type === "quran")
+          .map((it) => String(it.refId)),
+      ),
+  );
 
   const handleToggleFavorite = (e, id) => {
     e.stopPropagation();
     setFavIds(new Set(toggleFavorite(id)));
+  };
+
+  const handleToggleDaily = (e, id) => {
+    e.stopPropagation();
+    toggleCustomItem("quran", id);
+    setDailyIds((prev) => {
+      const next = new Set(prev);
+      if (next.has(String(id))) next.delete(String(id));
+      else next.add(String(id));
+      return next;
+    });
   };
 
   return (
@@ -32,6 +52,7 @@ export default function SurahList({
       {surahs.map((surah) => {
         const lastRead = getLastReadDate(surah.id);
         const favorite = favIds.has(surah.id);
+        const inDaily = dailyIds.has(String(surah.id));
         return (
           <li key={surah.id} className="flex items-stretch gap-2">
             <button
@@ -75,6 +96,24 @@ export default function SurahList({
               }`}
             >
               {favorite ? "★" : "☆"}
+            </button>
+
+            <button
+              type="button"
+              onClick={(e) => handleToggleDaily(e, surah.id)}
+              aria-pressed={inDaily}
+              aria-label={
+                inDaily
+                  ? `${surah.name} Günlük Okumalar'dan çıkar`
+                  : `${surah.name} Günlük Okumalar'a ekle`
+              }
+              className={`shrink-0 rounded-2xl border px-3 text-lg transition ${
+                inDaily
+                  ? "border-teal-600/40 bg-teal-600/10 text-teal-700 dark:border-gold-500/40 dark:bg-gold-500/10 dark:text-gold-500"
+                  : "border-teal-600/15 text-ink-700/30 hover:text-ink-700/60 dark:border-cream-200/15 dark:text-cream-200/30 dark:hover:text-cream-200/60"
+              }`}
+            >
+              {inDaily ? "✓" : "+"}
             </button>
           </li>
         );

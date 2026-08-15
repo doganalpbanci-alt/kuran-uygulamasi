@@ -7,6 +7,7 @@ import SyncMode from "./components/SyncMode";
 import SettingsScreen from "./components/SettingsScreen";
 import BookmarksScreen from "./components/BookmarksScreen";
 import DailyRecitationsScreen from "./components/DailyRecitationsScreen";
+import AddDailyItemScreen from "./components/AddDailyItemScreen";
 import DhikrDetailScreen from "./components/DhikrDetailScreen";
 import { getCurrentStreak, getLast7Days } from "./lib/streak";
 import { getPrefs, updatePrefs } from "./lib/prefs";
@@ -246,10 +247,15 @@ export default function App() {
     );
   }
 
+  if (screen === "daily-add") {
+    return <AddDailyItemScreen onBack={() => setScreen("daily")} />;
+  }
+
   if (screen === "daily") {
     return (
       <DailyRecitationsScreen
         onBack={() => setScreen("home")}
+        onOpenAdd={() => setScreen("daily-add")}
         onOpenSurah={(id) => openSurah(id, null, "daily")}
         onOpenDhikr={(item) => {
           setSelectedDhikr(item);

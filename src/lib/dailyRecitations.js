@@ -10,10 +10,11 @@ import { getEntry } from "./dataStore";
  */
 export const DAILY_RECITATIONS = data.items;
 
-/** İki ana sekme. */
+/** Ana sekmeler: iki sabit hadis kaynaklı liste + kullanıcının kendi eklediği. */
 export const DAILY_CATEGORIES = [
   { id: "okumalar", label: "Günlük Okumalar" },
   { id: "dualar", label: "Dualar" },
+  { id: "eklenenler", label: "Eklediklerim" },
 ];
 
 /**
@@ -60,4 +61,46 @@ export function isItemReady(item) {
     );
   }
   return false;
+}
+
+/** Kullanıcının Sureler ekranından/Ekle menüsünden seçtiği sabit dua öğesi. */
+export function builtinDhikrById(id) {
+  return (
+    DAILY_RECITATIONS.find((it) => it.type === "dhikr" && it.id === id) ??
+    null
+  );
+}
+
+/**
+ * Kullanıcının kendi eklediği bir sureyi "quran" tipi görüntülenebilir bir
+ * öğeye çevirir; ENTRIES içinde artık bulunmuyorsa null döner.
+ */
+export function customQuranDisplayItem(entryId) {
+  const entry = quranEntryFor({ entryId });
+  if (!entry) return null;
+  return {
+    id: `custom-quran-${entryId}`,
+    category: "eklenenler",
+    type: "quran",
+    name: entry.name,
+    occasion: "Kişisel listen",
+    repeat: "—",
+    source: "Kendi eklediğin",
+    tags: [],
+    entryId,
+  };
+}
+
+/**
+ * lib/dailyCustomItems.js'teki { type, refId } kayıtlarını görüntülenebilir
+ * öğelere çevirir; artık geçerli olmayanları (silinmiş referans) eler.
+ */
+export function resolveCustomItems(customItems) {
+  return customItems
+    .map((it) =>
+      it.type === "dhikr"
+        ? builtinDhikrById(it.refId)
+        : customQuranDisplayItem(it.refId),
+    )
+    .filter((it) => it != null);
 }
