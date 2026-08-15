@@ -6,12 +6,9 @@ import {
   isItemReady,
   quranEntryFor,
   quranGroupEntries,
-  resolveCustomItems,
+  resolveRoutineRefs,
 } from "../lib/dailyRecitations";
-import {
-  getCustomItems,
-  removeCustomItem,
-} from "../lib/dailyCustomItems";
+import { routineItemsForTag, removeFromRoutineTag } from "../lib/routine";
 
 function Meta({ item }) {
   return (
@@ -116,7 +113,7 @@ function DhikrItem({ item, onOpenDhikr }) {
   );
 }
 
-function CustomItem({ item, onOpen, onRemove }) {
+function RoutineItem({ item, onOpen, onRemove }) {
   return (
     <li className="flex items-stretch gap-2">
       <button
@@ -135,7 +132,7 @@ function CustomItem({ item, onOpen, onRemove }) {
       <button
         type="button"
         onClick={onRemove}
-        aria-label={`${item.name} eklediklerimden çıkar`}
+        aria-label={`${item.name} rutinden çıkar`}
         className="shrink-0 rounded-2xl border border-teal-600/15 px-3 text-lg text-ink-700/40 transition hover:text-red-500 dark:border-cream-200/15 dark:text-cream-200/40"
       >
         ×
@@ -152,23 +149,27 @@ export default function DailyRecitationsScreen({
 }) {
   const [category, setCategory] = useState(DAILY_CATEGORIES[0].id);
   const [timeFilter, setTimeFilter] = useState("all");
-  const [customItems, setCustomItems] = useState(getCustomItems);
+  const [routineTag, setRoutineTag] = useState(TIME_TAGS[0].id);
+  const [refresh, setRefresh] = useState(0);
 
-  const isCustomTab = category === "eklenenler";
-  const customDisplay = resolveCustomItems(customItems);
+  const isRoutineTab = category === "rutinim";
+  const routineDisplay = isRoutineTab
+    ? resolveRoutineRefs(routineItemsForTag(routineTag))
+    : [];
 
-  const inCategory = isCustomTab
-    ? customDisplay
+  const inCategory = isRoutineTab
+    ? routineDisplay
     : DAILY_RECITATIONS.filter((i) => i.category === category);
   const visible =
-    isCustomTab || timeFilter === "all"
+    isRoutineTab || timeFilter === "all"
       ? inCategory
       : inCategory.filter((i) => i.tags.includes(timeFilter));
 
-  const handleRemoveCustom = (item) => {
+  const handleRemoveFromRoutine = (item) => {
     const type = item.type === "dhikr" ? "dhikr" : "quran";
     const refId = item.type === "dhikr" ? item.id : item.entryId;
-    setCustomItems(removeCustomItem(type, refId));
+    removeFromRoutineTag(routineTag, type, refId);
+    setRefresh((n) => n + 1);
   };
 
   return (
@@ -184,23 +185,27 @@ export default function DailyRecitationsScreen({
         <h1 className="text-base font-semibold text-ink-900 dark:text-cream-100">
           Günlük Okumalar
         </h1>
-        <button
-          type="button"
-          onClick={onOpenAdd}
-          aria-label="Sure veya dua ekle"
-          className="text-sm font-medium text-teal-700 dark:text-gold-500"
-        >
-          + Ekle
-        </button>
+        {isRoutineTab ? (
+          <button
+            type="button"
+            onClick={() => onOpenAdd(routineTag)}
+            aria-label="Rutine sure veya dua ekle"
+            className="text-sm font-medium text-teal-700 dark:text-gold-500"
+          >
+            + Ekle
+          </button>
+        ) : (
+          <span className="w-10" />
+        )}
       </div>
 
       <p className="mt-3 text-xs leading-relaxed text-ink-700/60 dark:text-cream-200/60">
         Sahih hadislerde belirtilen okunması tavsiye edilen sure ve dualar.
-        Her öğenin altında kaynağı belirtilir. "Eklediklerim" sekmesi kendi
-        seçtiğin sure ve dualardan oluşur.
+        Her öğenin altında kaynağı belirtilir. "Rutinim" sekmesinde sabah,
+        gece ve gün içi için kendi okuma rutinini oluşturabilirsin.
       </p>
 
-      {/* Ana kategori: Günlük Okumalar (Kur'an) / Dualar (hadis) / Eklediklerim */}
+      {/* Ana kategori: Günlük Okumalar (Kur'an) / Dualar (hadis) / Rutinim */}
       <div
         role="tablist"
         aria-label="Kategori"
@@ -224,13 +229,13 @@ export default function DailyRecitationsScreen({
         ))}
       </div>
 
-      {/* Vakit filtresi: yalnızca bu üç etiket çip olarak seçilebilir; Eklediklerim'de anlamsız. */}
-      {!isCustomTab && (
-        <div
-          role="group"
-          aria-label="Vakit filtresi"
-          className="mt-3 flex flex-wrap gap-1.5"
-        >
+      {/* Günlük Okumalar/Dualar'da salt filtre; Rutinim'de hangi rutin düzenleniyor. */}
+      <div
+        role="group"
+        aria-label={isRoutineTab ? "Düzenlenen rutin" : "Vakit filtresi"}
+        className="mt-3 flex flex-wrap gap-1.5"
+      >
+        {!isRoutineTab && (
           <button
             type="button"
             onClick={() => setTimeFilter("all")}
@@ -243,36 +248,38 @@ export default function DailyRecitationsScreen({
           >
             Tümü
           </button>
-          {TIME_TAGS.map((t) => (
-            <button
-              key={t.id}
-              type="button"
-              onClick={() => setTimeFilter(t.id)}
-              aria-pressed={timeFilter === t.id}
-              className={`rounded-full px-3 py-1 text-xs font-medium transition ${
-                timeFilter === t.id
-                  ? "bg-gold-500/20 text-gold-500 ring-1 ring-gold-500/40"
-                  : "border border-teal-600/25 text-teal-700 dark:border-cream-200/25 dark:text-cream-100"
-              }`}
-            >
-              {t.label}
-            </button>
-          ))}
-        </div>
-      )}
+        )}
+        {TIME_TAGS.map((t) => (
+          <button
+            key={t.id}
+            type="button"
+            onClick={() =>
+              isRoutineTab ? setRoutineTag(t.id) : setTimeFilter(t.id)
+            }
+            aria-pressed={isRoutineTab ? routineTag === t.id : timeFilter === t.id}
+            className={`rounded-full px-3 py-1 text-xs font-medium transition ${
+              (isRoutineTab ? routineTag === t.id : timeFilter === t.id)
+                ? "bg-gold-500/20 text-gold-500 ring-1 ring-gold-500/40"
+                : "border border-teal-600/25 text-teal-700 dark:border-cream-200/25 dark:text-cream-100"
+            }`}
+          >
+            {t.label}
+          </button>
+        ))}
+      </div>
 
       {visible.length === 0 ? (
         <p className="mt-10 px-2 text-center text-sm text-ink-700/60 dark:text-cream-200/60">
-          {isCustomTab
-            ? 'Henüz bir şey eklemedin. Sağ üstteki "+ Ekle" ile sure ya da dua ekleyebilirsin.'
+          {isRoutineTab
+            ? 'Bu vakit için henüz bir şey eklemedin. Sağ üstteki "+ Ekle" ile sure ya da dua ekleyebilirsin.'
             : "Bu vakitte bu kategoride öğe yok."}
         </p>
       ) : (
-        <ul className="mb-6 mt-4 flex flex-col gap-3">
+        <ul key={refresh} className="mb-6 mt-4 flex flex-col gap-3">
           {visible.map((item) => {
-            if (isCustomTab) {
+            if (isRoutineTab) {
               return (
-                <CustomItem
+                <RoutineItem
                   key={item.id}
                   item={item}
                   onOpen={() =>
@@ -280,7 +287,7 @@ export default function DailyRecitationsScreen({
                       ? onOpenDhikr(item)
                       : onOpenSurah(item.entryId)
                   }
-                  onRemove={() => handleRemoveCustom(item)}
+                  onRemove={() => handleRemoveFromRoutine(item)}
                 />
               );
             }

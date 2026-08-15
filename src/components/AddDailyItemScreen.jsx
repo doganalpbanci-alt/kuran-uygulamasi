@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { ENTRIES } from "../lib/dataStore";
-import { DAILY_RECITATIONS } from "../lib/dailyRecitations";
-import { getCustomItems, toggleCustomItem } from "../lib/dailyCustomItems";
+import { DAILY_RECITATIONS, tagLabel } from "../lib/dailyRecitations";
+import { getRoutineItems, toggleRoutineTag } from "../lib/routine";
 
 const TABS = [
   { id: "sure", label: "Sure" },
@@ -29,7 +29,7 @@ function ToggleRow({ label, subtitle, added, onToggle }) {
         type="button"
         onClick={onToggle}
         aria-pressed={added}
-        aria-label={added ? `${label} eklediklerimden çıkar` : `${label} eklediklerime ekle`}
+        aria-label={added ? `${label} rutinden çıkar` : `${label} rutine ekle`}
         className={`shrink-0 rounded-2xl border px-4 text-sm font-medium transition ${
           added
             ? "border-gold-500/40 bg-gold-500/10 text-gold-500"
@@ -42,17 +42,21 @@ function ToggleRow({ label, subtitle, added, onToggle }) {
   );
 }
 
-export default function AddDailyItemScreen({ onBack }) {
+/** tag: hangi vakit rutinine ekleneceği (sabah_rutini/gece_rutini/gun_ici). */
+export default function AddDailyItemScreen({ tag, onBack }) {
   const [tab, setTab] = useState(TABS[0].id);
-  const [customItems, setCustomItems] = useState(getCustomItems);
+  const [routineItems, setRoutineItems] = useState(getRoutineItems);
 
   const isAdded = (type, refId) =>
-    customItems.some(
-      (it) => it.type === type && String(it.refId) === String(refId),
+    routineItems.some(
+      (it) =>
+        it.type === type &&
+        String(it.refId) === String(refId) &&
+        it.tags.includes(tag),
     );
 
   const handleToggle = (type, refId) => {
-    setCustomItems(toggleCustomItem(type, refId));
+    setRoutineItems(toggleRoutineTag(tag, type, refId));
   };
 
   return (
@@ -66,13 +70,14 @@ export default function AddDailyItemScreen({ onBack }) {
           ← Geri
         </button>
         <h1 className="text-base font-semibold text-ink-900 dark:text-cream-100">
-          Sure veya Dua Ekle
+          {tagLabel(tag)}ne Ekle
         </h1>
         <span className="w-10" />
       </div>
 
       <p className="mt-3 text-xs leading-relaxed text-ink-700/60 dark:text-cream-200/60">
-        Seçtiklerin Günlük Okumalar'daki "Eklediklerim" sekmesinde görünür.
+        Seçtiklerin Günlük Okumalar'daki "Rutinim" sekmesinde,{" "}
+        {tagLabel(tag)} altında görünür.
       </p>
 
       <div

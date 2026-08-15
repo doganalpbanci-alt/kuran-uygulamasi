@@ -173,6 +173,8 @@ export default function App() {
   const [selectedDhikr, setSelectedDhikr] = useState(null);
   // Okuma ekranından geri dönülecek ekran (nereden açıldıysa).
   const [returnScreen, setReturnScreen] = useState("home");
+  // Rutine sure/dua ekleme ekranının hangi vakit için açıldığı.
+  const [addRoutineTag, setAddRoutineTag] = useState(null);
 
   useEffect(() => {
     checkAndNotify();
@@ -247,15 +249,23 @@ export default function App() {
     );
   }
 
-  if (screen === "daily-add") {
-    return <AddDailyItemScreen onBack={() => setScreen("daily")} />;
+  if (screen === "daily-add" && addRoutineTag) {
+    return (
+      <AddDailyItemScreen
+        tag={addRoutineTag}
+        onBack={() => setScreen("daily")}
+      />
+    );
   }
 
   if (screen === "daily") {
     return (
       <DailyRecitationsScreen
         onBack={() => setScreen("home")}
-        onOpenAdd={() => setScreen("daily-add")}
+        onOpenAdd={(tag) => {
+          setAddRoutineTag(tag);
+          setScreen("daily-add");
+        }}
         onOpenSurah={(id) => openSurah(id, null, "daily")}
         onOpenDhikr={(item) => {
           setSelectedDhikr(item);

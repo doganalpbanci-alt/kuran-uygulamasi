@@ -10,11 +10,11 @@ import { getEntry } from "./dataStore";
  */
 export const DAILY_RECITATIONS = data.items;
 
-/** Ana sekmeler: iki sabit hadis kaynaklı liste + kullanıcının kendi eklediği. */
+/** Ana sekmeler: iki sabit hadis kaynaklı liste + kullanıcının kendi rutini. */
 export const DAILY_CATEGORIES = [
   { id: "okumalar", label: "Günlük Okumalar" },
   { id: "dualar", label: "Dualar" },
-  { id: "eklenenler", label: "Eklediklerim" },
+  { id: "rutinim", label: "Rutinim" },
 ];
 
 /**
@@ -63,7 +63,7 @@ export function isItemReady(item) {
   return false;
 }
 
-/** Kullanıcının Sureler ekranından/Ekle menüsünden seçtiği sabit dua öğesi. */
+/** Kullanıcının Sureler ekranından/Rutin ekle menüsünden seçtiği sabit dua öğesi. */
 export function builtinDhikrById(id) {
   return (
     DAILY_RECITATIONS.find((it) => it.type === "dhikr" && it.id === id) ??
@@ -72,18 +72,18 @@ export function builtinDhikrById(id) {
 }
 
 /**
- * Kullanıcının kendi eklediği bir sureyi "quran" tipi görüntülenebilir bir
+ * Kullanıcının rutinine eklediği bir sureyi "quran" tipi görüntülenebilir bir
  * öğeye çevirir; ENTRIES içinde artık bulunmuyorsa null döner.
  */
-export function customQuranDisplayItem(entryId) {
+export function routineQuranDisplayItem(entryId) {
   const entry = quranEntryFor({ entryId });
   if (!entry) return null;
   return {
-    id: `custom-quran-${entryId}`,
-    category: "eklenenler",
+    id: `routine-quran-${entryId}`,
+    category: "rutinim",
     type: "quran",
     name: entry.name,
-    occasion: "Kişisel listen",
+    occasion: "Kişisel rutinin",
     repeat: "—",
     source: "Kendi eklediğin",
     tags: [],
@@ -92,15 +92,15 @@ export function customQuranDisplayItem(entryId) {
 }
 
 /**
- * lib/dailyCustomItems.js'teki { type, refId } kayıtlarını görüntülenebilir
- * öğelere çevirir; artık geçerli olmayanları (silinmiş referans) eler.
+ * lib/routine.js'teki { type, refId } kayıtlarını görüntülenebilir öğelere
+ * çevirir; artık geçerli olmayanları (silinmiş referans) eler.
  */
-export function resolveCustomItems(customItems) {
-  return customItems
+export function resolveRoutineRefs(refs) {
+  return refs
     .map((it) =>
       it.type === "dhikr"
         ? builtinDhikrById(it.refId)
-        : customQuranDisplayItem(it.refId),
+        : routineQuranDisplayItem(it.refId),
     )
     .filter((it) => it != null);
 }
