@@ -341,16 +341,16 @@ atlandı). Son çalıştırmada 16 bölüm Açık Kuran'a erişilemediği için
 atlandı; alquran.cloud kaynaklı 5 bölümün tamamında **117 kontrolün
 117'si** geçti.
 
-## Favoriler, yer işaretleri ve erişilebilirlik
+## İşaretlenenler, yer işaretleri ve erişilebilirlik
 
 Üçü de `localStorage`'da tutulur (`lib/favorites.js`, `lib/bookmarks.js`,
 `lib/appearance.js`); veri çekme mimarisiyle ilgisi yok, uygulama
 çalışırken eklenip kaldırılır.
 
-- **Favoriler.** Ana ekrandaki sure kartlarının ☆'ı ve okuma ekranı
-  başlığındaki ☆ aynı listeye yazar. "★ Favoriler" filtresi ana ekranda
-  yalnızca favorileri gösterir; sıralama (mushaf/nüzûl) filtreden bağımsız
-  çalışmaya devam eder.
+- **İşaretlenenler.** Ana ekrandaki sure kartlarının ☆'ı ve okuma ekranı
+  başlığındaki ☆ aynı listeye yazar. "★ İşaretlenenler" filtresi ana ekranda
+  yalnızca işaretlenen sureleri gösterir; sıralama (mushaf/nüzûl) filtreden
+  bağımsız çalışmaya devam eder.
 - **Yer işaretleri.** Arapça+Meal ve Okunuş sekmelerinde her ayetin
   yanındaki 🔖 ile o ayete yer imi konur. Bölüm verisi lazy yüklendiği
   için Yer İşaretlerim ekranı ayrıca indirme yapmasın diye sure adı ve

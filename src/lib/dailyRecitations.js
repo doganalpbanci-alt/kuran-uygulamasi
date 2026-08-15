@@ -10,10 +10,11 @@ import { getEntry } from "./dataStore";
  */
 export const DAILY_RECITATIONS = data.items;
 
-/** İki ana sekme. */
+/** Ana sekmeler: iki sabit hadis kaynaklı liste + kullanıcının kendi rutini. */
 export const DAILY_CATEGORIES = [
   { id: "okumalar", label: "Günlük Okumalar" },
   { id: "dualar", label: "Dualar" },
+  { id: "rutinim", label: "Rutinim" },
 ];
 
 /**
@@ -60,4 +61,46 @@ export function isItemReady(item) {
     );
   }
   return false;
+}
+
+/** Kullanıcının Sureler ekranından/Rutin ekle menüsünden seçtiği sabit dua öğesi. */
+export function builtinDhikrById(id) {
+  return (
+    DAILY_RECITATIONS.find((it) => it.type === "dhikr" && it.id === id) ??
+    null
+  );
+}
+
+/**
+ * Kullanıcının rutinine eklediği bir sureyi "quran" tipi görüntülenebilir bir
+ * öğeye çevirir; ENTRIES içinde artık bulunmuyorsa null döner.
+ */
+export function routineQuranDisplayItem(entryId) {
+  const entry = quranEntryFor({ entryId });
+  if (!entry) return null;
+  return {
+    id: `routine-quran-${entryId}`,
+    category: "rutinim",
+    type: "quran",
+    name: entry.name,
+    occasion: "Kişisel rutinin",
+    repeat: "—",
+    source: "Kendi eklediğin",
+    tags: [],
+    entryId,
+  };
+}
+
+/**
+ * lib/routine.js'teki { type, refId } kayıtlarını görüntülenebilir öğelere
+ * çevirir; artık geçerli olmayanları (silinmiş referans) eler.
+ */
+export function resolveRoutineRefs(refs) {
+  return refs
+    .map((it) =>
+      it.type === "dhikr"
+        ? builtinDhikrById(it.refId)
+        : routineQuranDisplayItem(it.refId),
+    )
+    .filter((it) => it != null);
 }

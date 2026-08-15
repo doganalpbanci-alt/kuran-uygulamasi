@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { getLastReadDate } from "../lib/streak";
 import { getFavoriteIds, toggleFavorite } from "../lib/favorites";
+import { getRoutineItems } from "../lib/routine";
+import RoutinePickerModal from "./RoutinePickerModal";
 
 function formatLastRead(dateStr) {
   if (!dateStr) return "Henüz okunmadı";
@@ -21,17 +23,38 @@ export default function SurahList({
   onSelectSurah,
 }) {
   const [favIds, setFavIds] = useState(() => new Set(getFavoriteIds()));
+  const [routineIds, setRoutineIds] = useState(
+    () =>
+      new Set(
+        getRoutineItems()
+          .filter((it) => it.type === "quran" && it.tags.length > 0)
+          .map((it) => String(it.refId)),
+      ),
+  );
+  const [pickerSurah, setPickerSurah] = useState(null);
 
   const handleToggleFavorite = (e, id) => {
     e.stopPropagation();
     setFavIds(new Set(toggleFavorite(id)));
   };
 
+  const refreshRoutineIds = () => {
+    setRoutineIds(
+      new Set(
+        getRoutineItems()
+          .filter((it) => it.type === "quran" && it.tags.length > 0)
+          .map((it) => String(it.refId)),
+      ),
+    );
+  };
+
   return (
+    <>
     <ul className="flex flex-col gap-3">
       {surahs.map((surah) => {
         const lastRead = getLastReadDate(surah.id);
         const favorite = favIds.has(surah.id);
+        const inRoutine = routineIds.has(String(surah.id));
         return (
           <li key={surah.id} className="flex items-stretch gap-2">
             <button
@@ -65,8 +88,8 @@ export default function SurahList({
               aria-pressed={favorite}
               aria-label={
                 favorite
-                  ? `${surah.name} favorilerden çıkar`
-                  : `${surah.name} favorilere ekle`
+                  ? `${surah.name} işaretlenenlerden çıkar`
+                  : `${surah.name} işaretlenenlere ekle`
               }
               className={`shrink-0 rounded-2xl border px-3 text-lg transition ${
                 favorite
@@ -76,9 +99,40 @@ export default function SurahList({
             >
               {favorite ? "★" : "☆"}
             </button>
+
+            <button
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation();
+                setPickerSurah({ id: surah.id, name: surah.name });
+              }}
+              aria-haspopup="dialog"
+              aria-pressed={inRoutine}
+              aria-label={`${surah.name} okuma rutinine ekle/çıkar`}
+              className={`shrink-0 rounded-2xl border px-3 text-lg transition ${
+                inRoutine
+                  ? "border-teal-600/40 bg-teal-600/10 text-teal-700 dark:border-gold-500/40 dark:bg-gold-500/10 dark:text-gold-500"
+                  : "border-teal-600/15 text-ink-700/30 hover:text-ink-700/60 dark:border-cream-200/15 dark:text-cream-200/30 dark:hover:text-cream-200/60"
+              }`}
+            >
+              {inRoutine ? "✓" : "+"}
+            </button>
           </li>
         );
       })}
     </ul>
+
+    {pickerSurah && (
+      <RoutinePickerModal
+        type="quran"
+        refId={pickerSurah.id}
+        title={`${pickerSurah.name} — Rutin`}
+        onClose={() => {
+          setPickerSurah(null);
+          refreshRoutineIds();
+        }}
+      />
+    )}
+    </>
   );
 }

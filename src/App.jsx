@@ -7,6 +7,7 @@ import SyncMode from "./components/SyncMode";
 import SettingsScreen from "./components/SettingsScreen";
 import BookmarksScreen from "./components/BookmarksScreen";
 import DailyRecitationsScreen from "./components/DailyRecitationsScreen";
+import AddDailyItemScreen from "./components/AddDailyItemScreen";
 import DhikrDetailScreen from "./components/DhikrDetailScreen";
 import { getCurrentStreak, getLast7Days } from "./lib/streak";
 import { getPrefs, updatePrefs } from "./lib/prefs";
@@ -118,14 +119,14 @@ function Home({ onSelectSurah, onOpenSettings, onOpenBookmarks, onOpenDaily }) {
               : "bg-teal-600/10 text-teal-700 dark:bg-white/5 dark:text-cream-100"
           }`}
         >
-          ★ Favoriler
+          ★ İşaretlenenler
         </button>
       </div>
 
       <div className="mt-3">
         {visible.length === 0 ? (
           <p className="px-2 py-10 text-center text-sm text-ink-700/60 dark:text-cream-200/60">
-            Henüz favori işaretlenmedi. Sure kartındaki ☆ ile ekleyebilirsin.
+            Henüz işaretlenen sure yok. Sure kartındaki ☆ ile ekleyebilirsin.
           </p>
         ) : (
           <SurahList
@@ -172,6 +173,8 @@ export default function App() {
   const [selectedDhikr, setSelectedDhikr] = useState(null);
   // Okuma ekranından geri dönülecek ekran (nereden açıldıysa).
   const [returnScreen, setReturnScreen] = useState("home");
+  // Rutine sure/dua ekleme ekranının hangi vakit için açıldığı.
+  const [addRoutineTag, setAddRoutineTag] = useState(null);
 
   useEffect(() => {
     checkAndNotify();
@@ -246,10 +249,23 @@ export default function App() {
     );
   }
 
+  if (screen === "daily-add" && addRoutineTag) {
+    return (
+      <AddDailyItemScreen
+        tag={addRoutineTag}
+        onBack={() => setScreen("daily")}
+      />
+    );
+  }
+
   if (screen === "daily") {
     return (
       <DailyRecitationsScreen
         onBack={() => setScreen("home")}
+        onOpenAdd={(tag) => {
+          setAddRoutineTag(tag);
+          setScreen("daily-add");
+        }}
         onOpenSurah={(id) => openSurah(id, null, "daily")}
         onOpenDhikr={(item) => {
           setSelectedDhikr(item);
