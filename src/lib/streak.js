@@ -25,6 +25,17 @@ export function getLastReadDate(surahId) {
   return lastRead[surahId] ?? null;
 }
 
+/**
+ * Tüm bölümlerin son okunma tarihleri, tek okumada.
+ *
+ * Liste 114 sureye çıkınca sure başına getLastReadDate çağırmak her
+ * render'da 117 localStorage okuma + JSON.parse demek oluyordu; liste
+ * bir kez okuyup haritayı kullanıyor.
+ */
+export function getLastReadMap() {
+  return readJson(LAST_READ_KEY, {});
+}
+
 export function hasReadToday() {
   return getCompletedDates().includes(localDateString());
 }

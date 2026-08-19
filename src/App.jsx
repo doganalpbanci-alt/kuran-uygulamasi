@@ -12,17 +12,23 @@ import DhikrDetailScreen from "./components/DhikrDetailScreen";
 import { getCurrentStreak, getLast7Days } from "./lib/streak";
 import { getPrefs, updatePrefs } from "./lib/prefs";
 import { isFavorite } from "./lib/favorites";
+import { entryMatches } from "./lib/search";
 import { checkAndNotify } from "./lib/notifications";
 
 /**
- * Nüzûl sırası, surelerin indirilme sırası — mushaf sırasından farklı.
- * Kısmi bölümlerin (Âmenerrasûlü) kendi nüzûl sırası yok; ait olduğu
- * surenin sırasını kullanıp listenin sonuna yakın tutuyoruz.
+ * Liste sıralaması. Mushaf sırası sure numarasına, nüzûl sırası iniş
+ * sırasına göre. Kısmi bölümler (Âyetü'l-Kürsî, Âmenerrasûlü) ait
+ * oldukları surenin hemen ardında duruyor — ikisi de aynı sure
+ * numarasını taşıdığı için eşitliği `range` bozuyor.
  */
 function sortEntries(entries, order) {
-  if (order !== "revelation") return entries;
+  const key =
+    order === "revelation"
+      ? (e) => e.revelation_order ?? Number.MAX_SAFE_INTEGER
+      : (e) => e.audio_surah ?? Number(e.id);
+
   return [...entries].sort(
-    (a, b) => (a.revelation_order ?? 999) - (b.revelation_order ?? 999),
+    (a, b) => key(a) - key(b) || (a.range ? 1 : 0) - (b.range ? 1 : 0),
   );
 }
 
@@ -31,6 +37,7 @@ function Home({ onSelectSurah, onOpenSettings, onOpenBookmarks, onOpenDaily }) {
   const [last7Days, setLast7Days] = useState(getLast7Days);
   const [order, setOrder] = useState(() => getPrefs().surahOrder);
   const [favoritesOnly, setFavoritesOnly] = useState(false);
+  const [query, setQuery] = useState("");
 
   useEffect(() => {
     setStreak(getCurrentStreak());
@@ -43,9 +50,9 @@ function Home({ onSelectSurah, onOpenSettings, onOpenBookmarks, onOpenDaily }) {
   };
 
   const sorted = sortEntries(ENTRIES, order);
-  const visible = favoritesOnly
-    ? sorted.filter((s) => isFavorite(s.id))
-    : sorted;
+  const visible = sorted
+    .filter((s) => !favoritesOnly || isFavorite(s.id))
+    .filter((s) => entryMatches(s, query));
 
   return (
     <div className="flex min-h-full flex-col px-5 py-5">
@@ -83,7 +90,21 @@ function Home({ onSelectSurah, onOpenSettings, onOpenBookmarks, onOpenDaily }) {
 
       <StreakSummary streak={streak} last7Days={last7Days} />
 
-      <div className="mt-6 flex items-center gap-2">
+      <div className="mt-6">
+        <label htmlFor="surah-search" className="sr-only">
+          Sure ara
+        </label>
+        <input
+          id="surah-search"
+          type="search"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder="Sure ara (isim, anlam veya numara)"
+          className="w-full rounded-full border border-teal-600/15 bg-white/60 px-4 py-2 text-sm text-ink-900 placeholder:text-ink-700/40 focus:border-teal-600/40 focus:outline-none dark:border-cream-200/15 dark:bg-white/5 dark:text-cream-100 dark:placeholder:text-cream-200/40"
+        />
+      </div>
+
+      <div className="mt-3 flex items-center gap-2">
         <div
           role="group"
           aria-label="Sıralama"
@@ -126,12 +147,14 @@ function Home({ onSelectSurah, onOpenSettings, onOpenBookmarks, onOpenDaily }) {
       <div className="mt-3">
         {visible.length === 0 ? (
           <p className="px-2 py-10 text-center text-sm text-ink-700/60 dark:text-cream-200/60">
-            Henüz işaretlenen sure yok. Sure kartındaki ☆ ile ekleyebilirsin.
+            {query
+              ? `"${query}" ile eşleşen sure yok.`
+              : "Henüz işaretlenen sure yok. Sure kartındaki ☆ ile ekleyebilirsin."}
           </p>
         ) : (
           <SurahList
             surahs={visible}
-            showRevelationOrder={order === "revelation"}
+            order={order}
             onSelectSurah={onSelectSurah}
           />
         )}
@@ -141,6 +164,11 @@ function Home({ onSelectSurah, onOpenSettings, onOpenBookmarks, onOpenDaily }) {
 }
 
 function SyncPicker({ onSelectSurah, onBack }) {
+  const [query, setQuery] = useState("");
+  const visible = sortEntries(ENTRIES, "mushaf").filter((s) =>
+    entryMatches(s, query),
+  );
+
   return (
     <div className="flex min-h-full flex-col px-5 py-4">
       <div className="flex items-center justify-between">
@@ -157,7 +185,20 @@ function SyncPicker({ onSelectSurah, onBack }) {
         <span className="w-10" />
       </div>
       <div className="mt-4">
-        <SurahList surahs={ENTRIES} onSelectSurah={onSelectSurah} />
+        <label htmlFor="sync-surah-search" className="sr-only">
+          Sure ara
+        </label>
+        <input
+          id="sync-surah-search"
+          type="search"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder="Sure ara (isim, anlam veya numara)"
+          className="w-full rounded-full border border-teal-600/15 bg-white/60 px-4 py-2 text-sm text-ink-900 placeholder:text-ink-700/40 focus:border-teal-600/40 focus:outline-none dark:border-cream-200/15 dark:bg-white/5 dark:text-cream-100 dark:placeholder:text-cream-200/40"
+        />
+      </div>
+      <div className="mt-3">
+        <SurahList surahs={visible} order="mushaf" onSelectSurah={onSelectSurah} />
       </div>
     </div>
   );

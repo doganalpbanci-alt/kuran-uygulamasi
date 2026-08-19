@@ -2,6 +2,7 @@ import { useState } from "react";
 import { ENTRIES } from "../lib/dataStore";
 import { DAILY_RECITATIONS, tagLabel } from "../lib/dailyRecitations";
 import { getRoutineItems, toggleRoutineTag } from "../lib/routine";
+import { entryMatches } from "../lib/search";
 
 const TABS = [
   { id: "sure", label: "Sure" },
@@ -46,6 +47,10 @@ function ToggleRow({ label, subtitle, added, onToggle }) {
 export default function AddDailyItemScreen({ tag, onBack }) {
   const [tab, setTab] = useState(TABS[0].id);
   const [routineItems, setRoutineItems] = useState(getRoutineItems);
+  // 114 sure listelendiği için arama şart; boş sorguda hepsi görünür.
+  const [query, setQuery] = useState("");
+
+  const visibleEntries = ENTRIES.filter((entry) => entryMatches(entry, query));
 
   const isAdded = (type, refId) =>
     routineItems.some(
@@ -103,9 +108,25 @@ export default function AddDailyItemScreen({ tag, onBack }) {
         ))}
       </div>
 
+      {tab === "sure" && (
+        <div className="mt-4">
+          <label htmlFor="daily-surah-search" className="sr-only">
+            Sure ara
+          </label>
+          <input
+            id="daily-surah-search"
+            type="search"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="Sure ara (isim, anlam veya numara)"
+            className="w-full rounded-full border border-teal-600/15 bg-white/60 px-4 py-2 text-sm text-ink-900 placeholder:text-ink-700/40 focus:border-teal-600/40 focus:outline-none dark:border-cream-200/15 dark:bg-white/5 dark:text-cream-100 dark:placeholder:text-cream-200/40"
+          />
+        </div>
+      )}
+
       <ul className="mb-6 mt-4 flex flex-col gap-2">
         {tab === "sure"
-          ? ENTRIES.map((entry) => (
+          ? visibleEntries.map((entry) => (
               <ToggleRow
                 key={entry.id}
                 label={entry.name}
