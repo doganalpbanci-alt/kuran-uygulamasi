@@ -1,18 +1,27 @@
-// Build-time script. İki kaynaktan veri çekip src/data/surahs.json'a yazar,
-// böylece uygulama çalışırken hiçbir API'ye gitmez:
+// Build-time script. İki kaynaktan veri çekip src/data/index.json ve
+// public/data/*.json dosyalarına yazar, böylece uygulama çalışırken hiçbir
+// API'ye gitmez:
 //
-//   1. Açık Kuran (https://api.acikkuran.com) — Türkçe okunuş, meal ve
-//      surenin Türkçe meal sesi (tek mp3).
+//   1. Açık Kuran (https://api.quran.so) — Türkçe okunuş, meal ve surenin
+//      Türkçe meal sesi (tek mp3). Eski adres api.acikkuran.com DNS'ten
+//      kalktı; aynı API aynı yazar id'leriyle quran.so altında sürüyor.
 //   2. Quran.com (https://api.quran.com) — Arapça tilavet (ayet ayet mp3),
 //      kelime bazlı zaman damgaları ve Uthmani kelime metinleri.
 //
-// Usage: node scripts/fetch-surahs.mjs
+// Kullanım:
+//   node scripts/fetch-surahs.mjs            # eksik bölümleri çeker (resume)
+//   node scripts/fetch-surahs.mjs --force    # her şeyi yeniden çeker
+//   node scripts/fetch-surahs.mjs --only 2,36  # yalnızca verilen bölümler
+//
+// 114 sure tek oturumda ~1 saat sürdüğü ve ağ hatası kaçınılmaz olduğu için
+// her bölüm bittiğinde ara çıktı .cache/entries/<id>.json'a yazılır; script
+// yeniden çalıştırıldığında tamamlananlar atlanır.
 
-import { writeFile, mkdir } from "node:fs/promises";
+import { writeFile, readFile, mkdir } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 
-const API_BASE = "https://api.acikkuran.com";
+const API_BASE = "https://api.quran.so";
 export const QURAN_API = "https://api.quran.com/api/v4";
 const VERSE_AUDIO_BASE = "https://verses.quran.com/";
 
@@ -30,6 +39,9 @@ export const INDEX_FILE = path.join(ROOT, "src", "data", "index.json");
 // Ayet ve tefsir verisi public/ altında: paketlenmez, açıldıkça indirilir
 // ve service worker tarafından kalıcı olarak cache'lenir.
 export const DATA_DIR = path.join(ROOT, "public", "data");
+// Tamamlanan bölümlerin index kaydı. Yalnızca çekim sırasında kullanılır,
+// depoya girmez (.gitignore); resume bilgisini burada tutuyoruz.
+const CACHE_DIR = path.join(ROOT, ".cache", "entries");
 
 // Tefsirler. quran.com'da Türkçe tefsir yok; İngilizce İbn Kesir blok
 // bazlı (bir kayıt birden çok ayeti kapsıyor), tam istenen biçimde.
@@ -37,45 +49,19 @@ export const TAFSIRS = [
   { id: "en-ibn-kathir", source_id: 169, name: "Ibn Kathir (Abridged)", lang: "en" },
 ];
 
-// Uygulamadaki bölümler. Tamamı okunan sureler için sadece `surah`
-// yeterli; bir surenin bir bölümü alınacaksa `from`/`to` verilir.
+// Uygulamadaki bölümler: Kur'an'ın 114 suresinin tamamı, artı sık okunan
+// kısmi bölümler (Âmenerrasûlü gibi). Tamamı okunan sureler için sadece
+// `surah` yeterli; bir surenin bir bölümü alınacaksa `from`/`to` verilir.
 //
 // Kısmi bölümlerde Türkçe meal sesi olmaz: Açık Kuran sesi sure başına tek
 // dosya sunuyor, Âmenerrasûlü için bu Bakara'nın tamamı olurdu. Arapça
 // tilavet ayet başına ayrı dosya olduğu için kısmi bölümlerde de çalışır.
-const ENTRIES = [
-  // Nüzûl (iniş) sırasının ilk onu
-  { surah: 96 }, //  1. Alak
-  { surah: 68 }, //  2. Kalem
-  { surah: 73 }, //  3. Müzzemmil
-  { surah: 74 }, //  4. Müddessir
-  { surah: 1 }, //  5. Fatiha
-  { surah: 111 }, //  6. Tebbet (Mesed)
-  { surah: 81 }, //  7. Tekvir
-  { surah: 87 }, //  8. A'lâ
-  { surah: 92 }, //  9. Leyl
-  { surah: 89 }, // 10. Fecr
-  // Sonradan eklenen sureler
-  { surah: 36 }, // Yasin
-  { surah: 67 }, // Mülk
-  { surah: 56 }, // Vakıa
-  { surah: 18 }, // Kehf
-  { surah: 44 }, // Duhan
-  {
-    surah: 2,
-    from: 285,
-    to: 286,
-    id: "amenerrasulu",
-    name: "Âmenerrasûlü",
-    subtitle: "Bakara suresi 285-286",
-  },
-  // Günlük Okumalar (hadisle sabit zikir/dua listesi) sekmesindeki Kur'an
-  // parçaları. Metni elle yazmak yerine mevcut çekme/doğrulama hattından
-  // geçiyorlar — hassas bir konuda ikinci bir elle transkripsiyon riski
-  // almamak için.
-  { surah: 112 }, // İhlâs
-  { surah: 113 }, // Felâk
-  { surah: 114 }, // Nâs
+const SURAH_COUNT = 114;
+
+// Günlük Okumalar (hadisle sabit zikir/dua listesi) sekmesinden ve ana
+// listeden açılan kısmi bölümler. Kendi id'leri var; ait oldukları sure
+// zaten ayrıca tam olarak çekiliyor, bu kayıtlar onun yerine geçmiyor.
+const PARTIAL_ENTRIES = [
   {
     surah: 2,
     from: 255,
@@ -85,6 +71,14 @@ const ENTRIES = [
     subtitle: "Bakara suresi 255",
   },
   {
+    surah: 2,
+    from: 285,
+    to: 286,
+    id: "amenerrasulu",
+    name: "Âmenerrasûlü",
+    subtitle: "Bakara suresi 285-286",
+  },
+  {
     surah: 59,
     from: 22,
     to: 24,
@@ -92,6 +86,11 @@ const ENTRIES = [
     name: "Haşr Suresi (Son 3 Âyet)",
     subtitle: "Haşr suresi 22-24",
   },
+];
+
+const ENTRIES = [
+  ...Array.from({ length: SURAH_COUNT }, (_, i) => ({ surah: i + 1 })),
+  ...PARTIAL_ENTRIES,
 ];
 
 // Ayarlardan seçilebilecek mealler. Offline çalışması için hepsi
@@ -107,8 +106,8 @@ export const TR_TRANSLATION_IDS = [
   6, // Ali Bulaç
   22, // Muhammed Esed
   27, // Süleyman Ateş
-  26, // Suat Yıldırım
   30, // Yaşar Nuri Öztürk
+  19, // Hasan Basri Çantay
 ];
 export const EN_TRANSLATION_IDS = [
   20, // Saheeh International
@@ -118,12 +117,71 @@ export const EN_TRANSLATION_IDS = [
 ];
 const DEFAULT_TRANSLATION_ID = "tr-11";
 
-async function fetchJson(url) {
-  const res = await fetch(url);
-  if (!res.ok) {
-    throw new Error(`İstek başarısız: ${url} (${res.status})`);
+// Bir bölüm içinde aynı anda uçan istek sayısı. 8 meal + 12 kari zaman
+// damgası + 12 sürekli tilavet, sure başına ~35 istek eder; sırayla
+// gidince 114 sure saatler alıyor, sınırsız paralellikte quran.com 429
+// dönüyor.
+const REQUEST_CONCURRENCY = 4;
+
+/**
+ * Ağ isteklerini yeniden dener. 114 sure ~4000 istek demek; bu ölçekte
+ * geçici bir 5xx/timeout kesin oluyor ve tek bir hata tüm çekimi
+ * düşürmemeli. Kalıcı hatalarda (404 gibi) denemeye devam etmiyoruz.
+ */
+async function withRetry(label, fn, { attempts = 5 } = {}) {
+  let lastError;
+  for (let i = 0; i < attempts; i++) {
+    try {
+      return await fn();
+    } catch (err) {
+      lastError = err;
+      if (err?.permanent) break;
+      const waitMs = 1000 * 2 ** i;
+      console.warn(
+        `  yeniden deneniyor (${i + 1}/${attempts}, ${waitMs}ms): ${label} — ${err.message}`,
+      );
+      await new Promise((r) => setTimeout(r, waitMs));
+    }
   }
-  const body = await res.json();
+  throw lastError;
+}
+
+/** İstek + JSON çözme; 4xx kalıcı sayılır, 5xx/ağ hatası yeniden denenir. */
+async function requestJson(url) {
+  let res;
+  try {
+    res = await fetch(url);
+  } catch (err) {
+    throw new Error(`Ağ hatası: ${url} — ${err.message}`);
+  }
+  if (!res.ok) {
+    const err = new Error(`İstek başarısız: ${url} (${res.status})`);
+    if (res.status >= 400 && res.status < 500) err.permanent = true;
+    throw err;
+  }
+  return res.json();
+}
+
+/**
+ * Aynı anda kaç istek uçacağını sınırlar. Sınırsız paralellikte quran.com
+ * 429 dönüyor; sırayla gidince 114 sure saatler alıyor.
+ */
+async function mapLimit(items, limit, worker) {
+  const results = new Array(items.length);
+  let next = 0;
+  const runners = Array.from({ length: Math.min(limit, items.length) }, async () => {
+    for (;;) {
+      const i = next++;
+      if (i >= items.length) return;
+      results[i] = await worker(items[i], i);
+    }
+  });
+  await Promise.all(runners);
+  return results;
+}
+
+async function fetchJson(url) {
+  const body = await withRetry(url, () => requestJson(url));
   return body.data;
 }
 
@@ -213,11 +271,7 @@ export async function fetchEnglishTranslations(sourceIds, surahId) {
 }
 
 export async function fetchQuranJson(url) {
-  const res = await fetch(url);
-  if (!res.ok) {
-    throw new Error(`Quran.com isteği başarısız: ${url} (${res.status})`);
-  }
-  return res.json();
+  return withRetry(url, () => requestJson(url));
 }
 
 /** Bir surenin Arapça kelime metinleri (kariden bağımsız, bir kez saklanır). */
@@ -233,7 +287,13 @@ export async function fetchArabicWords(surahId) {
       verseNumber,
       v.words
         .filter((w) => w.char_type_name === "word")
-        .map((w) => ({ position: w.position, text: w.text_uthmani })),
+        // Kaynakta tek tük görünmez yön işareti (RLM/LRM) geliyor —
+        // 27:26'da secde işaretinden sonra bir U+200F var. Ekranda hiçbir
+        // şey değiştirmiyor ama metin karşılaştırmalarını bozuyor.
+        .map((w) => ({
+          position: w.position,
+          text: w.text_uthmani.replace(/[\u200e\u200f\u061c]/g, ""),
+        })),
     );
   }
   return byVerseNumber;
@@ -337,12 +397,11 @@ async function fetchSurah(entry, translations, reciters, bismillah) {
 
   // Türkçe mealler: her biri Açık Kuran'da ayrı bir istek.
   const byTranslation = new Map();
-  for (const t of trList) {
-    byTranslation.set(
-      t.id,
-      await fetchJson(`${API_BASE}/surah/${id}?author=${t.source_id}`),
-    );
-  }
+  const trFetched = await mapLimit(trList, REQUEST_CONCURRENCY, async (t) => [
+    t.id,
+    await fetchJson(`${API_BASE}/surah/${id}?author=${t.source_id}`),
+  ]);
+  for (const [key, value] of trFetched) byTranslation.set(key, value);
   const raw = byTranslation.get(trList[0].id);
 
   // İngilizce mealler Quran.com'dan, ayet anahtarına göre eşlenmiş halde.
@@ -360,23 +419,29 @@ async function fetchSurah(entry, translations, reciters, bismillah) {
   const timedReciters = reciters.filter((r) => r.sync === "word");
 
   const timingsByReciter = new Map();
-  for (const r of timedReciters) {
-    timingsByReciter.set(r.id, await fetchTimings(r.id, id, wordsByVerse));
-  }
+  const timingsFetched = await mapLimit(
+    timedReciters,
+    REQUEST_CONCURRENCY,
+    async (r) => [r.id, await fetchTimings(r.id, id, wordsByVerse)],
+  );
+  for (const [key, value] of timingsFetched) timingsByReciter.set(key, value);
 
   // Sürekli (tek dosya) tilavet. Kısmi bölümlerde anlamsız: Âmenerrasûlü
   // için dosya Bakara'nın tamamı olurdu.
   const continuousByReciter = new Map();
   const continuousAudio = {};
   if (!isPartial) {
-    for (const r of timedReciters) {
-      const c = await fetchContinuous(r.id, id);
+    const fetched = await mapLimit(timedReciters, REQUEST_CONCURRENCY, async (r) => [
+      r.id,
+      await fetchContinuous(r.id, id),
+    ]);
+    for (const [reciterId, c] of fetched) {
       if (!c) {
-        console.warn(`  uyarı: kari ${r.id} için sürekli tilavet yok`);
+        console.warn(`  uyarı: kari ${reciterId} için sürekli tilavet yok`);
         continue;
       }
-      continuousByReciter.set(r.id, c.byVerse);
-      continuousAudio[r.id] = c.url;
+      continuousByReciter.set(reciterId, c.byVerse);
+      continuousAudio[reciterId] = c.url;
     }
   }
 
@@ -595,7 +660,91 @@ export async function fetchBismillah(reciters, translations) {
   };
 }
 
+/** Bölüm etiketi: "Sure 2" ya da "Sure 2 ayet 255-255". */
+function entryLabel(entry) {
+  return entry.from
+    ? `Sure ${entry.surah} ayet ${entry.from}-${entry.to}`
+    : `Sure ${entry.surah}`;
+}
+
+/**
+ * Bir bölümü çekip dosyalarını yazar ve index'e girecek meta kaydını döner.
+ * Meta kaydı ayrıca CACHE_DIR'a yazılır: çekim yarıda kalırsa (ağ, rate
+ * limit, oturum) yeniden çalıştırıldığında tamamlananlar atlanır.
+ */
+async function fetchEntry(entry, ctx) {
+  const { translations, reciters, bismillah, chapterMeta } = ctx;
+  const surah = await fetchSurah(entry, translations, reciters, bismillah);
+  const meta = chapterMeta.get(entry.surah);
+
+  // Ayet verisi ayrı dosyaya: uygulama açılışta hepsini indirmesin,
+  // sure açıldıkça insin ve service worker cache'lesin.
+  await writeFile(
+    path.join(DATA_DIR, `surah-${surah.id}.json`),
+    JSON.stringify({ verses: surah.verses }),
+    "utf-8",
+  );
+
+  for (const t of TAFSIRS) {
+    const blocks = await fetchTafsir(t.source_id, {
+      ...entry,
+      verse_count: surah.verse_count,
+    });
+    if (blocks.length === 0) {
+      console.warn(`  uyarı: ${t.name} tefsiri boş (${entryLabel(entry)})`);
+      continue;
+    }
+    await writeFile(
+      path.join(DATA_DIR, `tafsir-${t.id}-${surah.id}.json`),
+      JSON.stringify({ blocks }),
+      "utf-8",
+    );
+    console.log(`  tefsir ${t.name}: ${blocks.length} blok`);
+  }
+
+  const { verses: _drop, ...rest } = surah;
+  const record = {
+    ...rest,
+    revelation_order: meta?.revelation_order ?? null,
+    revelation_place: meta?.revelation_place ?? null,
+    // Kısmi bölümlerde tefsir bloğu aralığın dışına taşabildiği için
+    // hangi ayetleri kapsadığı ayrıca tutuluyor.
+    range: entry.from ? [entry.from, entry.to] : null,
+  };
+
+  await writeFile(
+    path.join(CACHE_DIR, `${surah.id}.json`),
+    JSON.stringify(record),
+    "utf-8",
+  );
+  return record;
+}
+
+/** Daha önce tamamlanmış bölümün meta kaydını okur; yoksa null. */
+async function readCachedEntry(entryId) {
+  try {
+    const [meta, verses] = await Promise.all([
+      readFile(path.join(CACHE_DIR, `${entryId}.json`), "utf-8"),
+      readFile(path.join(DATA_DIR, `surah-${entryId}.json`), "utf-8"),
+    ]);
+    // Ayet dosyası yarım yazılmışsa (disk dolu, süreç öldü) JSON.parse
+    // patlar ve bölüm yeniden çekilir.
+    JSON.parse(verses);
+    return JSON.parse(meta);
+  } catch {
+    return null;
+  }
+}
+
 async function main() {
+  const args = process.argv.slice(2);
+  const force = args.includes("--force");
+  const onlyArg = args[args.indexOf("--only") + 1];
+  const only =
+    args.includes("--only") && onlyArg
+      ? new Set(onlyArg.split(",").map((x) => x.trim()))
+      : null;
+
   console.log("Meal listesi alınıyor...");
   const translations = await fetchTranslations();
   console.log(`Kullanılacak meal: ${translations.length}`);
@@ -612,49 +761,54 @@ async function main() {
   const bismillah = await fetchBismillah(reciters, translations);
 
   await mkdir(DATA_DIR, { recursive: true });
+  await mkdir(CACHE_DIR, { recursive: true });
 
+  const ctx = { translations, reciters, bismillah, chapterMeta };
   const entries = [];
-  for (const entry of ENTRIES) {
-    const label = entry.from
-      ? `Sure ${entry.surah} ayet ${entry.from}-${entry.to}`
-      : `Sure ${entry.surah}`;
-    console.log(`${label} çekiliyor...`);
+  const failed = [];
 
-    const surah = await fetchSurah(entry, translations, reciters, bismillah);
-    const meta = chapterMeta.get(entry.surah);
+  for (const [i, entry] of ENTRIES.entries()) {
+    const entryId = String(entry.id ?? entry.surah);
+    if (only && !only.has(entryId)) continue;
 
-    // Ayet verisi ayrı dosyaya: uygulama açılışta hepsini indirmesin,
-    // sure açıldıkça insin ve service worker cache'lesin.
-    await writeFile(
-      path.join(DATA_DIR, `surah-${surah.id}.json`),
-      JSON.stringify({ verses: surah.verses }),
-      "utf-8",
-    );
-
-    for (const t of TAFSIRS) {
-      console.log(`  tefsir: ${t.name}`);
-      const blocks = await fetchTafsir(t.source_id, {
-        ...entry,
-        verse_count: surah.verse_count,
-      });
-      if (blocks.length === 0) continue;
-      await writeFile(
-        path.join(DATA_DIR, `tafsir-${t.id}-${surah.id}.json`),
-        JSON.stringify({ blocks }),
-        "utf-8",
-      );
-      console.log(`    ${blocks.length} blok`);
+    const progress = `[${i + 1}/${ENTRIES.length}]`;
+    if (!force) {
+      const cached = await readCachedEntry(entryId);
+      if (cached) {
+        entries.push(cached);
+        console.log(`${progress} ${entryLabel(entry)} — zaten çekilmiş, atlandı`);
+        continue;
+      }
     }
 
-    const { verses: _drop, ...rest } = surah;
-    entries.push({
-      ...rest,
-      revelation_order: meta?.revelation_order ?? null,
-      revelation_place: meta?.revelation_place ?? null,
-      // Kısmi bölümlerde tefsir bloğu aralığın dışına taşabildiği için
-      // hangi ayetleri kapsadığı ayrıca tutuluyor.
-      range: entry.from ? [entry.from, entry.to] : null,
-    });
+    console.log(`${progress} ${entryLabel(entry)} çekiliyor...`);
+    try {
+      entries.push(await fetchEntry(entry, ctx));
+    } catch (err) {
+      // Tek bir bölüm yüzünden saatlerce süren çekim çöpe gitmesin:
+      // hatayı not edip devam ediyoruz, sonunda özet basılıyor ve
+      // script hata koduyla çıkıyor.
+      console.error(`${progress} HATA: ${entryLabel(entry)} — ${err.message}`);
+      failed.push(entryLabel(entry));
+    }
+  }
+
+  // --only ile çalışıldığında index'in geri kalanı kaybolmasın diye
+  // dokunulmayan bölümler cache'ten tamamlanıyor.
+  if (only) {
+    for (const entry of ENTRIES) {
+      const entryId = String(entry.id ?? entry.surah);
+      if (only.has(entryId)) continue;
+      const cached = await readCachedEntry(entryId);
+      if (cached) entries.push(cached);
+    }
+    // Cache'ten gelenler sona eklendiği için ENTRIES sırasına geri alıyoruz.
+    const order = new Map(
+      ENTRIES.map((e, i) => [String(e.id ?? e.surah), i]),
+    );
+    entries.sort(
+      (a, b) => (order.get(String(a.id)) ?? 0) - (order.get(String(b.id)) ?? 0),
+    );
   }
 
   const index = {
@@ -674,6 +828,12 @@ async function main() {
   console.log(`\nKaydedildi:`);
   console.log(`  ${INDEX_FILE}`);
   console.log(`  ${DATA_DIR}/surah-*.json (${entries.length} bölüm)`);
+
+  if (failed.length > 0) {
+    console.error(`\nÇekilemeyen bölümler (${failed.length}):`);
+    for (const f of failed) console.error(`  ${f}`);
+    process.exitCode = 1;
+  }
 }
 
 // Bu dosya scripts/fetch-fallback-items.mjs tarafından fonksiyonlarını
