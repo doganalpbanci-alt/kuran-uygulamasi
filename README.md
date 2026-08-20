@@ -3,30 +3,37 @@
 Kıraat dinlerken Türkçe okunuşu ve meali eş zamanlı takip edebileceğin, offline
 çalışan bir PWA. Günlük okuma alışkanlığı için basit bir streak takibi içerir.
 
-Kapsam (21 bölüm): nüzûl sırasının ilk onu — Alak, Kalem, Müzzemmil,
-Müddessir, Fatiha, Tebbet, Tekvir, A'lâ, Leyl, Fecr — ve ayrıca Yasin,
-Mülk, Vakıa, Kehf, Duhan sureleri; Âmenerrasûlü (Bakara 285-286); ve
-"Günlük Okumalar" sekmesi için İhlâs, Felâk, Nâs, Âyetü'l-Kürsî (Bakara
-255), Haşr suresinin son 3 âyeti.
+Kapsam: **Kur'an'ın 114 suresinin tamamı** (6236 âyet) — her biri 12 meal,
+İbn Kesir tefsiri, 12 karinin ayet ayet ve kesintisiz tilaveti, kelime
+zaman damgaları ve Türkçe okunuşla birlikte. Ayrıca sık okunan üç kısmi
+bölüm ayrı kayıt olarak durur: Âyetü'l-Kürsî (Bakara 255), Âmenerrasûlü
+(Bakara 285-286) ve Haşr suresinin son 3 âyeti — toplam 117 bölüm.
 
 Ana ekrandan **Mushaf sırası** ile **Nüzûl sırası** (iniş sırası) arasında
-geçiş yapılır; nüzûl seçilince bölümler iniş sırasına dizilir ve sıra
-numarası görünür.
+geçiş yapılır; hangisi seçiliyse sure kartında o sıra numarası görünür.
+Liste 114 sure uzunluğunda olduğu için üstünde bir **arama kutusu** var:
+sure adı ("kehf"), Türkçe anlamı ("mağara") veya sure numarası ("18") ile
+aranır; arama Türkçe harf ve aksan farklarına duyarsızdır ("ihlas" =
+"İhlâs"). Kısmi bölümler ait oldukları surenin hemen ardında listelenir.
 
 ## Veri mimarisi
 
 Ayet ve tefsir verisi uygulamayla paketlenmez. `src/data/index.json`
-(~11 KB) yalnızca bölüm listesi, kariler, mealler ve tefsir listesini
+(~132 KB) yalnızca bölüm listesi, kariler, mealler ve tefsir listesini
 taşır; her bölümün ayetleri `public/data/surah-<id>.json`, tefsiri
 `public/data/tafsir-<tefsir>-<id>.json` dosyasındadır ve bölüm ilk
 açıldığında indirilip service worker tarafından kalıcı olarak
 cache'lenir.
 
-Sebep boyut: her şey tek pakettiyken 6 bölüm 602 KB gzip tutuyordu ve
-nüzûl sırasıyla okumak için gereken sure sayısında bu birkaç MB'a
-çıkıyordu. Şimdi uygulama 76 KB gzip; indirilen bölüm ise kalıcı olarak
-çevrimdışı çalışır. Bedeli, bir bölümün **ilk** açılışında internet
-gerekmesidir.
+Sebep boyut: 114 surenin tamamı `public/data` altında **43 MB** tutuyor
+(en büyüğü Bakara: 2.4 MB, gzip 0.9 MB). Tek pakette bunun taşınması
+mümkün değil; bu yüzden uygulamanın kendisi 94 KB gzip kalıyor,
+indirilen bölüm ise kalıcı olarak çevrimdışı çalışıyor. Bedeli, bir
+bölümün **ilk** açılışında internet gerekmesidir.
+
+Bir bölüm dosyasının içinde yerin çoğunu meal (12 meal), kelime zaman
+damgaları (12 kari) ve kesintisiz tilavetin mutlak zaman damgaları
+kaplar; Arapça metnin kendisi %5 civarındadır.
 
 ## Tefsir
 
@@ -39,6 +46,12 @@ Alak 1-5 tek blok).
 20 tefsirinin hiçbiri Türkçe değil (Arapça 7, Urduca 4, Bengalce 4,
 İngilizce 3, Rusça 1, Kürtçe 1), Açık Kuran'da tefsir ucu yok, Diyanet'in
 açık API'si yok. Türkçe kaynak araştırması sürüyor.
+
+114 surenin 113'ünde tefsir var. Tek istisna **Fil suresi (105)**:
+quran.com'un İbn Kesir kaydı bu surenin beş ayetini de boş döndürüyor
+(kaynak eksiği, çekim hatası değil). O bölümde tefsir ekranı "Bu bölüm
+için tefsir bulunamadı." der; doğrulama script'i de bunu bilinen eksik
+olarak işaretler.
 
 Blok sınırları `tafsirs/<id>/by_chapter/<sure>` ucundan çıkarılıyor: bu uç
 sureyi ayet ayet döndürüyor ve metni yalnızca bloğun **ilk** ayetine
@@ -56,8 +69,9 @@ kadar sürüyor.
 Tefsir metni kaynakta HTML olarak geliyor; çekerken script/style/olay
 öznitelikleri ayıklanıyor (`sanitizeHtml`).
 
-Bölüm eklemek için `scripts/fetch-surahs.mjs` içindeki `ENTRIES` listesine
-`{ surah: 44 }` gibi bir kayıt eklemek yeterli. Bir surenin bir bölümü
+114 surenin tamamı `ENTRIES` içinde otomatik üretilir; ayrıca bir kısmi
+bölüm eklemek için `scripts/fetch-surahs.mjs` içindeki `PARTIAL_ENTRIES`
+listesine kayıt eklenir. Bir surenin bir bölümü
 alınacaksa `from`/`to` verilir; bu durumda besmele satırı eklenmez ve
 Türkçe meal sesi olmaz (Açık Kuran sesi sure başına tek dosya sunuyor,
 Âmenerrasûlü için bu Bakara'nın tamamı olurdu). Arapça tilavet ayet
@@ -77,10 +91,8 @@ iki sekme var:
   `ReadingScreen`'e (tüm ses/tefsir/meal altyapısıyla) gidilir. Âyetü'l-
   Kürsî ve Haşr'ın son 3 âyeti, Âmenerrasûlü'nün kullandığı `from`/`to`
   düzeniyle bölüm listesine eklendi — hassas bir konuda ikinci bir elle
-  Kur'an metnini yeniden yazmamak, doğrulanmış bir hattan beslenmek için
-  (bkz. "Sure verisini yeniden çekmek" — İhlâs/Felâk/Nâs/Âyetü'l-Kürsî/
-  Haşr son 3 âyet `acikkuran.com` kesintisi yüzünden ayrı bir kaynaktan
-  geliyor). Bir öğenin verisi henüz çekilmemişse (`getEntry` bulamazsa)
+  Kur'an metnini yeniden yazmamak, doğrulanmış bir hattan beslenmek için.
+  Bir öğenin verisi henüz çekilmemişse (`getEntry` bulamazsa)
   ekran çökmek yerine "Veri hazırlanıyor" gösterip devre dışı bırakır.
 - **Dualar** — 12 hadis kaynaklı zikir/dua (`category: "dualar"`,
   `type: "dhikr"`): Sayyidü'l-İstiğfâr, korunma duası, rıza duası,
@@ -170,7 +182,7 @@ Ses kaynakları:
   zaman damgaları kari başına ayrı tutulduğu için imleç her karide
   doğrudur.
 - **Türkçe meal sesi** — sure başına tek mp3
-  ([Açık Kuran API](https://acikkuran.com/api)).
+  ([Açık Kuran API](https://api.quran.so)).
 
   > **Dikkat:** Bu kayıt, ekranda seçili mealin seslendirmesi değildir.
   > Açık Kuran sure başına tek bir Türkçe ses sunuyor ve `author`
@@ -190,8 +202,8 @@ karşılaştırmak kolaydır. Aynı listeler Ayarlar ekranında da var; ikisi
 12 meal arasından seçim yapılır; seçim bütün sekmelere uygulanır.
 
 - **Türkçe** (Açık Kuran): Diyanet İşleri, Elmalılı Hamdi Yazır, Elmalılı
-  (sadeleştirilmiş), Ali Bulaç, Muhammed Esed, Süleyman Ateş, Suat
-  Yıldırım, Yaşar Nuri Öztürk
+  (sadeleştirilmiş), Ali Bulaç, Muhammed Esed, Süleyman Ateş, Yaşar Nuri
+  Öztürk, Hasan Basri Çantay
 - **English** (Quran.com): Saheeh International, M.A.S. Abdel Haleem,
   M. Pickthall, A. Yusuf Ali
 
@@ -207,16 +219,17 @@ Esed, Quran.com'da 22 = A. Yusuf Ali) id'ler `tr-11`, `en-20` biçiminde
 ### Ayet ayet çeviren mealler
 
 Bazı mealler birden çok ayeti tek cümlede çevirip aynı metni o aralıktaki
-her ayete tekrar yazar. 16 bölüm genelinde:
+her ayete tekrar yazar. 114 surenin 6236 ayeti genelinde:
 
 | Meal | Durum |
 |---|---|
 | Ali Bulaç, Muhammed Esed, Süleyman Ateş, Yaşar Nuri Öztürk | tamamen ayet ayet |
-| Saheeh International, Abdel Haleem, Pickthall, Yusuf Ali | tamamen ayet ayet |
-| Elmalılı (sadeleştirilmiş) | 2 grup |
-| Elmalılı Hamdi Yazır | 4 grup |
-| Suat Yıldırım | 76 grup (%29 ayet birleşik) |
-| Diyanet İşleri | 76 grup (%29 ayet birleşik) |
+| Saheeh International, Abdel Haleem, Yusuf Ali | tamamen ayet ayet |
+| M. Pickthall | 1 grup |
+| Elmalılı Hamdi Yazır | 19 grup |
+| Elmalılı (sadeleştirilmiş) | 24 grup |
+| Hasan Basri Çantay | 132 grup (%5 ayet birleşik) |
+| Diyanet İşleri | 316 grup (%12 ayet birleşik) |
 
 Tilavet ve okunuş sekmelerinde meal her ayetin altında gösterilir —
 birleşik çevirilerde metin tekrar eder, bu ayet takibini kolaylaştırdığı
@@ -245,56 +258,39 @@ Yeniden çekmek için:
 node scripts/fetch-surahs.mjs
 ```
 
-### api.acikkuran.com kesintisi ve yedek kaynak
-
-`api.acikkuran.com` (Türkçe meal + okunuşun ana kaynağı) 6 Ağustos
-2026'da erişilemez hâle geldi. Google'ın herkese açık DNS sunucusuna
-(`dns.google/resolve?name=api.acikkuran.com`) doğrudan soru sorularak
-doğrulandı: yanıt `Status: 3` (**NXDOMAIN**) — bu sandbox'a özgü bir
-engel değil, alan adının DNS kaydı dünya genelinde yok. Ana site
-(`acikkuran.com`, `api.` öneki olmadan) hâlâ çalışıyor; sorun yalnızca
-API alt alan adında.
-
-`node scripts/fetch-surahs.mjs` bu kesinti sürdüğü sürece **tüm**
-bölümler için (yeni + mevcut) başarısız olur, çünkü her bölümün Türkçe
-meali Açık Kuran'dan geliyor. Bunu aşmak için beş öğe
-(İhlâs, Felâk, Nâs, Âyetü'l-Kürsî, Haşr son 3 âyet) ayrı bir script ile,
-Açık Kuran'dan bağımsız iki kaynaktan çekildi:
+Script kaldığı yerden devam eder: her bölüm bittiğinde ara kaydı
+`.cache/entries/` altına yazılır ve yeniden çalıştırıldığında tamamlanan
+bölümler atlanır (114 sure yaklaşık 4000 istek, tek oturumda ~15 dakika).
+Seçenekler:
 
 ```bash
-node scripts/fetch-fallback-items.mjs
+node scripts/fetch-surahs.mjs              # eksikleri çeker
+node scripts/fetch-surahs.mjs --force      # her şeyi yeniden çeker
+node scripts/fetch-surahs.mjs --only 2,36  # yalnızca verilen bölümler
 ```
 
-- **Arapça metin, kelime zaman damgaları, tefsir, İngilizce meal** —
-  değişmedi, Quran.com'dan; `fetch-surahs.mjs`'teki aynı, zaten
-  doğrulanmış fonksiyonlar (`export` edilip) tekrar kullanılıyor.
-- **Türkçe meal + okunuş** — [api.alquran.cloud](https://alquran.cloud/api)
-  (bağımsız, üçüncü bir API). Mevcut 8 Türkçe mealden 6'sını karşılıyor
-  (`tr.diyanet`, `tr.yazir`, `tr.bulac`, `tr.ates`, `tr.yildirim`,
-  `tr.ozturk`); **Elmalılı (sadeleştirilmiş)** ve **Muhammed Esed**
-  hiçbir yeni kaynakta yok, bu 5 öğede bilinçli olarak eksik —
-  `translationText()` (`lib/translations.js`) boş metin yerine "Bu meal
-  bu bölüm için henüz eklenmedi." notu gösterir.
-- **Okunuş stili farklı**: alquran.cloud'un "Çeviriyazı" biçimi aksanlı
-  (`ḳul hüve-llâhü eḥad`), Açık Kuran'ınki sade (`Bismillahir rahmanir
-  rahim`). İki stilin aynı surede karışmaması için besmele satırının
-  okunuşu da (meali değil, yalnızca okunuşu) alquran.cloud'dan taze
-  çekiliyor — eski dosyadan kopyalanmıyor.
-- **Besmele meali** (İhlâs/Felâk/Nâs'ın 0. ayeti) — besmele metni
-  sabit olduğu için (hangi sureden önce geldiği anlamı değiştirmez,
-  bkz. `surah-96.json` ile `surah-68.json`'un besmelesinin birebir
-  aynı olduğu doğrulaması) yeni bir kaynağa gitmek yerine daha önce
-  Açık Kuran çalışırken çekilmiş, doğrulanmış bir dosyadan aynen
-  kopyalanıyor — bu sayede besmelede 8 mealin tamamı (Elmalılı
-  sadeleştirilmiş ve Esed dahil) mevcut, yalnızca 1-4. ayetlerde eksik.
-- **Türkçe meal sesi yok** — Açık Kuran'dan geliyordu, alternatif
-  kaynakta karşılığı yok. Açık Kuran düzelip bu 5 öğe normal
-  `fetch-surahs.mjs` ile yeniden çekilince geri gelir.
+Bir bölüm çekilemezse script durmaz: hatayı not eder, kalanlara devam
+eder, sonunda çekilemeyenleri listeler ve exit 1 ile biter.
 
-Mevcut 16 bölüme dokunmaz; yalnızca bu 5 girdiyi `index.json`'a ekler/
-günceller. Açık Kuran düzelince bu 5 öğe normal `fetch-surahs.mjs` ile
-yeniden çekilip tam kaynağa (8 meal + Açık Kuran okunuşu, sade stil)
-dönebilir.
+### Türkçe kaynağın adres değişikliği (api.acikkuran.com → api.quran.so)
+
+Türkçe meal ve okunuşun kaynağı olan `api.acikkuran.com` 6 Ağustos
+2026'da erişilemez hâle geldi; Google'ın herkese açık DNS sunucusuna
+doğrudan sorulduğunda yanıt `Status: 3` (**NXDOMAIN**) — alan adının
+kaydı dünya genelinde yok, sandbox'a özgü bir engel değil.
+
+Kesinti kalıcı çıktı: Açık Kuran **quran.so** adı altında sürüyor ve API
+`https://api.quran.so` adresine taşınmış. Şema ve yazar id'leri aynı
+kaldığı için (`/authors`, `/surah/<id>?author=<n>`) tek satırlık bir
+adres değişikliğiyle tüm veri yeniden çekilebildi; kesinti sırasında
+kullanılan alquran.cloud yedeği (`scripts/fetch-fallback-items.mjs`) bu
+yüzden kaldırıldı — artık bütün bölümler tek ve aynı kaynaktan geliyor.
+
+Tek kayıp **Suat Yıldırım** meali: yeni kaynağın yazar listesinde yok
+(eski id 26 karşılıksız). Yerine **Hasan Basri Çantay** eklendi, meal
+sayısı 12'de kaldı. Ayarlarında Suat Yıldırım seçili olan bir kullanıcı
+otomatik olarak varsayılan meale (Diyanet İşleri) döner —
+`getTranslation()` tanımadığı id'de varsayılana düşer.
 
 ## Veri doğrulama
 
@@ -309,37 +305,48 @@ node scripts/verify-data.mjs   # hata varsa exit 1
 Script çekme fonksiyonlarını kullanmaz, API'yi bağımsız olarak yeniden
 sorgular — çekmedeki bir hata doğrulamada tekrarlanmasın diye. Örnekleme
 de yapmaz: **her bölümün her ayetini, her meal için tek tek** karşılaştırır,
-çünkü kayma hatası tam olarak örneklemenin kaçırdığı hatadır. Denetlenenler:
+çünkü kayma hatası tam olarak örneklemenin kaçırdığı hatadır. 117 bölüm
+için 2805 kontrol çalışır. Denetlenenler:
 
 - ayet sayısı ve numaraların sürekliliği,
-- Türkçe mealin her ayeti — kaynağı bölüme göre değişir, aşağıya bakın,
+- besmele satırının bulunması gereken yerde bulunması (Fatiha'da besmele
+  1. ayetin kendisi, Tevbe'de hiç yok, kısmi bölümlerde olmaz),
+- 8 Türkçe mealin her ayeti (Açık Kuran'a karşı),
 - 4 İngilizce mealin her ayeti (`verse_key` + `resource_id` ile eşleştirilerek),
 - Arapça kelimelerin birleşimi ile ayetin kendi metni,
+- kelime zaman damgalarının kelime sayısıyla birebir tutması (12 kari),
+- Türkçe meal sesi ve 12 karinin kesintisiz tilavet adreslerinin varlığı
+  (kısmi bölümlerde ikisinin de olmaması),
 - tefsir bloklarının kaynaktan bağımsız yeniden kurulup birebir tutması ve
-  bölümü boşluksuz kapsaması.
+  bölümü boşluksuz kapsaması,
+- **iki kaynağın ayet hizası**: Arapça metin quran.com'dan, meal ve okunuş
+  Açık Kuran'dan geliyor. Diğer kontroller her kaynağı kendi içinde
+  doğruluyor; bu kontrol ikisinin *aynı ayet numaralandırmasını*
+  kullandığını doğruluyor — kaymış olsaydı meal sessizce yanlış ayete
+  yapışırdı. 6236 ayetin tamamında iki kaynağın Arapça metni
+  karşılaştırılır. İki imla farklı olduğu için (quran.com Uthmani "الكتب",
+  Açık Kuran imlâî "الكتاب") hareke/elif/hemze düşürülüp ünsüz iskeleti
+  karşılaştırılır; eşik ölçümle konmuştur: doğru eşleşmelerin en düşük
+  benzerliği 0.85, bir ayet kaydırılmış eşleşmelerin en yükseği 0.41,
+  sınır 0.60.
 
-Karşılaştırmadan elenen üç fark var; hiçbiri harf/anlam farkı değil:
+Karşılaştırmadan elenen farklar; hiçbiri harf/anlam farkı değil:
 dipnot referansları (`<sup>`, uygulamada da gösterilmiyor), yalnızca kelime
-bazlı metinde bulunan iklab işaretleri (U+06ED, U+06E2) ve birleşik işaret
+bazlı metinde bulunan iklab işaretleri (U+06ED, U+06E2), birleşik işaret
 sırası (NFC ile eşitleniyor: 81:1'de kaynak "şedde + fetha", kelime metni
-"fetha + şedde" veriyor).
+"fetha + şedde" veriyor) ve görünmez yön işaretleri (RLM/LRM).
 
-`api.acikkuran.com` kesintisi yüzünden `scripts/fetch-fallback-items.mjs`
-ile çekilen 5 öğe (İhlâs, Felâk, Nâs, Âyetü'l-Kürsî, Haşr son 3 âyet;
-bkz. yukarıdaki bölüm) farklı denetlenir: Türkçe meal ve okunuş Açık
-Kuran yerine alquran.cloud'a karşı, Elmalılı (sadeleştirilmiş) ve Esed'in
-bu 5 öğede *hiç bulunmadığı* ayrıca doğrulanır (yanlışlıkla eski/bozuk
-veri sızmadığından emin olmak için), besmelenin meali doğrulanmış eski
-dosyayla, okunuşu ise alquran.cloud'un Fatiha 1:1 çevirisiyle
-karşılaştırılır. Arapça ve tefsir denetimi değişmez (ikisi de Quran.com).
+İki ayet ayrıca açık bir istisna listesinde: **11:13** ve **80:25**.
+quran.com'un kendi iki ucu bu ayetlerde elifi farklı yazıyor (kelime
+bazlı uç "افْتَرَاهُ" / "اَنَّا", ayet bazlı uç "ٱفْتَرَىٰهُ" / "أَنَّا").
+Aynı kelime, kaynağın kendi içinde tutarsız imla. Liste bilinçli olarak
+dar tutuldu: bu iki ayet dışında herhangi bir Arapça farkı hâlâ hata
+sayılır. Aynı şekilde Fil suresinin (105) tefsiri kaynakta boş olduğu
+için "bilinen eksik" sayılır.
 
-Açık Kuran'a erişilemediği sürece ona bağlı 16 bölüm doğrulanamaz;
-script bunun için çökmez, o girdileri "atlandı" diye işaretleyip devam
-eder ve exit code 2 ile biter (0 = hepsi geçti, 1 = gerçek başarısızlık
-var, 2 = başarısızlık yok ama bir kısmı kaynağa erişilemediği için
-atlandı). Son çalıştırmada 16 bölüm Açık Kuran'a erişilemediği için
-atlandı; alquran.cloud kaynaklı 5 bölümün tamamında **117 kontrolün
-117'si** geçti.
+Çıkış kodu: 0 = hepsi geçti, 1 = gerçek başarısızlık var, 2 = başarısızlık
+yok ama bir kısmı kaynağa erişilemediği için atlandı. Son çalıştırmada
+**2805 kontrolün tamamı geçti**, 6236 ayetin hizasında sapma çıkmadı.
 
 ## İşaretlenenler, yer işaretleri ve erişilebilirlik
 

@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Sure çekiminin devam bilgisi (scripts/fetch-surahs.mjs)
+.cache
